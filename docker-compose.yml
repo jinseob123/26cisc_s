@@ -1,0 +1,44 @@
+services:
+  # [Layer 1] 모델 서버 (vLLM)
+  model-server:
+    image: vllm/vllm-openai:latest
+    container_name: model-server
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ["0", "1"] 
+              capabilities: [gpu]
+    volumes:
+      - ~/.cache/huggingface:/root/.cache/huggingface
+      
+    # meta-llama/Llama-4-Scout-17B-16E-Instruct, Qwen/Qwen2.5-7B-Instruct, meta-llama/Llama-4-Maverick-17B-128E-Instruct, meta-llama/Llama-3.2-3B-Instruct
+    command: [
+      "--model", "Qwen/Qwen2.5-7B-Instruct",  # [조정] 원하는 모델로 변경 가능
+      "--tensor-parallel-size", "2",          # [추가] 3대의 GPU로 모델 분산
+      "--max-model-len", "8192",               # [조정] 32768은 메모리 점유가 너무 큽니다. 8k부터 시작하세요.
+      "--gpu-memory-utilization", "0.9",
+      "--trust-remote-code"
+    ]
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    shm_size: '2gb'
+    environment:
+      - HF_TOKEN=${HF_TOKEN}  # .env에 본인의 Hugging Face 토큰을 적어두세요.
+
+  # [Layer 2] 에이전트 컨트롤러
+  agent-controller:
+    build:
+      context: ./agent
+      dockerfile: Dockerfile
+    container_name: agent-controller
+    depends_on:
+      - model-server
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock # Layer 3 제어를 위해 필수
+      - ${RESULT_PATH}:/app/results               # .env의 RESULT_PATH 사용
+    environment:
+      - MODEL_URL=${MODEL_URL}                    # .env의 MODEL_URL 사용
+    tty: true # 컨테이너가 바로 종료되지 않도록 설정
