@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-21T09:28:59Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-21T09:28:59Z",
+    "finished_at": "2026-03-21T09:29:06Z",
+    "image_name": "intercode-nl2bash-fs2",
+    "command": {
+      "text": "find /system/folder3/temp -type d -empty -delete",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_2.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /system/folder3/temp -type d -empty -delete",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": false,
+    "raw_output_text": "find /system/folder3/temp -type d -empty -delete",
+    "raw_output_payload": {
+      "content": "find /system/folder3/temp -type d -empty -delete",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need find empty directories under /system/folder3/temp and delete them. Use find -type d -empty -delete. Ensure recursive. So command: find /system/folder3/temp -type d -empty -delete.",
+      "reasoning_content": "Need find empty directories under /system/folder3/temp and delete them. Use find -type d -empty -delete. Ensure recursive. So command: find /system/folder3/temp -type d -empty -delete."
+    }
+  },
+  "task": {
+    "split": 2,
+    "task_index": 6,
+    "query": "Recursively removes all empty folders from the /system/folder3/temp folder.",
+    "gold": "find /system/folder3/temp -depth -type d -exec rmdir {} \\;",
+    "record": {
+      "query": "Recursively removes all empty folders from the /system/folder3/temp folder.",
+      "gold": "find /system/folder3/temp -depth -type d -exec rmdir {} \\;"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Recursively removes all empty folders from the /system/folder3/temp folder.",
+      "info": {}
+    },
+    "action": {
+      "command": "find /system/folder3/temp -type d -empty -delete",
+      "observation": "",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "",
+        "eval_obs": "rmdir: failed to remove '/system/folder3/temp/temp1': Directory not empty\nrmdir: failed to remove '/system/folder3/temp': Directory not empty\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /system/folder3/temp -type d -empty -delete",
+        "observation": ""
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "",
+    "eval_observation": "rmdir: failed to remove '/system/folder3/temp/temp1': Directory not empty\nrmdir: failed to remove '/system/folder3/temp': Directory not empty\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "58ffa2cc8965",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260321_153319_58ffa2cc8965/commands.jsonl"
+  }
+}

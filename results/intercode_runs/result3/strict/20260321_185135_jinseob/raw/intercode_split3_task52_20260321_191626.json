@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-21T10:16:26Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-21T10:16:26Z",
+    "finished_at": "2026-03-21T10:16:34Z",
+    "image_name": "intercode-nl2bash-fs3",
+    "command": {
+      "text": "touch $'Icon\\r'",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "touch $'Icon\\r'",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\ntouch $'Icon\\r'\n```",
+    "raw_output_payload": {
+      "content": "```bash\ntouch $'Icon\\r'\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need to create file named \"Icon\\r\". Use touch with printf? Use echo -e? Use printf to create file name with \\r. Command: touch $'Icon\\r'.",
+      "reasoning_content": "Need to create file named \"Icon\\r\". Use touch with printf? Use echo -e? Use printf to create file name with \\r. Command: touch $'Icon\\r'."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 52,
+    "query": "Create an empty file \"Icon\" with a carriage return character in the end of its name.",
+    "gold": "echo $'Icon\\r' | xargs touch",
+    "record": {
+      "query": "Create an empty file \"Icon\" with a carriage return character in the end of its name.",
+      "gold": "echo $'Icon\\r' | xargs touch"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Create an empty file \"Icon\" with a carriage return character in the end of its name.",
+      "info": {}
+    },
+    "action": {
+      "command": "touch $'Icon\\r'",
+      "observation": "touch: cannot touch 'Icon'$'\\r': Permission denied\n",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "touch: cannot touch 'Icon'$'\\r': Permission denied\n",
+      "reward": 0.39,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.05,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [
+          [
+            "\"Icon\\r\"",
+            "??"
+          ]
+        ],
+        "diff_extra": [],
+        "agent_obs": "touch: cannot touch 'Icon'$'\\r': Permission denied\n",
+        "eval_obs": "",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "touch $'Icon\\r'",
+        "observation": "touch: cannot touch 'Icon'$'\\r': Permission denied\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.39,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "touch: cannot touch 'Icon'$'\\r': Permission denied\n",
+    "eval_observation": "",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "7638e08942e6",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260321_153405_7638e08942e6/commands.jsonl"
+  }
+}

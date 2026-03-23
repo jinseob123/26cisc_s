@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T04:17:39Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T04:17:39Z",
+    "finished_at": "2026-03-17T04:17:46Z",
+    "image_name": "intercode-nl2bash-fs2",
+    "command": {
+      "text": "find /system -type f -mtime +31 -delete",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_2.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /system -type f -mtime +31 -delete",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": false,
+    "raw_output_text": "find /system -type f -mtime +31 -delete",
+    "raw_output_payload": {
+      "content": "find /system -type f -mtime +31 -delete",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need find and delete files older than 31 days in /system. Use find -type f -mtime +31 -delete. Recursively. So command: find /system -type f -mtime +31 -delete. Maybe also remove empty directories? But task only junk files. So output that.",
+      "reasoning_content": "Need find and delete files older than 31 days in /system. Use find -type f -mtime +31 -delete. Recursively. So command: find /system -type f -mtime +31 -delete. Maybe also remove empty directories? But task only junk files. So output that."
+    }
+  },
+  "task": {
+    "split": 2,
+    "task_index": 32,
+    "query": "Remove junk files modified more than 31 days ago recursively from \"/system\"",
+    "gold": "find /system -type f -mtime +31 -exec rm -f {} \\;",
+    "record": {
+      "query": "Remove junk files modified more than 31 days ago recursively from \"/system\"",
+      "gold": "find /system -type f -mtime +31 -exec rm -f {} \\;"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Remove junk files modified more than 31 days ago recursively from \"/system\"",
+      "info": {}
+    },
+    "action": {
+      "command": "find /system -type f -mtime +31 -delete",
+      "observation": "find: cannot delete '/system/folder1/recent.txt': Permission denied\nfind: cannot delete '/system/folder1/old2.txt': Permission denied\nfind: cannot delete '/system/folder3/backup_dbg/sql1.sql': Permission denied\nfind: cannot delete '/system/temp/keep.txt': Permission denied\nfind: cannot delete '/system/a.out': Permission denied\n",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "find: cannot delete '/system/folder1/recent.txt': Permission denied\nfind: cannot delete '/system/folder1/old2.txt': Permission denied\nfind: cannot delete '/system/folder3/backup_dbg/sql1.sql': Permission denied\nfind: cannot delete '/system/temp/keep.txt': Permission denied\nfind: cannot delete '/system/a.out': Permission denied\n",
+      "reward": 0.39,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.05,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [
+          [
+            "system/temp/keep.txt",
+            "D"
+          ]
+        ],
+        "diff_extra": [],
+        "agent_obs": "find: cannot delete '/system/folder1/recent.txt': Permission denied\nfind: cannot delete '/system/folder1/old2.txt': Permission denied\nfind: cannot delete '/system/folder3/backup_dbg/sql1.sql': Permission denied\nfind: cannot delete '/system/temp/keep.txt': Permission denied\nfind: cannot delete '/system/a.out': Permission denied\n",
+        "eval_obs": "",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /system -type f -mtime +31 -delete",
+        "observation": "find: cannot delete '/system/folder1/recent.txt': Permission denied\nfind: cannot delete '/system/folder1/old2.txt': Permission denied\nfind: cannot delete '/system/folder3/backup_dbg/sql1.sql': Permission denied\nfind: cannot delete '/system/temp/keep.txt': Permission denied\nfind: cannot delete '/system/a.out': Permission denied\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.39,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "find: cannot delete '/system/folder1/recent.txt': Permission denied\nfind: cannot delete '/system/folder1/old2.txt': Permission denied\nfind: cannot delete '/system/folder3/backup_dbg/sql1.sql': Permission denied\nfind: cannot delete '/system/temp/keep.txt': Permission denied\nfind: cannot delete '/system/a.out': Permission denied\n",
+    "eval_observation": "",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "0e083a8c7a1e",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260317_120709_0e083a8c7a1e/commands.jsonl"
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T02:27:13Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T02:27:13Z",
+    "finished_at": "2026-03-17T02:27:21Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "env | sed 's/;/\\\\;/g'",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_4.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "env | sed 's/;/\\\\;/g'",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nenv | sed 's/;/\\\\;/g'\n```",
+    "raw_output_payload": {
+      "content": "```bash\nenv | sed 's/;/\\\\;/g'\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need command to list env vars with values, escape semicolons. Use env | sed 's/;/\\\\;/g'. But need to escape semicolons in values only? All semicolons in output. So: env | sed 's/;/\\\\;/g'. Provide bash command.",
+      "reasoning_content": "Need command to list env vars with values, escape semicolons. Use env | sed 's/;/\\\\;/g'. But need to escape semicolons in values only? All semicolons in output. So: env | sed 's/;/\\\\;/g'. Provide bash command."
+    }
+  },
+  "task": {
+    "split": 4,
+    "task_index": 4,
+    "query": "List environment variables and their values, escaping all semicolons with a backslash.",
+    "gold": "env | sed 's/;/\\\\;/g'",
+    "record": {
+      "query": "List environment variables and their values, escaping all semicolons with a backslash.",
+      "gold": "env | sed 's/;/\\\\;/g'"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "List environment variables and their values, escaping all semicolons with a backslash.",
+      "info": {}
+    },
+    "action": {
+      "command": "env | sed 's/;/\\\\;/g'",
+      "observation": "HOSTNAME=0b68f7c6d7b0\nscript=setup_nl2b_fs_1.sh\nPWD=/\nHOME=/root\nSHLVL=1\nfile_system_version=1\nPATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\n_=/usr/bin/env\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "HOSTNAME=0b68f7c6d7b0\nscript=setup_nl2b_fs_1.sh\nPWD=/\nHOME=/root\nSHLVL=1\nfile_system_version=1\nPATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\n_=/usr/bin/env\n",
+      "reward": 0.99,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.32
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "HOSTNAME=0b68f7c6d7b0\nscript=setup_nl2b_fs_1.sh\nPWD=/\nHOME=/root\nSHLVL=1\nfile_system_version=1\nPATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\n_=/usr/bin/env\n",
+        "eval_obs": "HOSTNAME=39e7b97e7a8f\nscript=setup_nl2b_fs_1.sh\nPWD=/\nHOME=/root\nSHLVL=1\nfile_system_version=1\nPATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\n_=/usr/bin/env\n",
+        "answer_similarity": 0.9705065715076652,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "env | sed 's/;/\\\\;/g'",
+        "observation": "HOSTNAME=0b68f7c6d7b0\nscript=setup_nl2b_fs_1.sh\nPWD=/\nHOME=/root\nSHLVL=1\nfile_system_version=1\nPATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\n_=/usr/bin/env\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.99,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "HOSTNAME=0b68f7c6d7b0\nscript=setup_nl2b_fs_1.sh\nPWD=/\nHOME=/root\nSHLVL=1\nfile_system_version=1\nPATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\n_=/usr/bin/env\n",
+    "eval_observation": "HOSTNAME=39e7b97e7a8f\nscript=setup_nl2b_fs_1.sh\nPWD=/\nHOME=/root\nSHLVL=1\nfile_system_version=1\nPATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\n_=/usr/bin/env\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "batch": {
+    "run_id": "bbec81f40091",
+    "selection": {
+      "split": 4,
+      "offset": 0,
+      "limit": null,
+      "task_indices": null
+    }
+  }
+}

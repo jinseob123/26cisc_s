@@ -1,0 +1,125 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-16T14:45:05Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-16T14:45:05Z",
+    "finished_at": "2026-03-16T14:45:15Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "grep -r \"foo\" /system | tee /dev/tty | wc -l",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_2.json"
+    }
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "grep -r \"foo\" /system | tee /dev/tty | wc -l",
+    "raw_output_text": "grep -r \"foo\" /system | tee /dev/tty | wc -l",
+    "raw_output_payload": {
+      "content": "grep -r \"foo\" /system | tee /dev/tty | wc -l",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need bash command: grep -r \"foo\" /system | tee /dev/tty? Actually output to console then count lines. Use grep -r \"foo\" /system | tee /dev/tty | wc -l? But tee duplicates. Simpler: grep -r \"foo\" /system | tee /dev/tty | wc -l. But that will output count after. Maybe use grep -r \"foo\" /system | tee /dev/tty | wc -l. Provide command.",
+      "reasoning_content": "Need bash command: grep -r \"foo\" /system | tee /dev/tty? Actually output to console then count lines. Use grep -r \"foo\" /system | tee /dev/tty | wc -l? But tee duplicates. Simpler: grep -r \"foo\" /system | tee /dev/tty | wc -l. But that will output count after. Maybe use grep -r \"foo\" /system | tee /dev/tty | wc -l. Provide command."
+    }
+  },
+  "task": {
+    "split": 2,
+    "task_index": 10,
+    "query": "Recursively search for \"foo\" in the '/system' folder and write the output to the console followed by the number of matched lines",
+    "gold": "grep -r \"foo\" /system | tee >(wc -l)",
+    "record": {
+      "query": "Recursively search for \"foo\" in the '/system' folder and write the output to the console followed by the number of matched lines",
+      "gold": "grep -r \"foo\" /system | tee >(wc -l)"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Recursively search for \"foo\" in the '/system' folder and write the output to the console followed by the number of matched lines",
+      "info": {
+        "action_executed": true,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.25
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "tee: /dev/tty: No such device or address\ngrep: /system: No such file or directory\n0\n",
+        "eval_obs": "grep: /system: No such file or directory\n0\n",
+        "answer_similarity": 0.743013771066138
+      }
+    },
+    "action": {
+      "command": "grep -r \"foo\" /system | tee /dev/tty | wc -l",
+      "observation": "tee: /dev/tty: No such device or address\ngrep: /system: No such file or directory\n0\n",
+      "info": {
+        "action_executed": true,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.25
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "tee: /dev/tty: No such device or address\ngrep: /system: No such file or directory\n0\n",
+        "eval_obs": "grep: /system: No such file or directory\n0\n",
+        "answer_similarity": 0.743013771066138
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "tee: /dev/tty: No such device or address\ngrep: /system: No such file or directory\n0\n",
+      "reward": 0.92,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.25
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "tee: /dev/tty: No such device or address\ngrep: /system: No such file or directory\n0\n",
+        "eval_obs": "grep: /system: No such file or directory\n0\n",
+        "answer_similarity": 0.743013771066138,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "grep -r \"foo\" /system | tee /dev/tty | wc -l",
+        "observation": "tee: /dev/tty: No such device or address\ngrep: /system: No such file or directory\n0\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.92,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "tee: /dev/tty: No such device or address\ngrep: /system: No such file or directory\n0\n",
+    "eval_observation": "grep: /system: No such file or directory\n0\n",
+    "corrupt_gold": null
+  },
+  "error": null
+}

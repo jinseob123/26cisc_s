@@ -1,0 +1,119 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T01:49:55Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T01:49:55Z",
+    "finished_at": "2026-03-17T01:50:04Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "sudo ln -s / /system/folder1",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_2.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "sudo ln -s / /system/folder1",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nsudo ln -s / /system/folder1\n```",
+    "raw_output_payload": {
+      "content": "```bash\nsudo ln -s / /system/folder1\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need to create symlink in /system/folder1 pointing to root folder /. Command: ln -s / /system/folder1? But folder1 is inside /system. So link name is /system/folder1? Wait \"Create a symbolc link in the /system/folder1 to root folder\". Means create symlink named folder1 inside /system that points to root? Or create symlink inside /system/folder1? ambiguous. Probably create symlink /system/folder1 that points to /. So command: ln -s / /system/folder1. Ensure root permission. Use sudo. Provide one command.",
+      "reasoning_content": "Need to create symlink in /system/folder1 pointing to root folder /. Command: ln -s / /system/folder1? But folder1 is inside /system. So link name is /system/folder1? Wait \"Create a symbolc link in the /system/folder1 to root folder\". Means create symlink named folder1 inside /system that points to root? Or create symlink inside /system/folder1? ambiguous. Probably create symlink /system/folder1 that points to /. So command: ln -s / /system/folder1. Ensure root permission. Use sudo. Provide one command."
+    }
+  },
+  "task": {
+    "split": 2,
+    "task_index": 40,
+    "query": "Create a symbolc link in the /system/folder1 to root folder",
+    "gold": "ln /system/folder1 -s /",
+    "record": {
+      "query": "Create a symbolc link in the /system/folder1 to root folder",
+      "gold": "ln /system/folder1 -s /"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Create a symbolc link in the /system/folder1 to root folder",
+      "info": {}
+    },
+    "action": {
+      "command": "sudo ln -s / /system/folder1",
+      "observation": "/bin/bash: line 1: sudo: command not found\n",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "/bin/bash: line 1: sudo: command not found\n",
+      "reward": 0.39,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.05,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [
+          [
+            "folder1",
+            "??"
+          ]
+        ],
+        "diff_extra": [],
+        "agent_obs": "/bin/bash: line 1: sudo: command not found\n",
+        "eval_obs": "",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "sudo ln -s / /system/folder1",
+        "observation": "/bin/bash: line 1: sudo: command not found\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.39,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "/bin/bash: line 1: sudo: command not found\n",
+    "eval_observation": "",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "batch": {
+    "run_id": "ef4ab952b6ec",
+    "selection": {
+      "split": 2,
+      "offset": 0,
+      "limit": null,
+      "task_indices": null
+    }
+  }
+}

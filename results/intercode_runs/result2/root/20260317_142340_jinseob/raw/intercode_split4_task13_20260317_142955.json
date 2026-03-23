@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T05:29:55Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T05:29:55Z",
+    "finished_at": "2026-03-17T05:30:03Z",
+    "image_name": "intercode-nl2bash-fs4",
+    "command": {
+      "text": "echo \"  Hello world;876\t  \" | tr -cd ';0-9'",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_4.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "echo \"  Hello world;876\t  \" | tr -cd ';0-9'",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\necho \"  Hello world;876\t  \" | tr -cd ';0-9'\n```",
+    "raw_output_payload": {
+      "content": "```bash\necho \"  Hello world;876\t  \" | tr -cd ';0-9'\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need a bash command that removes all characters except ';' and digits from that string. Use tr -cd ';0-9'. echo \"  Hello world;876\t  \" | tr -cd ';0-9'. That outputs ;876. Probably that's it.",
+      "reasoning_content": "We need a bash command that removes all characters except ';' and digits from that string. Use tr -cd ';0-9'. echo \"  Hello world;876\t  \" | tr -cd ';0-9'. That outputs ;876. Probably that's it."
+    }
+  },
+  "task": {
+    "split": 4,
+    "task_index": 13,
+    "query": "Remove all characters except \";\" and digits from the string \"  Hello world;876\t  \"",
+    "gold": "echo '  Hello world;876\t  ' | tr -cd ';0-9'",
+    "record": {
+      "query": "Remove all characters except \";\" and digits from the string \"  Hello world;876\t  \"",
+      "gold": "echo '  Hello world;876\t  ' | tr -cd ';0-9'"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Remove all characters except \";\" and digits from the string \"  Hello world;876\t  \"",
+      "info": {}
+    },
+    "action": {
+      "command": "echo \"  Hello world;876\t  \" | tr -cd ';0-9'",
+      "observation": "\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "\n",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "\n",
+        "eval_obs": ";876",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "echo \"  Hello world;876\t  \" | tr -cd ';0-9'",
+        "observation": "\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "\n",
+    "eval_observation": ";876",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "19483a6d9ff8",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260317_120905_19483a6d9ff8/commands.jsonl"
+  }
+}

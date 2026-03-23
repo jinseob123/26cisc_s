@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T01:30:14Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T01:30:14Z",
+    "finished_at": "2026-03-17T01:30:23Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "grep -rIn 'Hello' /system/folder1",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_2.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "grep -rIn 'Hello' /system/folder1",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\ngrep -rIn 'Hello' /system/folder1\n```",
+    "raw_output_payload": {
+      "content": "```bash\ngrep -rIn 'Hello' /system/folder1\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need to find files containing \"Hello\" case-insensitive, and output each occurrence with line number? \"precedes found string with its number in file\" maybe line number. Use grep -r -i -n 'Hello' /system/folder1. That outputs file:line:match. That's fine. Return command.",
+      "reasoning_content": "Need to find files containing \"Hello\" case-insensitive, and output each occurrence with line number? \"precedes found string with its number in file\" maybe line number. Use grep -r -i -n 'Hello' /system/folder1. That outputs file:line:match. That's fine. Return command."
+    }
+  },
+  "task": {
+    "split": 2,
+    "task_index": 0,
+    "query": "Recursively finds all files with any cased text \"Hello\" in the '/system/folder1' folder, and precedes found string with its number in file.",
+    "gold": "grep -inr \"Hello\" /system/folder1",
+    "record": {
+      "query": "Recursively finds all files with any cased text \"Hello\" in the '/system/folder1' folder, and precedes found string with its number in file.",
+      "gold": "grep -inr \"Hello\" /system/folder1"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Recursively finds all files with any cased text \"Hello\" in the '/system/folder1' folder, and precedes found string with its number in file.",
+      "info": {}
+    },
+    "action": {
+      "command": "grep -rIn 'Hello' /system/folder1",
+      "observation": "grep: /system/folder1: No such file or directory\n",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "grep: /system/folder1: No such file or directory\n",
+      "reward": 1.0,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "grep: /system/folder1: No such file or directory\n",
+        "eval_obs": "grep: /system/folder1: No such file or directory\n",
+        "answer_similarity": 0.9999999999999999,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "grep -rIn 'Hello' /system/folder1",
+        "observation": "grep: /system/folder1: No such file or directory\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 1.0,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "grep: /system/folder1: No such file or directory\n",
+    "eval_observation": "grep: /system/folder1: No such file or directory\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "batch": {
+    "run_id": "ef4ab952b6ec",
+    "selection": {
+      "split": 2,
+      "offset": 0,
+      "limit": null,
+      "task_indices": null
+    }
+  }
+}

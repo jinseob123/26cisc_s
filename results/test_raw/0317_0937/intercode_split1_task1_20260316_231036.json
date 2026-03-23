@@ -1,0 +1,125 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-16T14:10:36Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-16T14:10:36Z",
+    "finished_at": "2026-03-16T14:10:45Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "find /testbed/dir2/subdir2 -type f -print0 | sort -z | xargs -0 cat | md5sum | awk '{print $1}' | xargs -I{} echo {} | md5sum | awk '{print $1}'",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    }
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /testbed/dir2/subdir2 -type f -print0 | sort -z | xargs -0 cat | md5sum | awk '{print $1}' | xargs -I{} echo {} | md5sum | awk '{print $1}'",
+    "raw_output_text": "```bash\nfind /testbed/dir2/subdir2 -type f -print0 | sort -z | xargs -0 cat | md5sum | awk '{print $1}' | xargs -I{} echo {} | md5sum | awk '{print $1}'\n```",
+    "raw_output_payload": {
+      "content": "```bash\nfind /testbed/dir2/subdir2 -type f -print0 | sort -z | xargs -0 cat | md5sum | awk '{print $1}' | xargs -I{} echo {} | md5sum | awk '{print $1}'\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need to compute md5 of md5 of all sorted files under that path. So first list files sorted, compute md5 of each file? Probably compute md5 of each file content, then combine? Maybe concatenate sorted file contents, compute md5, then md5 again. Command: find /testbed/dir2/subdir2 -type f -print0 | sort -z | xargs -0 cat | md5sum | awk '{print $1}' | xargs -I{} echo {} | md5sum. But need md5 of md5 sum. So first md5sum of concatenated contents, then md5sum of that output. So: find ... | sort -z | xargs -0 cat | md5sum | awk '{print $1}' | xargs -I{} echo {} | md5sum. Let's output just hash. Use -r? We'll output.",
+      "reasoning_content": "We need to compute md5 of md5 of all sorted files under that path. So first list files sorted, compute md5 of each file? Probably compute md5 of each file content, then combine? Maybe concatenate sorted file contents, compute md5, then md5 again. Command: find /testbed/dir2/subdir2 -type f -print0 | sort -z | xargs -0 cat | md5sum | awk '{print $1}' | xargs -I{} echo {} | md5sum. But need md5 of md5 sum. So first md5sum of concatenated contents, then md5sum of that output. So: find ... | sort -z | xargs -0 cat | md5sum | awk '{print $1}' | xargs -I{} echo {} | md5sum. Let's output just hash. Use -r? We'll output."
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 1,
+    "query": "Calculate md5 sum of the md5 sum of all the sorted files under /testbed/dir2/subdir2",
+    "gold": "find /testbed/dir2/subdir2 -type f -print0 | sort -z | xargs -r0 md5sum | md5sum",
+    "record": {
+      "query": "Calculate md5 sum of the md5 sum of all the sorted files under /testbed/dir2/subdir2",
+      "gold": "find /testbed/dir2/subdir2 -type f -print0 | sort -z | xargs -r0 md5sum | md5sum"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Calculate md5 sum of the md5 sum of all the sorted files under /testbed/dir2/subdir2",
+      "info": {
+        "action_executed": true,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "673480b36bea3c45f6f6aafa37af374f\n",
+        "eval_obs": "c9b48292048e937331fa825621eb0068  -\n",
+        "answer_similarity": 0.0
+      }
+    },
+    "action": {
+      "command": "find /testbed/dir2/subdir2 -type f -print0 | sort -z | xargs -0 cat | md5sum | awk '{print $1}' | xargs -I{} echo {} | md5sum | awk '{print $1}'",
+      "observation": "673480b36bea3c45f6f6aafa37af374f\n",
+      "info": {
+        "action_executed": true,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "673480b36bea3c45f6f6aafa37af374f\n",
+        "eval_obs": "c9b48292048e937331fa825621eb0068  -\n",
+        "answer_similarity": 0.0
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "673480b36bea3c45f6f6aafa37af374f\n",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "673480b36bea3c45f6f6aafa37af374f\n",
+        "eval_obs": "c9b48292048e937331fa825621eb0068  -\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /testbed/dir2/subdir2 -type f -print0 | sort -z | xargs -0 cat | md5sum | awk '{print $1}' | xargs -I{} echo {} | md5sum | awk '{print $1}'",
+        "observation": "673480b36bea3c45f6f6aafa37af374f\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "673480b36bea3c45f6f6aafa37af374f\n",
+    "eval_observation": "c9b48292048e937331fa825621eb0068  -\n",
+    "corrupt_gold": null
+  },
+  "error": null
+}

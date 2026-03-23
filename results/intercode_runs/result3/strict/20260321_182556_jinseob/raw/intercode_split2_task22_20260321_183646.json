@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-21T09:36:46Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-21T09:36:46Z",
+    "finished_at": "2026-03-21T09:36:53Z",
+    "image_name": "intercode-nl2bash-fs2",
+    "command": {
+      "text": "awk -F, 'BEGIN{OFS=\",\"} {print $(NF-4),$(NF-3),$(NF-2),$(NF-1),$NF}' /system/folder1/data.csv | sponge /system/folder1/data.csv",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_2.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "awk -F, 'BEGIN{OFS=\",\"} {print $(NF-4),$(NF-3),$(NF-2),$(NF-1),$NF}' /system/folder1/data.csv | sponge /system/folder1/data.csv",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nawk -F, 'BEGIN{OFS=\",\"} {print $(NF-4),$(NF-3),$(NF-2),$(NF-1),$NF}' /system/folder1/data.csv | sponge /system/folder1/data.csv\n```",
+    "raw_output_payload": {
+      "content": "```bash\nawk -F, 'BEGIN{OFS=\",\"} {print $(NF-4),$(NF-3),$(NF-2),$(NF-1),$NF}' /system/folder1/data.csv | sponge /system/folder1/data.csv\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need to keep last 5 fields. Use awk -F, '{print $(NF-4),$(NF-3),$(NF-2),$(NF-1),$NF}' OFS=, file. But need to output to same file? Probably overwrite. Use sponge. Command: awk -F, 'BEGIN{OFS=\",\"} {print $(NF-4),$(NF-3),$(NF-2),$(NF-1),$NF}' /system/folder1/data.csv | sponge /system/folder1/data.csv. Provide single command.",
+      "reasoning_content": "We need to keep last 5 fields. Use awk -F, '{print $(NF-4),$(NF-3),$(NF-2),$(NF-1),$NF}' OFS=, file. But need to output to same file? Probably overwrite. Use sponge. Command: awk -F, 'BEGIN{OFS=\",\"} {print $(NF-4),$(NF-3),$(NF-2),$(NF-1),$NF}' /system/folder1/data.csv | sponge /system/folder1/data.csv. Provide single command."
+    }
+  },
+  "task": {
+    "split": 2,
+    "task_index": 22,
+    "query": "Remove all but 5 last comma-separated fields from each line in '/system/folder1/data.csv'",
+    "gold": "cat /system/folder1/data.csv | rev | cut -d, -f-5 | rev",
+    "record": {
+      "query": "Remove all but 5 last comma-separated fields from each line in '/system/folder1/data.csv'",
+      "gold": "cat /system/folder1/data.csv | rev | cut -d, -f-5 | rev"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Remove all but 5 last comma-separated fields from each line in '/system/folder1/data.csv'",
+      "info": {}
+    },
+    "action": {
+      "command": "awk -F, 'BEGIN{OFS=\",\"} {print $(NF-4),$(NF-3),$(NF-2),$(NF-1),$NF}' /system/folder1/data.csv | sponge /system/folder1/data.csv",
+      "observation": "/bin/bash: line 1: sponge: command not found\nawk: line 1: syntax error at or near ,\n",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "/bin/bash: line 1: sponge: command not found\nawk: line 1: syntax error at or near ,\n",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "/bin/bash: line 1: sponge: command not found\nawk: line 1: syntax error at or near ,\n",
+        "eval_obs": "6,7,8,9,10\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "awk -F, 'BEGIN{OFS=\",\"} {print $(NF-4),$(NF-3),$(NF-2),$(NF-1),$NF}' /system/folder1/data.csv | sponge /system/folder1/data.csv",
+        "observation": "/bin/bash: line 1: sponge: command not found\nawk: line 1: syntax error at or near ,\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "/bin/bash: line 1: sponge: command not found\nawk: line 1: syntax error at or near ,\n",
+    "eval_observation": "6,7,8,9,10\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "58ffa2cc8965",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260321_153319_58ffa2cc8965/commands.jsonl"
+  }
+}

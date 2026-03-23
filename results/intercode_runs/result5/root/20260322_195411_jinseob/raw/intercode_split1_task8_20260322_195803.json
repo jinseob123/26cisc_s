@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-22T10:58:03Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-22T10:58:03Z",
+    "finished_at": "2026-03-22T10:58:10Z",
+    "image_name": "intercode-nl2bash-fs1",
+    "command": {
+      "text": "find /testbed -type f -name '*.php' -print0 | xargs -0 chmod 755; echo \"Changed $(find /testbed -type f -name '*.php' | wc -l) files\"",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /testbed -type f -name '*.php' -print0 | xargs -0 chmod 755; echo \"Changed $(find /testbed -type f -name '*.php' | wc -l) files\"",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nfind /testbed -type f -name '*.php' -print0 | xargs -0 chmod 755; echo \"Changed $(find /testbed -type f -name '*.php' | wc -l) files\"\n```",
+    "raw_output_payload": {
+      "content": "```bash\nfind /testbed -type f -name '*.php' -print0 | xargs -0 chmod 755; echo \"Changed $(find /testbed -type f -name '*.php' | wc -l) files\"\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need find all .php under /testbed, chmod 755, count. Use find -type f -name '*.php' -exec chmod 755 {} +; then count with wc -l. Combine: find ... -print | tee /dev/null? Actually we can use find ... -print0 | xargs -0 chmod 755; then count: find ... -type f -name '*.php' | wc -l. But need after chmod. So: find /testbed -type f -name '*.php' -print0 | xargs -0 chmod 755; echo \"Changed $(find /testbed -type f -name '*.php' | wc -l) files\". Provide single command? Could use semicolon. Provide one line.",
+      "reasoning_content": "Need find all .php under /testbed, chmod 755, count. Use find -type f -name '*.php' -exec chmod 755 {} +; then count with wc -l. Combine: find ... -print | tee /dev/null? Actually we can use find ... -print0 | xargs -0 chmod 755; then count: find ... -type f -name '*.php' | wc -l. But need after chmod. So: find /testbed -type f -name '*.php' -print0 | xargs -0 chmod 755; echo \"Changed $(find /testbed -type f -name '*.php' | wc -l) files\". Provide single command? Could use semicolon. Provide one line."
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 8,
+    "query": "Change permissions for all PHP files under the /testbed directory tree to 755 and print the number of files changed",
+    "gold": "find /testbed -name \"*.php\" -exec chmod 755 {} \\; -exec /bin/echo {} \\; | wc -l",
+    "record": {
+      "query": "Change permissions for all PHP files under the /testbed directory tree to 755 and print the number of files changed",
+      "gold": "find /testbed -name \"*.php\" -exec chmod 755 {} \\; -exec /bin/echo {} \\; | wc -l"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Change permissions for all PHP files under the /testbed directory tree to 755 and print the number of files changed",
+      "info": {}
+    },
+    "action": {
+      "command": "find /testbed -type f -name '*.php' -print0 | xargs -0 chmod 755; echo \"Changed $(find /testbed -type f -name '*.php' | wc -l) files\"",
+      "observation": "Changed\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "Changed\n",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "Changed\n",
+        "eval_obs": "2\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /testbed -type f -name '*.php' -print0 | xargs -0 chmod 755; echo \"Changed $(find /testbed -type f -name '*.php' | wc -l) files\"",
+        "observation": "Changed\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "Changed\n",
+    "eval_observation": "2\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "f6ff84e7aae6",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260322_193900_f6ff84e7aae6/commands.jsonl"
+  }
+}

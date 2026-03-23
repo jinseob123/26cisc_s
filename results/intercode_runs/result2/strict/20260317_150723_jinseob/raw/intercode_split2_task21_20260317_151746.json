@@ -1,0 +1,118 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T06:17:46Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T06:17:46Z",
+    "finished_at": "2026-03-17T06:17:54Z",
+    "image_name": "intercode-nl2bash-fs2",
+    "command": {
+      "text": "find /system -type f \\( -name a.out -o -name '*.o' -o -name core \\) -delete",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_2.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /system -type f \\( -name a.out -o -name '*.o' -o -name core \\) -delete",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": false,
+    "raw_output_text": "find /system -type f \\( -name a.out -o -name '*.o' -o -name core \\) -delete",
+    "raw_output_payload": {
+      "content": "find /system -type f \\( -name a.out -o -name '*.o' -o -name core \\) -delete",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need find and delete. Use find. Command: find /system -type f \\( -name a.out -o -name '*.o' -o -name core \\) -delete. Ensure quoting. Output one line.",
+      "reasoning_content": "Need find and delete. Use find. Command: find /system -type f \\( -name a.out -o -name '*.o' -o -name core \\) -delete. Ensure quoting. Output one line."
+    }
+  },
+  "task": {
+    "split": 2,
+    "task_index": 21,
+    "query": "Remove all a.out, *.o, and core files under the '/system' directory",
+    "gold": "find /system \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;",
+    "record": {
+      "query": "Remove all a.out, *.o, and core files under the '/system' directory",
+      "gold": "find /system \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Remove all a.out, *.o, and core files under the '/system' directory",
+      "info": {}
+    },
+    "action": {
+      "command": "find /system -type f \\( -name a.out -o -name '*.o' -o -name core \\) -delete",
+      "observation": "find: cannot delete '/system/folder1/a.out': Permission denied\nfind: cannot delete '/system/a.out': Permission denied\n",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "find: cannot delete '/system/folder1/a.out': Permission denied\nfind: cannot delete '/system/a.out': Permission denied\n",
+      "reward": 0.34,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.0,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [
+          [
+            "system/a.out",
+            "D"
+          ],
+          [
+            "system/folder1/a.out",
+            "D"
+          ]
+        ],
+        "diff_extra": [],
+        "agent_obs": "find: cannot delete '/system/folder1/a.out': Permission denied\nfind: cannot delete '/system/a.out': Permission denied\n",
+        "eval_obs": "",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /system -type f \\( -name a.out -o -name '*.o' -o -name core \\) -delete",
+        "observation": "find: cannot delete '/system/folder1/a.out': Permission denied\nfind: cannot delete '/system/a.out': Permission denied\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.34,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "find: cannot delete '/system/folder1/a.out': Permission denied\nfind: cannot delete '/system/a.out': Permission denied\n",
+    "eval_observation": "",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "0e083a8c7a1e",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260317_120709_0e083a8c7a1e/commands.jsonl"
+  }
+}

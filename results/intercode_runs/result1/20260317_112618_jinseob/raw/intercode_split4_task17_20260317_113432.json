@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T02:34:32Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T02:34:32Z",
+    "finished_at": "2026-03-17T02:34:40Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "compgen -v | grep 'H'",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_4.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "compgen -v | grep 'H'",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\ncompgen -v | grep 'H'\n```",
+    "raw_output_payload": {
+      "content": "```bash\ncompgen -v | grep 'H'\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need a bash command to list all variables names containing \"H\". Variables in shell environment? Use env or set? Probably list all environment variables and shell variables. Use compgen -v to list shell variables. Then grep for H. So: compgen -v | grep H. That lists names containing H. If case-sensitive? \"H\". So final.",
+      "reasoning_content": "We need a bash command to list all variables names containing \"H\". Variables in shell environment? Use env or set? Probably list all environment variables and shell variables. Use compgen -v to list shell variables. Then grep for H. So: compgen -v | grep H. That lists names containing H. If case-sensitive? \"H\". So final."
+    }
+  },
+  "task": {
+    "split": 4,
+    "task_index": 17,
+    "query": "List all variables (names only) with names containing \"H\".",
+    "gold": "env | awk -F= '{if($1 ~ /H/) print $1}'",
+    "record": {
+      "query": "List all variables (names only) with names containing \"H\".",
+      "gold": "env | awk -F= '{if($1 ~ /H/) print $1}'"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "List all variables (names only) with names containing \"H\".",
+      "info": {}
+    },
+    "action": {
+      "command": "compgen -v | grep 'H'",
+      "observation": "BASH\nBASHOPTS\nBASHPID\nBASH_ALIASES\nBASH_ARGC\nBASH_ARGV\nBASH_ARGV0\nBASH_CMDS\nBASH_COMMAND\nBASH_EXECUTION_STRING\nBASH_LINENO\nBASH_LOADABLES_PATH\nBASH_SOURCE\nBASH_SUBSHELL\nBASH_VERSINFO\nBASH_VERSION\nEPOCHREALTIME\nEPOCHSECONDS\nHISTCMD\nHOME\nHOSTNAME\nHOSTTYPE\nMACHTYPE\nPATH\nSHELL\nSHELLOPTS\nSHLVL\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "BASH\nBASHOPTS\nBASHPID\nBASH_ALIASES\nBASH_ARGC\nBASH_ARGV\nBASH_ARGV0\nBASH_CMDS\nBASH_COMMAND\nBASH_EXECUTION_STRING\nBASH_LINENO\nBASH_LOADABLES_PATH\nBASH_SOURCE\nBASH_SUBSHELL\nBASH_VERSINFO\nBASH_VERSION\nEPOCHREALTIME\nEPOCHSECONDS\nHISTCMD\nHOME\nHOSTNAME\nHOSTTYPE\nMACHTYPE\nPATH\nSHELL\nSHELLOPTS\nSHLVL\n",
+      "reward": 0.76,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.09
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "BASH\nBASHOPTS\nBASHPID\nBASH_ALIASES\nBASH_ARGC\nBASH_ARGV\nBASH_ARGV0\nBASH_CMDS\nBASH_COMMAND\nBASH_EXECUTION_STRING\nBASH_LINENO\nBASH_LOADABLES_PATH\nBASH_SOURCE\nBASH_SUBSHELL\nBASH_VERSINFO\nBASH_VERSION\nEPOCHREALTIME\nEPOCHSECONDS\nHISTCMD\nHOME\nHOSTNAME\nHOSTTYPE\nMACHTYPE\nPATH\nSHELL\nSHELLOPTS\nSHLVL\n",
+        "eval_obs": "HOSTNAME\nHOME\nSHLVL\nPATH\n",
+        "answer_similarity": 0.284461236524142,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "compgen -v | grep 'H'",
+        "observation": "BASH\nBASHOPTS\nBASHPID\nBASH_ALIASES\nBASH_ARGC\nBASH_ARGV\nBASH_ARGV0\nBASH_CMDS\nBASH_COMMAND\nBASH_EXECUTION_STRING\nBASH_LINENO\nBASH_LOADABLES_PATH\nBASH_SOURCE\nBASH_SUBSHELL\nBASH_VERSINFO\nBASH_VERSION\nEPOCHREALTIME\nEPOCHSECONDS\nHISTCMD\nHOME\nHOSTNAME\nHOSTTYPE\nMACHTYPE\nPATH\nSHELL\nSHELLOPTS\nSHLVL\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.76,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "BASH\nBASHOPTS\nBASHPID\nBASH_ALIASES\nBASH_ARGC\nBASH_ARGV\nBASH_ARGV0\nBASH_CMDS\nBASH_COMMAND\nBASH_EXECUTION_STRING\nBASH_LINENO\nBASH_LOADABLES_PATH\nBASH_SOURCE\nBASH_SUBSHELL\nBASH_VERSINFO\nBASH_VERSION\nEPOCHREALTIME\nEPOCHSECONDS\nHISTCMD\nHOME\nHOSTNAME\nHOSTTYPE\nMACHTYPE\nPATH\nSHELL\nSHELLOPTS\nSHLVL\n",
+    "eval_observation": "HOSTNAME\nHOME\nSHLVL\nPATH\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "batch": {
+    "run_id": "6cd0f7af3b38",
+    "selection": {
+      "split": 4,
+      "offset": 0,
+      "limit": null,
+      "task_indices": null
+    }
+  }
+}

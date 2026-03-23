@@ -1,0 +1,125 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-16T14:28:30Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-16T14:28:30Z",
+    "finished_at": "2026-03-16T14:28:40Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "find /testbed -type f -name '*.php' -print0 | xargs -0 wc -l",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    }
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /testbed -type f -name '*.php' -print0 | xargs -0 wc -l",
+    "raw_output_text": "find /testbed -type f -name '*.php' -print0 | xargs -0 wc -l",
+    "raw_output_payload": {
+      "content": "find /testbed -type f -name '*.php' -print0 | xargs -0 wc -l",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need a bash command that counts lines in each .php file recursively in /testbed, prints each file count and total. Use find and wc -l. For each file, maybe use while read. Simpler: find /testbed -name '*.php' -print0 | xargs -0 wc -l | awk. But need per file and total. wc -l prints per file and total if multiple. So command: find /testbed -name '*.php' -print0 | xargs -0 wc -l. That prints each file and total. That's fine.",
+      "reasoning_content": "We need a bash command that counts lines in each .php file recursively in /testbed, prints each file count and total. Use find and wc -l. For each file, maybe use while read. Simpler: find /testbed -name '*.php' -print0 | xargs -0 wc -l | awk. But need per file and total. wc -l prints per file and total if multiple. So command: find /testbed -name '*.php' -print0 | xargs -0 wc -l. That prints each file and total. That's fine."
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 37,
+    "query": "Counts lines in each of *.php files in the /testbed folder with subfolders and prints total count as well.",
+    "gold": "find /testbed -name '*.php' | xargs wc -l | sort -r",
+    "record": {
+      "query": "Counts lines in each of *.php files in the /testbed folder with subfolders and prints total count as well.",
+      "gold": "find /testbed -name '*.php' | xargs wc -l | sort -r"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Counts lines in each of *.php files in the /testbed folder with subfolders and prints total count as well.",
+      "info": {
+        "action_executed": true,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": " 1 /testbed/dir1/info.php\n 1 /testbed/hello.php\n 2 total\n",
+        "eval_obs": " 2 total\n 1 /testbed/hello.php\n 1 /testbed/dir1/info.php\n",
+        "answer_similarity": 1.0000000000000002
+      }
+    },
+    "action": {
+      "command": "find /testbed -type f -name '*.php' -print0 | xargs -0 wc -l",
+      "observation": " 1 /testbed/dir1/info.php\n 1 /testbed/hello.php\n 2 total\n",
+      "info": {
+        "action_executed": true,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": " 1 /testbed/dir1/info.php\n 1 /testbed/hello.php\n 2 total\n",
+        "eval_obs": " 2 total\n 1 /testbed/hello.php\n 1 /testbed/dir1/info.php\n",
+        "answer_similarity": 1.0000000000000002
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": " 1 /testbed/dir1/info.php\n 1 /testbed/hello.php\n 2 total\n",
+      "reward": 1.0,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": " 1 /testbed/dir1/info.php\n 1 /testbed/hello.php\n 2 total\n",
+        "eval_obs": " 2 total\n 1 /testbed/hello.php\n 1 /testbed/dir1/info.php\n",
+        "answer_similarity": 1.0000000000000002,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /testbed -type f -name '*.php' -print0 | xargs -0 wc -l",
+        "observation": " 1 /testbed/dir1/info.php\n 1 /testbed/hello.php\n 2 total\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 1.0,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": " 1 /testbed/dir1/info.php\n 1 /testbed/hello.php\n 2 total\n",
+    "eval_observation": " 2 total\n 1 /testbed/hello.php\n 1 /testbed/dir1/info.php\n",
+    "corrupt_gold": null
+  },
+  "error": null
+}

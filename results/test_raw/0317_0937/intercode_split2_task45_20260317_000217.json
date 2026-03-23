@@ -1,0 +1,125 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-16T15:02:17Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-16T15:02:17Z",
+    "finished_at": "2026-03-16T15:02:25Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "mkdir -p /system/folder3/backup_dbg/backup && rsync -av --exclude='*text*' /system/ /system/folder3/backup_dbg/backup/",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_2.json"
+    }
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "mkdir -p /system/folder3/backup_dbg/backup && rsync -av --exclude='*text*' /system/ /system/folder3/backup_dbg/backup/",
+    "raw_output_text": "```bash\nmkdir -p /system/folder3/backup_dbg/backup && rsync -av --exclude='*text*' /system/ /system/folder3/backup_dbg/backup/\n```",
+    "raw_output_payload": {
+      "content": "```bash\nmkdir -p /system/folder3/backup_dbg/backup && rsync -av --exclude='*text*' /system/ /system/folder3/backup_dbg/backup/\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need to copy all files except those containing 'text' in name? Probably exclude files with 'text' in name. Use rsync or find. Command: mkdir -p target then find /system -type f ! -name '*text*' -exec cp --parents {} /system/folder3/backup_dbg/backup \\; But need preserve directory structure? Not specified. Just copy all files. Use cp -r? Let's use rsync: rsync -av --exclude='*text*' /system/ /system/folder3/backup_dbg/backup/ . That copies all files and dirs except those containing text. But exclude only files? It will exclude directories too. Maybe fine. Provide command.",
+      "reasoning_content": "Need to copy all files except those containing 'text' in name? Probably exclude files with 'text' in name. Use rsync or find. Command: mkdir -p target then find /system -type f ! -name '*text*' -exec cp --parents {} /system/folder3/backup_dbg/backup \\; But need preserve directory structure? Not specified. Just copy all files. Use cp -r? Let's use rsync: rsync -av --exclude='*text*' /system/ /system/folder3/backup_dbg/backup/ . That copies all files and dirs except those containing text. But exclude only files? It will exclude directories too. Maybe fine. Provide command."
+    }
+  },
+  "task": {
+    "split": 2,
+    "task_index": 45,
+    "query": "Copy all files in the /system directory except those containing 'text' to '/system/folder3/backup_dbg/backup'.",
+    "gold": "find /system -maxdepth 1 -type f -name '*text*' -exec cp {} /system/folder3/backup_dbg/backup \\;",
+    "record": {
+      "query": "Copy all files in the /system directory except those containing 'text' to '/system/folder3/backup_dbg/backup'.",
+      "gold": "find /system -maxdepth 1 -type f -name '*text*' -exec cp {} /system/folder3/backup_dbg/backup \\;"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Copy all files in the /system directory except those containing 'text' to '/system/folder3/backup_dbg/backup'.",
+      "info": {
+        "action_executed": false,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "/bin/bash: line 1: rsync: command not found\n",
+        "eval_obs": "find: '/system': No such file or directory\n",
+        "answer_similarity": 0.0
+      }
+    },
+    "action": {
+      "command": "mkdir -p /system/folder3/backup_dbg/backup && rsync -av --exclude='*text*' /system/ /system/folder3/backup_dbg/backup/",
+      "observation": "/bin/bash: line 1: rsync: command not found\n",
+      "info": {
+        "action_executed": false,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "/bin/bash: line 1: rsync: command not found\n",
+        "eval_obs": "find: '/system': No such file or directory\n",
+        "answer_similarity": 0.0
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "/bin/bash: line 1: rsync: command not found\n",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "/bin/bash: line 1: rsync: command not found\n",
+        "eval_obs": "find: '/system': No such file or directory\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "mkdir -p /system/folder3/backup_dbg/backup && rsync -av --exclude='*text*' /system/ /system/folder3/backup_dbg/backup/",
+        "observation": "/bin/bash: line 1: rsync: command not found\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "/bin/bash: line 1: rsync: command not found\n",
+    "eval_observation": "find: '/system': No such file or directory\n",
+    "corrupt_gold": null
+  },
+  "error": null
+}

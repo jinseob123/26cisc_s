@@ -1,0 +1,125 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-16T14:34:32Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-16T14:34:32Z",
+    "finished_at": "2026-03-16T14:34:40Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "find /testbed -type f ! -size 0 -printf \"%s %p\\n\" | sort -n | head -5 | awk '{print $2}'",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    }
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /testbed -type f ! -size 0 -printf \"%s %p\\n\" | sort -n | head -5 | awk '{print $2}'",
+    "raw_output_text": "```bash\nfind /testbed -type f ! -size 0 -printf \"%s %p\\n\" | sort -n | head -5 | awk '{print $2}'\n```",
+    "raw_output_payload": {
+      "content": "```bash\nfind /testbed -type f ! -size 0 -printf \"%s %p\\n\" | sort -n | head -5 | awk '{print $2}'\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need command: find /testbed -type f ! -size 0 -printf \"%s %p\\n\" | sort -n | head -5 | awk '{print $2}' maybe. Use -printf \"%s %p\\n\". So final.",
+      "reasoning_content": "Need command: find /testbed -type f ! -size 0 -printf \"%s %p\\n\" | sort -n | head -5 | awk '{print $2}' maybe. Use -printf \"%s %p\\n\". So final."
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 49,
+    "query": "Display the 5 smallest files in the /testbed directory and its sub-directories ignoring any empty files.",
+    "gold": "find /testbed -not -empty -type f -exec ls -s {} \\; | sort -n  | head -5",
+    "record": {
+      "query": "Display the 5 smallest files in the /testbed directory and its sub-directories ignoring any empty files.",
+      "gold": "find /testbed -not -empty -type f -exec ls -s {} \\; | sort -n  | head -5"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Display the 5 smallest files in the /testbed directory and its sub-directories ignoring any empty files.",
+      "info": {
+        "action_executed": true,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "32482032486314103202811618324832172632173248661244103103118317582",
+        "eval_obs": "4 /testbed/FooBar.html\n4 /testbed/Hello.java\n4 /testbed/Hello1.java\n4 /testbed/NewClass.java\n4 /testbed/dir1/AnotherHello.java\n",
+        "answer_similarity": 0.0
+      }
+    },
+    "action": {
+      "command": "find /testbed -type f ! -size 0 -printf \"%s %p\\n\" | sort -n | head -5 | awk '{print $2}'",
+      "observation": "32482032486314103202811618324832172632173248661244103103118317582",
+      "info": {
+        "action_executed": true,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "32482032486314103202811618324832172632173248661244103103118317582",
+        "eval_obs": "4 /testbed/FooBar.html\n4 /testbed/Hello.java\n4 /testbed/Hello1.java\n4 /testbed/NewClass.java\n4 /testbed/dir1/AnotherHello.java\n",
+        "answer_similarity": 0.0
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "32482032486314103202811618324832172632173248661244103103118317582",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "32482032486314103202811618324832172632173248661244103103118317582",
+        "eval_obs": "4 /testbed/FooBar.html\n4 /testbed/Hello.java\n4 /testbed/Hello1.java\n4 /testbed/NewClass.java\n4 /testbed/dir1/AnotherHello.java\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /testbed -type f ! -size 0 -printf \"%s %p\\n\" | sort -n | head -5 | awk '{print $2}'",
+        "observation": "32482032486314103202811618324832172632173248661244103103118317582"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "32482032486314103202811618324832172632173248661244103103118317582",
+    "eval_observation": "4 /testbed/FooBar.html\n4 /testbed/Hello.java\n4 /testbed/Hello1.java\n4 /testbed/NewClass.java\n4 /testbed/dir1/AnotherHello.java\n",
+    "corrupt_gold": null
+  },
+  "error": null
+}

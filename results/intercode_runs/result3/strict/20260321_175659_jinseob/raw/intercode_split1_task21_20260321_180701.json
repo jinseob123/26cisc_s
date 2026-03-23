@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-21T09:07:01Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-21T09:07:01Z",
+    "finished_at": "2026-03-21T09:07:10Z",
+    "image_name": "intercode-nl2bash-fs1",
+    "command": {
+      "text": "find . -type f -name '*.php' -exec cat {} + | wc -l",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find . -type f -name '*.php' -exec cat {} + | wc -l",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": false,
+    "raw_output_text": "find . -type f -name '*.php' -exec cat {} + | wc -l",
+    "raw_output_payload": {
+      "content": "find . -type f -name '*.php' -exec cat {} + | wc -l",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need a bash command that counts lines of all php files recursively. Use find . -type f -name '*.php' -print0 | xargs -0 cat | wc -l. Or use find ... -exec cat {} + | wc -l. So final command: find . -type f -name '*.php' -exec cat {} + | wc -l.",
+      "reasoning_content": "We need a bash command that counts lines of all php files recursively. Use find . -type f -name '*.php' -print0 | xargs -0 cat | wc -l. Or use find ... -exec cat {} + | wc -l. So final command: find . -type f -name '*.php' -exec cat {} + | wc -l."
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 21,
+    "query": "Count all the lines of all files with names ending with 'php' in current directory recursively",
+    "gold": "find -name '*php' | xargs cat | wc -l",
+    "record": {
+      "query": "Count all the lines of all files with names ending with 'php' in current directory recursively",
+      "gold": "find -name '*php' | xargs cat | wc -l"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Count all the lines of all files with names ending with 'php' in current directory recursively",
+      "info": {}
+    },
+    "action": {
+      "command": "find . -type f -name '*.php' -exec cat {} + | wc -l",
+      "observation": "find: './etc/credstore': Permission denied\nfind: './etc/credstore.encrypted': Permission denied\nfind: './etc/ssl/private': Permission denied\nfind: './home/ubuntu': Permission denied\nfind: './proc/tty/driver': Permission denied\nfind: './proc/1/task/1/fd': Permission denied\nfind: './proc/1/task/1/fdinfo': Permission denied\nfind: './proc/1/task/1/ns': Permission denied\nfind: './proc/1/fd': Permission denied\nfind: './proc/1/map_files': Permission denied\nfind: './proc/1/fdinfo': Permission denied\nfind: './proc/1/ns': Permission denied\nfind: './root': Permission denied\nfind: './var/cache/apt/archives/partial': Permission denied\nfind: './var/cache/ldconfig': Permission denied\nfind: './var/cache/private': Permission denied\nfind: './var/lib/private': Permission denied\nfind: './var/log/private': Permission denied\nfind: './var/spool/cron/crontabs': Permission denied\n2\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "find: './etc/credstore': Permission denied\nfind: './etc/credstore.encrypted': Permission denied\nfind: './etc/ssl/private': Permission denied\nfind: './home/ubuntu': Permission denied\nfind: './proc/tty/driver': Permission denied\nfind: './proc/1/task/1/fd': Permission denied\nfind: './proc/1/task/1/fdinfo': Permission denied\nfind: './proc/1/task/1/ns': Permission denied\nfind: './proc/1/fd': Permission denied\nfind: './proc/1/map_files': Permission denied\nfind: './proc/1/fdinfo': Permission denied\nfind: './proc/1/ns': Permission denied\nfind: './root': Permission denied\nfind: './var/cache/apt/archives/partial': Permission denied\nfind: './var/cache/ldconfig': Permission denied\nfind: './var/cache/private': Permission denied\nfind: './var/lib/private': Permission denied\nfind: './var/log/private': Permission denied\nfind: './var/spool/cron/crontabs': Permission denied\n2\n",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "find: './etc/credstore': Permission denied\nfind: './etc/credstore.encrypted': Permission denied\nfind: './etc/ssl/private': Permission denied\nfind: './home/ubuntu': Permission denied\nfind: './proc/tty/driver': Permission denied\nfind: './proc/1/task/1/fd': Permission denied\nfind: './proc/1/task/1/fdinfo': Permission denied\nfind: './proc/1/task/1/ns': Permission denied\nfind: './proc/1/fd': Permission denied\nfind: './proc/1/map_files': Permission denied\nfind: './proc/1/fdinfo': Permission denied\nfind: './proc/1/ns': Permission denied\nfind: './root': Permission denied\nfind: './var/cache/apt/archives/partial': Permission denied\nfind: './var/cache/ldconfig': Permission denied\nfind: './var/cache/private': Permission denied\nfind: './var/lib/private': Permission denied\nfind: './var/log/private': Permission denied\nfind: './var/spool/cron/crontabs': Permission denied\n2\n",
+        "eval_obs": "cat: ./sys/module/acpiphp: Is a directory\n2\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find . -type f -name '*.php' -exec cat {} + | wc -l",
+        "observation": "find: './etc/credstore': Permission denied\nfind: './etc/credstore.encrypted': Permission denied\nfind: './etc/ssl/private': Permission denied\nfind: './home/ubuntu': Permission denied\nfind: './proc/tty/driver': Permission denied\nfind: './proc/1/task/1/fd': Permission denied\nfind: './proc/1/task/1/fdinfo': Permission denied\nfind: './proc/1/task/1/ns': Permission denied\nfind: './proc/1/fd': Permission denied\nfind: './proc/1/map_files': Permission denied\nfind: './proc/1/fdinfo': Permission denied\nfind: './proc/1/ns': Permission denied\nfind: './root': Permission denied\nfind: './var/cache/apt/archives/partial': Permission denied\nfind: './var/cache/ldconfig': Permission denied\nfind: './var/cache/private': Permission denied\nfind: './var/lib/private': Permission denied\nfind: './var/log/private': Permission denied\nfind: './var/spool/cron/crontabs': Permission denied\n2\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "find: './etc/credstore': Permission denied\nfind: './etc/credstore.encrypted': Permission denied\nfind: './etc/ssl/private': Permission denied\nfind: './home/ubuntu': Permission denied\nfind: './proc/tty/driver': Permission denied\nfind: './proc/1/task/1/fd': Permission denied\nfind: './proc/1/task/1/fdinfo': Permission denied\nfind: './proc/1/task/1/ns': Permission denied\nfind: './proc/1/fd': Permission denied\nfind: './proc/1/map_files': Permission denied\nfind: './proc/1/fdinfo': Permission denied\nfind: './proc/1/ns': Permission denied\nfind: './root': Permission denied\nfind: './var/cache/apt/archives/partial': Permission denied\nfind: './var/cache/ldconfig': Permission denied\nfind: './var/cache/private': Permission denied\nfind: './var/lib/private': Permission denied\nfind: './var/log/private': Permission denied\nfind: './var/spool/cron/crontabs': Permission denied\n2\n",
+    "eval_observation": "cat: ./sys/module/acpiphp: Is a directory\n2\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "fdb8887b32c1",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260321_153210_fdb8887b32c1/commands.jsonl"
+  }
+}

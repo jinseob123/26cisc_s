@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T05:24:10Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T05:24:10Z",
+    "finished_at": "2026-03-17T05:24:18Z",
+    "image_name": "intercode-nl2bash-fs4",
+    "command": {
+      "text": "dig -x 127.0.0.1 +short",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_4.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "dig -x 127.0.0.1 +short",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\ndig -x 127.0.0.1 +short\n```",
+    "raw_output_payload": {
+      "content": "```bash\ndig -x 127.0.0.1 +short\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need to perform reverse DNS lookup for 127.0.0.1. Use dig -x 127.0.0.1 +short or host -a. Provide one command.",
+      "reasoning_content": "Need to perform reverse DNS lookup for 127.0.0.1. Use dig -x 127.0.0.1 +short or host -a. Provide one command."
+    }
+  },
+  "task": {
+    "split": 4,
+    "task_index": 1,
+    "query": "Print reverse lookup for adress 127.0.0.1",
+    "gold": "dig -x 127.0.0.1",
+    "record": {
+      "query": "Print reverse lookup for adress 127.0.0.1",
+      "gold": "dig -x 127.0.0.1"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Print reverse lookup for adress 127.0.0.1",
+      "info": {}
+    },
+    "action": {
+      "command": "dig -x 127.0.0.1 +short",
+      "observation": "localhost.\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "localhost.\n",
+      "reward": 0.7200000000000001,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.05
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "localhost.\n",
+        "eval_obs": "\n; <<>> DiG 9.18.39-0ubuntu0.24.04.2-Ubuntu <<>> -x 127.0.0.1\n;; global options: +cmd\n;; Got answer:\n;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 26934\n;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 1, ADDITIONAL: 2\n\n;; OPT PSEUDOSECTION:\n; EDNS: version: 0, flags:; udp: 1232\n; COOKIE: 20c4231bdd57377af55db11969b8e581823f8ddc3bdc7743 (good)\n;; QUESTION SECTION:\n;1.0.0.127.in-addr.arpa.\t\tIN\tPTR\n\n;; ANSWER SECTION:\n1.0.0.127.in-addr.arpa.\t86400\tIN\tPTR\tlocalhost.\n\n;; AUTHORITY SECTION:\n0.0.127.in-addr.arpa.\t86400\tIN\tNS\tlocalhost.\n\n;; ADDITIONAL SECTION:\nlocalhost.\t\t43200\tIN\tA\t127.0.0.1\n\n;; Query time: 5 msec\n;; SERVER: 164.124.107.9#53(164.124.107.9) (UDP)\n;; WHEN: Tue Mar 17 05:24:17 UTC 2026\n;; MSG SIZE  rcvd: 132\n\n",
+        "answer_similarity": 0.1440550003422176,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "dig -x 127.0.0.1 +short",
+        "observation": "localhost.\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.7200000000000001,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "localhost.\n",
+    "eval_observation": "\n; <<>> DiG 9.18.39-0ubuntu0.24.04.2-Ubuntu <<>> -x 127.0.0.1\n;; global options: +cmd\n;; Got answer:\n;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 26934\n;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 1, ADDITIONAL: 2\n\n;; OPT PSEUDOSECTION:\n; EDNS: version: 0, flags:; udp: 1232\n; COOKIE: 20c4231bdd57377af55db11969b8e581823f8ddc3bdc7743 (good)\n;; QUESTION SECTION:\n;1.0.0.127.in-addr.arpa.\t\tIN\tPTR\n\n;; ANSWER SECTION:\n1.0.0.127.in-addr.arpa.\t86400\tIN\tPTR\tlocalhost.\n\n;; AUTHORITY SECTION:\n0.0.127.in-addr.arpa.\t86400\tIN\tNS\tlocalhost.\n\n;; ADDITIONAL SECTION:\nlocalhost.\t\t43200\tIN\tA\t127.0.0.1\n\n;; Query time: 5 msec\n;; SERVER: 164.124.107.9#53(164.124.107.9) (UDP)\n;; WHEN: Tue Mar 17 05:24:17 UTC 2026\n;; MSG SIZE  rcvd: 132\n\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "19483a6d9ff8",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260317_120905_19483a6d9ff8/commands.jsonl"
+  }
+}

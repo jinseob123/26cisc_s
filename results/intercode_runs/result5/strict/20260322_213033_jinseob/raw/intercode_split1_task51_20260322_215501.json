@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-22T12:55:01Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-22T12:55:01Z",
+    "finished_at": "2026-03-22T12:55:08Z",
+    "image_name": "intercode-nl2bash-fs1",
+    "command": {
+      "text": "find /testbed -type f -printf \"%s %p\\n\" | sort -nr | head -n 10",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /testbed -type f -printf \"%s %p\\n\" | sort -nr | head -n 10",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nfind /testbed -type f -printf \"%s %p\\n\" | sort -nr | head -n 10\n```",
+    "raw_output_payload": {
+      "content": "```bash\nfind /testbed -type f -printf \"%s %p\\n\" | sort -nr | head -n 10\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need command to list biggest file sizes only. Maybe sort -h -r. Use find /testbed -type f -printf \"%s %p\\n\" | sort -nr | head -n 10. Provide command.",
+      "reasoning_content": "Need command to list biggest file sizes only. Maybe sort -h -r. Use find /testbed -type f -printf \"%s %p\\n\" | sort -nr | head -n 10. Provide command."
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 51,
+    "query": "Display the biggest file sizes only in the /testbed directory",
+    "gold": "find /testbed -type f -exec du -Sh {} + | sort -rh | head -n 5",
+    "record": {
+      "query": "Display the biggest file sizes only in the /testbed directory",
+      "gold": "find /testbed -type f -exec du -Sh {} + | sort -rh | head -n 5"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Display the biggest file sizes only in the /testbed directory",
+      "info": {}
+    },
+    "action": {
+      "command": "find /testbed -type f -printf \"%s %p\\n\" | sort -nr | head -n 10",
+      "observation": "324820324863141032028116183248321726321732486612440103103118317582",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "324820324863141032028116183248321726321732486612440103103118317582",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "324820324863141032028116183248321726321732486612440103103118317582",
+        "eval_obs": "4.0K\t/testbed/textfile7.txt\n4.0K\t/testbed/hello.php\n4.0K\t/testbed/hello.c\n4.0K\t/testbed/dir3/textfile6.txt\n4.0K\t/testbed/dir3/subdir2/csvfile1.csv\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /testbed -type f -printf \"%s %p\\n\" | sort -nr | head -n 10",
+        "observation": "324820324863141032028116183248321726321732486612440103103118317582"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "324820324863141032028116183248321726321732486612440103103118317582",
+    "eval_observation": "4.0K\t/testbed/textfile7.txt\n4.0K\t/testbed/hello.php\n4.0K\t/testbed/hello.c\n4.0K\t/testbed/dir3/textfile6.txt\n4.0K\t/testbed/dir3/subdir2/csvfile1.csv\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "f6ff84e7aae6",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260322_193900_f6ff84e7aae6/commands.jsonl"
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T02:28:41Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T02:28:41Z",
+    "finished_at": "2026-03-17T02:28:49Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "cd \"$(dirname \"$(command -v python)\")\"",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_4.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "cd \"$(dirname \"$(command -v python)\")\"",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\ncd \"$(dirname \"$(command -v python)\")\"\n```",
+    "raw_output_payload": {
+      "content": "```bash\ncd \"$(dirname \"$(command -v python)\")\"\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need a bash command to change to directory of executable python. Use which python or readlink. Command: cd \"$(dirname \"$(readlink -f $(which python))\")\". But which python may not exist. Use command: cd \"$(dirname \"$(command -v python)\")\". That gives path to binary. So final.",
+      "reasoning_content": "We need a bash command to change to directory of executable python. Use which python or readlink. Command: cd \"$(dirname \"$(readlink -f $(which python))\")\". But which python may not exist. Use command: cd \"$(dirname \"$(command -v python)\")\". That gives path to binary. So final."
+    }
+  },
+  "task": {
+    "split": 4,
+    "task_index": 7,
+    "query": "Change to the directory of the executable \"python\"",
+    "gold": "cd `dirname $(which python)`",
+    "record": {
+      "query": "Change to the directory of the executable \"python\"",
+      "gold": "cd `dirname $(which python)`"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Change to the directory of the executable \"python\"",
+      "info": {}
+    },
+    "action": {
+      "command": "cd \"$(dirname \"$(command -v python)\")\"",
+      "observation": "$(command -v python)): -c: line 2: unexpected EOF while looking for matching `)'\n",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "$(command -v python)): -c: line 2: unexpected EOF while looking for matching `)'\n",
+      "reward": 0.6900000000000001,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.02
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "$(command -v python)): -c: line 2: unexpected EOF while looking for matching `)'\n",
+        "eval_obs": "dirname: missing operand\nTry 'dirname --help' for more information.\n",
+        "answer_similarity": 0.05355095314996731,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "cd \"$(dirname \"$(command -v python)\")\"",
+        "observation": "$(command -v python)): -c: line 2: unexpected EOF while looking for matching `)'\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.6900000000000001,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "$(command -v python)): -c: line 2: unexpected EOF while looking for matching `)'\n",
+    "eval_observation": "dirname: missing operand\nTry 'dirname --help' for more information.\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "batch": {
+    "run_id": "bbec81f40091",
+    "selection": {
+      "split": 4,
+      "offset": 0,
+      "limit": null,
+      "task_indices": null
+    }
+  }
+}

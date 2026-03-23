@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T01:17:43Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T01:17:43Z",
+    "finished_at": "2026-03-17T01:17:52Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "find /testbed -type f -name '*.php' | sort | while read -r f; do echo -n \"$f: \"; wc -l < \"$f\"; done",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /testbed -type f -name '*.php' | sort | while read -r f; do echo -n \"$f: \"; wc -l < \"$f\"; done",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nfind /testbed -type f -name '*.php' | sort | while read -r f; do echo -n \"$f: \"; wc -l < \"$f\"; done\n```",
+    "raw_output_payload": {
+      "content": "```bash\nfind /testbed -type f -name '*.php' | sort | while read -r f; do echo -n \"$f: \"; wc -l < \"$f\"; done\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need command: find /testbed -name '*.php' -type f -printf '%p\\n' | sort | while read f; do echo -n \"$f: \"; wc -l < \"$f\"; done\n\nReturn one command. Use xargs? Use awk? Provide single pipeline. Let's output: find /testbed -type f -name '*.php' -print0 | sort -z | while IFS= read -r -d '' f; do echo -n \"$f: \"; wc -l < \"$f\"; done\n\nBut sort -z requires GNU sort. Simpler: find ... | sort | while read f; do echo -n \"$f: \"; wc -l < \"$f\"; done\n\nReturn that.",
+      "reasoning_content": "Need command: find /testbed -name '*.php' -type f -printf '%p\\n' | sort | while read f; do echo -n \"$f: \"; wc -l < \"$f\"; done\n\nReturn one command. Use xargs? Use awk? Provide single pipeline. Let's output: find /testbed -type f -name '*.php' -print0 | sort -z | while IFS= read -r -d '' f; do echo -n \"$f: \"; wc -l < \"$f\"; done\n\nBut sort -z requires GNU sort. Simpler: find ... | sort | while read f; do echo -n \"$f: \"; wc -l < \"$f\"; done\n\nReturn that."
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 34,
+    "query": "Count lines in each *.php file sorted by file in /testbed directory.",
+    "gold": "find /testbed -name '*.php' -type f | sort | xargs wc -l",
+    "record": {
+      "query": "Count lines in each *.php file sorted by file in /testbed directory.",
+      "gold": "find /testbed -name '*.php' -type f | sort | xargs wc -l"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Count lines in each *.php file sorted by file in /testbed directory.",
+      "info": {}
+    },
+    "action": {
+      "command": "find /testbed -type f -name '*.php' | sort | while read -r f; do echo -n \"$f: \"; wc -l < \"$f\"; done",
+      "observation": "; wc -l < $f; done: -c: line 2: syntax error: unexpected end of file\n",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "; wc -l < $f; done: -c: line 2: syntax error: unexpected end of file\n",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "; wc -l < $f; done: -c: line 2: syntax error: unexpected end of file\n",
+        "eval_obs": " 1 /testbed/dir1/info.php\n 1 /testbed/hello.php\n 2 total\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /testbed -type f -name '*.php' | sort | while read -r f; do echo -n \"$f: \"; wc -l < \"$f\"; done",
+        "observation": "; wc -l < $f; done: -c: line 2: syntax error: unexpected end of file\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "; wc -l < $f; done: -c: line 2: syntax error: unexpected end of file\n",
+    "eval_observation": " 1 /testbed/dir1/info.php\n 1 /testbed/hello.php\n 2 total\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "batch": {
+    "run_id": "b437772b8004",
+    "selection": {
+      "split": 1,
+      "offset": 0,
+      "limit": null,
+      "task_indices": null
+    }
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-21T08:10:54Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-21T08:10:54Z",
+    "finished_at": "2026-03-21T08:11:02Z",
+    "image_name": "intercode-nl2bash-fs2",
+    "command": {
+      "text": "tar -czf /backup/system.tar.gz -C /system .",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_2.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "tar -czf /backup/system.tar.gz -C /system .",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\ntar -czf /backup/system.tar.gz -C /system .\n```",
+    "raw_output_payload": {
+      "content": "```bash\ntar -czf /backup/system.tar.gz -C /system .\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need tar -czf /backup/system.tar.gz -C /system .",
+      "reasoning_content": "Need tar -czf /backup/system.tar.gz -C /system ."
+    }
+  },
+  "task": {
+    "split": 2,
+    "task_index": 44,
+    "query": "compresses all the files in the /system folder with default depth to /backup",
+    "gold": "find /system -depth -print | cpio -dump /backup",
+    "record": {
+      "query": "compresses all the files in the /system folder with default depth to /backup",
+      "gold": "find /system -depth -print | cpio -dump /backup"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "compresses all the files in the /system folder with default depth to /backup",
+      "info": {}
+    },
+    "action": {
+      "command": "tar -czf /backup/system.tar.gz -C /system .",
+      "observation": "tar (child): /backup/system.tar.gz: Cannot open: No such file or directory\ntar (child): Error is not recoverable: exiting now\ntar: /backup/system.tar.gz: Cannot write: Broken pipe\ntar: Child returned status 2\ntar: Error is not recoverable: exiting now\n",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "tar (child): /backup/system.tar.gz: Cannot open: No such file or directory\ntar (child): Error is not recoverable: exiting now\ntar: /backup/system.tar.gz: Cannot write: Broken pipe\ntar: Child returned status 2\ntar: Error is not recoverable: exiting now\n",
+      "reward": 0.39,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.05,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [
+          [
+            "backup/",
+            "??"
+          ]
+        ],
+        "diff_extra": [],
+        "agent_obs": "tar (child): /backup/system.tar.gz: Cannot open: No such file or directory\ntar (child): Error is not recoverable: exiting now\ntar: /backup/system.tar.gz: Cannot write: Broken pipe\ntar: Child returned status 2\ntar: Error is not recoverable: exiting now\n",
+        "eval_obs": "3 blocks\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "tar -czf /backup/system.tar.gz -C /system .",
+        "observation": "tar (child): /backup/system.tar.gz: Cannot open: No such file or directory\ntar (child): Error is not recoverable: exiting now\ntar: /backup/system.tar.gz: Cannot write: Broken pipe\ntar: Child returned status 2\ntar: Error is not recoverable: exiting now\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.39,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "tar (child): /backup/system.tar.gz: Cannot open: No such file or directory\ntar (child): Error is not recoverable: exiting now\ntar: /backup/system.tar.gz: Cannot write: Broken pipe\ntar: Child returned status 2\ntar: Error is not recoverable: exiting now\n",
+    "eval_observation": "3 blocks\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "58ffa2cc8965",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260321_153319_58ffa2cc8965/commands.jsonl"
+  }
+}

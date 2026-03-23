@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T07:04:12Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T07:04:12Z",
+    "finished_at": "2026-03-17T07:04:20Z",
+    "image_name": "intercode-nl2bash-fs4",
+    "command": {
+      "text": "ps -e -o pid,ppid,cmd --forest",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_4.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "ps -e -o pid,ppid,cmd --forest",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": true,
+    "raw_output_text": "ps -e -o pid,ppid,cmd --forest",
+    "raw_output_payload": {
+      "content": "ps -e -o pid,ppid,cmd --forest",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need a bash command to display process tree with command line args. Use pstree -p? but need args. ps -e -o pid,ppid,cmd | awk? Use pstree -ap? pstree -p shows PIDs. For args use ps -o pid,ppid,cmd. To build tree: use pstree -p -A? Actually pstree -p shows PIDs, not args. Use pstree -p -A? Maybe use pstree -p -A? But to include args, use pstree -p -A? Not. Alternative: use ps -e -o pid,ppid,cmd --forest. That shows tree. So command: ps -e -o pid,ppid,cmd --forest. Let's output that.",
+      "reasoning_content": "Need a bash command to display process tree with command line args. Use pstree -p? but need args. ps -e -o pid,ppid,cmd | awk? Use pstree -ap? pstree -p shows PIDs. For args use ps -o pid,ppid,cmd. To build tree: use pstree -p -A? Actually pstree -p shows PIDs, not args. Use pstree -p -A? Maybe use pstree -p -A? But to include args, use pstree -p -A? Not. Alternative: use ps -e -o pid,ppid,cmd --forest. That shows tree. So command: ps -e -o pid,ppid,cmd --forest. Let's output that."
+    }
+  },
+  "task": {
+    "split": 4,
+    "task_index": 5,
+    "query": "Displays a tree of all process alongside their command line arguments.",
+    "gold": "pstree -a",
+    "record": {
+      "query": "Displays a tree of all process alongside their command line arguments.",
+      "gold": "pstree -a"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Displays a tree of all process alongside their command line arguments.",
+      "info": {}
+    },
+    "action": {
+      "command": "ps -e -o pid,ppid,cmd --forest",
+      "observation": "    PID    PPID CMD\n     20       0 ps -e -o pid,ppid,cmd --forest\n      1       0 /bin/bash\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "    PID    PPID CMD\n     20       0 ps -e -o pid,ppid,cmd --forest\n      1       0 /bin/bash\n",
+      "reward": 0.73,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.06
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "    PID    PPID CMD\n     20       0 ps -e -o pid,ppid,cmd --forest\n      1       0 /bin/bash\n",
+        "eval_obs": "bash\n",
+        "answer_similarity": 0.1751280861929285,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "ps -e -o pid,ppid,cmd --forest",
+        "observation": "    PID    PPID CMD\n     20       0 ps -e -o pid,ppid,cmd --forest\n      1       0 /bin/bash\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.73,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "    PID    PPID CMD\n     20       0 ps -e -o pid,ppid,cmd --forest\n      1       0 /bin/bash\n",
+    "eval_observation": "bash\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "19483a6d9ff8",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260317_120905_19483a6d9ff8/commands.jsonl"
+  }
+}

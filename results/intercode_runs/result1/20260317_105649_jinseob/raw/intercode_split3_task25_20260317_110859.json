@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T02:08:59Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T02:08:59Z",
+    "finished_at": "2026-03-17T02:09:08Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "find /workspace -type f -printf '%f\\n' | tr '[:upper:]' '[:lower:]' | sort | uniq -d",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /workspace -type f -printf '%f\\n' | tr '[:upper:]' '[:lower:]' | sort | uniq -d",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": false,
+    "raw_output_text": "find /workspace -type f -printf '%f\\n' | tr '[:upper:]' '[:lower:]' | sort | uniq -d",
+    "raw_output_payload": {
+      "content": "find /workspace -type f -printf '%f\\n' | tr '[:upper:]' '[:lower:]' | sort | uniq -d",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need a bash command that finds duplicate filenames case-insensitive. Use find, basename, tr to lower, sort, uniq -d. But need list of duplicates. Command: find /workspace -type f -printf '%f\\n' | tr '[:upper:]' '[:lower:]' | sort | uniq -d. That prints names. If want full paths? But duplicates by name only. Provide one line.",
+      "reasoning_content": "We need a bash command that finds duplicate filenames case-insensitive. Use find, basename, tr to lower, sort, uniq -d. But need list of duplicates. Command: find /workspace -type f -printf '%f\\n' | tr '[:upper:]' '[:lower:]' | sort | uniq -d. That prints names. If want full paths? But duplicates by name only. Provide one line."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 25,
+    "query": "Print a list of all duplicate case insensitive filenames in the /workspace directory tree",
+    "gold": "find /workspace -type f | awk -F/ '{print $NF}' | sort -f | uniq -i -d",
+    "record": {
+      "query": "Print a list of all duplicate case insensitive filenames in the /workspace directory tree",
+      "gold": "find /workspace -type f | awk -F/ '{print $NF}' | sort -f | uniq -i -d"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Print a list of all duplicate case insensitive filenames in the /workspace directory tree",
+      "info": {}
+    },
+    "action": {
+      "command": "find /workspace -type f -printf '%f\\n' | tr '[:upper:]' '[:lower:]' | sort | uniq -d",
+      "observation": "find: '/workspace': No such file or directory\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "find: '/workspace': No such file or directory\n",
+      "reward": 1.0,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "find: '/workspace': No such file or directory\n",
+        "eval_obs": "find: '/workspace': No such file or directory\n",
+        "answer_similarity": 0.9999999999999997,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /workspace -type f -printf '%f\\n' | tr '[:upper:]' '[:lower:]' | sort | uniq -d",
+        "observation": "find: '/workspace': No such file or directory\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 1.0,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "find: '/workspace': No such file or directory\n",
+    "eval_observation": "find: '/workspace': No such file or directory\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "batch": {
+    "run_id": "e87c93ee9cb6",
+    "selection": {
+      "split": 3,
+      "offset": 0,
+      "limit": null,
+      "task_indices": null
+    }
+  }
+}

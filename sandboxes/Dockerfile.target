@@ -9,6 +9,14 @@ RUN apt-get update && apt-get install -y \
     python3-pip \
     git \
     curl \
+    dnsutils \
+    iputils-ping \
+    jq \
+    tree \
+    psmisc \
+    cpio \
+    bsdextrautils \
+    ncal \
     wget \
     vim \
     sudo \

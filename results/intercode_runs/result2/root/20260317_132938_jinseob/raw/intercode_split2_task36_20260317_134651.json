@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T04:46:51Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T04:46:51Z",
+    "finished_at": "2026-03-17T04:46:59Z",
+    "image_name": "intercode-nl2bash-fs2",
+    "command": {
+      "text": "df -m --output=avail /system | tail -n +2",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_2.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "df -m --output=avail /system | tail -n +2",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\ndf -m --output=avail /system | tail -n +2\n```",
+    "raw_output_payload": {
+      "content": "```bash\ndf -m --output=avail /system | tail -n +2\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need command to print available space on filesystem containing /system directory in MB. Use df -m /system --output=avail? Actually df -m gives MB. So: df -m --output=avail /system | tail -n +2. That prints number. Or df -m /system | awk 'NR==2{print $4}'. But output header. Use --output=avail. So: df -m --output=avail /system | tail -n +2.",
+      "reasoning_content": "We need command to print available space on filesystem containing /system directory in MB. Use df -m /system --output=avail? Actually df -m gives MB. So: df -m --output=avail /system | tail -n +2. That prints number. Or df -m /system | awk 'NR==2{print $4}'. But output header. Use --output=avail. So: df -m --output=avail /system | tail -n +2."
+    }
+  },
+  "task": {
+    "split": 2,
+    "task_index": 36,
+    "query": "Print amount of space available on the file system containing path to the /system directory in megabytes.",
+    "gold": "df /system -B MB | tail -1 | awk {'print $4'} | grep  .[0-9]*",
+    "record": {
+      "query": "Print amount of space available on the file system containing path to the /system directory in megabytes.",
+      "gold": "df /system -B MB | tail -1 | awk {'print $4'} | grep  .[0-9]*"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Print amount of space available on the file system containing path to the /system directory in megabytes.",
+      "info": {}
+    },
+    "action": {
+      "command": "df -m --output=avail /system | tail -n +2",
+      "observation": "1811136\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "1811136\n",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "1811136\n",
+        "eval_obs": "1899114MB\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "df -m --output=avail /system | tail -n +2",
+        "observation": "1811136\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "1811136\n",
+    "eval_observation": "1899114MB\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "0e083a8c7a1e",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260317_120709_0e083a8c7a1e/commands.jsonl"
+  }
+}

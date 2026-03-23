@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-22T10:01:37Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-22T10:01:37Z",
+    "finished_at": "2026-03-22T10:01:44Z",
+    "image_name": "intercode-nl2bash-fs3",
+    "command": {
+      "text": "[ -d /workspace/dir2/mysql/ ] && [ \"$(stat -f -c %T /workspace/dir2/mysql/)\" != \"$(stat -f -c %T /)\" ] && echo \"exists\"",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "[ -d /workspace/dir2/mysql/ ] && [ \"$(stat -f -c %T /workspace/dir2/mysql/)\" != \"$(stat -f -c %T /)\" ] && echo \"exists\"",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": true,
+    "raw_output_text": "[ -d /workspace/dir2/mysql/ ] && [ \"$(stat -f -c %T /workspace/dir2/mysql/)\" != \"$(stat -f -c %T /)\" ] && echo \"exists\"",
+    "raw_output_payload": {
+      "content": "[ -d /workspace/dir2/mysql/ ] && [ \"$(stat -f -c %T /workspace/dir2/mysql/)\" != \"$(stat -f -c %T /)\" ] && echo \"exists\"",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need a bash command that checks if directory exists on a mounted filesystem. Use find -mount? Actually to check if path exists and is on a mount point. Use stat -f to get fstype? Use find -L? Maybe: if [ -d /workspace/dir2/mysql/ ] && [ \"$(stat -f -c %T /workspace/dir2/mysql/)\" != \"$(stat -f -c %T /)\" ]; then echo exists; fi. But single command. Use test: [ -d /workspace/dir2/mysql/ ] && [ \"$(stat -f -c %T /workspace/dir2/mysql/)\" != \"$(stat -f -c %T /)\" ] && echo \"exists\". Provide that.",
+      "reasoning_content": "We need a bash command that checks if directory exists on a mounted filesystem. Use find -mount? Actually to check if path exists and is on a mount point. Use stat -f to get fstype? Use find -L? Maybe: if [ -d /workspace/dir2/mysql/ ] && [ \"$(stat -f -c %T /workspace/dir2/mysql/)\" != \"$(stat -f -c %T /)\" ]; then echo exists; fi. But single command. Use test: [ -d /workspace/dir2/mysql/ ] && [ \"$(stat -f -c %T /workspace/dir2/mysql/)\" != \"$(stat -f -c %T /)\" ] && echo \"exists\". Provide that."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 44,
+    "query": "Determine if /workspace/dir2/mysql/ exists on a mounted file system.",
+    "gold": "df /workspace/dir2/mysql/",
+    "record": {
+      "query": "Determine if /workspace/dir2/mysql/ exists on a mounted file system.",
+      "gold": "df /workspace/dir2/mysql/"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Determine if /workspace/dir2/mysql/ exists on a mounted file system.",
+      "info": {}
+    },
+    "action": {
+      "command": "[ -d /workspace/dir2/mysql/ ] && [ \"$(stat -f -c %T /workspace/dir2/mysql/)\" != \"$(stat -f -c %T /)\" ] && echo \"exists\"",
+      "observation": "-f: -c: line 2: unexpected EOF while looking for matching `)'\n",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "-f: -c: line 2: unexpected EOF while looking for matching `)'\n",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "-f: -c: line 2: unexpected EOF while looking for matching `)'\n",
+        "eval_obs": "Filesystem      1K-blocks       Used  Available Use% Mounted on\noverlay        3905109820 2069076684 1836033136  53% /\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "[ -d /workspace/dir2/mysql/ ] && [ \"$(stat -f -c %T /workspace/dir2/mysql/)\" != \"$(stat -f -c %T /)\" ] && echo \"exists\"",
+        "observation": "-f: -c: line 2: unexpected EOF while looking for matching `)'\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "-f: -c: line 2: unexpected EOF while looking for matching `)'\n",
+    "eval_observation": "Filesystem      1K-blocks       Used  Available Use% Mounted on\noverlay        3905109820 2069076684 1836033136  53% /\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "ba7ef8134b5e",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260322_152203_ba7ef8134b5e/commands.jsonl"
+  }
+}

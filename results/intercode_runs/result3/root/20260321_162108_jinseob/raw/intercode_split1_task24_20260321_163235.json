@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-21T07:32:35Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-21T07:32:35Z",
+    "finished_at": "2026-03-21T07:32:43Z",
+    "image_name": "intercode-nl2bash-fs1",
+    "command": {
+      "text": "find /testbed -type f -name '*.py' -print0 | xargs -0 md5sum | wc -l",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /testbed -type f -name '*.py' -print0 | xargs -0 md5sum | wc -l",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": false,
+    "raw_output_text": "find /testbed -type f -name '*.py' -print0 | xargs -0 md5sum | wc -l",
+    "raw_output_payload": {
+      "content": "find /testbed -type f -name '*.py' -print0 | xargs -0 md5sum | wc -l",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need a bash command that counts md5sum of all *.py files in /testbed recursively. Likely: find /testbed -type f -name '*.py' -print0 | xargs -0 md5sum | wc -l. That counts lines. So output that.",
+      "reasoning_content": "We need a bash command that counts md5sum of all *.py files in /testbed recursively. Likely: find /testbed -type f -name '*.py' -print0 | xargs -0 md5sum | wc -l. That counts lines. So output that."
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 24,
+    "query": "Count md5sum of all '*.py' files in /testbed folder with subfolders.",
+    "gold": "find /testbed -type f -name \"*.py\" -exec md5sum {} + | awk '{print $1}' | sort | md5sum",
+    "record": {
+      "query": "Count md5sum of all '*.py' files in /testbed folder with subfolders.",
+      "gold": "find /testbed -type f -name \"*.py\" -exec md5sum {} + | awk '{print $1}' | sort | md5sum"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Count md5sum of all '*.py' files in /testbed folder with subfolders.",
+      "info": {}
+    },
+    "action": {
+      "command": "find /testbed -type f -name '*.py' -print0 | xargs -0 md5sum | wc -l",
+      "observation": "4\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "4\n",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "4\n",
+        "eval_obs": "7e9ff48e395ab4e0acb8336c4afe4504  -\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /testbed -type f -name '*.py' -print0 | xargs -0 md5sum | wc -l",
+        "observation": "4\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "4\n",
+    "eval_observation": "7e9ff48e395ab4e0acb8336c4afe4504  -\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "fdb8887b32c1",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260321_153210_fdb8887b32c1/commands.jsonl"
+  }
+}

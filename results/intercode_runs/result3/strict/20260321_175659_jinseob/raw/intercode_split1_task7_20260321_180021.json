@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-21T09:00:21Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-21T09:00:21Z",
+    "finished_at": "2026-03-21T09:00:28Z",
+    "image_name": "intercode-nl2bash-fs1",
+    "command": {
+      "text": "cd \"$(dirname \"$(readlink -f \"$(which python)\")\")\"",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "cd \"$(dirname \"$(readlink -f \"$(which python)\")\")\"",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\ncd \"$(dirname \"$(readlink -f \"$(which python)\")\")\"\n```",
+    "raw_output_payload": {
+      "content": "```bash\ncd \"$(dirname \"$(readlink -f \"$(which python)\")\")\"\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need to find path of python, then cd to its directory. Use readlink -f $(which python) to get full path, then dirname. So command: cd \"$(dirname \"$(readlink -f \"$(which python)\")\")\" . Provide as single command.",
+      "reasoning_content": "Need to find path of python, then cd to its directory. Use readlink -f $(which python) to get full path, then dirname. So command: cd \"$(dirname \"$(readlink -f \"$(which python)\")\")\" . Provide as single command."
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 7,
+    "query": "Change directory to the directory containing the executable file of command \"python\"",
+    "gold": "cd $(which python | xargs dirname)",
+    "record": {
+      "query": "Change directory to the directory containing the executable file of command \"python\"",
+      "gold": "cd $(which python | xargs dirname)"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Change directory to the directory containing the executable file of command \"python\"",
+      "info": {}
+    },
+    "action": {
+      "command": "cd \"$(dirname \"$(readlink -f \"$(which python)\")\")\"",
+      "observation": "$(readlink -f $(which: -c: line 2: unexpected EOF while looking for matching `)'\n",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "$(readlink -f $(which: -c: line 2: unexpected EOF while looking for matching `)'\n",
+      "reward": 0.6900000000000001,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.02
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "$(readlink -f $(which: -c: line 2: unexpected EOF while looking for matching `)'\n",
+        "eval_obs": "dirname: missing operand\nTry 'dirname --help' for more information.\n",
+        "answer_similarity": 0.05355095314996731,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "cd \"$(dirname \"$(readlink -f \"$(which python)\")\")\"",
+        "observation": "$(readlink -f $(which: -c: line 2: unexpected EOF while looking for matching `)'\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.6900000000000001,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "$(readlink -f $(which: -c: line 2: unexpected EOF while looking for matching `)'\n",
+    "eval_observation": "dirname: missing operand\nTry 'dirname --help' for more information.\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "fdb8887b32c1",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260321_153210_fdb8887b32c1/commands.jsonl"
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-22T07:57:47Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-22T07:57:47Z",
+    "finished_at": "2026-03-22T07:57:55Z",
+    "image_name": "intercode-nl2bash-fs2",
+    "command": {
+      "text": "ln -s / /system/folder1",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_2.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "ln -s / /system/folder1",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nln -s / /system/folder1\n```",
+    "raw_output_payload": {
+      "content": "```bash\nln -s / /system/folder1\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need to create symlink in /system/folder1 pointing to root folder /. Command: ln -s / /system/folder1. Ensure folder exists. Use -s. Provide command.",
+      "reasoning_content": "Need to create symlink in /system/folder1 pointing to root folder /. Command: ln -s / /system/folder1. Ensure folder exists. Use -s. Provide command."
+    }
+  },
+  "task": {
+    "split": 2,
+    "task_index": 40,
+    "query": "Create a symbolc link in the /system/folder1 to root folder",
+    "gold": "ln /system/folder1 -s /",
+    "record": {
+      "query": "Create a symbolc link in the /system/folder1 to root folder",
+      "gold": "ln /system/folder1 -s /"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Create a symbolc link in the /system/folder1 to root folder",
+      "info": {}
+    },
+    "action": {
+      "command": "ln -s / /system/folder1",
+      "observation": "ln: failed to create symbolic link '/system/folder1/': No such file or directory\n",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "ln: failed to create symbolic link '/system/folder1/': No such file or directory\n",
+      "reward": 0.39,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.05,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [
+          [
+            "folder1",
+            "??"
+          ]
+        ],
+        "diff_extra": [],
+        "agent_obs": "ln: failed to create symbolic link '/system/folder1/': No such file or directory\n",
+        "eval_obs": "",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "ln -s / /system/folder1",
+        "observation": "ln: failed to create symbolic link '/system/folder1/': No such file or directory\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.39,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "ln: failed to create symbolic link '/system/folder1/': No such file or directory\n",
+    "eval_observation": "",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "fbaa0391ba0c",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260322_152123_fbaa0391ba0c/commands.jsonl"
+  }
+}

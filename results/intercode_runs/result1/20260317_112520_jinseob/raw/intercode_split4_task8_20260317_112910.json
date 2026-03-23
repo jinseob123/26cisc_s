@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T02:29:10Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T02:29:10Z",
+    "finished_at": "2026-03-17T02:29:18Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "seq -s: 1 10",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_4.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "seq -s: 1 10",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nseq -s: 1 10\n```",
+    "raw_output_payload": {
+      "content": "```bash\nseq -s: 1 10\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need command to print 1:2:...:10. Use seq and paste. e.g., seq -s: 1 10. That's simplest.",
+      "reasoning_content": "Need command to print 1:2:...:10. Use seq and paste. e.g., seq -s: 1 10. That's simplest."
+    }
+  },
+  "task": {
+    "split": 4,
+    "task_index": 8,
+    "query": "Print numbers 1 through 10 separated by \":\"",
+    "gold": "yes | head -n10 | grep -n . | cut -d: -f1 | paste -sd:",
+    "record": {
+      "query": "Print numbers 1 through 10 separated by \":\"",
+      "gold": "yes | head -n10 | grep -n . | cut -d: -f1 | paste -sd:"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Print numbers 1 through 10 separated by \":\"",
+      "info": {}
+    },
+    "action": {
+      "command": "seq -s: 1 10",
+      "observation": "1:2:3:4:5:6:7:8:9:10\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "1:2:3:4:5:6:7:8:9:10\n",
+      "reward": 1.0,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "1:2:3:4:5:6:7:8:9:10\n",
+        "eval_obs": "1:2:3:4:5:6:7:8:9:10\n",
+        "answer_similarity": 1.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "seq -s: 1 10",
+        "observation": "1:2:3:4:5:6:7:8:9:10\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 1.0,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "1:2:3:4:5:6:7:8:9:10\n",
+    "eval_observation": "1:2:3:4:5:6:7:8:9:10\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "batch": {
+    "run_id": "bbec81f40091",
+    "selection": {
+      "split": 4,
+      "offset": 0,
+      "limit": null,
+      "task_indices": null
+    }
+  }
+}

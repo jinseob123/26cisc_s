@@ -1,0 +1,140 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-16T14:33:33Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-16T14:33:33Z",
+    "finished_at": "2026-03-16T14:33:42Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "find /testbed/dir3/subdir1/subsubdir1/tmp -type f -mtime +2 -print -delete | wc -l",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    }
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /testbed/dir3/subdir1/subsubdir1/tmp -type f -mtime +2 -print -delete | wc -l",
+    "raw_output_text": "```bash\nfind /testbed/dir3/subdir1/subsubdir1/tmp -type f -mtime +2 -print -delete | wc -l\n```",
+    "raw_output_payload": {
+      "content": "```bash\nfind /testbed/dir3/subdir1/subsubdir1/tmp -type f -mtime +2 -print -delete | wc -l\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need a command to delete and count files older than 2 days in that directory. Use find with -mtime +2 -type f -delete and count. We can use find ... -mtime +2 -type f -print | tee /dev/stderr | wc -l? Actually to delete and count, we can first find and delete while counting. Use find ... -mtime +2 -type f -print -delete? But -delete must be last. To count, we can use -printf \"%f\\n\" and pipe to wc -l. But deletion occurs before counting? We can use find ... -mtime +2 -type f -print -delete | wc -l? But -delete will delete after printing? The order: -print then -delete. That prints then deletes. So wc -l counts. So command: find /testbed/dir3/subdir1/subsubdir1/tmp -type f -mtime +2 -print -delete | wc -l. That returns count. Let's output that.",
+      "reasoning_content": "We need a command to delete and count files older than 2 days in that directory. Use find with -mtime +2 -type f -delete and count. We can use find ... -mtime +2 -type f -print | tee /dev/stderr | wc -l? Actually to delete and count, we can first find and delete while counting. Use find ... -mtime +2 -type f -print -delete? But -delete must be last. To count, we can use -printf \"%f\\n\" and pipe to wc -l. But deletion occurs before counting? We can use find ... -mtime +2 -type f -print -delete | wc -l? But -delete will delete after printing? The order: -print then -delete. That prints then deletes. So wc -l counts. So command: find /testbed/dir3/subdir1/subsubdir1/tmp -type f -mtime +2 -print -delete | wc -l. That returns count. Let's output that."
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 47,
+    "query": "Delete and count files in \"/testbed/dir3/subdir1/subsubdir1/tmp\" that are older than 2 days",
+    "gold": "find /testbed/dir3/subdir1/subsubdir1/tmp -type f -mtime +2 -print0 | xargs -0 rm -f",
+    "record": {
+      "query": "Delete and count files in \"/testbed/dir3/subdir1/subsubdir1/tmp\" that are older than 2 days",
+      "gold": "find /testbed/dir3/subdir1/subsubdir1/tmp -type f -mtime +2 -print0 | xargs -0 rm -f"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Delete and count files in \"/testbed/dir3/subdir1/subsubdir1/tmp\" that are older than 2 days",
+      "info": {
+        "action_executed": true,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.05,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [
+          [
+            "testbed/dir3/subdir1/subsubdir1/tmp/tmp.txt",
+            "D"
+          ]
+        ],
+        "diff_extra": [],
+        "agent_obs": "0\n",
+        "eval_obs": "",
+        "answer_similarity": 0
+      }
+    },
+    "action": {
+      "command": "find /testbed/dir3/subdir1/subsubdir1/tmp -type f -mtime +2 -print -delete | wc -l",
+      "observation": "0\n",
+      "info": {
+        "action_executed": true,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.05,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [
+          [
+            "testbed/dir3/subdir1/subsubdir1/tmp/tmp.txt",
+            "D"
+          ]
+        ],
+        "diff_extra": [],
+        "agent_obs": "0\n",
+        "eval_obs": "",
+        "answer_similarity": 0
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "0\n",
+      "reward": 0.39,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.05,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [
+          [
+            "testbed/dir3/subdir1/subsubdir1/tmp/tmp.txt",
+            "D"
+          ]
+        ],
+        "diff_extra": [],
+        "agent_obs": "0\n",
+        "eval_obs": "",
+        "answer_similarity": 0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /testbed/dir3/subdir1/subsubdir1/tmp -type f -mtime +2 -print -delete | wc -l",
+        "observation": "0\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.39,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "0\n",
+    "eval_observation": "",
+    "corrupt_gold": null
+  },
+  "error": null
+}

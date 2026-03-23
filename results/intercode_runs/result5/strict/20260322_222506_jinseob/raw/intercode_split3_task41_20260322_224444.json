@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-22T13:44:44Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-22T13:44:44Z",
+    "finished_at": "2026-03-22T13:44:52Z",
+    "image_name": "intercode-nl2bash-fs3",
+    "command": {
+      "text": "grep -v -e '^[[:space:]]*$' /workspace/dir1/a.txt | wc -l",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "grep -v -e '^[[:space:]]*$' /workspace/dir1/a.txt | wc -l",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": false,
+    "raw_output_text": "grep -v -e '^[[:space:]]*$' /workspace/dir1/a.txt | wc -l",
+    "raw_output_payload": {
+      "content": "grep -v -e '^[[:space:]]*$' /workspace/dir1/a.txt | wc -l",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need a bash command that counts lines in file ignoring empty lines and lines with spaces only. Use grep -v -e '^\\s*$' | wc -l. So: grep -v -e '^[[:space:]]*$' /workspace/dir1/a.txt | wc -l.",
+      "reasoning_content": "We need a bash command that counts lines in file ignoring empty lines and lines with spaces only. Use grep -v -e '^\\s*$' | wc -l. So: grep -v -e '^[[:space:]]*$' /workspace/dir1/a.txt | wc -l."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 41,
+    "query": "Counts lines in file /workspace/dir1/a.txt ignoring empty lines and lines with spaces only.",
+    "gold": "awk '!/^[[:space:]]*$/{++x} END{print x}' /workspace/dir1/a.txt",
+    "record": {
+      "query": "Counts lines in file /workspace/dir1/a.txt ignoring empty lines and lines with spaces only.",
+      "gold": "awk '!/^[[:space:]]*$/{++x} END{print x}' /workspace/dir1/a.txt"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Counts lines in file /workspace/dir1/a.txt ignoring empty lines and lines with spaces only.",
+      "info": {}
+    },
+    "action": {
+      "command": "grep -v -e '^[[:space:]]*$' /workspace/dir1/a.txt | wc -l",
+      "observation": "1\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "1\n",
+      "reward": 1.0,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "1\n",
+        "eval_obs": "1\n",
+        "answer_similarity": 1,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "grep -v -e '^[[:space:]]*$' /workspace/dir1/a.txt | wc -l",
+        "observation": "1\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 1.0,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "1\n",
+    "eval_observation": "1\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "7600a79d9526",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260322_194046_7600a79d9526/commands.jsonl"
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T02:12:56Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T02:12:56Z",
+    "finished_at": "2026-03-17T02:13:04Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "find /workspace -type f -printf '%T@ %p\\n' | sort -n | head -1 | cut -d' ' -f2- | xargs ls -l",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /workspace -type f -printf '%T@ %p\\n' | sort -n | head -1 | cut -d' ' -f2- | xargs ls -l",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": false,
+    "raw_output_text": "find /workspace -type f -printf '%T@ %p\\n' | sort -n | head -1 | cut -d' ' -f2- | xargs ls -l",
+    "raw_output_payload": {
+      "content": "find /workspace -type f -printf '%T@ %p\\n' | sort -n | head -1 | cut -d' ' -f2- | xargs ls -l",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need find oldest file and ls -l. Use find with -printf to get mtime, sort, head. Then ls -l. Command: find /workspace -type f -printf '%T@ %p\\n' | sort -n | head -1 | cut -d' ' -f2- | xargs ls -l. Combine.",
+      "reasoning_content": "Need find oldest file and ls -l. Use find with -printf to get mtime, sort, head. Then ls -l. Command: find /workspace -type f -printf '%T@ %p\\n' | sort -n | head -1 | cut -d' ' -f2- | xargs ls -l. Combine."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 33,
+    "query": "Display a long listing of the oldest file under '/workspace' directory tree",
+    "gold": "find /workspace -printf \"%T@ %p\\n\" | sort -n | head -1 | cut -d\" \" -f2- | xargs ls -al",
+    "record": {
+      "query": "Display a long listing of the oldest file under '/workspace' directory tree",
+      "gold": "find /workspace -printf \"%T@ %p\\n\" | sort -n | head -1 | cut -d\" \" -f2- | xargs ls -al"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Display a long listing of the oldest file under '/workspace' directory tree",
+      "info": {}
+    },
+    "action": {
+      "command": "find /workspace -type f -printf '%T@ %p\\n' | sort -n | head -1 | cut -d' ' -f2- | xargs ls -l",
+      "observation": "find: '/workspace': No such file or directory\ntotal 8\nlrwxrwxrwx    1 root root    7 Apr 22  2024 bin -> usr/bin\ndrwxr-xr-x    2 root root   10 Apr 22  2024 boot\ndrwxr-xr-x    5 root root  360 Mar 17 02:12 dev\ndrwxr-xr-x    1 root root   66 Mar 16 13:09 etc\ndrwxr-xr-x    3 root root   28 Feb 10 14:12 home\n-rw-r--r--    1 root root   81 Mar 16 12:08 index.html\nlrwxrwxrwx    1 root root    7 Apr 22  2024 lib -> usr/lib\nlrwxrwxrwx    1 root root    9 Apr 22  2024 lib64 -> usr/lib64\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 media\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 opt\ndr-xr-xr-x 1367 root root    0 Mar 17 02:12 proc\ndrwx------    1 root root   30 Mar 16 15:27 root\ndrwxr-xr-x    1 root root  172 Mar 16 12:08 run\nlrwxrwxrwx    1 root root    8 Apr 22  2024 sbin -> usr/sbin\n-rwxr-xr-x    1 root root 4018 Mar 16 01:08 setup_nl2b_fs_1.sh\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 srv\ndr-xr-xr-x   13 root root    0 Mar 16 14:58 sys\ndrwxr-xr-x    1 root root  101 Mar 17 01:14 testbed\ndrwxr-xr-x    1 root root  109 Feb 10 14:05 usr\ndrwxr-xr-x    1 root root   54 Feb 10 14:12 var\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "find: '/workspace': No such file or directory\ntotal 8\nlrwxrwxrwx    1 root root    7 Apr 22  2024 bin -> usr/bin\ndrwxr-xr-x    2 root root   10 Apr 22  2024 boot\ndrwxr-xr-x    5 root root  360 Mar 17 02:12 dev\ndrwxr-xr-x    1 root root   66 Mar 16 13:09 etc\ndrwxr-xr-x    3 root root   28 Feb 10 14:12 home\n-rw-r--r--    1 root root   81 Mar 16 12:08 index.html\nlrwxrwxrwx    1 root root    7 Apr 22  2024 lib -> usr/lib\nlrwxrwxrwx    1 root root    9 Apr 22  2024 lib64 -> usr/lib64\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 media\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 opt\ndr-xr-xr-x 1367 root root    0 Mar 17 02:12 proc\ndrwx------    1 root root   30 Mar 16 15:27 root\ndrwxr-xr-x    1 root root  172 Mar 16 12:08 run\nlrwxrwxrwx    1 root root    8 Apr 22  2024 sbin -> usr/sbin\n-rwxr-xr-x    1 root root 4018 Mar 16 01:08 setup_nl2b_fs_1.sh\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 srv\ndr-xr-xr-x   13 root root    0 Mar 16 14:58 sys\ndrwxr-xr-x    1 root root  101 Mar 17 01:14 testbed\ndrwxr-xr-x    1 root root  109 Feb 10 14:05 usr\ndrwxr-xr-x    1 root root   54 Feb 10 14:12 var\n",
+      "reward": 0.68,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.01
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "find: '/workspace': No such file or directory\ntotal 8\nlrwxrwxrwx    1 root root    7 Apr 22  2024 bin -> usr/bin\ndrwxr-xr-x    2 root root   10 Apr 22  2024 boot\ndrwxr-xr-x    5 root root  360 Mar 17 02:12 dev\ndrwxr-xr-x    1 root root   66 Mar 16 13:09 etc\ndrwxr-xr-x    3 root root   28 Feb 10 14:12 home\n-rw-r--r--    1 root root   81 Mar 16 12:08 index.html\nlrwxrwxrwx    1 root root    7 Apr 22  2024 lib -> usr/lib\nlrwxrwxrwx    1 root root    9 Apr 22  2024 lib64 -> usr/lib64\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 media\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 opt\ndr-xr-xr-x 1367 root root    0 Mar 17 02:12 proc\ndrwx------    1 root root   30 Mar 16 15:27 root\ndrwxr-xr-x    1 root root  172 Mar 16 12:08 run\nlrwxrwxrwx    1 root root    8 Apr 22  2024 sbin -> usr/sbin\n-rwxr-xr-x    1 root root 4018 Mar 16 01:08 setup_nl2b_fs_1.sh\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 srv\ndr-xr-xr-x   13 root root    0 Mar 16 14:58 sys\ndrwxr-xr-x    1 root root  101 Mar 17 01:14 testbed\ndrwxr-xr-x    1 root root  109 Feb 10 14:05 usr\ndrwxr-xr-x    1 root root   54 Feb 10 14:12 var\n",
+        "eval_obs": "find: '/workspace': No such file or directory\n",
+        "answer_similarity": 0.036696416625023265,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /workspace -type f -printf '%T@ %p\\n' | sort -n | head -1 | cut -d' ' -f2- | xargs ls -l",
+        "observation": "find: '/workspace': No such file or directory\ntotal 8\nlrwxrwxrwx    1 root root    7 Apr 22  2024 bin -> usr/bin\ndrwxr-xr-x    2 root root   10 Apr 22  2024 boot\ndrwxr-xr-x    5 root root  360 Mar 17 02:12 dev\ndrwxr-xr-x    1 root root   66 Mar 16 13:09 etc\ndrwxr-xr-x    3 root root   28 Feb 10 14:12 home\n-rw-r--r--    1 root root   81 Mar 16 12:08 index.html\nlrwxrwxrwx    1 root root    7 Apr 22  2024 lib -> usr/lib\nlrwxrwxrwx    1 root root    9 Apr 22  2024 lib64 -> usr/lib64\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 media\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 opt\ndr-xr-xr-x 1367 root root    0 Mar 17 02:12 proc\ndrwx------    1 root root   30 Mar 16 15:27 root\ndrwxr-xr-x    1 root root  172 Mar 16 12:08 run\nlrwxrwxrwx    1 root root    8 Apr 22  2024 sbin -> usr/sbin\n-rwxr-xr-x    1 root root 4018 Mar 16 01:08 setup_nl2b_fs_1.sh\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 srv\ndr-xr-xr-x   13 root root    0 Mar 16 14:58 sys\ndrwxr-xr-x    1 root root  101 Mar 17 01:14 testbed\ndrwxr-xr-x    1 root root  109 Feb 10 14:05 usr\ndrwxr-xr-x    1 root root   54 Feb 10 14:12 var\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.68,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "find: '/workspace': No such file or directory\ntotal 8\nlrwxrwxrwx    1 root root    7 Apr 22  2024 bin -> usr/bin\ndrwxr-xr-x    2 root root   10 Apr 22  2024 boot\ndrwxr-xr-x    5 root root  360 Mar 17 02:12 dev\ndrwxr-xr-x    1 root root   66 Mar 16 13:09 etc\ndrwxr-xr-x    3 root root   28 Feb 10 14:12 home\n-rw-r--r--    1 root root   81 Mar 16 12:08 index.html\nlrwxrwxrwx    1 root root    7 Apr 22  2024 lib -> usr/lib\nlrwxrwxrwx    1 root root    9 Apr 22  2024 lib64 -> usr/lib64\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 media\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 opt\ndr-xr-xr-x 1367 root root    0 Mar 17 02:12 proc\ndrwx------    1 root root   30 Mar 16 15:27 root\ndrwxr-xr-x    1 root root  172 Mar 16 12:08 run\nlrwxrwxrwx    1 root root    8 Apr 22  2024 sbin -> usr/sbin\n-rwxr-xr-x    1 root root 4018 Mar 16 01:08 setup_nl2b_fs_1.sh\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 srv\ndr-xr-xr-x   13 root root    0 Mar 16 14:58 sys\ndrwxr-xr-x    1 root root  101 Mar 17 01:14 testbed\ndrwxr-xr-x    1 root root  109 Feb 10 14:05 usr\ndrwxr-xr-x    1 root root   54 Feb 10 14:12 var\n",
+    "eval_observation": "find: '/workspace': No such file or directory\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "batch": {
+    "run_id": "e87c93ee9cb6",
+    "selection": {
+      "split": 3,
+      "offset": 0,
+      "limit": null,
+      "task_indices": null
+    }
+  }
+}

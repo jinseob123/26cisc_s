@@ -1,0 +1,125 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-16T14:36:29Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-16T14:36:29Z",
+    "finished_at": "2026-03-16T14:36:37Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "find /testbed -type f -printf \"%f\\n\" | tr '[:upper:]' '[:lower:]' | sort | uniq -d",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    }
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /testbed -type f -printf \"%f\\n\" | tr '[:upper:]' '[:lower:]' | sort | uniq -d",
+    "raw_output_text": "```bash\nfind /testbed -type f -printf \"%f\\n\" | tr '[:upper:]' '[:lower:]' | sort | uniq -d\n```",
+    "raw_output_payload": {
+      "content": "```bash\nfind /testbed -type f -printf \"%f\\n\" | tr '[:upper:]' '[:lower:]' | sort | uniq -d\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need to find duplicate filenames ignoring case. Use find, sort -f, uniq -d. But need to output duplicates. Use find -type f -printf \"%f\\n\" | tr '[:upper:]' '[:lower:]' | sort | uniq -d. But need to list original filenames? maybe just names. Provide command.",
+      "reasoning_content": "Need to find duplicate filenames ignoring case. Use find, sort -f, uniq -d. But need to output duplicates. Use find -type f -printf \"%f\\n\" | tr '[:upper:]' '[:lower:]' | sort | uniq -d. But need to list original filenames? maybe just names. Provide command."
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 53,
+    "query": "Print a list of all duplicate case insensitive filenames in the /testbed directory tree",
+    "gold": "find /testbed -type f | awk -F/ '{print $NF}' | sort -f | uniq -i -d",
+    "record": {
+      "query": "Print a list of all duplicate case insensitive filenames in the /testbed directory tree",
+      "gold": "find /testbed -type f | awk -F/ '{print $NF}' | sort -f | uniq -i -d"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Print a list of all duplicate case insensitive filenames in the /testbed directory tree",
+      "info": {
+        "action_executed": true,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "",
+        "eval_obs": "file.txt\n",
+        "answer_similarity": 0.0
+      }
+    },
+    "action": {
+      "command": "find /testbed -type f -printf \"%f\\n\" | tr '[:upper:]' '[:lower:]' | sort | uniq -d",
+      "observation": "",
+      "info": {
+        "action_executed": true,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "",
+        "eval_obs": "file.txt\n",
+        "answer_similarity": 0.0
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "",
+        "eval_obs": "file.txt\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /testbed -type f -printf \"%f\\n\" | tr '[:upper:]' '[:lower:]' | sort | uniq -d",
+        "observation": ""
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "",
+    "eval_observation": "file.txt\n",
+    "corrupt_gold": null
+  },
+  "error": null
+}

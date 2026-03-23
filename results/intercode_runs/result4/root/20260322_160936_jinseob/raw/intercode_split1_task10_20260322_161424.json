@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-22T07:14:24Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-22T07:14:24Z",
+    "finished_at": "2026-03-22T07:14:32Z",
+    "image_name": "intercode-nl2bash-fs1",
+    "command": {
+      "text": "comm -23 <(sort /testbed/dir3/subdir1/subsubdir1/textfile3.txt) <(sort /testbed/dir2/subdir1/textfile2.txt) | grep -q . && echo \"subset\" || echo \"not a subset\"",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "comm -23 <(sort /testbed/dir3/subdir1/subsubdir1/textfile3.txt) <(sort /testbed/dir2/subdir1/textfile2.txt) | grep -q . && echo \"subset\" || echo \"not a subset\"",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\ncomm -23 <(sort /testbed/dir3/subdir1/subsubdir1/textfile3.txt) <(sort /testbed/dir2/subdir1/textfile2.txt) | grep -q . && echo \"subset\" || echo \"not a subset\"\n```",
+    "raw_output_payload": {
+      "content": "```bash\ncomm -23 <(sort /testbed/dir3/subdir1/subsubdir1/textfile3.txt) <(sort /testbed/dir2/subdir1/textfile2.txt) | grep -q . && echo \"subset\" || echo \"not a subset\"\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need command to check subset. Use grep -F -x -f file1 file2? Actually subset means all lines of file1 appear in file2. Use grep -Fx -f file1 file2 | wc -l equals lines? Simpler: comm -23 <(sort file1) <(sort file2) | grep -q . && echo yes. Provide command.",
+      "reasoning_content": "Need command to check subset. Use grep -F -x -f file1 file2? Actually subset means all lines of file1 appear in file2. Use grep -Fx -f file1 file2 | wc -l equals lines? Simpler: comm -23 <(sort file1) <(sort file2) | grep -q . && echo yes. Provide command."
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 10,
+    "query": "Check if the contents of file /testbed/dir3/subdir1/subsubdir1/textfile3.txt is a subset of file /testbed/dir2/subdir1/textfile2.txt",
+    "gold": "comm -23 <(sort /testbed/dir3/subdir1/subsubdir1/textfile3.txt | uniq) <(sort /testbed/dir2/subdir1/textfile2.txt | uniq) | head -1",
+    "record": {
+      "query": "Check if the contents of file /testbed/dir3/subdir1/subsubdir1/textfile3.txt is a subset of file /testbed/dir2/subdir1/textfile2.txt",
+      "gold": "comm -23 <(sort /testbed/dir3/subdir1/subsubdir1/textfile3.txt | uniq) <(sort /testbed/dir2/subdir1/textfile2.txt | uniq) | head -1"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Check if the contents of file /testbed/dir3/subdir1/subsubdir1/textfile3.txt is a subset of file /testbed/dir2/subdir1/textfile2.txt",
+      "info": {}
+    },
+    "action": {
+      "command": "comm -23 <(sort /testbed/dir3/subdir1/subsubdir1/textfile3.txt) <(sort /testbed/dir2/subdir1/textfile2.txt) | grep -q . && echo \"subset\" || echo \"not a subset\"",
+      "observation": "subset\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "subset\n",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "subset\n",
+        "eval_obs": "Yet another text file\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "comm -23 <(sort /testbed/dir3/subdir1/subsubdir1/textfile3.txt) <(sort /testbed/dir2/subdir1/textfile2.txt) | grep -q . && echo \"subset\" || echo \"not a subset\"",
+        "observation": "subset\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "subset\n",
+    "eval_observation": "Yet another text file\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "7c62332c30c1",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260322_152018_7c62332c30c1/commands.jsonl"
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-22T08:40:43Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-22T08:40:43Z",
+    "finished_at": "2026-03-22T08:40:50Z",
+    "image_name": "intercode-nl2bash-fs4",
+    "command": {
+      "text": "df -h . | awk 'NR==2{print $1}'",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_4.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "df -h . | awk 'NR==2{print $1}'",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\ndf -h . | awk 'NR==2{print $1}'\n```",
+    "raw_output_payload": {
+      "content": "```bash\ndf -h . | awk 'NR==2{print $1}'\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need to print source of filesystem containing current working directory. Use df -h . | awk 'NR==2{print $1}'? Actually df -h . shows filesystem. So command: df -h . | awk 'NR==2{print $1}'.",
+      "reasoning_content": "Need to print source of filesystem containing current working directory. Use df -h . | awk 'NR==2{print $1}'? Actually df -h . shows filesystem. So command: df -h . | awk 'NR==2{print $1}'."
+    }
+  },
+  "task": {
+    "split": 4,
+    "task_index": 16,
+    "query": "Print source of the file system containing current working directory.",
+    "gold": "df . | tail -1 | awk '{print $1}'",
+    "record": {
+      "query": "Print source of the file system containing current working directory.",
+      "gold": "df . | tail -1 | awk '{print $1}'"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Print source of the file system containing current working directory.",
+      "info": {}
+    },
+    "action": {
+      "command": "df -h . | awk 'NR==2{print $1}'",
+      "observation": "overlay\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "overlay\n",
+      "reward": 1.0,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "overlay\n",
+        "eval_obs": "overlay\n",
+        "answer_similarity": 1.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "df -h . | awk 'NR==2{print $1}'",
+        "observation": "overlay\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 1.0,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "overlay\n",
+    "eval_observation": "overlay\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "660047f61fb0",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260322_152249_660047f61fb0/commands.jsonl"
+  }
+}

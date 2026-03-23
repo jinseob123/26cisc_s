@@ -1,0 +1,125 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-16T15:04:14Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-16T15:04:14Z",
+    "finished_at": "2026-03-16T15:04:23Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "curl -o /system/textfile.txt http://example.com/textfile.txt",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_2.json"
+    }
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "curl -o /system/textfile.txt http://example.com/textfile.txt",
+    "raw_output_text": "```bash\ncurl -o /system/textfile.txt http://example.com/textfile.txt\n```",
+    "raw_output_payload": {
+      "content": "```bash\ncurl -o /system/textfile.txt http://example.com/textfile.txt\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need to download and output to /system/textfile.txt. Use wget or curl. Provide command. Use curl -o /system/textfile.txt http://example.com/textfile.txt. Ensure directory exists? Just command.",
+      "reasoning_content": "Need to download and output to /system/textfile.txt. Use wget or curl. Provide command. Use curl -o /system/textfile.txt http://example.com/textfile.txt. Ensure directory exists? Just command."
+    }
+  },
+  "task": {
+    "split": 2,
+    "task_index": 49,
+    "query": "download content from \"http://example.com/textfile.txt\" and output to 'textfile.txt' in /system",
+    "gold": "curl http://example.com/textfile.txt -o /system/textfile.txt",
+    "record": {
+      "query": "download content from \"http://example.com/textfile.txt\" and output to 'textfile.txt' in /system",
+      "gold": "curl http://example.com/textfile.txt -o /system/textfile.txt"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "download content from \"http://example.com/textfile.txt\" and output to 'textfile.txt' in /system",
+      "info": {
+        "action_executed": false,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0Warning: Failed to open the file /system/textfile.txt: No such file or \nWarning: directory\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\ncurl: (23) Failure writing output to destination\n",
+        "eval_obs": "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0Warning: Failed to open the file /system/textfile.txt: No such file or \nWarning: directory\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\ncurl: (23) Failure writing output to destination\n",
+        "answer_similarity": 1.0000000000000004
+      }
+    },
+    "action": {
+      "command": "curl -o /system/textfile.txt http://example.com/textfile.txt",
+      "observation": "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0Warning: Failed to open the file /system/textfile.txt: No such file or \nWarning: directory\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\ncurl: (23) Failure writing output to destination\n",
+      "info": {
+        "action_executed": false,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0Warning: Failed to open the file /system/textfile.txt: No such file or \nWarning: directory\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\ncurl: (23) Failure writing output to destination\n",
+        "eval_obs": "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0Warning: Failed to open the file /system/textfile.txt: No such file or \nWarning: directory\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\ncurl: (23) Failure writing output to destination\n",
+        "answer_similarity": 1.0000000000000004
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0Warning: Failed to open the file /system/textfile.txt: No such file or \nWarning: directory\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\ncurl: (23) Failure writing output to destination\n",
+      "reward": 1.0,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0Warning: Failed to open the file /system/textfile.txt: No such file or \nWarning: directory\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\ncurl: (23) Failure writing output to destination\n",
+        "eval_obs": "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0Warning: Failed to open the file /system/textfile.txt: No such file or \nWarning: directory\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\ncurl: (23) Failure writing output to destination\n",
+        "answer_similarity": 1.0000000000000004,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "curl -o /system/textfile.txt http://example.com/textfile.txt",
+        "observation": "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0Warning: Failed to open the file /system/textfile.txt: No such file or \nWarning: directory\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\ncurl: (23) Failure writing output to destination\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 1.0,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0Warning: Failed to open the file /system/textfile.txt: No such file or \nWarning: directory\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\ncurl: (23) Failure writing output to destination\n",
+    "eval_observation": "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0Warning: Failed to open the file /system/textfile.txt: No such file or \nWarning: directory\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\ncurl: (23) Failure writing output to destination\n",
+    "corrupt_gold": null
+  },
+  "error": null
+}

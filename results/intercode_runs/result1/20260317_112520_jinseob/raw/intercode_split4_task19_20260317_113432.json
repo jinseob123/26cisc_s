@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T02:34:32Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T02:34:32Z",
+    "finished_at": "2026-03-17T02:34:41Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "ping -c 1 hostname | grep -oP '192\\.168\\.11\\.\\d+'",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_4.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "ping -c 1 hostname | grep -oP '192\\.168\\.11\\.\\d+'",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nping -c 1 hostname | grep -oP '192\\.168\\.11\\.\\d+'\n```",
+    "raw_output_payload": {
+      "content": "```bash\nping -c 1 hostname | grep -oP '192\\.168\\.11\\.\\d+'\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need command: ping -c 1 hostname | grep -oP '192\\.168\\.11\\.\\d+' . Or use awk. Provide single command.",
+      "reasoning_content": "Need command: ping -c 1 hostname | grep -oP '192\\.168\\.11\\.\\d+' . Or use awk. Provide single command."
+    }
+  },
+  "task": {
+    "split": 4,
+    "task_index": 19,
+    "query": "Ping hostname, grep for 192.168.11 and print the IP from the output",
+    "gold": "ping -c 1 hostname | grep 192.168.11 | grep 'bytes from' | awk '{print $4}' | sed 's/://g'",
+    "record": {
+      "query": "Ping hostname, grep for 192.168.11 and print the IP from the output",
+      "gold": "ping -c 1 hostname | grep 192.168.11 | grep 'bytes from' | awk '{print $4}' | sed 's/://g'"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Ping hostname, grep for 192.168.11 and print the IP from the output",
+      "info": {}
+    },
+    "action": {
+      "command": "ping -c 1 hostname | grep -oP '192\\.168\\.11\\.\\d+'",
+      "observation": "ping: hostname: Name or service not known\n",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "ping: hostname: Name or service not known\n",
+      "reward": 1.0,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "ping: hostname: Name or service not known\n",
+        "eval_obs": "ping: hostname: Name or service not known\n",
+        "answer_similarity": 0.9999999999999997,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "ping -c 1 hostname | grep -oP '192\\.168\\.11\\.\\d+'",
+        "observation": "ping: hostname: Name or service not known\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 1.0,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "ping: hostname: Name or service not known\n",
+    "eval_observation": "ping: hostname: Name or service not known\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "batch": {
+    "run_id": "bbec81f40091",
+    "selection": {
+      "split": 4,
+      "offset": 0,
+      "limit": null,
+      "task_indices": null
+    }
+  }
+}

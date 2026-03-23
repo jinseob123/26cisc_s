@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-21T09:25:56Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-21T09:25:56Z",
+    "finished_at": "2026-03-21T09:26:15Z",
+    "image_name": "intercode-nl2bash-fs2",
+    "command": {
+      "text": "grep -inRH --color=never -e \"Hello\" /system/folder1",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_2.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "grep -inRH --color=never -e \"Hello\" /system/folder1",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\ngrep -inRH --color=never -e \"Hello\" /system/folder1\n```",
+    "raw_output_payload": {
+      "content": "```bash\ngrep -inRH --color=never -e \"Hello\" /system/folder1\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need find all files, grep -inH \"Hello\" case-insensitive. Precede found string with its number in file? maybe line number? \"number in file\" unclear. Probably line number. So: grep -inH -e \"Hello\" -R /system/folder1 | sed 's/^\\([^:]*:\\)\\([0-9]*\\):\\(.*\\)$/\\2: \\3/'? Actually want preceding string with its number in file: maybe prefix each match with line number. So output like \"line: Hello\". Use grep -inH. That's enough.",
+      "reasoning_content": "Need find all files, grep -inH \"Hello\" case-insensitive. Precede found string with its number in file? maybe line number? \"number in file\" unclear. Probably line number. So: grep -inH -e \"Hello\" -R /system/folder1 | sed 's/^\\([^:]*:\\)\\([0-9]*\\):\\(.*\\)$/\\2: \\3/'? Actually want preceding string with its number in file: maybe prefix each match with line number. So output like \"line: Hello\". Use grep -inH. That's enough."
+    }
+  },
+  "task": {
+    "split": 2,
+    "task_index": 0,
+    "query": "Recursively finds all files with any cased text \"Hello\" in the '/system/folder1' folder, and precedes found string with its number in file.",
+    "gold": "grep -inr \"Hello\" /system/folder1",
+    "record": {
+      "query": "Recursively finds all files with any cased text \"Hello\" in the '/system/folder1' folder, and precedes found string with its number in file.",
+      "gold": "grep -inr \"Hello\" /system/folder1"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Recursively finds all files with any cased text \"Hello\" in the '/system/folder1' folder, and precedes found string with its number in file.",
+      "info": {}
+    },
+    "action": {
+      "command": "grep -inRH --color=never -e \"Hello\" /system/folder1",
+      "observation": "Command timed out",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "Command timed out",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "Command timed out",
+        "eval_obs": "/system/folder1/text2.txt:1:Another hello world file\n/system/folder1/text3.txt:1:- e Hello!\\nAnother hello world file\n/system/folder1/text4.txt:1:Hello!\n/system/folder1/text4.txt:2:Another hello world file\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "grep -inRH --color=never -e \"Hello\" /system/folder1",
+        "observation": "Command timed out"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "Command timed out",
+    "eval_observation": "/system/folder1/text2.txt:1:Another hello world file\n/system/folder1/text3.txt:1:- e Hello!\\nAnother hello world file\n/system/folder1/text4.txt:1:Hello!\n/system/folder1/text4.txt:2:Another hello world file\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "58ffa2cc8965",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260321_153319_58ffa2cc8965/commands.jsonl"
+  }
+}

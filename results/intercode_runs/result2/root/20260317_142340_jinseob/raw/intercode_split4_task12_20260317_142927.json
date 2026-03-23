@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T05:29:27Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T05:29:27Z",
+    "finished_at": "2026-03-17T05:29:34Z",
+    "image_name": "intercode-nl2bash-fs4",
+    "command": {
+      "text": "address=$(dig +short google.com | head -n1); echo \"$address\"",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_4.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "address=$(dig +short google.com | head -n1); echo \"$address\"",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\naddress=$(dig +short google.com | head -n1); echo \"$address\"\n```",
+    "raw_output_payload": {
+      "content": "```bash\naddress=$(dig +short google.com | head -n1); echo \"$address\"\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need command to resolve google.com, get first IP, assign to variable address, echo. Use dig +short or host. For first IP: dig +short google.com | head -n1. Assign: address=$(dig +short google.com | head -n1); echo \"$address\". Provide single command? Could be a one-liner: address=$(dig +short google.com | head -n1); echo \"$address\". Provide that.",
+      "reasoning_content": "Need command to resolve google.com, get first IP, assign to variable address, echo. Use dig +short or host. For first IP: dig +short google.com | head -n1. Assign: address=$(dig +short google.com | head -n1); echo \"$address\". Provide single command? Could be a one-liner: address=$(dig +short google.com | head -n1); echo \"$address\". Provide that."
+    }
+  },
+  "task": {
+    "split": 4,
+    "task_index": 12,
+    "query": "Save first IP address of domain 'google.com' in 'address' variable and display it",
+    "gold": "address=$(dig +short google.com | grep -E '^[0-9.]+$' | head -n 1) && echo $address",
+    "record": {
+      "query": "Save first IP address of domain 'google.com' in 'address' variable and display it",
+      "gold": "address=$(dig +short google.com | grep -E '^[0-9.]+$' | head -n 1) && echo $address"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Save first IP address of domain 'google.com' in 'address' variable and display it",
+      "info": {}
+    },
+    "action": {
+      "command": "address=$(dig +short google.com | head -n1); echo \"$address\"",
+      "observation": "142.250.197.46\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "142.250.197.46\n",
+      "reward": 0.8700000000000001,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.2
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "142.250.197.46\n",
+        "eval_obs": "142.250.198.46\n",
+        "answer_similarity": 0.6029748160380572,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "address=$(dig +short google.com | head -n1); echo \"$address\"",
+        "observation": "142.250.197.46\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.8700000000000001,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "142.250.197.46\n",
+    "eval_observation": "142.250.198.46\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "19483a6d9ff8",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260317_120905_19483a6d9ff8/commands.jsonl"
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-22T12:39:11Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-22T12:39:11Z",
+    "finished_at": "2026-03-22T12:39:19Z",
+    "image_name": "intercode-nl2bash-fs1",
+    "command": {
+      "text": "find /testbed -type f -path '*FooBar*' -exec cp --preserve=all {} . \\;",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /testbed -type f -path '*FooBar*' -exec cp --preserve=all {} . \\;",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nfind /testbed -type f -path '*FooBar*' -exec cp --preserve=all {} . \\;\n```",
+    "raw_output_payload": {
+      "content": "```bash\nfind /testbed -type f -path '*FooBar*' -exec cp --preserve=all {} . \\;\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need find files with FooBar in path. cp -pR? Use find and cp --preserve=all. Use -exec. Command: find /testbed -type f -path '*FooBar*' -exec cp --preserve=all {} . \\;",
+      "reasoning_content": "Need find files with FooBar in path. cp -pR? Use find and cp --preserve=all. Use -exec. Command: find /testbed -type f -path '*FooBar*' -exec cp --preserve=all {} . \\;"
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 18,
+    "query": "Copies all files under the /testbed folder like \"file.txt\" with \"FooBar\" in the path to the root of the current folder, preserving mode, ownership and timestamp attributes.",
+    "gold": "find /testbed -name \"file.txt\"| grep \"FooBar\" | xargs -i cp -p \"{}\" .",
+    "record": {
+      "query": "Copies all files under the /testbed folder like \"file.txt\" with \"FooBar\" in the path to the root of the current folder, preserving mode, ownership and timestamp attributes.",
+      "gold": "find /testbed -name \"file.txt\"| grep \"FooBar\" | xargs -i cp -p \"{}\" ."
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Copies all files under the /testbed folder like \"file.txt\" with \"FooBar\" in the path to the root of the current folder, preserving mode, ownership and timestamp attributes.",
+      "info": {}
+    },
+    "action": {
+      "command": "find /testbed -type f -path '*FooBar*' -exec cp --preserve=all {} . \\;",
+      "observation": "cp: cannot create regular file './file.txt': Permission denied\ncp: cannot create regular file './FooBar.html': Permission denied\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "cp: cannot create regular file './file.txt': Permission denied\ncp: cannot create regular file './FooBar.html': Permission denied\n",
+      "reward": 0.39,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.05,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [
+          [
+            "file.txt",
+            "??"
+          ]
+        ],
+        "diff_extra": [],
+        "agent_obs": "cp: cannot create regular file './file.txt': Permission denied\ncp: cannot create regular file './FooBar.html': Permission denied\n",
+        "eval_obs": "",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /testbed -type f -path '*FooBar*' -exec cp --preserve=all {} . \\;",
+        "observation": "cp: cannot create regular file './file.txt': Permission denied\ncp: cannot create regular file './FooBar.html': Permission denied\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.39,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "cp: cannot create regular file './file.txt': Permission denied\ncp: cannot create regular file './FooBar.html': Permission denied\n",
+    "eval_observation": "",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "f6ff84e7aae6",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260322_193900_f6ff84e7aae6/commands.jsonl"
+  }
+}

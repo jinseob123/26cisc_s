@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-21T08:36:19Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-21T08:36:19Z",
+    "finished_at": "2026-03-21T08:36:26Z",
+    "image_name": "intercode-nl2bash-fs3",
+    "command": {
+      "text": "findmnt -n -o TARGET --target /workspace/dir2/mysql/ && echo \"exists\"",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "findmnt -n -o TARGET --target /workspace/dir2/mysql/ && echo \"exists\"",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nfindmnt -n -o TARGET --target /workspace/dir2/mysql/ && echo \"exists\"\n```",
+    "raw_output_payload": {
+      "content": "```bash\nfindmnt -n -o TARGET --target /workspace/dir2/mysql/ && echo \"exists\"\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need to check if path exists and is on a mounted filesystem. Use findmnt -n -o SOURCE /workspace/dir2/mysql/ to see mount point. Or test -d and then findmnt -n -o TARGET. Probably: findmnt -n -o TARGET --target /workspace/dir2/mysql/ && echo exists. But need to determine if exists on a mounted fs. So: if [ -d /workspace/dir2/mysql/ ] && findmnt -n -o TARGET --target /workspace/dir2/mysql/; then echo yes. Provide single command: findmnt -n -o TARGET --target /workspace/dir2/mysql/ && echo \"exists\".",
+      "reasoning_content": "Need to check if path exists and is on a mounted filesystem. Use findmnt -n -o SOURCE /workspace/dir2/mysql/ to see mount point. Or test -d and then findmnt -n -o TARGET. Probably: findmnt -n -o TARGET --target /workspace/dir2/mysql/ && echo exists. But need to determine if exists on a mounted fs. So: if [ -d /workspace/dir2/mysql/ ] && findmnt -n -o TARGET --target /workspace/dir2/mysql/; then echo yes. Provide single command: findmnt -n -o TARGET --target /workspace/dir2/mysql/ && echo \"exists\"."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 44,
+    "query": "Determine if /workspace/dir2/mysql/ exists on a mounted file system.",
+    "gold": "df /workspace/dir2/mysql/",
+    "record": {
+      "query": "Determine if /workspace/dir2/mysql/ exists on a mounted file system.",
+      "gold": "df /workspace/dir2/mysql/"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Determine if /workspace/dir2/mysql/ exists on a mounted file system.",
+      "info": {}
+    },
+    "action": {
+      "command": "findmnt -n -o TARGET --target /workspace/dir2/mysql/ && echo \"exists\"",
+      "observation": "/\nexists\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "/\nexists\n",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "/\nexists\n",
+        "eval_obs": "Filesystem      1K-blocks       Used  Available Use% Mounted on\noverlay        3905109820 2068991796 1836118024  53% /\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "findmnt -n -o TARGET --target /workspace/dir2/mysql/ && echo \"exists\"",
+        "observation": "/\nexists\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "/\nexists\n",
+    "eval_observation": "Filesystem      1K-blocks       Used  Available Use% Mounted on\noverlay        3905109820 2068991796 1836118024  53% /\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "7638e08942e6",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260321_153405_7638e08942e6/commands.jsonl"
+  }
+}

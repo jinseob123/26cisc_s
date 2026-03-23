@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-21T08:58:55Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-21T08:58:55Z",
+    "finished_at": "2026-03-21T08:59:03Z",
+    "image_name": "intercode-nl2bash-fs1",
+    "command": {
+      "text": "find /testbed/dir1/subdir1 -type f -name '*.py' -print0 | xargs -0 md5sum | sort -k1,1 | awk '{print $1}' | tr '\\n' ' ' | md5sum",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /testbed/dir1/subdir1 -type f -name '*.py' -print0 | xargs -0 md5sum | sort -k1,1 | awk '{print $1}' | tr '\\n' ' ' | md5sum",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nfind /testbed/dir1/subdir1 -type f -name '*.py' -print0 | xargs -0 md5sum | sort -k1,1 | awk '{print $1}' | tr '\\n' ' ' | md5sum\n```",
+    "raw_output_payload": {
+      "content": "```bash\nfind /testbed/dir1/subdir1 -type f -name '*.py' -print0 | xargs -0 md5sum | sort -k1,1 | awk '{print $1}' | tr '\\n' ' ' | md5sum\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need command: find /testbed/dir1/subdir1 -type f -name '*.py' -exec md5sum {} + | sort -k1,1 | awk '{print $1}' | tr '\\n' ' ' | md5sum. But need sorted list of md5 sums, then md5 of that list. So: find ... -type f -name '*.py' -exec md5sum {} + | sort -k1,1 | cut -d' ' -f1 | tr '\\n' ' ' | md5sum. Probably better: find ... -type f -name '*.py' -print0 | xargs -0 md5sum | sort -k1,1 | awk '{print $1}' | tr '\\n' ' ' | md5sum. Provide one command.",
+      "reasoning_content": "We need command: find /testbed/dir1/subdir1 -type f -name '*.py' -exec md5sum {} + | sort -k1,1 | awk '{print $1}' | tr '\\n' ' ' | md5sum. But need sorted list of md5 sums, then md5 of that list. So: find ... -type f -name '*.py' -exec md5sum {} + | sort -k1,1 | cut -d' ' -f1 | tr '\\n' ' ' | md5sum. Probably better: find ... -type f -name '*.py' -print0 | xargs -0 md5sum | sort -k1,1 | awk '{print $1}' | tr '\\n' ' ' | md5sum. Provide one command."
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 4,
+    "query": "Calculate the md5 sum of the sorted list of md5 sums of all \".py\" files under /testbed/dir1/subdir1",
+    "gold": "find /testbed/dir1/subdir1 -type f -name *.py -exec md5sum {} + | awk '{print $1}' | sort | md5sum",
+    "record": {
+      "query": "Calculate the md5 sum of the sorted list of md5 sums of all \".py\" files under /testbed/dir1/subdir1",
+      "gold": "find /testbed/dir1/subdir1 -type f -name *.py -exec md5sum {} + | awk '{print $1}' | sort | md5sum"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Calculate the md5 sum of the sorted list of md5 sums of all \".py\" files under /testbed/dir1/subdir1",
+      "info": {}
+    },
+    "action": {
+      "command": "find /testbed/dir1/subdir1 -type f -name '*.py' -print0 | xargs -0 md5sum | sort -k1,1 | awk '{print $1}' | tr '\\n' ' ' | md5sum",
+      "observation": "8834fabeeba3284b5acaba5784e31a39  -\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "8834fabeeba3284b5acaba5784e31a39  -\n",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "8834fabeeba3284b5acaba5784e31a39  -\n",
+        "eval_obs": "abd1db025ea1e9dbef827b574c500bdb  -\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /testbed/dir1/subdir1 -type f -name '*.py' -print0 | xargs -0 md5sum | sort -k1,1 | awk '{print $1}' | tr '\\n' ' ' | md5sum",
+        "observation": "8834fabeeba3284b5acaba5784e31a39  -\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "8834fabeeba3284b5acaba5784e31a39  -\n",
+    "eval_observation": "abd1db025ea1e9dbef827b574c500bdb  -\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "fdb8887b32c1",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260321_153210_fdb8887b32c1/commands.jsonl"
+  }
+}

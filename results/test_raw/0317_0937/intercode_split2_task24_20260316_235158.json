@@ -1,0 +1,125 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-16T14:51:58Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-16T14:51:58Z",
+    "finished_at": "2026-03-16T14:52:07Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "find /system/folder3/temp -type f -empty -delete",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_2.json"
+    }
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /system/folder3/temp -type f -empty -delete",
+    "raw_output_text": "```bash\nfind /system/folder3/temp -type f -empty -delete\n```",
+    "raw_output_payload": {
+      "content": "```bash\nfind /system/folder3/temp -type f -empty -delete\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need find and delete empty files. Use find /system/folder3/temp -type f -empty -delete.",
+      "reasoning_content": "Need find and delete empty files. Use find /system/folder3/temp -type f -empty -delete."
+    }
+  },
+  "task": {
+    "split": 2,
+    "task_index": 24,
+    "query": "Remove all empty files in /system/folder3/temp and below",
+    "gold": "find /system/folder3/temp -type f -empty -print | xargs rm -f",
+    "record": {
+      "query": "Remove all empty files in /system/folder3/temp and below",
+      "gold": "find /system/folder3/temp -type f -empty -print | xargs rm -f"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Remove all empty files in /system/folder3/temp and below",
+      "info": {
+        "action_executed": false,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "find: '/system/folder3/temp': No such file or directory\n",
+        "eval_obs": "find: '/system/folder3/temp': No such file or directory\n",
+        "answer_similarity": 1.0000000000000002
+      }
+    },
+    "action": {
+      "command": "find /system/folder3/temp -type f -empty -delete",
+      "observation": "find: '/system/folder3/temp': No such file or directory\n",
+      "info": {
+        "action_executed": false,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "find: '/system/folder3/temp': No such file or directory\n",
+        "eval_obs": "find: '/system/folder3/temp': No such file or directory\n",
+        "answer_similarity": 1.0000000000000002
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "find: '/system/folder3/temp': No such file or directory\n",
+      "reward": 1.0,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "find: '/system/folder3/temp': No such file or directory\n",
+        "eval_obs": "find: '/system/folder3/temp': No such file or directory\n",
+        "answer_similarity": 1.0000000000000002,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /system/folder3/temp -type f -empty -delete",
+        "observation": "find: '/system/folder3/temp': No such file or directory\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 1.0,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "find: '/system/folder3/temp': No such file or directory\n",
+    "eval_observation": "find: '/system/folder3/temp': No such file or directory\n",
+    "corrupt_gold": null
+  },
+  "error": null
+}

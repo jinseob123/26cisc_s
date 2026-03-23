@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-22T09:08:04Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-22T09:08:04Z",
+    "finished_at": "2026-03-22T09:08:12Z",
+    "image_name": "intercode-nl2bash-fs1",
+    "command": {
+      "text": "tar czf logs.tar.gz $(find /var/log -type f -name '*.log' -mtime +1)",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "tar czf logs.tar.gz $(find /var/log -type f -name '*.log' -mtime +1)",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": true,
+    "raw_output_text": "tar czf logs.tar.gz $(find /var/log -type f -name '*.log' -mtime +1)",
+    "raw_output_payload": {
+      "content": "tar czf logs.tar.gz $(find /var/log -type f -name '*.log' -mtime +1)",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need find /var/log/*.log older than 1 day, tar.gz. Command: tar czf logs.tar.gz $(find /var/log -type f -name '*.log' -mtime +1). Ensure quoting.",
+      "reasoning_content": "Need find /var/log/*.log older than 1 day, tar.gz. Command: tar czf logs.tar.gz $(find /var/log -type f -name '*.log' -mtime +1). Ensure quoting."
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 46,
+    "query": "Create logs.tar.gz of all older than one day logs of Ubuntu",
+    "gold": "find /var/log/ -mtime +1 | xargs  tar -czvPf  /testbed/logs.tar.gz",
+    "record": {
+      "query": "Create logs.tar.gz of all older than one day logs of Ubuntu",
+      "gold": "find /var/log/ -mtime +1 | xargs  tar -czvPf  /testbed/logs.tar.gz"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Create logs.tar.gz of all older than one day logs of Ubuntu",
+      "info": {}
+    },
+    "action": {
+      "command": "tar czf logs.tar.gz $(find /var/log -type f -name '*.log' -mtime +1)",
+      "observation": "find: '/var/log/private': Permission denied\ntar: Removing leading `/' from member names\ntar (child): logs.tar.gz: Cannot open: Permission denied\ntar (child): Error is not recoverable: exiting now\ntar: Removing leading `/' from hard link targets\ntar: /var/log/apt/term.log: Cannot open: Permission denied\ntar: logs.tar.gz: Cannot write: Broken pipe\ntar: Child returned status 2\ntar: Error is not recoverable: exiting now\n",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "find: '/var/log/private': Permission denied\ntar: Removing leading `/' from member names\ntar (child): logs.tar.gz: Cannot open: Permission denied\ntar (child): Error is not recoverable: exiting now\ntar: Removing leading `/' from hard link targets\ntar: /var/log/apt/term.log: Cannot open: Permission denied\ntar: logs.tar.gz: Cannot write: Broken pipe\ntar: Child returned status 2\ntar: Error is not recoverable: exiting now\n",
+      "reward": 0.45,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.05,
+          "file_changes": 0.33,
+          "answer_similarity": 0.06
+        },
+        "diff_miss": [
+          [
+            "testbed/logs.tar.gz",
+            "??"
+          ]
+        ],
+        "diff_extra": [],
+        "agent_obs": "find: '/var/log/private': Permission denied\ntar: Removing leading `/' from member names\ntar (child): logs.tar.gz: Cannot open: Permission denied\ntar (child): Error is not recoverable: exiting now\ntar: Removing leading `/' from hard link targets\ntar: /var/log/apt/term.log: Cannot open: Permission denied\ntar: logs.tar.gz: Cannot write: Broken pipe\ntar: Child returned status 2\ntar: Error is not recoverable: exiting now\n",
+        "eval_obs": "/var/log/\n/var/log/alternatives.log\n/var/log/apt/\n/var/log/apt/eipp.log.xz\n/var/log/apt/history.log\n/var/log/apt/term.log\n/var/log/bootstrap.log\n/var/log/btmp\n/var/log/dpkg.log\n/var/log/faillog\n/var/log/lastlog\n/var/log/wtmp\n/var/log/journal/\n/var/log/README\n/var/log/private/\n/var/log/fontconfig.log\n/var/log/alternatives.log\n/var/log/apt/\n/var/log/apt/eipp.log.xz\n/var/log/apt/history.log\n/var/log/apt/term.log\n/var/log/apt/eipp.log.xz\n/var/log/apt/history.log\n/var/log/apt/term.log\n/var/log/bootstrap.log\n/var/log/btmp\n/var/log/dpkg.log\n/var/log/faillog\n/var/log/lastlog\n/var/log/wtmp\n/var/log/journal/\n/var/log/README\n/var/log/private/\n/var/log/fontconfig.log\n",
+        "answer_similarity": 0.18654330204146205,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "tar czf logs.tar.gz $(find /var/log -type f -name '*.log' -mtime +1)",
+        "observation": "find: '/var/log/private': Permission denied\ntar: Removing leading `/' from member names\ntar (child): logs.tar.gz: Cannot open: Permission denied\ntar (child): Error is not recoverable: exiting now\ntar: Removing leading `/' from hard link targets\ntar: /var/log/apt/term.log: Cannot open: Permission denied\ntar: logs.tar.gz: Cannot write: Broken pipe\ntar: Child returned status 2\ntar: Error is not recoverable: exiting now\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.45,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "find: '/var/log/private': Permission denied\ntar: Removing leading `/' from member names\ntar (child): logs.tar.gz: Cannot open: Permission denied\ntar (child): Error is not recoverable: exiting now\ntar: Removing leading `/' from hard link targets\ntar: /var/log/apt/term.log: Cannot open: Permission denied\ntar: logs.tar.gz: Cannot write: Broken pipe\ntar: Child returned status 2\ntar: Error is not recoverable: exiting now\n",
+    "eval_observation": "/var/log/\n/var/log/alternatives.log\n/var/log/apt/\n/var/log/apt/eipp.log.xz\n/var/log/apt/history.log\n/var/log/apt/term.log\n/var/log/bootstrap.log\n/var/log/btmp\n/var/log/dpkg.log\n/var/log/faillog\n/var/log/lastlog\n/var/log/wtmp\n/var/log/journal/\n/var/log/README\n/var/log/private/\n/var/log/fontconfig.log\n/var/log/alternatives.log\n/var/log/apt/\n/var/log/apt/eipp.log.xz\n/var/log/apt/history.log\n/var/log/apt/term.log\n/var/log/apt/eipp.log.xz\n/var/log/apt/history.log\n/var/log/apt/term.log\n/var/log/bootstrap.log\n/var/log/btmp\n/var/log/dpkg.log\n/var/log/faillog\n/var/log/lastlog\n/var/log/wtmp\n/var/log/journal/\n/var/log/README\n/var/log/private/\n/var/log/fontconfig.log\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "7c62332c30c1",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260322_152018_7c62332c30c1/commands.jsonl"
+  }
+}

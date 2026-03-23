@@ -1,0 +1,125 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-16T14:22:34Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-16T14:22:34Z",
+    "finished_at": "2026-03-16T14:22:42Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "grep -rl --include='*.html' 'foo' /testbed | wc -l",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    }
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "grep -rl --include='*.html' 'foo' /testbed | wc -l",
+    "raw_output_text": "```bash\ngrep -rl --include='*.html' 'foo' /testbed | wc -l\n```",
+    "raw_output_payload": {
+      "content": "```bash\ngrep -rl --include='*.html' 'foo' /testbed | wc -l\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need command to count html files containing string foo. Use grep -rl --include='*.html' 'foo' /testbed | wc -l. Or find with grep. Provide one command.",
+      "reasoning_content": "Need command to count html files containing string foo. Use grep -rl --include='*.html' 'foo' /testbed | wc -l. Or find with grep. Provide one command."
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 25,
+    "query": "Count the *.html files residing in the /testbed directory tree and containing string \"foo\"",
+    "gold": "find /testbed -name \"*.html\" | xargs grep -l foo | wc -l",
+    "record": {
+      "query": "Count the *.html files residing in the /testbed directory tree and containing string \"foo\"",
+      "gold": "find /testbed -name \"*.html\" | xargs grep -l foo | wc -l"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Count the *.html files residing in the /testbed directory tree and containing string \"foo\"",
+      "info": {
+        "action_executed": true,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "0\n",
+        "eval_obs": "0\n",
+        "answer_similarity": 1
+      }
+    },
+    "action": {
+      "command": "grep -rl --include='*.html' 'foo' /testbed | wc -l",
+      "observation": "0\n",
+      "info": {
+        "action_executed": true,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "0\n",
+        "eval_obs": "0\n",
+        "answer_similarity": 1
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "0\n",
+      "reward": 1.0,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "0\n",
+        "eval_obs": "0\n",
+        "answer_similarity": 1,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "grep -rl --include='*.html' 'foo' /testbed | wc -l",
+        "observation": "0\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 1.0,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "0\n",
+    "eval_observation": "0\n",
+    "corrupt_gold": null
+  },
+  "error": null
+}

@@ -1,0 +1,125 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-16T14:58:52Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-16T14:58:52Z",
+    "finished_at": "2026-03-16T14:59:01Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "find /system -type d -print0 | while IFS= read -r -d '' dir; do\n  echo \"$(find \"$dir\" -mindepth 1 -maxdepth 1 -type d | wc -l) $dir\"\ndone | sort -nrk1 | head -n10",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_2.json"
+    }
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /system -type d -print0 | while IFS= read -r -d '' dir; do\n  echo \"$(find \"$dir\" -mindepth 1 -maxdepth 1 -type d | wc -l) $dir\"\ndone | sort -nrk1 | head -n10",
+    "raw_output_text": "```bash\nfind /system -type d -print0 | while IFS= read -r -d '' dir; do\n  echo \"$(find \"$dir\" -mindepth 1 -maxdepth 1 -type d | wc -l) $dir\"\ndone | sort -nrk1 | head -n10\n```",
+    "raw_output_payload": {
+      "content": "```bash\nfind /system -type d -print0 | while IFS= read -r -d '' dir; do\n  echo \"$(find \"$dir\" -mindepth 1 -maxdepth 1 -type d | wc -l) $dir\"\ndone | sort -nrk1 | head -n10\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need to count subdirectories for each directory under /system. Use find to list directories, then for each count subdirs? Use while read? Simpler: find /system -type d -print0 | while read -d '' dir; do echo \"$(find \"$dir\" -mindepth 1 -maxdepth 1 -type d | wc -l) $dir\"; done | sort -nrk1 | head -n10\n\nReturn single command. Use xargs? Use -exec? Let's craft:\n\nfind /system -type d -print0 | while IFS= read -r -d '' dir; do echo \"$(find \"$dir\" -mindepth 1 -maxdepth 1 -type d | wc -l) $dir\"; done | sort -nrk1 | head -n10\n\nReturn.",
+      "reasoning_content": "Need to count subdirectories for each directory under /system. Use find to list directories, then for each count subdirs? Use while read? Simpler: find /system -type d -print0 | while read -d '' dir; do echo \"$(find \"$dir\" -mindepth 1 -maxdepth 1 -type d | wc -l) $dir\"; done | sort -nrk1 | head -n10\n\nReturn single command. Use xargs? Use -exec? Let's craft:\n\nfind /system -type d -print0 | while IFS= read -r -d '' dir; do echo \"$(find \"$dir\" -mindepth 1 -maxdepth 1 -type d | wc -l) $dir\"; done | sort -nrk1 | head -n10\n\nReturn."
+    }
+  },
+  "task": {
+    "split": 2,
+    "task_index": 38,
+    "query": "Display the number of sub-directories for all directories under /system directory tree, sort them according to the decreasing order of the number and show only the first 10 of them",
+    "gold": "find /system -type d -ls | awk '{print $4 - 2, $NF}' | sort -rn | head",
+    "record": {
+      "query": "Display the number of sub-directories for all directories under /system directory tree, sort them according to the decreasing order of the number and show only the first 10 of them",
+      "gold": "find /system -type d -ls | awk '{print $4 - 2, $NF}' | sort -rn | head"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Display the number of sub-directories for all directories under /system directory tree, sort them according to the decreasing order of the number and show only the first 10 of them",
+      "info": {
+        "action_executed": false,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "$dir: -c: line 3: unexpected EOF while looking for matching `)'\n",
+        "eval_obs": "find: '/system': No such file or directory\n",
+        "answer_similarity": 0.0
+      }
+    },
+    "action": {
+      "command": "find /system -type d -print0 | while IFS= read -r -d '' dir; do\n  echo \"$(find \"$dir\" -mindepth 1 -maxdepth 1 -type d | wc -l) $dir\"\ndone | sort -nrk1 | head -n10",
+      "observation": "$dir: -c: line 3: unexpected EOF while looking for matching `)'\n",
+      "info": {
+        "action_executed": false,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "$dir: -c: line 3: unexpected EOF while looking for matching `)'\n",
+        "eval_obs": "find: '/system': No such file or directory\n",
+        "answer_similarity": 0.0
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "$dir: -c: line 3: unexpected EOF while looking for matching `)'\n",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "$dir: -c: line 3: unexpected EOF while looking for matching `)'\n",
+        "eval_obs": "find: '/system': No such file or directory\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /system -type d -print0 | while IFS= read -r -d '' dir; do\n  echo \"$(find \"$dir\" -mindepth 1 -maxdepth 1 -type d | wc -l) $dir\"\ndone | sort -nrk1 | head -n10",
+        "observation": "$dir: -c: line 3: unexpected EOF while looking for matching `)'\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "$dir: -c: line 3: unexpected EOF while looking for matching `)'\n",
+    "eval_observation": "find: '/system': No such file or directory\n",
+    "corrupt_gold": null
+  },
+  "error": null
+}

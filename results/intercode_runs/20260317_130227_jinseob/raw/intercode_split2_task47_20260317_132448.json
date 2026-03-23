@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T04:24:48Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T04:24:48Z",
+    "finished_at": "2026-03-17T04:24:56Z",
+    "image_name": "intercode-nl2bash-fs2",
+    "command": {
+      "text": "od -c /system/text1.txt",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_2.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "od -c /system/text1.txt",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nod -c /system/text1.txt\n```",
+    "raw_output_payload": {
+      "content": "```bash\nod -c /system/text1.txt\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need a bash command to dump file as ASCII characters. Maybe use cat -v or od -c. \"Dump as ASCII characters\" could mean show non-printable as ^? Use cat -v. Or use hexdump -C? But ASCII characters: od -c. So command: od -c /system/text1.txt. Or cat -v. I'll output: od -c /system/text1.txt.",
+      "reasoning_content": "We need a bash command to dump file as ASCII characters. Maybe use cat -v or od -c. \"Dump as ASCII characters\" could mean show non-printable as ^? Use cat -v. Or use hexdump -C? But ASCII characters: od -c. So command: od -c /system/text1.txt. Or cat -v. I'll output: od -c /system/text1.txt."
+    }
+  },
+  "task": {
+    "split": 2,
+    "task_index": 47,
+    "query": "Dump \"/system/text1.txt\" as ASCII characters",
+    "gold": "od -t c /system/text1.txt",
+    "record": {
+      "query": "Dump \"/system/text1.txt\" as ASCII characters",
+      "gold": "od -t c /system/text1.txt"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Dump \"/system/text1.txt\" as ASCII characters",
+      "info": {}
+    },
+    "action": {
+      "command": "od -c /system/text1.txt",
+      "observation": "0000000   H   e   l   l   o       w   o   r   l   d   !  \\n\n0000015\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "0000000   H   e   l   l   o       w   o   r   l   d   !  \\n\n0000015\n",
+      "reward": 1.0,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "0000000   H   e   l   l   o       w   o   r   l   d   !  \\n\n0000015\n",
+        "eval_obs": "0000000   H   e   l   l   o       w   o   r   l   d   !  \\n\n0000015\n",
+        "answer_similarity": 0.9999999999999998,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "od -c /system/text1.txt",
+        "observation": "0000000   H   e   l   l   o       w   o   r   l   d   !  \\n\n0000015\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 1.0,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "0000000   H   e   l   l   o       w   o   r   l   d   !  \\n\n0000015\n",
+    "eval_observation": "0000000   H   e   l   l   o       w   o   r   l   d   !  \\n\n0000015\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "0e083a8c7a1e",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260317_120709_0e083a8c7a1e/commands.jsonl"
+  }
+}

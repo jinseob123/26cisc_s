@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T02:35:31Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T02:35:31Z",
+    "finished_at": "2026-03-17T02:35:42Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "awk -v start=\"$(date +%s -d \"$(date +%Y-%m-01)\")\" -v end=\"$(date +%s -d \"$(date +%Y-%m-01 +1 month -1 day)\")\" 'BEGIN{for(d=start;d<=end;d+=86400){if(strftime(\"%u\",d)<6)c++}print c}'",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_4.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "awk -v start=\"$(date +%s -d \"$(date +%Y-%m-01)\")\" -v end=\"$(date +%s -d \"$(date +%Y-%m-01 +1 month -1 day)\")\" 'BEGIN{for(d=start;d<=end;d+=86400){if(strftime(\"%u\",d)<6)c++}print c}'",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": true,
+    "raw_output_text": "awk -v start=\"$(date +%s -d \"$(date +%Y-%m-01)\")\" -v end=\"$(date +%s -d \"$(date +%Y-%m-01 +1 month -1 day)\")\" 'BEGIN{for(d=start;d<=end;d+=86400){if(strftime(\"%u\",d)<6)c++}print c}'",
+    "raw_output_payload": {
+      "content": "awk -v start=\"$(date +%s -d \"$(date +%Y-%m-01)\")\" -v end=\"$(date +%s -d \"$(date +%Y-%m-01 +1 month -1 day)\")\" 'BEGIN{for(d=start;d<=end;d+=86400){if(strftime(\"%u\",d)<6)c++}print c}'",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need bash command to count business days (Mon-Fri) in current month. Use date, seq, etc. Maybe: use GNU date to iterate days. Count days where weekday not 6 or 7. Command: \n\n```\ncount=$(date -d \"$(date +%Y-%m-01)\" +%s); end=$(date -d \"$(date +%Y-%m-01 +1 month -1 day)\" +%s); days=$(seq -f \"%s\" $count 86400 $end); echo $(printf \"%s\\n\" $days | while read d; do w=$(date -d \"@$d\" +%u); [[ $w -lt 6 ]] && echo; done | wc -l)\n```\n\nBut need one line. Let's craft simpler: use for loop.\n\n```\necho $(date -d \"$(date +%Y-%m-01)\" +%s) $(date -d \"$(date +%Y-%m-01 +1 month -1 day)\" +%s) | awk '{for(d=$1;d<=$2;d+=86400){if(strftime(\"%u\",d)<6) c++}print c}'\n```\n\nBut need to output count. Let's produce:\n\n```\nawk 'BEGIN{start=strftime(\"%s\",\"$(date +%Y-%m-01)\"); end=strftime(\"%s\",\"$(date +%Y-%m-01 +1 month -1 day)\"); for(d=start;d<=end;d+=86400){if(strftime(\"%u\",d)<6)c++}print c}'\n```\n\nBut date inside awk? Use shell to compute start and end. Let's final:\n\n```\nawk -v start=\"$(date +%s -d \"$(date +%Y-%m-01)\")\" -v end=\"$(date +%s -d \"$(date +%Y-%m-01 +1 month -1 day)\")\" 'BEGIN{for(d=start;d<=end;d+=86400){if(strftime(\"%u\",d)<6)c++}print c}'\n```\n\nBut date -d requires GNU date. Provide final command.",
+      "reasoning_content": "Need bash command to count business days (Mon-Fri) in current month. Use date, seq, etc. Maybe: use GNU date to iterate days. Count days where weekday not 6 or 7. Command: \n\n```\ncount=$(date -d \"$(date +%Y-%m-01)\" +%s); end=$(date -d \"$(date +%Y-%m-01 +1 month -1 day)\" +%s); days=$(seq -f \"%s\" $count 86400 $end); echo $(printf \"%s\\n\" $days | while read d; do w=$(date -d \"@$d\" +%u); [[ $w -lt 6 ]] && echo; done | wc -l)\n```\n\nBut need one line. Let's craft simpler: use for loop.\n\n```\necho $(date -d \"$(date +%Y-%m-01)\" +%s) $(date -d \"$(date +%Y-%m-01 +1 month -1 day)\" +%s) | awk '{for(d=$1;d<=$2;d+=86400){if(strftime(\"%u\",d)<6) c++}print c}'\n```\n\nBut need to output count. Let's produce:\n\n```\nawk 'BEGIN{start=strftime(\"%s\",\"$(date +%Y-%m-01)\"); end=strftime(\"%s\",\"$(date +%Y-%m-01 +1 month -1 day)\"); for(d=start;d<=end;d+=86400){if(strftime(\"%u\",d)<6)c++}print c}'\n```\n\nBut date inside awk? Use shell to compute start and end. Let's final:\n\n```\nawk -v start=\"$(date +%s -d \"$(date +%Y-%m-01)\")\" -v end=\"$(date +%s -d \"$(date +%Y-%m-01 +1 month -1 day)\")\" 'BEGIN{for(d=start;d<=end;d+=86400){if(strftime(\"%u\",d)<6)c++}print c}'\n```\n\nBut date -d requires GNU date. Provide final command."
+    }
+  },
+  "task": {
+    "split": 4,
+    "task_index": 21,
+    "query": "Counts all business days in a current month.",
+    "gold": "cal -h | cut -c 4-17 | tail -n +3  | wc -w",
+    "record": {
+      "query": "Counts all business days in a current month.",
+      "gold": "cal -h | cut -c 4-17 | tail -n +3  | wc -w"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Counts all business days in a current month.",
+      "info": {}
+    },
+    "action": {
+      "command": "awk -v start=\"$(date +%s -d \"$(date +%Y-%m-01)\")\" -v end=\"$(date +%s -d \"$(date +%Y-%m-01 +1 month -1 day)\")\" 'BEGIN{for(d=start;d<=end;d+=86400){if(strftime(\"%u\",d)<6)c++}print c}'",
+      "observation": "+%s: -c: line 2: unexpected EOF while looking for matching `)'\n",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "+%s: -c: line 2: unexpected EOF while looking for matching `)'\n",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "+%s: -c: line 2: unexpected EOF while looking for matching `)'\n",
+        "eval_obs": "Usage: cal [general options] [-jy] [[month] year]\n       cal [general options] [-j] [-m month] [year]\n       ncal -C [general options] [-jy] [[month] year]\n       ncal -C [general options] [-j] [-m month] [year]\n       ncal [general options] [-bhJjpwySM] [-H yyyy-mm-dd] [-s country_code] [-W number of days] [[month] year]\n       ncal [general options] [-Jeo] [year]\nGeneral options: [-31] [-A months] [-B months] [-d yyyy-mm]\n0\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "awk -v start=\"$(date +%s -d \"$(date +%Y-%m-01)\")\" -v end=\"$(date +%s -d \"$(date +%Y-%m-01 +1 month -1 day)\")\" 'BEGIN{for(d=start;d<=end;d+=86400){if(strftime(\"%u\",d)<6)c++}print c}'",
+        "observation": "+%s: -c: line 2: unexpected EOF while looking for matching `)'\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "+%s: -c: line 2: unexpected EOF while looking for matching `)'\n",
+    "eval_observation": "Usage: cal [general options] [-jy] [[month] year]\n       cal [general options] [-j] [-m month] [year]\n       ncal -C [general options] [-jy] [[month] year]\n       ncal -C [general options] [-j] [-m month] [year]\n       ncal [general options] [-bhJjpwySM] [-H yyyy-mm-dd] [-s country_code] [-W number of days] [[month] year]\n       ncal [general options] [-Jeo] [year]\nGeneral options: [-31] [-A months] [-B months] [-d yyyy-mm]\n0\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "batch": {
+    "run_id": "bbec81f40091",
+    "selection": {
+      "split": 4,
+      "offset": 0,
+      "limit": null,
+      "task_indices": null
+    }
+  }
+}

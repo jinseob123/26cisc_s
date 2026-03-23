@@ -1,0 +1,125 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-16T14:30:29Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-16T14:30:29Z",
+    "finished_at": "2026-03-16T14:30:40Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "grep -R -E '[[:alnum:]]' --include='*.php' /testbed | wc -l",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    }
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "grep -R -E '[[:alnum:]]' --include='*.php' /testbed | wc -l",
+    "raw_output_text": "grep -R -E '[[:alnum:]]' --include='*.php' /testbed | wc -l",
+    "raw_output_payload": {
+      "content": "grep -R -E '[[:alnum:]]' --include='*.php' /testbed | wc -l",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need a bash command that counts lines with alphanumeric symbols in all .php files under /testbed. Use grep -E -c? We need total number across all files. Use grep -E -o? Actually count lines that contain at least one alphanumeric? Use grep -E -c '[[:alnum:]]' per file and sum. Use grep -E -c '[[:alnum:]]' *.php? But recursive. Use grep -R -E -c? But -c per file. We can use grep -R -E '[[:alnum:]]' /testbed/*.php? But need count lines. Use grep -R -E '[[:alnum:]]' /testbed/*.php | wc -l. That counts matching lines across all files. So command: grep -R -E '[[:alnum:]]' /testbed/*.php | wc -l. But need to include subfolders: use find. grep -R works. But pattern may match binary? Use grep -R -E '[[:alnum:]]' /testbed/*.php? Actually glob won't recurse. Use grep -R -E '[[:alnum:]]' /testbed/*.php? Better: grep -R -E '[[:alnum:]]' /testbed/*.php? Might not find subfolders. Use grep -R -E '[[:alnum:]]' /testbed/*.php? Actually -R will search recursively but pattern only .php? Use grep -R -E '[[:alnum:]]' --include='*.php' /testbed | wc -l. That's good.",
+      "reasoning_content": "We need a bash command that counts lines with alphanumeric symbols in all .php files under /testbed. Use grep -E -c? We need total number across all files. Use grep -E -o? Actually count lines that contain at least one alphanumeric? Use grep -E -c '[[:alnum:]]' per file and sum. Use grep -E -c '[[:alnum:]]' *.php? But recursive. Use grep -R -E -c? But -c per file. We can use grep -R -E '[[:alnum:]]' /testbed/*.php? But need count lines. Use grep -R -E '[[:alnum:]]' /testbed/*.php | wc -l. That counts matching lines across all files. So command: grep -R -E '[[:alnum:]]' /testbed/*.php | wc -l. But need to include subfolders: use find. grep -R works. But pattern may match binary? Use grep -R -E '[[:alnum:]]' /testbed/*.php? Actually glob won't recurse. Use grep -R -E '[[:alnum:]]' /testbed/*.php? Better: grep -R -E '[[:alnum:]]' /testbed/*.php? Might not find subfolders. Use grep -R -E '[[:alnum:]]' /testbed/*.php? Actually -R will search recursively but pattern only .php? Use grep -R -E '[[:alnum:]]' --include='*.php' /testbed | wc -l. That's good."
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 41,
+    "query": "Counts total number of only lines with alphanumeric symbols in all *.php files in the /testbed folder and subfolders.",
+    "gold": "find /testbed -name '*.php' | xargs cat | awk '/[a-zA-Z0-9]/ {i++} END{print i}'",
+    "record": {
+      "query": "Counts total number of only lines with alphanumeric symbols in all *.php files in the /testbed folder and subfolders.",
+      "gold": "find /testbed -name '*.php' | xargs cat | awk '/[a-zA-Z0-9]/ {i++} END{print i}'"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Counts total number of only lines with alphanumeric symbols in all *.php files in the /testbed folder and subfolders.",
+      "info": {
+        "action_executed": true,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "2\n",
+        "eval_obs": "2\n",
+        "answer_similarity": 1
+      }
+    },
+    "action": {
+      "command": "grep -R -E '[[:alnum:]]' --include='*.php' /testbed | wc -l",
+      "observation": "2\n",
+      "info": {
+        "action_executed": true,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "2\n",
+        "eval_obs": "2\n",
+        "answer_similarity": 1
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "2\n",
+      "reward": 1.0,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "2\n",
+        "eval_obs": "2\n",
+        "answer_similarity": 1,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "grep -R -E '[[:alnum:]]' --include='*.php' /testbed | wc -l",
+        "observation": "2\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 1.0,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "2\n",
+    "eval_observation": "2\n",
+    "corrupt_gold": null
+  },
+  "error": null
+}

@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T01:43:58Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T01:43:58Z",
+    "finished_at": "2026-03-17T01:44:09Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "echo \"1/2 [3] (27/03/2012 19:32:54) word word word word 4/5\" | sed 's/([^)]*)//g' | tr -c '0-9' ' ' | column -t",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_2.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "echo \"1/2 [3] (27/03/2012 19:32:54) word word word word 4/5\" | sed 's/([^)]*)//g' | tr -c '0-9' ' ' | column -t",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": false,
+    "raw_output_text": "echo \"1/2 [3] (27/03/2012 19:32:54) word word word word 4/5\" | sed 's/([^)]*)//g' | tr -c '0-9' ' ' | column -t",
+    "raw_output_payload": {
+      "content": "echo \"1/2 [3] (27/03/2012 19:32:54) word word word word 4/5\" | sed 's/([^)]*)//g' | tr -c '0-9' ' ' | column -t",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need to produce a bash command that does this. Input string: \"1/2 [3] (27/03/2012 19:32:54) word word word word 4/5\". Remove everything within parentheses. So remove \"(27/03/2012 19:32:54)\". Then substitute all non-digit characters with a space. So digits remain. After removal, string becomes \"1/2 [3]  word word word word 4/5\". Then replace non-digits with space: digits and spaces? Non-digit replaced by space. So digits remain, others become space. So \"1/2 [3]  word word word word 4/5\" -> digits: 1 2 3 4 5. But slashes and brackets become spaces. So result: \"1 2   3     4 5\". Then format as a table. Maybe use printf? Table maybe columns? Probably just output as table with numbers separated by spaces? Maybe use awk to print each number in column. Let's produce: echo \"1/2 [3] (27/03/2012 19:32:54) word word word word 4/5\" | sed 's/([^)]*)//g' | tr -cd '0-9\\n' | tr '\\n' ' ' | awk '{print $1,$2,$3,$4,$5}'? But need table. Maybe use column -t. So final command: echo ... | sed 's/([^)]*)//g' | tr -cd '0-9\\n' | tr '\\n' ' ' | column -t. But tr -cd removes non-digits, but we want spaces for non-digits. Instead use tr -s '[:digit:]' ' '?? Actually we want replace non-digit with space: tr -c '0-9' ' '. So: echo ... | sed 's/([^)]*)//g' | tr -c '0-9' ' ' | column -t. That will produce table with numbers. Let's output.",
+      "reasoning_content": "We need to produce a bash command that does this. Input string: \"1/2 [3] (27/03/2012 19:32:54) word word word word 4/5\". Remove everything within parentheses. So remove \"(27/03/2012 19:32:54)\". Then substitute all non-digit characters with a space. So digits remain. After removal, string becomes \"1/2 [3]  word word word word 4/5\". Then replace non-digits with space: digits and spaces? Non-digit replaced by space. So digits remain, others become space. So \"1/2 [3]  word word word word 4/5\" -> digits: 1 2 3 4 5. But slashes and brackets become spaces. So result: \"1 2   3     4 5\". Then format as a table. Maybe use printf? Table maybe columns? Probably just output as table with numbers separated by spaces? Maybe use awk to print each number in column. Let's produce: echo \"1/2 [3] (27/03/2012 19:32:54) word word word word 4/5\" | sed 's/([^)]*)//g' | tr -cd '0-9\\n' | tr '\\n' ' ' | awk '{print $1,$2,$3,$4,$5}'? But need table. Maybe use column -t. So final command: echo ... | sed 's/([^)]*)//g' | tr -cd '0-9\\n' | tr '\\n' ' ' | column -t. But tr -cd removes non-digits, but we want spaces for non-digits. Instead use tr -s '[:digit:]' ' '?? Actually we want replace non-digit with space: tr -c '0-9' ' '. So: echo ... | sed 's/([^)]*)//g' | tr -c '0-9' ' ' | column -t. That will produce table with numbers. Let's output."
+    }
+  },
+  "task": {
+    "split": 2,
+    "task_index": 28,
+    "query": "Remove everything within parentheses and substitute all non digit characters with a space from \"1/2 [3] (27/03/2012 19:32:54) word word word word 4/5\" and format the output as a table",
+    "gold": "echo '1/2 [3] (27/03/2012 19:32:54) word word word word 4/5' | sed -e 's/(.*)//' -e 's/[^0-9]/ /g' | column -t",
+    "record": {
+      "query": "Remove everything within parentheses and substitute all non digit characters with a space from \"1/2 [3] (27/03/2012 19:32:54) word word word word 4/5\" and format the output as a table",
+      "gold": "echo '1/2 [3] (27/03/2012 19:32:54) word word word word 4/5' | sed -e 's/(.*)//' -e 's/[^0-9]/ /g' | column -t"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Remove everything within parentheses and substitute all non digit characters with a space from \"1/2 [3] (27/03/2012 19:32:54) word word word word 4/5\" and format the output as a table",
+      "info": {}
+    },
+    "action": {
+      "command": "echo \"1/2 [3] (27/03/2012 19:32:54) word word word word 4/5\" | sed 's/([^)]*)//g' | tr -c '0-9' ' ' | column -t",
+      "observation": "1/2\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "1/2\n",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "1/2\n",
+        "eval_obs": "1  2  3  4  5\n",
+        "answer_similarity": 0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "echo \"1/2 [3] (27/03/2012 19:32:54) word word word word 4/5\" | sed 's/([^)]*)//g' | tr -c '0-9' ' ' | column -t",
+        "observation": "1/2\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "1/2\n",
+    "eval_observation": "1  2  3  4  5\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "batch": {
+    "run_id": "ef4ab952b6ec",
+    "selection": {
+      "split": 2,
+      "offset": 0,
+      "limit": null,
+      "task_indices": null
+    }
+  }
+}

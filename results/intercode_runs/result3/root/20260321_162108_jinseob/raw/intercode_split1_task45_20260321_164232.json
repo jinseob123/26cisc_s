@@ -1,0 +1,119 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-21T07:42:32Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-21T07:42:32Z",
+    "finished_at": "2026-03-21T07:42:40Z",
+    "image_name": "intercode-nl2bash-fs1",
+    "command": {
+      "text": "tar -cf /backup1.tar -C /testbed $(find . -maxdepth 1 -type d ! -name .)",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "tar -cf /backup1.tar -C /testbed $(find . -maxdepth 1 -type d ! -name .)",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": true,
+    "raw_output_text": "tar -cf /backup1.tar -C /testbed $(find . -maxdepth 1 -type d ! -name .)",
+    "raw_output_payload": {
+      "content": "tar -cf /backup1.tar -C /testbed $(find . -maxdepth 1 -type d ! -name .)",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need tar of subdirectories of /testbed, but without prefix \"testbed\". So use -C /testbed and tar -cf /backup1.tar .? But only subdirectories, not files. Use find. tar -cf /backup1.tar -C /testbed $(find . -maxdepth 1 -type d ! -name .) . That includes directories. Use --transform to strip prefix? Actually want archive without prefix \"testbed\". If we tar from /testbed, paths inside will be like subdir/... So no prefix. So command: tar -cf /backup1.tar -C /testbed $(find . -maxdepth 1 -type d ! -name .)",
+      "reasoning_content": "Need tar of subdirectories of /testbed, but without prefix \"testbed\". So use -C /testbed and tar -cf /backup1.tar .? But only subdirectories, not files. Use find. tar -cf /backup1.tar -C /testbed $(find . -maxdepth 1 -type d ! -name .) . That includes directories. Use --transform to strip prefix? Actually want archive without prefix \"testbed\". If we tar from /testbed, paths inside will be like subdir/... So no prefix. So command: tar -cf /backup1.tar -C /testbed $(find . -maxdepth 1 -type d ! -name .)"
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 45,
+    "query": "Create archive \"/backup1.tar\" of all subdirectories of the /testbed directory without the prefix \"testbed\"",
+    "gold": "find /testbed -mindepth 1 -maxdepth 1 -type d | xargs tar czf /backup1.tar --transform 's,^testbed/,,'",
+    "record": {
+      "query": "Create archive \"/backup1.tar\" of all subdirectories of the /testbed directory without the prefix \"testbed\"",
+      "gold": "find /testbed -mindepth 1 -maxdepth 1 -type d | xargs tar czf /backup1.tar --transform 's,^testbed/,,'"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Create archive \"/backup1.tar\" of all subdirectories of the /testbed directory without the prefix \"testbed\"",
+      "info": {}
+    },
+    "action": {
+      "command": "tar -cf /backup1.tar -C /testbed $(find . -maxdepth 1 -type d ! -name .)",
+      "observation": "tar: ./boot: Cannot stat: No such file or directory\ntar: ./dev: Cannot stat: No such file or directory\ntar: ./etc: Cannot stat: No such file or directory\ntar: ./home: Cannot stat: No such file or directory\ntar: ./media: Cannot stat: No such file or directory\ntar: ./opt: Cannot stat: No such file or directory\ntar: ./proc: Cannot stat: No such file or directory\ntar: ./root: Cannot stat: No such file or directory\ntar: ./run: Cannot stat: No such file or directory\ntar: ./srv: Cannot stat: No such file or directory\ntar: ./sys: Cannot stat: No such file or directory\ntar: ./usr: Cannot stat: No such file or directory\ntar: ./var: Cannot stat: No such file or directory\ntar: ./.git: Cannot stat: No such file or directory\ntar: ./testbed: Cannot stat: No such file or directory\ntar: Exiting with failure status due to previous errors\n",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "tar: ./boot: Cannot stat: No such file or directory\ntar: ./dev: Cannot stat: No such file or directory\ntar: ./etc: Cannot stat: No such file or directory\ntar: ./home: Cannot stat: No such file or directory\ntar: ./media: Cannot stat: No such file or directory\ntar: ./opt: Cannot stat: No such file or directory\ntar: ./proc: Cannot stat: No such file or directory\ntar: ./root: Cannot stat: No such file or directory\ntar: ./run: Cannot stat: No such file or directory\ntar: ./srv: Cannot stat: No such file or directory\ntar: ./sys: Cannot stat: No such file or directory\ntar: ./usr: Cannot stat: No such file or directory\ntar: ./var: Cannot stat: No such file or directory\ntar: ./.git: Cannot stat: No such file or directory\ntar: ./testbed: Cannot stat: No such file or directory\ntar: Exiting with failure status due to previous errors\n",
+      "reward": 0.37,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.0,
+          "answer_similarity": 0.03
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "diff_same": {
+          "files": [
+            [
+              "backup1.tar",
+              "??"
+            ]
+          ],
+          "correct": 0,
+          "total": 1
+        },
+        "agent_obs": "tar: ./boot: Cannot stat: No such file or directory\ntar: ./dev: Cannot stat: No such file or directory\ntar: ./etc: Cannot stat: No such file or directory\ntar: ./home: Cannot stat: No such file or directory\ntar: ./media: Cannot stat: No such file or directory\ntar: ./opt: Cannot stat: No such file or directory\ntar: ./proc: Cannot stat: No such file or directory\ntar: ./root: Cannot stat: No such file or directory\ntar: ./run: Cannot stat: No such file or directory\ntar: ./srv: Cannot stat: No such file or directory\ntar: ./sys: Cannot stat: No such file or directory\ntar: ./usr: Cannot stat: No such file or directory\ntar: ./var: Cannot stat: No such file or directory\ntar: ./.git: Cannot stat: No such file or directory\ntar: ./testbed: Cannot stat: No such file or directory\ntar: Exiting with failure status due to previous errors\n",
+        "eval_obs": "tar: Removing leading `/' from member names\ntar: Removing leading `/' from hard link targets\n",
+        "answer_similarity": 0.08935654752304802,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "tar -cf /backup1.tar -C /testbed $(find . -maxdepth 1 -type d ! -name .)",
+        "observation": "tar: ./boot: Cannot stat: No such file or directory\ntar: ./dev: Cannot stat: No such file or directory\ntar: ./etc: Cannot stat: No such file or directory\ntar: ./home: Cannot stat: No such file or directory\ntar: ./media: Cannot stat: No such file or directory\ntar: ./opt: Cannot stat: No such file or directory\ntar: ./proc: Cannot stat: No such file or directory\ntar: ./root: Cannot stat: No such file or directory\ntar: ./run: Cannot stat: No such file or directory\ntar: ./srv: Cannot stat: No such file or directory\ntar: ./sys: Cannot stat: No such file or directory\ntar: ./usr: Cannot stat: No such file or directory\ntar: ./var: Cannot stat: No such file or directory\ntar: ./.git: Cannot stat: No such file or directory\ntar: ./testbed: Cannot stat: No such file or directory\ntar: Exiting with failure status due to previous errors\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.37,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "tar: ./boot: Cannot stat: No such file or directory\ntar: ./dev: Cannot stat: No such file or directory\ntar: ./etc: Cannot stat: No such file or directory\ntar: ./home: Cannot stat: No such file or directory\ntar: ./media: Cannot stat: No such file or directory\ntar: ./opt: Cannot stat: No such file or directory\ntar: ./proc: Cannot stat: No such file or directory\ntar: ./root: Cannot stat: No such file or directory\ntar: ./run: Cannot stat: No such file or directory\ntar: ./srv: Cannot stat: No such file or directory\ntar: ./sys: Cannot stat: No such file or directory\ntar: ./usr: Cannot stat: No such file or directory\ntar: ./var: Cannot stat: No such file or directory\ntar: ./.git: Cannot stat: No such file or directory\ntar: ./testbed: Cannot stat: No such file or directory\ntar: Exiting with failure status due to previous errors\n",
+    "eval_observation": "tar: Removing leading `/' from member names\ntar: Removing leading `/' from hard link targets\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "fdb8887b32c1",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260321_153210_fdb8887b32c1/commands.jsonl"
+  }
+}

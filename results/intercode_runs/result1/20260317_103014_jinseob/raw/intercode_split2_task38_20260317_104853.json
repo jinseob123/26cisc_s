@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T01:48:53Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T01:48:53Z",
+    "finished_at": "2026-03-17T01:49:02Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "find /system -type d -print0 | while IFS= read -r -d '' dir; do c=$(find \"$dir\" -mindepth 1 -maxdepth 1 -type d | wc -l); echo \"$c $dir\"; done | sort -nr | head -10",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_2.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /system -type d -print0 | while IFS= read -r -d '' dir; do c=$(find \"$dir\" -mindepth 1 -maxdepth 1 -type d | wc -l); echo \"$c $dir\"; done | sort -nr | head -10",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": false,
+    "raw_output_text": "find /system -type d -print0 | while IFS= read -r -d '' dir; do c=$(find \"$dir\" -mindepth 1 -maxdepth 1 -type d | wc -l); echo \"$c $dir\"; done | sort -nr | head -10",
+    "raw_output_payload": {
+      "content": "find /system -type d -print0 | while IFS= read -r -d '' dir; do c=$(find \"$dir\" -mindepth 1 -maxdepth 1 -type d | wc -l); echo \"$c $dir\"; done | sort -nr | head -10",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need a bash command that counts subdirectories for each directory under /system, sort descending, show top 10. Use find to list directories, then for each count subdirs. Maybe use while read. Simpler: find /system -type d -print0 | while IFS= read -r -d '' dir; do count=$(find \"$dir\" -mindepth 1 -maxdepth 1 -type d | wc -l); echo \"$count $dir\"; done | sort -nr | head -10\n\nOne line: find /system -type d -print0 | while IFS= read -r -d '' dir; do c=$(find \"$dir\" -mindepth 1 -maxdepth 1 -type d | wc -l); echo \"$c $dir\"; done | sort -nr | head -10\n\nLet's output that.",
+      "reasoning_content": "We need a bash command that counts subdirectories for each directory under /system, sort descending, show top 10. Use find to list directories, then for each count subdirs. Maybe use while read. Simpler: find /system -type d -print0 | while IFS= read -r -d '' dir; do count=$(find \"$dir\" -mindepth 1 -maxdepth 1 -type d | wc -l); echo \"$count $dir\"; done | sort -nr | head -10\n\nOne line: find /system -type d -print0 | while IFS= read -r -d '' dir; do c=$(find \"$dir\" -mindepth 1 -maxdepth 1 -type d | wc -l); echo \"$c $dir\"; done | sort -nr | head -10\n\nLet's output that."
+    }
+  },
+  "task": {
+    "split": 2,
+    "task_index": 38,
+    "query": "Display the number of sub-directories for all directories under /system directory tree, sort them according to the decreasing order of the number and show only the first 10 of them",
+    "gold": "find /system -type d -ls | awk '{print $4 - 2, $NF}' | sort -rn | head",
+    "record": {
+      "query": "Display the number of sub-directories for all directories under /system directory tree, sort them according to the decreasing order of the number and show only the first 10 of them",
+      "gold": "find /system -type d -ls | awk '{print $4 - 2, $NF}' | sort -rn | head"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Display the number of sub-directories for all directories under /system directory tree, sort them according to the decreasing order of the number and show only the first 10 of them",
+      "info": {}
+    },
+    "action": {
+      "command": "find /system -type d -print0 | while IFS= read -r -d '' dir; do c=$(find \"$dir\" -mindepth 1 -maxdepth 1 -type d | wc -l); echo \"$c $dir\"; done | sort -nr | head -10",
+      "observation": "$dir; done | sort -nr | head -10: -c: line 2: syntax error: unexpected end of file\n",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "$dir; done | sort -nr | head -10: -c: line 2: syntax error: unexpected end of file\n",
+      "reward": 0.6900000000000001,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.02
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "$dir; done | sort -nr | head -10: -c: line 2: syntax error: unexpected end of file\n",
+        "eval_obs": "find: '/system': No such file or directory\n",
+        "answer_similarity": 0.05612175491366005,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /system -type d -print0 | while IFS= read -r -d '' dir; do c=$(find \"$dir\" -mindepth 1 -maxdepth 1 -type d | wc -l); echo \"$c $dir\"; done | sort -nr | head -10",
+        "observation": "$dir; done | sort -nr | head -10: -c: line 2: syntax error: unexpected end of file\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.6900000000000001,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "$dir; done | sort -nr | head -10: -c: line 2: syntax error: unexpected end of file\n",
+    "eval_observation": "find: '/system': No such file or directory\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "batch": {
+    "run_id": "ef4ab952b6ec",
+    "selection": {
+      "split": 2,
+      "offset": 0,
+      "limit": null,
+      "task_indices": null
+    }
+  }
+}

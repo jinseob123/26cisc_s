@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-22T09:44:55Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-22T09:44:55Z",
+    "finished_at": "2026-03-22T09:45:02Z",
+    "image_name": "intercode-nl2bash-fs3",
+    "command": {
+      "text": "find /workspace -type f -perm 0777 -printf \"%p\\n\"",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /workspace -type f -perm 0777 -printf \"%p\\n\"",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nfind /workspace -type f -perm 0777 -printf \"%p\\n\"\n```",
+    "raw_output_payload": {
+      "content": "```bash\nfind /workspace -type f -perm 0777 -printf \"%p\\n\"\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need list files with all permissions (rwx for user, group, others). Use find. Command: find /workspace -type f -perm 0777 -printf \"%p\\n\"",
+      "reasoning_content": "Need list files with all permissions (rwx for user, group, others). Use find. Command: find /workspace -type f -perm 0777 -printf \"%p\\n\""
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 9,
+    "query": "long list al the files in the /workspace directory which have all the permissions",
+    "gold": "find /workspace -perm 777 -type f -exec ls -l {} \\;",
+    "record": {
+      "query": "long list al the files in the /workspace directory which have all the permissions",
+      "gold": "find /workspace -perm 777 -type f -exec ls -l {} \\;"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "long list al the files in the /workspace directory which have all the permissions",
+      "info": {}
+    },
+    "action": {
+      "command": "find /workspace -type f -perm 0777 -printf \"%p\\n\"",
+      "observation": "",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "",
+      "reward": 1.0,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "",
+        "eval_obs": "",
+        "answer_similarity": 1,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /workspace -type f -perm 0777 -printf \"%p\\n\"",
+        "observation": ""
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 1.0,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "",
+    "eval_observation": "",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "ba7ef8134b5e",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260322_152203_ba7ef8134b5e/commands.jsonl"
+  }
+}

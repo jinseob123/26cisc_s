@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T02:13:58Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T02:13:58Z",
+    "finished_at": "2026-03-17T02:14:10Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "cat /workspace/files.txt | xargs -d '\\n' -I{} stat -c %s {} | awk '{s+=$1} END{print s}'",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "cat /workspace/files.txt | xargs -d '\\n' -I{} stat -c %s {} | awk '{s+=$1} END{print s}'",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": true,
+    "raw_output_text": "cat /workspace/files.txt | xargs -d '\\n' -I{} stat -c %s {} | awk '{s+=$1} END{print s}'",
+    "raw_output_payload": {
+      "content": "cat /workspace/files.txt | xargs -d '\\n' -I{} stat -c %s {} | awk '{s+=$1} END{print s}'",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need to read file list, sum sizes. Use xargs -d '\\n' -I{} stat -c %s {} and sum. Or use awk. Command: awk '{sum+=($1?`stat -c %s \"$1\"`:0)} END{print sum}'? But simpler: cat files.txt | xargs -d '\\n' -I{} stat -c %s {} | awk '{s+=$1} END{print s}'. One line.",
+      "reasoning_content": "We need to read file list, sum sizes. Use xargs -d '\\n' -I{} stat -c %s {} and sum. Or use awk. Command: awk '{sum+=($1?`stat -c %s \"$1\"`:0)} END{print sum}'? But simpler: cat files.txt | xargs -d '\\n' -I{} stat -c %s {} | awk '{s+=$1} END{print s}'. One line."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 37,
+    "query": "Print the total disk usage in bytes of all files listed in \"/workspace/files.txt\"",
+    "gold": "cat /workspace/files.txt | xargs du -c | tail -1 | awk '{print $1}'",
+    "record": {
+      "query": "Print the total disk usage in bytes of all files listed in \"/workspace/files.txt\"",
+      "gold": "cat /workspace/files.txt | xargs du -c | tail -1 | awk '{print $1}'"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Print the total disk usage in bytes of all files listed in \"/workspace/files.txt\"",
+      "info": {}
+    },
+    "action": {
+      "command": "cat /workspace/files.txt | xargs -d '\\n' -I{} stat -c %s {} | awk '{s+=$1} END{print s}'",
+      "observation": "cat: /workspace/files.txt: No such file or directory\n\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "cat: /workspace/files.txt: No such file or directory\n\n",
+      "reward": 0.8400000000000001,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.17
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "cat: /workspace/files.txt: No such file or directory\n\n",
+        "eval_obs": "cat: /workspace/files.txt: No such file or directory\ndu: cannot access './proc/47/task/47/fd/3': No such file or directory\ndu: cannot access './proc/47/task/47/fdinfo/3': No such file or directory\ndu: cannot access './proc/47/fd/4': No such file or directory\ndu: cannot access './proc/47/fdinfo/4': No such file or directory\n415312\n",
+        "answer_similarity": 0.5150795872037635,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "cat /workspace/files.txt | xargs -d '\\n' -I{} stat -c %s {} | awk '{s+=$1} END{print s}'",
+        "observation": "cat: /workspace/files.txt: No such file or directory\n\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.8400000000000001,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "cat: /workspace/files.txt: No such file or directory\n\n",
+    "eval_observation": "cat: /workspace/files.txt: No such file or directory\ndu: cannot access './proc/47/task/47/fd/3': No such file or directory\ndu: cannot access './proc/47/task/47/fdinfo/3': No such file or directory\ndu: cannot access './proc/47/fd/4': No such file or directory\ndu: cannot access './proc/47/fdinfo/4': No such file or directory\n415312\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "batch": {
+    "run_id": "dc74a59cf2ba",
+    "selection": {
+      "split": 3,
+      "offset": 0,
+      "limit": null,
+      "task_indices": null
+    }
+  }
+}

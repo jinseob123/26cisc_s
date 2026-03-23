@@ -1,0 +1,119 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T04:52:36Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T04:52:36Z",
+    "finished_at": "2026-03-17T04:52:44Z",
+    "image_name": "intercode-nl2bash-fs2",
+    "command": {
+      "text": "tar -czvf compress_folder1.tar.gz -C /system folder1",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_2.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "tar -czvf compress_folder1.tar.gz -C /system folder1",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\ntar -czvf compress_folder1.tar.gz -C /system folder1\n```",
+    "raw_output_payload": {
+      "content": "```bash\ntar -czvf compress_folder1.tar.gz -C /system folder1\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need tar -czvf compress_folder1.tar.gz /system/folder1. Use -C? but path. Just: tar -czvf compress_folder1.tar.gz -C /system folder1? But they want archive of /system/folder1. So: tar -czvf compress_folder1.tar.gz -C /system folder1.",
+      "reasoning_content": "Need tar -czvf compress_folder1.tar.gz /system/folder1. Use -C? but path. Just: tar -czvf compress_folder1.tar.gz -C /system folder1? But they want archive of /system/folder1. So: tar -czvf compress_folder1.tar.gz -C /system folder1."
+    }
+  },
+  "task": {
+    "split": 2,
+    "task_index": 48,
+    "query": "create a compressed archive of /system/folder1 \"compress_folder1.tar.gz\" with verbose output",
+    "gold": "tar -zcvf compress_folder1.tar.gz /system/folder1",
+    "record": {
+      "query": "create a compressed archive of /system/folder1 \"compress_folder1.tar.gz\" with verbose output",
+      "gold": "tar -zcvf compress_folder1.tar.gz /system/folder1"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "create a compressed archive of /system/folder1 \"compress_folder1.tar.gz\" with verbose output",
+      "info": {}
+    },
+    "action": {
+      "command": "tar -czvf compress_folder1.tar.gz -C /system folder1",
+      "observation": "folder1/\nfolder1/text2.txt\nfolder1/text3.txt\nfolder1/text4.txt\nfolder1/keep.txt\nfolder1/a.out\nfolder1/doc1.doc\nfolder1/doc2.doc\nfolder1/log1.log\nfolder1/script1.sh\nfolder1/new.sh\nfolder1/data.csv\nfolder1/recent.txt\nfolder1/old2.txt\nfolder1/root\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "folder1/\nfolder1/text2.txt\nfolder1/text3.txt\nfolder1/text4.txt\nfolder1/keep.txt\nfolder1/a.out\nfolder1/doc1.doc\nfolder1/doc2.doc\nfolder1/log1.log\nfolder1/script1.sh\nfolder1/new.sh\nfolder1/data.csv\nfolder1/recent.txt\nfolder1/old2.txt\nfolder1/root\n",
+      "reward": 0.55,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.0,
+          "answer_similarity": 0.21
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "diff_same": {
+          "files": [
+            [
+              "compress_folder1.tar.gz",
+              "??"
+            ]
+          ],
+          "correct": 0,
+          "total": 1
+        },
+        "agent_obs": "folder1/\nfolder1/text2.txt\nfolder1/text3.txt\nfolder1/text4.txt\nfolder1/keep.txt\nfolder1/a.out\nfolder1/doc1.doc\nfolder1/doc2.doc\nfolder1/log1.log\nfolder1/script1.sh\nfolder1/new.sh\nfolder1/data.csv\nfolder1/recent.txt\nfolder1/old2.txt\nfolder1/root\n",
+        "eval_obs": "tar: Removing leading `/' from member names\n/system/folder1/\n/system/folder1/text2.txt\n/system/folder1/text3.txt\n/system/folder1/text4.txt\n/system/folder1/keep.txt\n/system/folder1/a.out\n/system/folder1/doc1.doc\n/system/folder1/doc2.doc\n/system/folder1/log1.log\n/system/folder1/script1.sh\n/system/folder1/new.sh\n/system/folder1/data.csv\n/system/folder1/recent.txt\n/system/folder1/old2.txt\n",
+        "answer_similarity": 0.6220043790020936,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "tar -czvf compress_folder1.tar.gz -C /system folder1",
+        "observation": "folder1/\nfolder1/text2.txt\nfolder1/text3.txt\nfolder1/text4.txt\nfolder1/keep.txt\nfolder1/a.out\nfolder1/doc1.doc\nfolder1/doc2.doc\nfolder1/log1.log\nfolder1/script1.sh\nfolder1/new.sh\nfolder1/data.csv\nfolder1/recent.txt\nfolder1/old2.txt\nfolder1/root\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.55,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "folder1/\nfolder1/text2.txt\nfolder1/text3.txt\nfolder1/text4.txt\nfolder1/keep.txt\nfolder1/a.out\nfolder1/doc1.doc\nfolder1/doc2.doc\nfolder1/log1.log\nfolder1/script1.sh\nfolder1/new.sh\nfolder1/data.csv\nfolder1/recent.txt\nfolder1/old2.txt\nfolder1/root\n",
+    "eval_observation": "tar: Removing leading `/' from member names\n/system/folder1/\n/system/folder1/text2.txt\n/system/folder1/text3.txt\n/system/folder1/text4.txt\n/system/folder1/keep.txt\n/system/folder1/a.out\n/system/folder1/doc1.doc\n/system/folder1/doc2.doc\n/system/folder1/log1.log\n/system/folder1/script1.sh\n/system/folder1/new.sh\n/system/folder1/data.csv\n/system/folder1/recent.txt\n/system/folder1/old2.txt\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "0e083a8c7a1e",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260317_120709_0e083a8c7a1e/commands.jsonl"
+  }
+}

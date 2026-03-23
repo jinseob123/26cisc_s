@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-22T11:45:52Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-22T11:45:52Z",
+    "finished_at": "2026-03-22T11:46:00Z",
+    "image_name": "intercode-nl2bash-fs2",
+    "command": {
+      "text": "cat -v /system/text1.txt",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_2.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "cat -v /system/text1.txt",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\ncat -v /system/text1.txt\n```",
+    "raw_output_payload": {
+      "content": "```bash\ncat -v /system/text1.txt\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need to dump file as ASCII characters. Use cat -v or od -c. Probably cat -v to show non-printable. So command: cat -v /system/text1.txt.",
+      "reasoning_content": "We need to dump file as ASCII characters. Use cat -v or od -c. Probably cat -v to show non-printable. So command: cat -v /system/text1.txt."
+    }
+  },
+  "task": {
+    "split": 2,
+    "task_index": 47,
+    "query": "Dump \"/system/text1.txt\" as ASCII characters",
+    "gold": "od -t c /system/text1.txt",
+    "record": {
+      "query": "Dump \"/system/text1.txt\" as ASCII characters",
+      "gold": "od -t c /system/text1.txt"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Dump \"/system/text1.txt\" as ASCII characters",
+      "info": {}
+    },
+    "action": {
+      "command": "cat -v /system/text1.txt",
+      "observation": "Hello world!\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "Hello world!\n",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "Hello world!\n",
+        "eval_obs": "0000000   H   e   l   l   o       w   o   r   l   d   !  \\n\n0000015\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "cat -v /system/text1.txt",
+        "observation": "Hello world!\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "Hello world!\n",
+    "eval_observation": "0000000   H   e   l   l   o       w   o   r   l   d   !  \\n\n0000015\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "00da826ef10e",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260322_194005_00da826ef10e/commands.jsonl"
+  }
+}

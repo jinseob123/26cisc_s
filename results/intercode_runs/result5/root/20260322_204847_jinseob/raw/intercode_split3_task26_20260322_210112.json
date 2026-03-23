@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-22T12:01:12Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-22T12:01:12Z",
+    "finished_at": "2026-03-22T12:01:20Z",
+    "image_name": "intercode-nl2bash-fs3",
+    "command": {
+      "text": "find /workspace -name foo -printf \"%T@ %p\\n\" | sort -n | cut -d' ' -f2- | xargs -d '\\n' ls -l",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /workspace -name foo -printf \"%T@ %p\\n\" | sort -n | cut -d' ' -f2- | xargs -d '\\n' ls -l",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": false,
+    "raw_output_text": "find /workspace -name foo -printf \"%T@ %p\\n\" | sort -n | cut -d' ' -f2- | xargs -d '\\n' ls -l",
+    "raw_output_payload": {
+      "content": "find /workspace -name foo -printf \"%T@ %p\\n\" | sort -n | cut -d' ' -f2- | xargs -d '\\n' ls -l",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need find foo, then ls -l sorted by modification date. Use find /workspace -name foo -exec ls -l {} + | sort -k6,7? Actually ls -l gives date columns. Better use find ... -printf \"%T@ %p\\n\" | sort -n | cut -d' ' -f2- | xargs ls -l. Simpler: find /workspace -name foo -printf \"%T@ %p\\n\" | sort -n | cut -d' ' -f2- | xargs -d '\\n' ls -l. Provide one line.",
+      "reasoning_content": "Need find foo, then ls -l sorted by modification date. Use find /workspace -name foo -exec ls -l {} + | sort -k6,7? Actually ls -l gives date columns. Better use find ... -printf \"%T@ %p\\n\" | sort -n | cut -d' ' -f2- | xargs ls -l. Simpler: find /workspace -name foo -printf \"%T@ %p\\n\" | sort -n | cut -d' ' -f2- | xargs -d '\\n' ls -l. Provide one line."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 26,
+    "query": "search for the file foo in  the /workspace folder and display a long listing of it in sorted order of modification date",
+    "gold": "find /workspace -name foo | xargs ls -tl",
+    "record": {
+      "query": "search for the file foo in  the /workspace folder and display a long listing of it in sorted order of modification date",
+      "gold": "find /workspace -name foo | xargs ls -tl"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "search for the file foo in  the /workspace folder and display a long listing of it in sorted order of modification date",
+      "info": {}
+    },
+    "action": {
+      "command": "find /workspace -name foo -printf \"%T@ %p\\n\" | sort -n | cut -d' ' -f2- | xargs -d '\\n' ls -l",
+      "observation": "",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "",
+        "eval_obs": "total 24\ndrwxr-xr-x    5 root root  360 Mar 22 12:01 dev\ndr-xr-xr-x 1170 root root    0 Mar 22 12:01 proc\ndrwxr-xr-x    1 root root 4096 Mar 22 11:54 workspace\ndrwxr-xr-x    1 root root    6 Mar 22 10:09 backup\ndrwx------    1 root root   22 Mar 21 08:35 root\ndrwxr-xr-x    1 root root   31 Mar 21 08:30 usr\ndrwxr-xr-x    1 root root   86 Mar 21 08:15 etc\ndrwxr-xr-x    1 root root  172 Mar 17 04:33 run\ndr-xr-xr-x   13 root root    0 Mar 16 14:58 sys\n-rw-r--r--    1 root root 2128 Mar 16 01:08 setup_fs.sh\n-rw-r--r--    1 root root 4018 Mar 16 01:08 setup_nl2b_fs_1.sh\n-rw-r--r--    1 root root 3280 Mar 16 01:08 setup_nl2b_fs_2.sh\n-rwxr-xr-x    1 root root 3055 Mar 16 01:08 setup_nl2b_fs_3.sh\n-rw-r--r--    1 root root   60 Mar 16 01:08 setup_nl2b_fs_4.sh\ndrwxr-xr-x    3 root root   28 Feb 17 02:09 home\ndrwxr-xr-x    1 root root   74 Feb 17 02:09 var\ndrwxr-xr-x    2 root root   10 Feb 17 02:02 media\ndrwxr-xr-x    2 root root   10 Feb 17 02:02 opt\ndrwxr-xr-x    2 root root   10 Feb 17 02:02 srv\nlrwxrwxrwx    1 root root    7 Apr 22  2024 bin -> usr/bin\ndrwxr-xr-x    2 root root   10 Apr 22  2024 boot\nlrwxrwxrwx    1 root root    7 Apr 22  2024 lib -> usr/lib\nlrwxrwxrwx    1 root root    9 Apr 22  2024 lib64 -> usr/lib64\nlrwxrwxrwx    1 root root    8 Apr 22  2024 sbin -> usr/sbin\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /workspace -name foo -printf \"%T@ %p\\n\" | sort -n | cut -d' ' -f2- | xargs -d '\\n' ls -l",
+        "observation": ""
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "",
+    "eval_observation": "total 24\ndrwxr-xr-x    5 root root  360 Mar 22 12:01 dev\ndr-xr-xr-x 1170 root root    0 Mar 22 12:01 proc\ndrwxr-xr-x    1 root root 4096 Mar 22 11:54 workspace\ndrwxr-xr-x    1 root root    6 Mar 22 10:09 backup\ndrwx------    1 root root   22 Mar 21 08:35 root\ndrwxr-xr-x    1 root root   31 Mar 21 08:30 usr\ndrwxr-xr-x    1 root root   86 Mar 21 08:15 etc\ndrwxr-xr-x    1 root root  172 Mar 17 04:33 run\ndr-xr-xr-x   13 root root    0 Mar 16 14:58 sys\n-rw-r--r--    1 root root 2128 Mar 16 01:08 setup_fs.sh\n-rw-r--r--    1 root root 4018 Mar 16 01:08 setup_nl2b_fs_1.sh\n-rw-r--r--    1 root root 3280 Mar 16 01:08 setup_nl2b_fs_2.sh\n-rwxr-xr-x    1 root root 3055 Mar 16 01:08 setup_nl2b_fs_3.sh\n-rw-r--r--    1 root root   60 Mar 16 01:08 setup_nl2b_fs_4.sh\ndrwxr-xr-x    3 root root   28 Feb 17 02:09 home\ndrwxr-xr-x    1 root root   74 Feb 17 02:09 var\ndrwxr-xr-x    2 root root   10 Feb 17 02:02 media\ndrwxr-xr-x    2 root root   10 Feb 17 02:02 opt\ndrwxr-xr-x    2 root root   10 Feb 17 02:02 srv\nlrwxrwxrwx    1 root root    7 Apr 22  2024 bin -> usr/bin\ndrwxr-xr-x    2 root root   10 Apr 22  2024 boot\nlrwxrwxrwx    1 root root    7 Apr 22  2024 lib -> usr/lib\nlrwxrwxrwx    1 root root    9 Apr 22  2024 lib64 -> usr/lib64\nlrwxrwxrwx    1 root root    8 Apr 22  2024 sbin -> usr/sbin\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "7600a79d9526",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260322_194046_7600a79d9526/commands.jsonl"
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-22T07:51:05Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-22T07:51:05Z",
+    "finished_at": "2026-03-22T07:51:13Z",
+    "image_name": "intercode-nl2bash-fs2",
+    "command": {
+      "text": "find /system/folder3/temp -depth \\( -name '.DS_Store' -o -name '._.DS_Store' -o -name '._*' -o -name '.TemporaryItems' -o -name '.apdisk' \\) -exec rm -rf {} +",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_2.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /system/folder3/temp -depth \\( -name '.DS_Store' -o -name '._.DS_Store' -o -name '._*' -o -name '.TemporaryItems' -o -name '.apdisk' \\) -exec rm -rf {} +",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nfind /system/folder3/temp -depth \\( -name '.DS_Store' -o -name '._.DS_Store' -o -name '._*' -o -name '.TemporaryItems' -o -name '.apdisk' \\) -exec rm -rf {} +\n```",
+    "raw_output_payload": {
+      "content": "```bash\nfind /system/folder3/temp -depth \\( -name '.DS_Store' -o -name '._.DS_Store' -o -name '._*' -o -name '.TemporaryItems' -o -name '.apdisk' \\) -exec rm -rf {} +\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need find and delete. Use find with -regex or -name patterns. Patterns: .DS_Store, _._DS_Store? Actually '._.DS_Store' literal. '._*' matches any starting with ._ .TemporaryItems .apdisk. Use -type f or -type d? Remove all files and directories. So find . -depth -name patterns -exec rm -rf {} +. Use -depth to delete directories after contents. Command: find /system/folder3/temp -depth \\( -name '.DS_Store' -o -name '._.DS_Store' -o -name '._*' -o -name '.TemporaryItems' -o -name '.apdisk' \\) -exec rm -rf {} +.",
+      "reasoning_content": "Need find and delete. Use find with -regex or -name patterns. Patterns: .DS_Store, _._DS_Store? Actually '._.DS_Store' literal. '._*' matches any starting with ._ .TemporaryItems .apdisk. Use -type f or -type d? Remove all files and directories. So find . -depth -name patterns -exec rm -rf {} +. Use -depth to delete directories after contents. Command: find /system/folder3/temp -depth \\( -name '.DS_Store' -o -name '._.DS_Store' -o -name '._*' -o -name '.TemporaryItems' -o -name '.apdisk' \\) -exec rm -rf {} +."
+    }
+  },
+  "task": {
+    "split": 2,
+    "task_index": 26,
+    "query": "Remove all files and directories under '/system/folder3/temp' directory tree that match with one of the name patterns '.DS_Store', '._.DS_Store' , '._*', '.TemporaryItems' or '.apdisk'",
+    "gold": "find /system/folder3/temp \\( -name '.DS_Store' -or -name '._.DS_Store' -or -name '._*' -or -name '.TemporaryItems' -or -name '.apdisk' \\) -exec rm -rf {} \\;",
+    "record": {
+      "query": "Remove all files and directories under '/system/folder3/temp' directory tree that match with one of the name patterns '.DS_Store', '._.DS_Store' , '._*', '.TemporaryItems' or '.apdisk'",
+      "gold": "find /system/folder3/temp \\( -name '.DS_Store' -or -name '._.DS_Store' -or -name '._*' -or -name '.TemporaryItems' -or -name '.apdisk' \\) -exec rm -rf {} \\;"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Remove all files and directories under '/system/folder3/temp' directory tree that match with one of the name patterns '.DS_Store', '._.DS_Store' , '._*', '.TemporaryItems' or '.apdisk'",
+      "info": {}
+    },
+    "action": {
+      "command": "find /system/folder3/temp -depth \\( -name '.DS_Store' -o -name '._.DS_Store' -o -name '._*' -o -name '.TemporaryItems' -o -name '.apdisk' \\) -exec rm -rf {} +",
+      "observation": "",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "",
+      "reward": 1.0,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "",
+        "eval_obs": "",
+        "answer_similarity": 1,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /system/folder3/temp -depth \\( -name '.DS_Store' -o -name '._.DS_Store' -o -name '._*' -o -name '.TemporaryItems' -o -name '.apdisk' \\) -exec rm -rf {} +",
+        "observation": ""
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 1.0,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "",
+    "eval_observation": "",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "fbaa0391ba0c",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260322_152123_fbaa0391ba0c/commands.jsonl"
+  }
+}

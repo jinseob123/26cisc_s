@@ -1,0 +1,125 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-16T14:26:03Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-16T14:26:03Z",
+    "finished_at": "2026-03-16T14:26:11Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "find /testbed -type f -name '*.gz' -exec zcat {} + | wc -l",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    }
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /testbed -type f -name '*.gz' -exec zcat {} + | wc -l",
+    "raw_output_text": "```bash\nfind /testbed -type f -name '*.gz' -exec zcat {} + | wc -l\n```",
+    "raw_output_payload": {
+      "content": "```bash\nfind /testbed -type f -name '*.gz' -exec zcat {} + | wc -l\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need to count lines in all gz files after decompression. Use zcat | wc -l. For all *.gz recursively: find /testbed -type f -name '*.gz' -exec zcat {} + | wc -l. But need total lines. That command works. Use cat? zcat. So final.",
+      "reasoning_content": "Need to count lines in all gz files after decompression. Use zcat | wc -l. For all *.gz recursively: find /testbed -type f -name '*.gz' -exec zcat {} + | wc -l. But need total lines. That command works. Use cat? zcat. So final."
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 32,
+    "query": "Count the total number of lines in all \"*.gz\" files in the /testbed directory tree after decompression",
+    "gold": "find /testbed -type f -name '*.gz' | xargs zcat | wc -l",
+    "record": {
+      "query": "Count the total number of lines in all \"*.gz\" files in the /testbed directory tree after decompression",
+      "gold": "find /testbed -type f -name '*.gz' | xargs zcat | wc -l"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Count the total number of lines in all \"*.gz\" files in the /testbed directory tree after decompression",
+      "info": {
+        "action_executed": true,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "0\n",
+        "eval_obs": "\ngzip: stdin: unexpected end of file\n0\n",
+        "answer_similarity": 0.0
+      }
+    },
+    "action": {
+      "command": "find /testbed -type f -name '*.gz' -exec zcat {} + | wc -l",
+      "observation": "0\n",
+      "info": {
+        "action_executed": true,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "0\n",
+        "eval_obs": "\ngzip: stdin: unexpected end of file\n0\n",
+        "answer_similarity": 0.0
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "0\n",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "0\n",
+        "eval_obs": "\ngzip: stdin: unexpected end of file\n0\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /testbed -type f -name '*.gz' -exec zcat {} + | wc -l",
+        "observation": "0\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "0\n",
+    "eval_observation": "\ngzip: stdin: unexpected end of file\n0\n",
+    "corrupt_gold": null
+  },
+  "error": null
+}

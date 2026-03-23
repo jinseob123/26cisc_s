@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T01:04:48Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T01:04:48Z",
+    "finished_at": "2026-03-17T01:04:57Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "[[ -n \"$STY\" ]] && echo \"inside screen\" || echo \"not inside screen\"",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "[[ -n \"$STY\" ]] && echo \"inside screen\" || echo \"not inside screen\"",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\n[[ -n \"$STY\" ]] && echo \"inside screen\" || echo \"not inside screen\"\n```",
+    "raw_output_payload": {
+      "content": "```bash\n[[ -n \"$STY\" ]] && echo \"inside screen\" || echo \"not inside screen\"\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need command to check if inside screen. Usually check $STY variable or presence of screen in parent chain. Use ps -o ppid etc. simplest: [[ -n \"$STY\" ]] && echo yes. Or use pgrep -f screen. Provide command. Let's output: \n\n```\n[[ -n \"$STY\" ]] && echo \"inside screen\" || echo \"not inside screen\"\n```",
+      "reasoning_content": "Need command to check if inside screen. Usually check $STY variable or presence of screen in parent chain. Use ps -o ppid etc. simplest: [[ -n \"$STY\" ]] && echo yes. Or use pgrep -f screen. Provide command. Let's output: \n\n```\n[[ -n \"$STY\" ]] && echo \"inside screen\" || echo \"not inside screen\"\n```"
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 9,
+    "query": "Check if current shell is running within a 'screen' process.",
+    "gold": "pstree --show-parents -p $$ | head -n 1 | sed 's/\\(.*\\)+.*/\\1/' | wc -l",
+    "record": {
+      "query": "Check if current shell is running within a 'screen' process.",
+      "gold": "pstree --show-parents -p $$ | head -n 1 | sed 's/\\(.*\\)+.*/\\1/' | wc -l"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Check if current shell is running within a 'screen' process.",
+      "info": {}
+    },
+    "action": {
+      "command": "[[ -n \"$STY\" ]] && echo \"inside screen\" || echo \"not inside screen\"",
+      "observation": "",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "",
+        "eval_obs": "1\n",
+        "answer_similarity": 0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "[[ -n \"$STY\" ]] && echo \"inside screen\" || echo \"not inside screen\"",
+        "observation": ""
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "",
+    "eval_observation": "1\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "batch": {
+    "run_id": "172a61432793",
+    "selection": {
+      "split": 1,
+      "offset": 0,
+      "limit": null,
+      "task_indices": null
+    }
+  }
+}

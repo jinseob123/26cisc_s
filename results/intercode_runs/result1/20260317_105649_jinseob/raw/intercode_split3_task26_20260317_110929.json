@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T02:09:29Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T02:09:29Z",
+    "finished_at": "2026-03-17T02:09:38Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "find /workspace -name foo -print0 | xargs -0 ls -lt",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /workspace -name foo -print0 | xargs -0 ls -lt",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": false,
+    "raw_output_text": "find /workspace -name foo -print0 | xargs -0 ls -lt",
+    "raw_output_payload": {
+      "content": "find /workspace -name foo -print0 | xargs -0 ls -lt",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need find foo in /workspace, then sort by modification date and long listing. Use find to list, then sort by -t? Actually sort by modification date: use ls -lt? But need to display long listing of the file(s). We can use find to get paths, then xargs ls -lt. But sorting by modification date across all found files. Use ls -lt $(find /workspace -name foo). But if many, use xargs. So command: find /workspace -name foo -print0 | xargs -0 ls -lt. That will list sorted by modification date descending. Output one line.",
+      "reasoning_content": "Need find foo in /workspace, then sort by modification date and long listing. Use find to list, then sort by -t? Actually sort by modification date: use ls -lt? But need to display long listing of the file(s). We can use find to get paths, then xargs ls -lt. But sorting by modification date across all found files. Use ls -lt $(find /workspace -name foo). But if many, use xargs. So command: find /workspace -name foo -print0 | xargs -0 ls -lt. That will list sorted by modification date descending. Output one line."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 26,
+    "query": "search for the file foo in  the /workspace folder and display a long listing of it in sorted order of modification date",
+    "gold": "find /workspace -name foo | xargs ls -tl",
+    "record": {
+      "query": "search for the file foo in  the /workspace folder and display a long listing of it in sorted order of modification date",
+      "gold": "find /workspace -name foo | xargs ls -tl"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "search for the file foo in  the /workspace folder and display a long listing of it in sorted order of modification date",
+      "info": {}
+    },
+    "action": {
+      "command": "find /workspace -name foo -print0 | xargs -0 ls -lt",
+      "observation": "find: '/workspace': No such file or directory\ntotal 8\ndrwxr-xr-x    5 root root  360 Mar 17 02:09 dev\ndr-xr-xr-x 1206 root root    0 Mar 17 02:09 proc\ndrwxr-xr-x    1 root root  101 Mar 17 01:14 testbed\ndrwx------    1 root root   30 Mar 16 15:27 root\ndr-xr-xr-x   13 root root    0 Mar 16 14:58 sys\ndrwxr-xr-x    1 root root   66 Mar 16 13:09 etc\n-rw-r--r--    1 root root   81 Mar 16 12:08 index.html\ndrwxr-xr-x    1 root root  172 Mar 16 12:08 run\n-rwxr-xr-x    1 root root 4018 Mar 16 01:08 setup_nl2b_fs_1.sh\ndrwxr-xr-x    3 root root   28 Feb 10 14:12 home\ndrwxr-xr-x    1 root root   54 Feb 10 14:12 var\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 media\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 opt\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 srv\ndrwxr-xr-x    1 root root  109 Feb 10 14:05 usr\nlrwxrwxrwx    1 root root    7 Apr 22  2024 bin -> usr/bin\ndrwxr-xr-x    2 root root   10 Apr 22  2024 boot\nlrwxrwxrwx    1 root root    7 Apr 22  2024 lib -> usr/lib\nlrwxrwxrwx    1 root root    9 Apr 22  2024 lib64 -> usr/lib64\nlrwxrwxrwx    1 root root    8 Apr 22  2024 sbin -> usr/sbin\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "find: '/workspace': No such file or directory\ntotal 8\ndrwxr-xr-x    5 root root  360 Mar 17 02:09 dev\ndr-xr-xr-x 1206 root root    0 Mar 17 02:09 proc\ndrwxr-xr-x    1 root root  101 Mar 17 01:14 testbed\ndrwx------    1 root root   30 Mar 16 15:27 root\ndr-xr-xr-x   13 root root    0 Mar 16 14:58 sys\ndrwxr-xr-x    1 root root   66 Mar 16 13:09 etc\n-rw-r--r--    1 root root   81 Mar 16 12:08 index.html\ndrwxr-xr-x    1 root root  172 Mar 16 12:08 run\n-rwxr-xr-x    1 root root 4018 Mar 16 01:08 setup_nl2b_fs_1.sh\ndrwxr-xr-x    3 root root   28 Feb 10 14:12 home\ndrwxr-xr-x    1 root root   54 Feb 10 14:12 var\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 media\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 opt\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 srv\ndrwxr-xr-x    1 root root  109 Feb 10 14:05 usr\nlrwxrwxrwx    1 root root    7 Apr 22  2024 bin -> usr/bin\ndrwxr-xr-x    2 root root   10 Apr 22  2024 boot\nlrwxrwxrwx    1 root root    7 Apr 22  2024 lib -> usr/lib\nlrwxrwxrwx    1 root root    9 Apr 22  2024 lib64 -> usr/lib64\nlrwxrwxrwx    1 root root    8 Apr 22  2024 sbin -> usr/sbin\n",
+      "reward": 1.0,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "find: '/workspace': No such file or directory\ntotal 8\ndrwxr-xr-x    5 root root  360 Mar 17 02:09 dev\ndr-xr-xr-x 1206 root root    0 Mar 17 02:09 proc\ndrwxr-xr-x    1 root root  101 Mar 17 01:14 testbed\ndrwx------    1 root root   30 Mar 16 15:27 root\ndr-xr-xr-x   13 root root    0 Mar 16 14:58 sys\ndrwxr-xr-x    1 root root   66 Mar 16 13:09 etc\n-rw-r--r--    1 root root   81 Mar 16 12:08 index.html\ndrwxr-xr-x    1 root root  172 Mar 16 12:08 run\n-rwxr-xr-x    1 root root 4018 Mar 16 01:08 setup_nl2b_fs_1.sh\ndrwxr-xr-x    3 root root   28 Feb 10 14:12 home\ndrwxr-xr-x    1 root root   54 Feb 10 14:12 var\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 media\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 opt\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 srv\ndrwxr-xr-x    1 root root  109 Feb 10 14:05 usr\nlrwxrwxrwx    1 root root    7 Apr 22  2024 bin -> usr/bin\ndrwxr-xr-x    2 root root   10 Apr 22  2024 boot\nlrwxrwxrwx    1 root root    7 Apr 22  2024 lib -> usr/lib\nlrwxrwxrwx    1 root root    9 Apr 22  2024 lib64 -> usr/lib64\nlrwxrwxrwx    1 root root    8 Apr 22  2024 sbin -> usr/sbin\n",
+        "eval_obs": "find: '/workspace': No such file or directory\ntotal 8\ndrwxr-xr-x    5 root root  360 Mar 17 02:09 dev\ndr-xr-xr-x 1206 root root    0 Mar 17 02:09 proc\ndrwxr-xr-x    1 root root   79 Mar 17 01:34 testbed\ndr-xr-xr-x   13 root root    0 Mar 16 14:58 sys\ndrwxr-xr-x    1 root root   86 Mar 16 13:09 etc\ndrwx------    1 root root   32 Mar 16 12:08 root\n-rw-r--r--    1 root root   81 Mar 16 12:08 index.html\ndrwxr-xr-x    1 root root  172 Mar 16 12:08 run\n-rwxr-xr-x    1 root root 4018 Mar 16 01:08 setup_nl2b_fs_1.sh\ndrwxr-xr-x    3 root root   28 Feb 10 14:12 home\ndrwxr-xr-x    1 root root   54 Feb 10 14:12 var\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 media\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 opt\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 srv\ndrwxr-xr-x    1 root root  109 Feb 10 14:05 usr\nlrwxrwxrwx    1 root root    7 Apr 22  2024 bin -> usr/bin\ndrwxr-xr-x    2 root root   10 Apr 22  2024 boot\nlrwxrwxrwx    1 root root    7 Apr 22  2024 lib -> usr/lib\nlrwxrwxrwx    1 root root    9 Apr 22  2024 lib64 -> usr/lib64\nlrwxrwxrwx    1 root root    8 Apr 22  2024 sbin -> usr/sbin\n",
+        "answer_similarity": 0.9960459034777025,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /workspace -name foo -print0 | xargs -0 ls -lt",
+        "observation": "find: '/workspace': No such file or directory\ntotal 8\ndrwxr-xr-x    5 root root  360 Mar 17 02:09 dev\ndr-xr-xr-x 1206 root root    0 Mar 17 02:09 proc\ndrwxr-xr-x    1 root root  101 Mar 17 01:14 testbed\ndrwx------    1 root root   30 Mar 16 15:27 root\ndr-xr-xr-x   13 root root    0 Mar 16 14:58 sys\ndrwxr-xr-x    1 root root   66 Mar 16 13:09 etc\n-rw-r--r--    1 root root   81 Mar 16 12:08 index.html\ndrwxr-xr-x    1 root root  172 Mar 16 12:08 run\n-rwxr-xr-x    1 root root 4018 Mar 16 01:08 setup_nl2b_fs_1.sh\ndrwxr-xr-x    3 root root   28 Feb 10 14:12 home\ndrwxr-xr-x    1 root root   54 Feb 10 14:12 var\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 media\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 opt\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 srv\ndrwxr-xr-x    1 root root  109 Feb 10 14:05 usr\nlrwxrwxrwx    1 root root    7 Apr 22  2024 bin -> usr/bin\ndrwxr-xr-x    2 root root   10 Apr 22  2024 boot\nlrwxrwxrwx    1 root root    7 Apr 22  2024 lib -> usr/lib\nlrwxrwxrwx    1 root root    9 Apr 22  2024 lib64 -> usr/lib64\nlrwxrwxrwx    1 root root    8 Apr 22  2024 sbin -> usr/sbin\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 1.0,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "find: '/workspace': No such file or directory\ntotal 8\ndrwxr-xr-x    5 root root  360 Mar 17 02:09 dev\ndr-xr-xr-x 1206 root root    0 Mar 17 02:09 proc\ndrwxr-xr-x    1 root root  101 Mar 17 01:14 testbed\ndrwx------    1 root root   30 Mar 16 15:27 root\ndr-xr-xr-x   13 root root    0 Mar 16 14:58 sys\ndrwxr-xr-x    1 root root   66 Mar 16 13:09 etc\n-rw-r--r--    1 root root   81 Mar 16 12:08 index.html\ndrwxr-xr-x    1 root root  172 Mar 16 12:08 run\n-rwxr-xr-x    1 root root 4018 Mar 16 01:08 setup_nl2b_fs_1.sh\ndrwxr-xr-x    3 root root   28 Feb 10 14:12 home\ndrwxr-xr-x    1 root root   54 Feb 10 14:12 var\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 media\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 opt\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 srv\ndrwxr-xr-x    1 root root  109 Feb 10 14:05 usr\nlrwxrwxrwx    1 root root    7 Apr 22  2024 bin -> usr/bin\ndrwxr-xr-x    2 root root   10 Apr 22  2024 boot\nlrwxrwxrwx    1 root root    7 Apr 22  2024 lib -> usr/lib\nlrwxrwxrwx    1 root root    9 Apr 22  2024 lib64 -> usr/lib64\nlrwxrwxrwx    1 root root    8 Apr 22  2024 sbin -> usr/sbin\n",
+    "eval_observation": "find: '/workspace': No such file or directory\ntotal 8\ndrwxr-xr-x    5 root root  360 Mar 17 02:09 dev\ndr-xr-xr-x 1206 root root    0 Mar 17 02:09 proc\ndrwxr-xr-x    1 root root   79 Mar 17 01:34 testbed\ndr-xr-xr-x   13 root root    0 Mar 16 14:58 sys\ndrwxr-xr-x    1 root root   86 Mar 16 13:09 etc\ndrwx------    1 root root   32 Mar 16 12:08 root\n-rw-r--r--    1 root root   81 Mar 16 12:08 index.html\ndrwxr-xr-x    1 root root  172 Mar 16 12:08 run\n-rwxr-xr-x    1 root root 4018 Mar 16 01:08 setup_nl2b_fs_1.sh\ndrwxr-xr-x    3 root root   28 Feb 10 14:12 home\ndrwxr-xr-x    1 root root   54 Feb 10 14:12 var\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 media\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 opt\ndrwxr-xr-x    2 root root   10 Feb 10 14:05 srv\ndrwxr-xr-x    1 root root  109 Feb 10 14:05 usr\nlrwxrwxrwx    1 root root    7 Apr 22  2024 bin -> usr/bin\ndrwxr-xr-x    2 root root   10 Apr 22  2024 boot\nlrwxrwxrwx    1 root root    7 Apr 22  2024 lib -> usr/lib\nlrwxrwxrwx    1 root root    9 Apr 22  2024 lib64 -> usr/lib64\nlrwxrwxrwx    1 root root    8 Apr 22  2024 sbin -> usr/sbin\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "batch": {
+    "run_id": "e87c93ee9cb6",
+    "selection": {
+      "split": 3,
+      "offset": 0,
+      "limit": null,
+      "task_indices": null
+    }
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-16T14:15:39Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-16T14:15:39Z",
+    "finished_at": "2026-03-16T14:15:48Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "find testbed -type f -mtime +7 -print0 | xargs -0 -P$(nproc) pigz -k",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    }
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find testbed -type f -mtime +7 -print0 | xargs -0 -P$(nproc) pigz -k",
+    "raw_output_text": "```bash\nfind testbed -type f -mtime +7 -print0 | xargs -0 -P$(nproc) pigz -k\n```",
+    "raw_output_payload": {
+      "content": "```bash\nfind testbed -type f -mtime +7 -print0 | xargs -0 -P$(nproc) pigz -k\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need find files older than 7 days and compress in parallel. Use find with -mtime +7 and -type f, then xargs -P? Use pigz for parallel gzip. Command: find testbed -type f -mtime +7 -print0 | xargs -0 -P$(nproc) pigz -k? But compress in place? pigz -k keeps original. Use -p? Actually pigz -p threads. But parallel: xargs -P. So: find testbed -type f -mtime +7 -print0 | xargs -0 -P$(nproc) pigz -k.",
+      "reasoning_content": "Need find files older than 7 days and compress in parallel. Use find with -mtime +7 and -type f, then xargs -P? Use pigz for parallel gzip. Command: find testbed -type f -mtime +7 -print0 | xargs -0 -P$(nproc) pigz -k? But compress in place? pigz -k keeps original. Use -p? Actually pigz -p threads. But parallel: xargs -P. So: find testbed -type f -mtime +7 -print0 | xargs -0 -P$(nproc) pigz -k."
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 11,
+    "query": "Compress in parallel regular files in the testbed directory tree that were last modified more than 7 days ago",
+    "gold": "find /testbed -type f  -mtime +7 | tee compressedP.list | xargs -I{} -P10 compress {} &",
+    "record": {
+      "query": "Compress in parallel regular files in the testbed directory tree that were last modified more than 7 days ago",
+      "gold": "find /testbed -type f  -mtime +7 | tee compressedP.list | xargs -I{} -P10 compress {} &"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Compress in parallel regular files in the testbed directory tree that were last modified more than 7 days ago",
+      "info": {
+        "action_executed": false,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.05,
+          "file_changes": 0.33,
+          "answer_similarity": 0.25
+        },
+        "diff_miss": [
+          [
+            "compressedP.list",
+            "??"
+          ]
+        ],
+        "diff_extra": [],
+        "agent_obs": "xargs: pigz: No such file or directory\n",
+        "eval_obs": "xargs: compress: No such file or directory\n",
+        "answer_similarity": 0.7523197619890014
+      }
+    },
+    "action": {
+      "command": "find testbed -type f -mtime +7 -print0 | xargs -0 -P$(nproc) pigz -k",
+      "observation": "xargs: pigz: No such file or directory\n",
+      "info": {
+        "action_executed": false,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.05,
+          "file_changes": 0.33,
+          "answer_similarity": 0.25
+        },
+        "diff_miss": [
+          [
+            "compressedP.list",
+            "??"
+          ]
+        ],
+        "diff_extra": [],
+        "agent_obs": "xargs: pigz: No such file or directory\n",
+        "eval_obs": "xargs: compress: No such file or directory\n",
+        "answer_similarity": 0.7523197619890014
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "xargs: pigz: No such file or directory\n",
+      "reward": 0.64,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.05,
+          "file_changes": 0.33,
+          "answer_similarity": 0.25
+        },
+        "diff_miss": [
+          [
+            "compressedP.list",
+            "??"
+          ]
+        ],
+        "diff_extra": [],
+        "agent_obs": "xargs: pigz: No such file or directory\n",
+        "eval_obs": "xargs: compress: No such file or directory\n",
+        "answer_similarity": 0.7523197619890014,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find testbed -type f -mtime +7 -print0 | xargs -0 -P$(nproc) pigz -k",
+        "observation": "xargs: pigz: No such file or directory\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.64,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "xargs: pigz: No such file or directory\n",
+    "eval_observation": "xargs: compress: No such file or directory\n",
+    "corrupt_gold": null
+  },
+  "error": null
+}

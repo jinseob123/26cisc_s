@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T02:24:19Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T02:24:19Z",
+    "finished_at": "2026-03-17T02:24:27Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "split -b 10M /workspace/archive.tar.gz output_prefix",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "split -b 10M /workspace/archive.tar.gz output_prefix",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nsplit -b 10M /workspace/archive.tar.gz output_prefix\n```",
+    "raw_output_payload": {
+      "content": "```bash\nsplit -b 10M /workspace/archive.tar.gz output_prefix\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need to split archive.tar.gz into files of at most 10 MiB. Use split -b 10M? But need to preserve gzip? We can split the file itself. Command: split -b 10M /workspace/archive.tar.gz output_prefix. That splits into files of 10M each. If want at most 10 MiB, that's fine. Use -d for numeric suffix? Not required. Provide command.",
+      "reasoning_content": "We need to split archive.tar.gz into files of at most 10 MiB. Use split -b 10M? But need to preserve gzip? We can split the file itself. Command: split -b 10M /workspace/archive.tar.gz output_prefix. That splits into files of 10M each. If want at most 10 MiB, that's fine. Use -d for numeric suffix? Not required. Provide command."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 56,
+    "query": "Split the output of \"/workspace/archive.tar.gz\" into files of at most 10 MiB in size and use prefix \"output_prefix\"",
+    "gold": "tar -xf /workspace/archive.tar.gz | split -b 10M -d - /output_prefix",
+    "record": {
+      "query": "Split the output of \"/workspace/archive.tar.gz\" into files of at most 10 MiB in size and use prefix \"output_prefix\"",
+      "gold": "tar -xf /workspace/archive.tar.gz | split -b 10M -d - /output_prefix"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Split the output of \"/workspace/archive.tar.gz\" into files of at most 10 MiB in size and use prefix \"output_prefix\"",
+      "info": {}
+    },
+    "action": {
+      "command": "split -b 10M /workspace/archive.tar.gz output_prefix",
+      "observation": "split: cannot open '/workspace/archive.tar.gz' for reading: No such file or directory\n",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "split: cannot open '/workspace/archive.tar.gz' for reading: No such file or directory\n",
+      "reward": 0.8600000000000001,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.19
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "split: cannot open '/workspace/archive.tar.gz' for reading: No such file or directory\n",
+        "eval_obs": "tar: /workspace/archive.tar.gz: Cannot open: No such file or directory\ntar: Error is not recoverable: exiting now\n",
+        "answer_similarity": 0.5688851753551752,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "split -b 10M /workspace/archive.tar.gz output_prefix",
+        "observation": "split: cannot open '/workspace/archive.tar.gz' for reading: No such file or directory\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.8600000000000001,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "split: cannot open '/workspace/archive.tar.gz' for reading: No such file or directory\n",
+    "eval_observation": "tar: /workspace/archive.tar.gz: Cannot open: No such file or directory\ntar: Error is not recoverable: exiting now\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "batch": {
+    "run_id": "e87c93ee9cb6",
+    "selection": {
+      "split": 3,
+      "offset": 0,
+      "limit": null,
+      "task_indices": null
+    }
+  }
+}

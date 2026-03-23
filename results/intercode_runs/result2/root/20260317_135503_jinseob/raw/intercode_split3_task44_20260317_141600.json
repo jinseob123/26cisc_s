@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T05:16:00Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T05:16:00Z",
+    "finished_at": "2026-03-17T05:16:08Z",
+    "image_name": "intercode-nl2bash-fs3",
+    "command": {
+      "text": "test -d /workspace/dir2/mysql/ && [ \"$(df -P -T /workspace/dir2/mysql/ | tail -1 | awk '{print $1}')\" != \"$(df -P -T / | tail -1 | awk '{print $1}')\" ] && echo \"exists on a mounted filesystem\" || echo \"does not exist or not on a mounted filesystem\"",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "test -d /workspace/dir2/mysql/ && [ \"$(df -P -T /workspace/dir2/mysql/ | tail -1 | awk '{print $1}')\" != \"$(df -P -T / | tail -1 | awk '{print $1}')\" ] && echo \"exists on a mounted filesystem\" || echo \"does not exist or not on a mounted filesystem\"",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": true,
+    "raw_output_text": "test -d /workspace/dir2/mysql/ && [ \"$(df -P -T /workspace/dir2/mysql/ | tail -1 | awk '{print $1}')\" != \"$(df -P -T / | tail -1 | awk '{print $1}')\" ] && echo \"exists on a mounted filesystem\" || echo \"does not exist or not on a mounted filesystem\"",
+    "raw_output_payload": {
+      "content": "test -d /workspace/dir2/mysql/ && [ \"$(df -P -T /workspace/dir2/mysql/ | tail -1 | awk '{print $1}')\" != \"$(df -P -T / | tail -1 | awk '{print $1}')\" ] && echo \"exists on a mounted filesystem\" || echo \"does not exist or not on a mounted filesystem\"",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need a bash command to check if directory exists on a mounted filesystem. Maybe use find -mount? Or test -d and stat -f? We can use test -d and then check if it's on a different filesystem than root? Use df to see if it's on a mount. Command: if [ -d /workspace/dir2/mysql/ ] && [ \"$(df -P -T /workspace/dir2/mysql/ | tail -1 | awk '{print $1}')\" != \"$(df -P -T / | tail -1 | awk '{print $1}')\" ]; then echo exists; fi. But output only one command. Maybe: test -d /workspace/dir2/mysql/ && [ \"$(df -P -T /workspace/dir2/mysql/ | tail -1 | awk '{print $1}')\" != \"$(df -P -T / | tail -1 | awk '{print $1}')\" ] && echo \"exists on mounted fs\" || echo \"does not exist or not on mounted fs\". Provide single line.",
+      "reasoning_content": "We need a bash command to check if directory exists on a mounted filesystem. Maybe use find -mount? Or test -d and stat -f? We can use test -d and then check if it's on a different filesystem than root? Use df to see if it's on a mount. Command: if [ -d /workspace/dir2/mysql/ ] && [ \"$(df -P -T /workspace/dir2/mysql/ | tail -1 | awk '{print $1}')\" != \"$(df -P -T / | tail -1 | awk '{print $1}')\" ]; then echo exists; fi. But output only one command. Maybe: test -d /workspace/dir2/mysql/ && [ \"$(df -P -T /workspace/dir2/mysql/ | tail -1 | awk '{print $1}')\" != \"$(df -P -T / | tail -1 | awk '{print $1}')\" ] && echo \"exists on mounted fs\" || echo \"does not exist or not on mounted fs\". Provide single line."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 44,
+    "query": "Determine if /workspace/dir2/mysql/ exists on a mounted file system.",
+    "gold": "df /workspace/dir2/mysql/",
+    "record": {
+      "query": "Determine if /workspace/dir2/mysql/ exists on a mounted file system.",
+      "gold": "df /workspace/dir2/mysql/"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Determine if /workspace/dir2/mysql/ exists on a mounted file system.",
+      "info": {}
+    },
+    "action": {
+      "command": "test -d /workspace/dir2/mysql/ && [ \"$(df -P -T /workspace/dir2/mysql/ | tail -1 | awk '{print $1}')\" != \"$(df -P -T / | tail -1 | awk '{print $1}')\" ] && echo \"exists on a mounted filesystem\" || echo \"does not exist or not on a mounted filesystem\"",
+      "observation": "-P: -c: line 2: unexpected EOF while looking for matching `)'\n",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "-P: -c: line 2: unexpected EOF while looking for matching `)'\n",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "-P: -c: line 2: unexpected EOF while looking for matching `)'\n",
+        "eval_obs": "Filesystem      1K-blocks       Used  Available Use% Mounted on\noverlay        3905109820 2050568008 1854541812  53% /\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "test -d /workspace/dir2/mysql/ && [ \"$(df -P -T /workspace/dir2/mysql/ | tail -1 | awk '{print $1}')\" != \"$(df -P -T / | tail -1 | awk '{print $1}')\" ] && echo \"exists on a mounted filesystem\" || echo \"does not exist or not on a mounted filesystem\"",
+        "observation": "-P: -c: line 2: unexpected EOF while looking for matching `)'\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "-P: -c: line 2: unexpected EOF while looking for matching `)'\n",
+    "eval_observation": "Filesystem      1K-blocks       Used  Available Use% Mounted on\noverlay        3905109820 2050568008 1854541812  53% /\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "2acd6955a881",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260317_120804_2acd6955a881/commands.jsonl"
+  }
+}

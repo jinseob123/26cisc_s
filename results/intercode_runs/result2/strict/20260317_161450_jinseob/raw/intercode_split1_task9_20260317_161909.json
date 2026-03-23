@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T07:19:09Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T07:19:09Z",
+    "finished_at": "2026-03-17T07:19:17Z",
+    "image_name": "intercode-nl2bash-fs1",
+    "command": {
+      "text": "[[ -n $STY ]] && echo \"inside screen\" || echo \"not inside screen\"",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "[[ -n $STY ]] && echo \"inside screen\" || echo \"not inside screen\"",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\n[[ -n $STY ]] && echo \"inside screen\" || echo \"not inside screen\"\n```",
+    "raw_output_payload": {
+      "content": "```bash\n[[ -n $STY ]] && echo \"inside screen\" || echo \"not inside screen\"\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need command to check if inside screen. Usually check $STY variable or presence of screen in parent chain. Use ps -o ppid or pstree. Simpler: if [ -n \"$STY\" ]; then echo yes. But maybe also check if screen is ancestor. Use pgrep -f screen? But requirement: check if current shell is running within a 'screen' process. So command: `if [ -n \"$STY\" ]; then echo \"inside screen\"; else echo \"not\"; fi`. Provide single command? Maybe `[[ -n $STY ]] && echo inside || echo outside`. Provide bash command.",
+      "reasoning_content": "Need command to check if inside screen. Usually check $STY variable or presence of screen in parent chain. Use ps -o ppid or pstree. Simpler: if [ -n \"$STY\" ]; then echo yes. But maybe also check if screen is ancestor. Use pgrep -f screen? But requirement: check if current shell is running within a 'screen' process. So command: `if [ -n \"$STY\" ]; then echo \"inside screen\"; else echo \"not\"; fi`. Provide single command? Maybe `[[ -n $STY ]] && echo inside || echo outside`. Provide bash command."
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 9,
+    "query": "Check if current shell is running within a 'screen' process.",
+    "gold": "pstree --show-parents -p $$ | head -n 1 | sed 's/\\(.*\\)+.*/\\1/' | wc -l",
+    "record": {
+      "query": "Check if current shell is running within a 'screen' process.",
+      "gold": "pstree --show-parents -p $$ | head -n 1 | sed 's/\\(.*\\)+.*/\\1/' | wc -l"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Check if current shell is running within a 'screen' process.",
+      "info": {}
+    },
+    "action": {
+      "command": "[[ -n $STY ]] && echo \"inside screen\" || echo \"not inside screen\"",
+      "observation": "",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "",
+        "eval_obs": "1\n",
+        "answer_similarity": 0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "[[ -n $STY ]] && echo \"inside screen\" || echo \"not inside screen\"",
+        "observation": ""
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "",
+    "eval_observation": "1\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "4268659b113e",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260317_121223_4268659b113e/commands.jsonl"
+  }
+}

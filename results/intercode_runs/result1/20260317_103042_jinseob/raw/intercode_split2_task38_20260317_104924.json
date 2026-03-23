@@ -1,0 +1,119 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T01:49:24Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T01:49:24Z",
+    "finished_at": "2026-03-17T01:49:34Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "find /system -type d -print0 | while IFS= read -r -d '' d; do echo \"$(find \"$d\" -mindepth 1 -maxdepth 1 -type d | wc -l) $d\"; done | sort -nr | head -10",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_2.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /system -type d -print0 | while IFS= read -r -d '' d; do echo \"$(find \"$d\" -mindepth 1 -maxdepth 1 -type d | wc -l) $d\"; done | sort -nr | head -10",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": false,
+    "raw_output_text": "find /system -type d -print0 | while IFS= read -r -d '' d; do echo \"$(find \"$d\" -mindepth 1 -maxdepth 1 -type d | wc -l) $d\"; done | sort -nr | head -10",
+    "raw_output_payload": {
+      "content": "find /system -type d -print0 | while IFS= read -r -d '' d; do echo \"$(find \"$d\" -mindepth 1 -maxdepth 1 -type d | wc -l) $d\"; done | sort -nr | head -10",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need a bash command that counts subdirectories for each directory under /system, sort descending, show top 10. Use find to list directories, then for each count subdirs. Maybe use while read. Simpler: find /system -type d -print0 | while read -d '' dir; do echo \"$(find \"$dir\" -mindepth 1 -maxdepth 1 -type d | wc -l) $dir\"; done | sort -nr | head -10. Use xargs? Provide one line. Let's craft:\n\nfind /system -type d -print0 | while IFS= read -r -d '' d; do echo \"$(find \"$d\" -mindepth 1 -maxdepth 1 -type d | wc -l) $d\"; done | sort -nr | head -10\n\nThat's one line.",
+      "reasoning_content": "We need a bash command that counts subdirectories for each directory under /system, sort descending, show top 10. Use find to list directories, then for each count subdirs. Maybe use while read. Simpler: find /system -type d -print0 | while read -d '' dir; do echo \"$(find \"$dir\" -mindepth 1 -maxdepth 1 -type d | wc -l) $dir\"; done | sort -nr | head -10. Use xargs? Provide one line. Let's craft:\n\nfind /system -type d -print0 | while IFS= read -r -d '' d; do echo \"$(find \"$d\" -mindepth 1 -maxdepth 1 -type d | wc -l) $d\"; done | sort -nr | head -10\n\nThat's one line."
+    }
+  },
+  "task": {
+    "split": 2,
+    "task_index": 38,
+    "query": "Display the number of sub-directories for all directories under /system directory tree, sort them according to the decreasing order of the number and show only the first 10 of them",
+    "gold": "find /system -type d -ls | awk '{print $4 - 2, $NF}' | sort -rn | head",
+    "record": {
+      "query": "Display the number of sub-directories for all directories under /system directory tree, sort them according to the decreasing order of the number and show only the first 10 of them",
+      "gold": "find /system -type d -ls | awk '{print $4 - 2, $NF}' | sort -rn | head"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Display the number of sub-directories for all directories under /system directory tree, sort them according to the decreasing order of the number and show only the first 10 of them",
+      "info": {}
+    },
+    "action": {
+      "command": "find /system -type d -print0 | while IFS= read -r -d '' d; do echo \"$(find \"$d\" -mindepth 1 -maxdepth 1 -type d | wc -l) $d\"; done | sort -nr | head -10",
+      "observation": "$d: -c: line 2: unexpected EOF while looking for matching `)'\n",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "$d: -c: line 2: unexpected EOF while looking for matching `)'\n",
+      "reward": 0.39,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.05,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [
+          [
+            "mytarfile.tgz",
+            "??"
+          ]
+        ],
+        "agent_obs": "$d: -c: line 2: unexpected EOF while looking for matching `)'\n",
+        "eval_obs": "find: '/system': No such file or directory\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /system -type d -print0 | while IFS= read -r -d '' d; do echo \"$(find \"$d\" -mindepth 1 -maxdepth 1 -type d | wc -l) $d\"; done | sort -nr | head -10",
+        "observation": "$d: -c: line 2: unexpected EOF while looking for matching `)'\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.39,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "$d: -c: line 2: unexpected EOF while looking for matching `)'\n",
+    "eval_observation": "find: '/system': No such file or directory\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "batch": {
+    "run_id": "4276f0030da3",
+    "selection": {
+      "split": 2,
+      "offset": 0,
+      "limit": null,
+      "task_indices": null
+    }
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-22T13:41:23Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-22T13:41:23Z",
+    "finished_at": "2026-03-22T13:41:31Z",
+    "image_name": "intercode-nl2bash-fs3",
+    "command": {
+      "text": "du -sh -d 1 /workspace | sort -rh | head -n 2",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "du -sh -d 1 /workspace | sort -rh | head -n 2",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\ndu -sh -d 1 /workspace | sort -rh | head -n 2\n```",
+    "raw_output_payload": {
+      "content": "```bash\ndu -sh -d 1 /workspace | sort -rh | head -n 2\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need command to find largest 2 directories under /workspace. Use du -sh . | sort -rh | head -n 2. But need directories only. du -sh */? Actually du -sh /workspace/* | sort -rh | head -n 2. Use -d 1? du -sh -d 1 /workspace | sort -rh | head -n 2. Provide command.",
+      "reasoning_content": "We need command to find largest 2 directories under /workspace. Use du -sh . | sort -rh | head -n 2. But need directories only. du -sh */? Actually du -sh /workspace/* | sort -rh | head -n 2. Use -d 1? du -sh -d 1 /workspace | sort -rh | head -n 2. Provide command."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 34,
+    "query": "Find the largest 2 directories under /workspace directory",
+    "gold": "find /workspace -type d -print0 | xargs -0 du | sort -n | tail -2 | cut -f2 | xargs -I{} du -sh {}",
+    "record": {
+      "query": "Find the largest 2 directories under /workspace directory",
+      "gold": "find /workspace -type d -print0 | xargs -0 du | sort -n | tail -2 | cut -f2 | xargs -I{} du -sh {}"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Find the largest 2 directories under /workspace directory",
+      "info": {}
+    },
+    "action": {
+      "command": "du -sh -d 1 /workspace | sort -rh | head -n 2",
+      "observation": "du: warning: summarizing conflicts with --max-depth=1\nTry 'du --help' for more information.\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "du: warning: summarizing conflicts with --max-depth=1\nTry 'du --help' for more information.\n",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "du: warning: summarizing conflicts with --max-depth=1\nTry 'du --help' for more information.\n",
+        "eval_obs": "48K\t/workspace/dir1\n88K\t/workspace\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "du -sh -d 1 /workspace | sort -rh | head -n 2",
+        "observation": "du: warning: summarizing conflicts with --max-depth=1\nTry 'du --help' for more information.\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "du: warning: summarizing conflicts with --max-depth=1\nTry 'du --help' for more information.\n",
+    "eval_observation": "48K\t/workspace/dir1\n88K\t/workspace\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "7600a79d9526",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260322_194046_7600a79d9526/commands.jsonl"
+  }
+}

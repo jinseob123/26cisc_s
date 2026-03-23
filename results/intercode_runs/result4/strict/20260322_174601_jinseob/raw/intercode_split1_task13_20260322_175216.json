@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-22T08:52:16Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-22T08:52:16Z",
+    "finished_at": "2026-03-22T08:52:23Z",
+    "image_name": "intercode-nl2bash-fs1",
+    "command": {
+      "text": "find /testbed -maxdepth 1 -name '*.txt' -print0 | xargs -0 wc -w | awk 'NR>1{sum+=$1} END{print sum/(NR-1)}'",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /testbed -maxdepth 1 -name '*.txt' -print0 | xargs -0 wc -w | awk 'NR>1{sum+=$1} END{print sum/(NR-1)}'",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nfind /testbed -maxdepth 1 -name '*.txt' -print0 | xargs -0 wc -w | awk 'NR>1{sum+=$1} END{print sum/(NR-1)}'\n```",
+    "raw_output_payload": {
+      "content": "```bash\nfind /testbed -maxdepth 1 -name '*.txt' -print0 | xargs -0 wc -w | awk 'NR>1{sum+=$1} END{print sum/(NR-1)}'\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need a bash command to compute mean average of word count of *.txt files in /testbed. Use wc -w and average. Command: awk. For example: wc -w /testbed/*.txt | awk 'END{print $1/NR}'. But wc outputs each file and total. Actually wc -w gives per file and total. We can use find and xargs. Simpler: wc -w /testbed/*.txt | awk 'NR>1{sum+=$1} END{print sum/NR-1}'. But better: use find and wc -w | awk. Let's produce: find /testbed -maxdepth 1 -name '*.txt' -print0 | xargs -0 wc -w | awk 'NR>1{sum+=$1} END{print sum/(NR-1)}'. That gives mean. Provide command.",
+      "reasoning_content": "We need a bash command to compute mean average of word count of *.txt files in /testbed. Use wc -w and average. Command: awk. For example: wc -w /testbed/*.txt | awk 'END{print $1/NR}'. But wc outputs each file and total. Actually wc -w gives per file and total. We can use find and xargs. Simpler: wc -w /testbed/*.txt | awk 'NR>1{sum+=$1} END{print sum/NR-1}'. But better: use find and wc -w | awk. Let's produce: find /testbed -maxdepth 1 -name '*.txt' -print0 | xargs -0 wc -w | awk 'NR>1{sum+=$1} END{print sum/(NR-1)}'. That gives mean. Provide command."
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 13,
+    "query": "Compute the mean average of the word count of *.txt files in the /testbed directory",
+    "gold": "find /testbed -name '*.txt' -print0 | xargs -0 wc -w | awk 'END { print $1/(NR-1) }'",
+    "record": {
+      "query": "Compute the mean average of the word count of *.txt files in the /testbed directory",
+      "gold": "find /testbed -name '*.txt' -print0 | xargs -0 wc -w | awk 'END { print $1/(NR-1) }'"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Compute the mean average of the word count of *.txt files in the /testbed directory",
+      "info": {}
+    },
+    "action": {
+      "command": "find /testbed -maxdepth 1 -name '*.txt' -print0 | xargs -0 wc -w | awk 'NR>1{sum+=$1} END{print sum/(NR-1)}'",
+      "observation": "4.5\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "4.5\n",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "4.5\n",
+        "eval_obs": "4.18182\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /testbed -maxdepth 1 -name '*.txt' -print0 | xargs -0 wc -w | awk 'NR>1{sum+=$1} END{print sum/(NR-1)}'",
+        "observation": "4.5\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "4.5\n",
+    "eval_observation": "4.18182\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "7c62332c30c1",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260322_152018_7c62332c30c1/commands.jsonl"
+  }
+}

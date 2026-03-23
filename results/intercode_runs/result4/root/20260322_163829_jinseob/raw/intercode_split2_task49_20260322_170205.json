@@ -1,0 +1,119 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-22T08:02:05Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-22T08:02:05Z",
+    "finished_at": "2026-03-22T08:02:13Z",
+    "image_name": "intercode-nl2bash-fs2",
+    "command": {
+      "text": "curl -o /system/textfile.txt http://example.com/textfile.txt",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_2.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "curl -o /system/textfile.txt http://example.com/textfile.txt",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\ncurl -o /system/textfile.txt http://example.com/textfile.txt\n```",
+    "raw_output_payload": {
+      "content": "```bash\ncurl -o /system/textfile.txt http://example.com/textfile.txt\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need command: curl or wget. Use -o. Provide path. Use sudo? Just command.",
+      "reasoning_content": "Need command: curl or wget. Use -o. Provide path. Use sudo? Just command."
+    }
+  },
+  "task": {
+    "split": 2,
+    "task_index": 49,
+    "query": "download content from \"http://example.com/textfile.txt\" and output to 'textfile.txt' in /system",
+    "gold": "curl http://example.com/textfile.txt -o /system/textfile.txt",
+    "record": {
+      "query": "download content from \"http://example.com/textfile.txt\" and output to 'textfile.txt' in /system",
+      "gold": "curl http://example.com/textfile.txt -o /system/textfile.txt"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "download content from \"http://example.com/textfile.txt\" and output to 'textfile.txt' in /system",
+      "info": {}
+    },
+    "action": {
+      "command": "curl -o /system/textfile.txt http://example.com/textfile.txt",
+      "observation": "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\r100   528    0   528    0     0  23473      0 --:--:-- --:--:-- --:--:-- 24000\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\r100   528    0   528    0     0  23473      0 --:--:-- --:--:-- --:--:-- 24000\n",
+      "reward": 0.96,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.29
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "diff_same": {
+          "files": [
+            [
+              "system/textfile.txt",
+              "??"
+            ]
+          ],
+          "correct": 1,
+          "total": 1
+        },
+        "agent_obs": "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\r100   528    0   528    0     0  23473      0 --:--:-- --:--:-- --:--:-- 24000\n",
+        "eval_obs": "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\r100   528    0   528    0     0  29508      0 --:--:-- --:--:-- --:--:-- 31058\n",
+        "answer_similarity": 0.8836351388995088,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "curl -o /system/textfile.txt http://example.com/textfile.txt",
+        "observation": "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\r100   528    0   528    0     0  23473      0 --:--:-- --:--:-- --:--:-- 24000\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.96,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\r100   528    0   528    0     0  23473      0 --:--:-- --:--:-- --:--:-- 24000\n",
+    "eval_observation": "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\r100   528    0   528    0     0  29508      0 --:--:-- --:--:-- --:--:-- 31058\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "fbaa0391ba0c",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260322_152123_fbaa0391ba0c/commands.jsonl"
+  }
+}

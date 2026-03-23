@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T02:04:05Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T02:04:05Z",
+    "finished_at": "2026-03-17T02:04:13Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "find /workspace -type f -printf \"%s %p\\n\" | sort -nr | head -n3",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /workspace -type f -printf \"%s %p\\n\" | sort -nr | head -n3",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": false,
+    "raw_output_text": "find /workspace -type f -printf \"%s %p\\n\" | sort -nr | head -n3",
+    "raw_output_payload": {
+      "content": "find /workspace -type f -printf \"%s %p\\n\" | sort -nr | head -n3",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need bash command to find files in /workspace, sort by size, top 3. Use find, du -h? Use sort -h? Use ls -lR? Simpler: find /workspace -type f -printf \"%s %p\\n\" | sort -nr | head -n3. Or use du -a. Provide one line. Let's output: find /workspace -type f -printf \"%s %p\\n\" | sort -nr | head -n3.",
+      "reasoning_content": "Need bash command to find files in /workspace, sort by size, top 3. Use find, du -h? Use sort -h? Use ls -lR? Simpler: find /workspace -type f -printf \"%s %p\\n\" | sort -nr | head -n3. Or use du -a. Provide one line. Let's output: find /workspace -type f -printf \"%s %p\\n\" | sort -nr | head -n3."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 16,
+    "query": "print top 3 largest files and /workspace",
+    "gold": "du -a /workspace | sort -nr | head -3",
+    "record": {
+      "query": "print top 3 largest files and /workspace",
+      "gold": "du -a /workspace | sort -nr | head -3"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "print top 3 largest files and /workspace",
+      "info": {}
+    },
+    "action": {
+      "command": "find /workspace -type f -printf \"%s %p\\n\" | sort -nr | head -n3",
+      "observation": "find: '/workspace': No such file or directory\n",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "find: '/workspace': No such file or directory\n",
+      "reward": 0.8700000000000001,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.2
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "find: '/workspace': No such file or directory\n",
+        "eval_obs": "du: cannot access '/workspace': No such file or directory\n",
+        "answer_similarity": 0.615218690896332,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /workspace -type f -printf \"%s %p\\n\" | sort -nr | head -n3",
+        "observation": "find: '/workspace': No such file or directory\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.8700000000000001,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "find: '/workspace': No such file or directory\n",
+    "eval_observation": "du: cannot access '/workspace': No such file or directory\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "batch": {
+    "run_id": "dc74a59cf2ba",
+    "selection": {
+      "split": 3,
+      "offset": 0,
+      "limit": null,
+      "task_indices": null
+    }
+  }
+}

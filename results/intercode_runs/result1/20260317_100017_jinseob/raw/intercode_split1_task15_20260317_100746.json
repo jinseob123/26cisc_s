@@ -1,0 +1,123 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T01:07:46Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T01:07:46Z",
+    "finished_at": "2026-03-17T01:07:54Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "find /testbed/dir1 -type f -path '*FooBar*' -exec cp {} /testbed/dir3/subdir1/subsubdir1/tmp/ \\;",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /testbed/dir1 -type f -path '*FooBar*' -exec cp {} /testbed/dir3/subdir1/subsubdir1/tmp/ \\;",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nfind /testbed/dir1 -type f -path '*FooBar*' -exec cp {} /testbed/dir3/subdir1/subsubdir1/tmp/ \\;\n```",
+    "raw_output_payload": {
+      "content": "```bash\nfind /testbed/dir1 -type f -path '*FooBar*' -exec cp {} /testbed/dir3/subdir1/subsubdir1/tmp/ \\;\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need find and cp. Use -exec cp --parents? But target directory. Use find /testbed/dir1 -type f -path '*FooBar*' -exec cp {} /testbed/dir3/subdir1/subsubdir1/tmp/ \\; . Ensure directories created? Use -p? Just copy. Provide command.",
+      "reasoning_content": "Need find and cp. Use -exec cp --parents? But target directory. Use find /testbed/dir1 -type f -path '*FooBar*' -exec cp {} /testbed/dir3/subdir1/subsubdir1/tmp/ \\; . Ensure directories created? Use -p? Just copy. Provide command."
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 15,
+    "query": "Copies all files with \"FooBar\" in the path under the '/testbed/dir1' directory to the '/testbed/dir3/subdir1/subsubdir1/tmp' directory.",
+    "gold": "find /testbed -name '*FooBar*' -print0 | xargs -0 -I{} cp -R {} /testbed/dir3/subdir1/subsubdir1/tmp",
+    "record": {
+      "query": "Copies all files with \"FooBar\" in the path under the '/testbed/dir1' directory to the '/testbed/dir3/subdir1/subsubdir1/tmp' directory.",
+      "gold": "find /testbed -name '*FooBar*' -print0 | xargs -0 -I{} cp -R {} /testbed/dir3/subdir1/subsubdir1/tmp"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Copies all files with \"FooBar\" in the path under the '/testbed/dir1' directory to the '/testbed/dir3/subdir1/subsubdir1/tmp' directory.",
+      "info": {}
+    },
+    "action": {
+      "command": "find /testbed/dir1 -type f -path '*FooBar*' -exec cp {} /testbed/dir3/subdir1/subsubdir1/tmp/ \\;",
+      "observation": "",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.0,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [
+          [
+            "testbed/dir3/subdir1/subsubdir1/tmp/FooBar.html",
+            "??"
+          ],
+          [
+            "testbed/dir3/subdir1/subsubdir1/tmp/FooBar/",
+            "??"
+          ]
+        ],
+        "diff_extra": [],
+        "agent_obs": "",
+        "eval_obs": "",
+        "answer_similarity": 1,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /testbed/dir1 -type f -path '*FooBar*' -exec cp {} /testbed/dir3/subdir1/subsubdir1/tmp/ \\;",
+        "observation": ""
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "",
+    "eval_observation": "",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "batch": {
+    "run_id": "172a61432793",
+    "selection": {
+      "split": 1,
+      "offset": 0,
+      "limit": null,
+      "task_indices": null
+    }
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-21T09:06:04Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-21T09:06:04Z",
+    "finished_at": "2026-03-21T09:06:11Z",
+    "image_name": "intercode-nl2bash-fs1",
+    "command": {
+      "text": "mkdir -p /testbed/dir3/subdir1/subsubdir1/tmp && find /testbed -type f -name '*FooBar*' -exec cp {} /testbed/dir3/subdir1/subsubdir1/tmp/ \\;",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "mkdir -p /testbed/dir3/subdir1/subsubdir1/tmp && find /testbed -type f -name '*FooBar*' -exec cp {} /testbed/dir3/subdir1/subsubdir1/tmp/ \\;",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nmkdir -p /testbed/dir3/subdir1/subsubdir1/tmp && find /testbed -type f -name '*FooBar*' -exec cp {} /testbed/dir3/subdir1/subsubdir1/tmp/ \\;\n```",
+    "raw_output_payload": {
+      "content": "```bash\nmkdir -p /testbed/dir3/subdir1/subsubdir1/tmp && find /testbed -type f -name '*FooBar*' -exec cp {} /testbed/dir3/subdir1/subsubdir1/tmp/ \\;\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need find and cp. Use -exec cp {} dest/. Use -name '*FooBar*'. Ensure dest exists. Command: mkdir -p ... && find /testbed -type f -name '*FooBar*' -exec cp {} /testbed/dir3/subdir1/subsubdir1/tmp/ \\;",
+      "reasoning_content": "Need find and cp. Use -exec cp {} dest/. Use -name '*FooBar*'. Ensure dest exists. Command: mkdir -p ... && find /testbed -type f -name '*FooBar*' -exec cp {} /testbed/dir3/subdir1/subsubdir1/tmp/ \\;"
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 19,
+    "query": "Copy all files below the /testbed directory whose names contain \"FooBar\" to directory '/testbed/dir3/subdir1/subsubdir1/tmp'",
+    "gold": "find /testbed -name '*FooBar*' -print0 | xargs -0 -I{} cp -R {} /testbed/dir3/subdir1/subsubdir1/tmp",
+    "record": {
+      "query": "Copy all files below the /testbed directory whose names contain \"FooBar\" to directory '/testbed/dir3/subdir1/subsubdir1/tmp'",
+      "gold": "find /testbed -name '*FooBar*' -print0 | xargs -0 -I{} cp -R {} /testbed/dir3/subdir1/subsubdir1/tmp"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Copy all files below the /testbed directory whose names contain \"FooBar\" to directory '/testbed/dir3/subdir1/subsubdir1/tmp'",
+      "info": {}
+    },
+    "action": {
+      "command": "mkdir -p /testbed/dir3/subdir1/subsubdir1/tmp && find /testbed -type f -name '*FooBar*' -exec cp {} /testbed/dir3/subdir1/subsubdir1/tmp/ \\;",
+      "observation": "cp: cannot create regular file '/testbed/dir3/subdir1/subsubdir1/tmp/FooBar.html': Permission denied\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "cp: cannot create regular file '/testbed/dir3/subdir1/subsubdir1/tmp/FooBar.html': Permission denied\n",
+      "reward": 0.34,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.0,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [
+          [
+            "testbed/dir3/subdir1/subsubdir1/tmp/FooBar/",
+            "??"
+          ],
+          [
+            "testbed/dir3/subdir1/subsubdir1/tmp/FooBar.html",
+            "??"
+          ]
+        ],
+        "diff_extra": [],
+        "agent_obs": "cp: cannot create regular file '/testbed/dir3/subdir1/subsubdir1/tmp/FooBar.html': Permission denied\n",
+        "eval_obs": "",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "mkdir -p /testbed/dir3/subdir1/subsubdir1/tmp && find /testbed -type f -name '*FooBar*' -exec cp {} /testbed/dir3/subdir1/subsubdir1/tmp/ \\;",
+        "observation": "cp: cannot create regular file '/testbed/dir3/subdir1/subsubdir1/tmp/FooBar.html': Permission denied\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.34,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "cp: cannot create regular file '/testbed/dir3/subdir1/subsubdir1/tmp/FooBar.html': Permission denied\n",
+    "eval_observation": "",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "fdb8887b32c1",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260321_153210_fdb8887b32c1/commands.jsonl"
+  }
+}

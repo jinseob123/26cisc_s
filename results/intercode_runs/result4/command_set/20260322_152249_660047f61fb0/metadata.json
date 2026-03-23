@@ -1,0 +1,18 @@
+{
+  "schema_version": "intercode.command_set.v1",
+  "command_set_id": "660047f61fb0",
+  "created_at": "2026-03-22T06:22:49Z",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "selection": {
+    "split": 4,
+    "offset": 0,
+    "limit": null,
+    "task_indices": null
+  },
+  "model_name": "openai/gpt-oss-20b",
+  "model_server_url": "http://localhost:8000/v1",
+  "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+  "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_4.json",
+  "task_count": 27
+}

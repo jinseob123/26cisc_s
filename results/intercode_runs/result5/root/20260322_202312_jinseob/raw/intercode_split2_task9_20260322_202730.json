@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-22T11:27:30Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-22T11:27:30Z",
+    "finished_at": "2026-03-22T11:27:38Z",
+    "image_name": "intercode-nl2bash-fs2",
+    "command": {
+      "text": "find /system/folder1 -type f -name '*special*' -exec sh -c 'mv \"$0\" \"${0//special/regular}\"' {} \\;",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_2.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /system/folder1 -type f -name '*special*' -exec sh -c 'mv \"$0\" \"${0//special/regular}\"' {} \\;",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nfind /system/folder1 -type f -name '*special*' -exec sh -c 'mv \"$0\" \"${0//special/regular}\"' {} \\;\n```",
+    "raw_output_payload": {
+      "content": "```bash\nfind /system/folder1 -type f -name '*special*' -exec sh -c 'mv \"$0\" \"${0//special/regular}\"' {} \\;\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need find all files under /system/folder1, rename replacing 'special' with 'regular'. Use find -depth to rename directories too? Only files? It says all files under, but directories may not contain 'special'. So only files. Use find -type f -name '*special*' -exec rename. Use mv. Use bash command. Provide one command. Use find with -exec sh -c 'mv \"$0\" \"${0//special/regular}\"' {} \\; . Use -depth? Not needed. Provide single line.",
+      "reasoning_content": "We need find all files under /system/folder1, rename replacing 'special' with 'regular'. Use find -depth to rename directories too? Only files? It says all files under, but directories may not contain 'special'. So only files. Use find -type f -name '*special*' -exec rename. Use mv. Use bash command. Provide one command. Use find with -exec sh -c 'mv \"$0\" \"${0//special/regular}\"' {} \\; . Use -depth? Not needed. Provide single line."
+    }
+  },
+  "task": {
+    "split": 2,
+    "task_index": 9,
+    "query": "Recursively rename all files under /system/folder1 replacing 'special' with 'regular' - all file/diretory names may not include spaces, and directory names containing such files may not contain the word 'special' in their name.",
+    "gold": "find /system/folder1 -type f -exec rename 's/special/regular/' '{}' \\;",
+    "record": {
+      "query": "Recursively rename all files under /system/folder1 replacing 'special' with 'regular' - all file/diretory names may not include spaces, and directory names containing such files may not contain the word 'special' in their name.",
+      "gold": "find /system/folder1 -type f -exec rename 's/special/regular/' '{}' \\;"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Recursively rename all files under /system/folder1 replacing 'special' with 'regular' - all file/diretory names may not include spaces, and directory names containing such files may not contain the word 'special' in their name.",
+      "info": {}
+    },
+    "action": {
+      "command": "find /system/folder1 -type f -name '*special*' -exec sh -c 'mv \"$0\" \"${0//special/regular}\"' {} \\;",
+      "observation": "",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "",
+        "eval_obs": "find: 'rename': No such file or directory\nfind: 'rename': No such file or directory\nfind: 'rename': No such file or directory\nfind: 'rename': No such file or directory\nfind: 'rename': No such file or directory\nfind: 'rename': No such file or directory\nfind: 'rename': No such file or directory\nfind: 'rename': No such file or directory\nfind: 'rename': No such file or directory\nfind: 'rename': No such file or directory\nfind: 'rename': No such file or directory\nfind: 'rename': No such file or directory\nfind: 'rename': No such file or directory\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /system/folder1 -type f -name '*special*' -exec sh -c 'mv \"$0\" \"${0//special/regular}\"' {} \\;",
+        "observation": ""
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "",
+    "eval_observation": "find: 'rename': No such file or directory\nfind: 'rename': No such file or directory\nfind: 'rename': No such file or directory\nfind: 'rename': No such file or directory\nfind: 'rename': No such file or directory\nfind: 'rename': No such file or directory\nfind: 'rename': No such file or directory\nfind: 'rename': No such file or directory\nfind: 'rename': No such file or directory\nfind: 'rename': No such file or directory\nfind: 'rename': No such file or directory\nfind: 'rename': No such file or directory\nfind: 'rename': No such file or directory\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "00da826ef10e",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260322_194005_00da826ef10e/commands.jsonl"
+  }
+}

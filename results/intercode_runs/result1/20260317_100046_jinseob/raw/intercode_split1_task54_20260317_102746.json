@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T01:27:46Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T01:27:46Z",
+    "finished_at": "2026-03-17T01:27:55Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "comm -23 <(find testbed/dir1 -type f | sort) <(find testbed/dir2 -type f | sort)",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "comm -23 <(find testbed/dir1 -type f | sort) <(find testbed/dir2 -type f | sort)",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\ncomm -23 <(find testbed/dir1 -type f | sort) <(find testbed/dir2 -type f | sort)\n```",
+    "raw_output_payload": {
+      "content": "```bash\ncomm -23 <(find testbed/dir1 -type f | sort) <(find testbed/dir2 -type f | sort)\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need to print all unique file paths under testbed/dir1 compared to testbed/dir2. That means list files that exist in dir1 but not in dir2. Use diff? find and comm. Command: comm -23 <(find testbed/dir1 -type f | sort) <(find testbed/dir2 -type f | sort). That prints unique to dir1. Provide bash command.",
+      "reasoning_content": "We need to print all unique file paths under testbed/dir1 compared to testbed/dir2. That means list files that exist in dir1 but not in dir2. Use diff? find and comm. Command: comm -23 <(find testbed/dir1 -type f | sort) <(find testbed/dir2 -type f | sort). That prints unique to dir1. Provide bash command."
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 54,
+    "query": "Print all unique file paths under \"testbed/dir1\" compared to \"testbed/dir2\"",
+    "gold": "comm -23 <(find /testbed/dir1 | sed 's#/testbed/dir1/##' | sort) <(find /testbed/dir2 | sed 's#/testbed/dir2/##' | sort) | sed 's#^#/testbed/dir1/#'",
+    "record": {
+      "query": "Print all unique file paths under \"testbed/dir1\" compared to \"testbed/dir2\"",
+      "gold": "comm -23 <(find /testbed/dir1 | sed 's#/testbed/dir1/##' | sort) <(find /testbed/dir2 | sed 's#/testbed/dir2/##' | sort) | sed 's#^#/testbed/dir1/#'"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Print all unique file paths under \"testbed/dir1\" compared to \"testbed/dir2\"",
+      "info": {}
+    },
+    "action": {
+      "command": "comm -23 <(find testbed/dir1 -type f | sort) <(find testbed/dir2 -type f | sort)",
+      "observation": "testbed/dir1/AnotherHello.java\ntestbed/dir1/info.php\ntestbed/dir1/subdir1/jsonfile1.json\ntestbed/dir1/subdir1/pythonscript4.py\ntestbed/dir1/subdir1/shellscript1.sh\ntestbed/dir1/subdir1/subsubdir1/pythonscript1.py\ntestbed/dir1/subdir1/subsubdir1/shellscript4.sh\ntestbed/dir1/subdir1/textfile4.txt\ntestbed/dir1/textfile1.txt\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "testbed/dir1/AnotherHello.java\ntestbed/dir1/info.php\ntestbed/dir1/subdir1/jsonfile1.json\ntestbed/dir1/subdir1/pythonscript4.py\ntestbed/dir1/subdir1/shellscript1.sh\ntestbed/dir1/subdir1/subsubdir1/pythonscript1.py\ntestbed/dir1/subdir1/subsubdir1/shellscript4.sh\ntestbed/dir1/subdir1/textfile4.txt\ntestbed/dir1/textfile1.txt\n",
+      "reward": 1.0,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "testbed/dir1/AnotherHello.java\ntestbed/dir1/info.php\ntestbed/dir1/subdir1/jsonfile1.json\ntestbed/dir1/subdir1/pythonscript4.py\ntestbed/dir1/subdir1/shellscript1.sh\ntestbed/dir1/subdir1/subsubdir1/pythonscript1.py\ntestbed/dir1/subdir1/subsubdir1/shellscript4.sh\ntestbed/dir1/subdir1/textfile4.txt\ntestbed/dir1/textfile1.txt\n",
+        "eval_obs": "/testbed/dir1//testbed/dir1\n/testbed/dir1/AnotherHello.java\n/testbed/dir1/info.php\n/testbed/dir1/subdir1/jsonfile1.json\n/testbed/dir1/subdir1/pythonscript4.py\n/testbed/dir1/subdir1/shellscript1.sh\n/testbed/dir1/subdir1/subsubdir1\n/testbed/dir1/subdir1/subsubdir1/pythonscript1.py\n/testbed/dir1/subdir1/subsubdir1/shellscript4.sh\n/testbed/dir1/subdir1/textfile4.txt\n/testbed/dir1/textfile1.txt\n",
+        "answer_similarity": 0.9959497023519431,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "comm -23 <(find testbed/dir1 -type f | sort) <(find testbed/dir2 -type f | sort)",
+        "observation": "testbed/dir1/AnotherHello.java\ntestbed/dir1/info.php\ntestbed/dir1/subdir1/jsonfile1.json\ntestbed/dir1/subdir1/pythonscript4.py\ntestbed/dir1/subdir1/shellscript1.sh\ntestbed/dir1/subdir1/subsubdir1/pythonscript1.py\ntestbed/dir1/subdir1/subsubdir1/shellscript4.sh\ntestbed/dir1/subdir1/textfile4.txt\ntestbed/dir1/textfile1.txt\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 1.0,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "testbed/dir1/AnotherHello.java\ntestbed/dir1/info.php\ntestbed/dir1/subdir1/jsonfile1.json\ntestbed/dir1/subdir1/pythonscript4.py\ntestbed/dir1/subdir1/shellscript1.sh\ntestbed/dir1/subdir1/subsubdir1/pythonscript1.py\ntestbed/dir1/subdir1/subsubdir1/shellscript4.sh\ntestbed/dir1/subdir1/textfile4.txt\ntestbed/dir1/textfile1.txt\n",
+    "eval_observation": "/testbed/dir1//testbed/dir1\n/testbed/dir1/AnotherHello.java\n/testbed/dir1/info.php\n/testbed/dir1/subdir1/jsonfile1.json\n/testbed/dir1/subdir1/pythonscript4.py\n/testbed/dir1/subdir1/shellscript1.sh\n/testbed/dir1/subdir1/subsubdir1\n/testbed/dir1/subdir1/subsubdir1/pythonscript1.py\n/testbed/dir1/subdir1/subsubdir1/shellscript4.sh\n/testbed/dir1/subdir1/textfile4.txt\n/testbed/dir1/textfile1.txt\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "batch": {
+    "run_id": "b437772b8004",
+    "selection": {
+      "split": 1,
+      "offset": 0,
+      "limit": null,
+      "task_indices": null
+    }
+  }
+}

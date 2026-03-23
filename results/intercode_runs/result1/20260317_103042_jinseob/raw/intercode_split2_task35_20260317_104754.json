@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T01:47:54Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T01:47:54Z",
+    "finished_at": "2026-03-17T01:48:02Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "diff -rq /system/folder1 /system/folder2 | sort",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_2.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "diff -rq /system/folder1 /system/folder2 | sort",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": true,
+    "raw_output_text": "diff -rq /system/folder1 /system/folder2 | sort",
+    "raw_output_payload": {
+      "content": "diff -rq /system/folder1 /system/folder2 | sort",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need a bash command to compare directories, list new/missing and differing files. Use diff -rq or rsync --dry-run. For summary sorted alphabetically. Maybe:\n\ncomm -3 <(find /system/folder1 -type f -printf \"%P\\n\" | sort) <(find /system/folder2 -type f -printf \"%P\\n\" | sort)\n\nBut need differences. Use diff -rq. Then parse. Simpler: diff -rq folder1 folder2 | sort. That prints differences. So final command: diff -rq /system/folder1 /system/folder2 | sort.",
+      "reasoning_content": "Need a bash command to compare directories, list new/missing and differing files. Use diff -rq or rsync --dry-run. For summary sorted alphabetically. Maybe:\n\ncomm -3 <(find /system/folder1 -type f -printf \"%P\\n\" | sort) <(find /system/folder2 -type f -printf \"%P\\n\" | sort)\n\nBut need differences. Use diff -rq. Then parse. Simpler: diff -rq folder1 folder2 | sort. That prints differences. So final command: diff -rq /system/folder1 /system/folder2 | sort."
+    }
+  },
+  "task": {
+    "split": 2,
+    "task_index": 35,
+    "query": "Print summary of new/missing files, and which files differ between /system/folder1 and /system/folder2, sorted alphabetically.",
+    "gold": "diff -qr /system/folder1 /system/folder1 | sort",
+    "record": {
+      "query": "Print summary of new/missing files, and which files differ between /system/folder1 and /system/folder2, sorted alphabetically.",
+      "gold": "diff -qr /system/folder1 /system/folder1 | sort"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Print summary of new/missing files, and which files differ between /system/folder1 and /system/folder2, sorted alphabetically.",
+      "info": {}
+    },
+    "action": {
+      "command": "diff -rq /system/folder1 /system/folder2 | sort",
+      "observation": "diff: /system/folder1: No such file or directory\ndiff: /system/folder2: No such file or directory\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "diff: /system/folder1: No such file or directory\ndiff: /system/folder2: No such file or directory\n",
+      "reward": 0.98,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.31
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "diff: /system/folder1: No such file or directory\ndiff: /system/folder2: No such file or directory\n",
+        "eval_obs": "diff: /system/folder1: No such file or directory\ndiff: /system/folder1: No such file or directory\n",
+        "answer_similarity": 0.9528801486839774,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "diff -rq /system/folder1 /system/folder2 | sort",
+        "observation": "diff: /system/folder1: No such file or directory\ndiff: /system/folder2: No such file or directory\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.98,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "diff: /system/folder1: No such file or directory\ndiff: /system/folder2: No such file or directory\n",
+    "eval_observation": "diff: /system/folder1: No such file or directory\ndiff: /system/folder1: No such file or directory\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "batch": {
+    "run_id": "4276f0030da3",
+    "selection": {
+      "split": 2,
+      "offset": 0,
+      "limit": null,
+      "task_indices": null
+    }
+  }
+}

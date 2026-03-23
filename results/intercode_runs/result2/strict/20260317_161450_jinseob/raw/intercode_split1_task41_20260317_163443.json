@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T07:34:43Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T07:34:43Z",
+    "finished_at": "2026-03-17T07:34:50Z",
+    "image_name": "intercode-nl2bash-fs1",
+    "command": {
+      "text": "find /testbed -type f -name '*.php' -print0 | xargs -0 grep -E '^[[:alnum:]]+$' | wc -l",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /testbed -type f -name '*.php' -print0 | xargs -0 grep -E '^[[:alnum:]]+$' | wc -l",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": false,
+    "raw_output_text": "find /testbed -type f -name '*.php' -print0 | xargs -0 grep -E '^[[:alnum:]]+$' | wc -l",
+    "raw_output_payload": {
+      "content": "find /testbed -type f -name '*.php' -print0 | xargs -0 grep -E '^[[:alnum:]]+$' | wc -l",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need bash command to count lines with alphanumeric symbols in all .php files under /testbed. Use grep -E -c? Actually count lines that contain at least one alphanumeric? Use grep -E -o? We want total number of only lines with alphanumeric symbols. Means lines that consist only of alphanumeric? Or lines that contain alphanumeric? Likely lines that contain only alphanumeric symbols (no other chars). Use grep -E '^[[:alnum:]]+$' to match lines with only alphanumeric. Count across all files: grep -r -E '^[[:alnum:]]+$' /testbed/*.php? Need subfolders: find . -name '*.php' -print0 | xargs -0 grep -E '^[[:alnum:]]+$' | wc -l. But need only lines with alphanumeric symbols, maybe also spaces? \"only lines with alphanumeric symbols\" ambiguous. I'll assume lines that contain at least one alphanumeric. Use grep -E -c? Actually to count total lines: grep -E -o? Wait: grep -E '.*[[:alnum:]].*' will match lines containing alphanumeric. Count: grep -r -E '.*[[:alnum:]].*' /testbed/*.php | wc -l. But \"only lines with alphanumeric symbols\" maybe means lines that contain only alphanumeric characters (no other). I'll go with that. Use find. Command: find /testbed -type f -name '*.php' -print0 | xargs -0 grep -E '^[[:alnum:]]+$' | wc -l.",
+      "reasoning_content": "We need bash command to count lines with alphanumeric symbols in all .php files under /testbed. Use grep -E -c? Actually count lines that contain at least one alphanumeric? Use grep -E -o? We want total number of only lines with alphanumeric symbols. Means lines that consist only of alphanumeric? Or lines that contain alphanumeric? Likely lines that contain only alphanumeric symbols (no other chars). Use grep -E '^[[:alnum:]]+$' to match lines with only alphanumeric. Count across all files: grep -r -E '^[[:alnum:]]+$' /testbed/*.php? Need subfolders: find . -name '*.php' -print0 | xargs -0 grep -E '^[[:alnum:]]+$' | wc -l. But need only lines with alphanumeric symbols, maybe also spaces? \"only lines with alphanumeric symbols\" ambiguous. I'll assume lines that contain at least one alphanumeric. Use grep -E -c? Actually to count total lines: grep -E -o? Wait: grep -E '.*[[:alnum:]].*' will match lines containing alphanumeric. Count: grep -r -E '.*[[:alnum:]].*' /testbed/*.php | wc -l. But \"only lines with alphanumeric symbols\" maybe means lines that contain only alphanumeric characters (no other). I'll go with that. Use find. Command: find /testbed -type f -name '*.php' -print0 | xargs -0 grep -E '^[[:alnum:]]+$' | wc -l."
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 41,
+    "query": "Counts total number of only lines with alphanumeric symbols in all *.php files in the /testbed folder and subfolders.",
+    "gold": "find /testbed -name '*.php' | xargs cat | awk '/[a-zA-Z0-9]/ {i++} END{print i}'",
+    "record": {
+      "query": "Counts total number of only lines with alphanumeric symbols in all *.php files in the /testbed folder and subfolders.",
+      "gold": "find /testbed -name '*.php' | xargs cat | awk '/[a-zA-Z0-9]/ {i++} END{print i}'"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Counts total number of only lines with alphanumeric symbols in all *.php files in the /testbed folder and subfolders.",
+      "info": {}
+    },
+    "action": {
+      "command": "find /testbed -type f -name '*.php' -print0 | xargs -0 grep -E '^[[:alnum:]]+$' | wc -l",
+      "observation": "0\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "0\n",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "0\n",
+        "eval_obs": "2\n",
+        "answer_similarity": 0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /testbed -type f -name '*.php' -print0 | xargs -0 grep -E '^[[:alnum:]]+$' | wc -l",
+        "observation": "0\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "0\n",
+    "eval_observation": "2\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "4268659b113e",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260317_121223_4268659b113e/commands.jsonl"
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-16T14:53:29Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-16T14:53:29Z",
+    "finished_at": "2026-03-16T14:53:37Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "find /system -type d -empty -delete",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_2.json"
+    }
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /system -type d -empty -delete",
+    "raw_output_text": "```bash\nfind /system -type d -empty -delete\n```",
+    "raw_output_payload": {
+      "content": "```bash\nfind /system -type d -empty -delete\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need a bash command to remove empty directories under /system. Use find -type d -empty -delete. But ensure not to delete /system itself? If empty, maybe. Use find /system -type d -empty -delete. That's it.",
+      "reasoning_content": "We need a bash command to remove empty directories under /system. Use find -type d -empty -delete. But ensure not to delete /system itself? If empty, maybe. Use find /system -type d -empty -delete. That's it."
+    }
+  },
+  "task": {
+    "split": 2,
+    "task_index": 27,
+    "query": "Remove empty directories from directory tree /system",
+    "gold": "find /system -type d -empty -exec rm -r {} \\;",
+    "record": {
+      "query": "Remove empty directories from directory tree /system",
+      "gold": "find /system -type d -empty -exec rm -r {} \\;"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Remove empty directories from directory tree /system",
+      "info": {
+        "action_executed": false,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "find: '/system': No such file or directory\n",
+        "eval_obs": "find: '/system': No such file or directory\n",
+        "answer_similarity": 0.9999999999999997
+      }
+    },
+    "action": {
+      "command": "find /system -type d -empty -delete",
+      "observation": "find: '/system': No such file or directory\n",
+      "info": {
+        "action_executed": false,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "find: '/system': No such file or directory\n",
+        "eval_obs": "find: '/system': No such file or directory\n",
+        "answer_similarity": 0.9999999999999997
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "find: '/system': No such file or directory\n",
+      "reward": 1.0,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "find: '/system': No such file or directory\n",
+        "eval_obs": "find: '/system': No such file or directory\n",
+        "answer_similarity": 0.9999999999999997,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /system -type d -empty -delete",
+        "observation": "find: '/system': No such file or directory\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 1.0,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "find: '/system': No such file or directory\n",
+    "eval_observation": "find: '/system': No such file or directory\n",
+    "corrupt_gold": null
+  },
+  "error": null
+}

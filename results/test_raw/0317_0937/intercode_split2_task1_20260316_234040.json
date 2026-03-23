@@ -1,0 +1,125 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-16T14:40:40Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-16T14:40:40Z",
+    "finished_at": "2026-03-16T14:40:49Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "grep -Rnw '/system' -e '\\bfoo\\b' | awk -F: '{print $1 \":\" $2 \":\" $3}'",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_2.json"
+    }
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "grep -Rnw '/system' -e '\\bfoo\\b' | awk -F: '{print $1 \":\" $2 \":\" $3}'",
+    "raw_output_text": "```bash\ngrep -Rnw '/system' -e '\\bfoo\\b' | awk -F: '{print $1 \":\" $2 \":\" $3}'\n```",
+    "raw_output_payload": {
+      "content": "```bash\ngrep -Rnw '/system' -e '\\bfoo\\b' | awk -F: '{print $1 \":\" $2 \":\" $3}'\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need a bash command that recursively finds all files with whole word \"foo\" in /system, and precedes found string with its number in file. So for each file, we need to output lines with line numbers where whole word foo appears, and prefix the string with its number? Maybe use grep -n -w 'foo' /system -R. That outputs filename:line:linecontent. But \"precedes found string with its number in file\" maybe means replace each occurrence with line number? Or output line number before the string? Probably use grep -n -w 'foo' /system -R. That's simplest. Provide command.",
+      "reasoning_content": "We need a bash command that recursively finds all files with whole word \"foo\" in /system, and precedes found string with its number in file. So for each file, we need to output lines with line numbers where whole word foo appears, and prefix the string with its number? Maybe use grep -n -w 'foo' /system -R. That outputs filename:line:linecontent. But \"precedes found string with its number in file\" maybe means replace each occurrence with line number? Or output line number before the string? Probably use grep -n -w 'foo' /system -R. That's simplest. Provide command."
+    }
+  },
+  "task": {
+    "split": 2,
+    "task_index": 1,
+    "query": "Recursively finds all files with whole word \"foo\" in the '/system', and precedes found string with its number in file.",
+    "gold": "grep -rnw /system -e \"foo\"",
+    "record": {
+      "query": "Recursively finds all files with whole word \"foo\" in the '/system', and precedes found string with its number in file.",
+      "gold": "grep -rnw /system -e \"foo\""
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Recursively finds all files with whole word \"foo\" in the '/system', and precedes found string with its number in file.",
+      "info": {
+        "action_executed": false,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.21
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "awk: line 1: syntax error at or near :\ngrep: /system: No such file or directory\n",
+        "eval_obs": "grep: /system: No such file or directory\n",
+        "answer_similarity": 0.6468378730988875
+      }
+    },
+    "action": {
+      "command": "grep -Rnw '/system' -e '\\bfoo\\b' | awk -F: '{print $1 \":\" $2 \":\" $3}'",
+      "observation": "awk: line 1: syntax error at or near :\ngrep: /system: No such file or directory\n",
+      "info": {
+        "action_executed": false,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.21
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "awk: line 1: syntax error at or near :\ngrep: /system: No such file or directory\n",
+        "eval_obs": "grep: /system: No such file or directory\n",
+        "answer_similarity": 0.6468378730988875
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "awk: line 1: syntax error at or near :\ngrep: /system: No such file or directory\n",
+      "reward": 0.88,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.21
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "awk: line 1: syntax error at or near :\ngrep: /system: No such file or directory\n",
+        "eval_obs": "grep: /system: No such file or directory\n",
+        "answer_similarity": 0.6468378730988875,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "grep -Rnw '/system' -e '\\bfoo\\b' | awk -F: '{print $1 \":\" $2 \":\" $3}'",
+        "observation": "awk: line 1: syntax error at or near :\ngrep: /system: No such file or directory\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.88,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "awk: line 1: syntax error at or near :\ngrep: /system: No such file or directory\n",
+    "eval_observation": "grep: /system: No such file or directory\n",
+    "corrupt_gold": null
+  },
+  "error": null
+}

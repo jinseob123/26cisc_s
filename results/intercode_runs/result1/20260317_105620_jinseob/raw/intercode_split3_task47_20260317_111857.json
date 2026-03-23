@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T02:18:57Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T02:18:57Z",
+    "finished_at": "2026-03-17T02:19:05Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "stat -c %s /workspace/dir1/sum.c",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "stat -c %s /workspace/dir1/sum.c",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nstat -c %s /workspace/dir1/sum.c\n```",
+    "raw_output_payload": {
+      "content": "```bash\nstat -c %s /workspace/dir1/sum.c\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need to output a bash command that displays file size in bytes. Use stat -c %s or ls -l | awk. Provide one command.",
+      "reasoning_content": "Need to output a bash command that displays file size in bytes. Use stat -c %s or ls -l | awk. Provide one command."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 47,
+    "query": "Display the file size of file '/workspace/dir1/sum.c' in bytes",
+    "gold": "du -sb /workspace/dir1/sum.c | cut -f1",
+    "record": {
+      "query": "Display the file size of file '/workspace/dir1/sum.c' in bytes",
+      "gold": "du -sb /workspace/dir1/sum.c | cut -f1"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Display the file size of file '/workspace/dir1/sum.c' in bytes",
+      "info": {}
+    },
+    "action": {
+      "command": "stat -c %s /workspace/dir1/sum.c",
+      "observation": "stat: cannot statx '/workspace/dir1/sum.c': No such file or directory\n",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "stat: cannot statx '/workspace/dir1/sum.c': No such file or directory\n",
+      "reward": 0.9,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.23
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "stat: cannot statx '/workspace/dir1/sum.c': No such file or directory\n",
+        "eval_obs": "du: cannot access '/workspace/dir1/sum.c': No such file or directory\n",
+        "answer_similarity": 0.6949450440198665,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "stat -c %s /workspace/dir1/sum.c",
+        "observation": "stat: cannot statx '/workspace/dir1/sum.c': No such file or directory\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.9,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "stat: cannot statx '/workspace/dir1/sum.c': No such file or directory\n",
+    "eval_observation": "du: cannot access '/workspace/dir1/sum.c': No such file or directory\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "batch": {
+    "run_id": "dc74a59cf2ba",
+    "selection": {
+      "split": 3,
+      "offset": 0,
+      "limit": null,
+      "task_indices": null
+    }
+  }
+}

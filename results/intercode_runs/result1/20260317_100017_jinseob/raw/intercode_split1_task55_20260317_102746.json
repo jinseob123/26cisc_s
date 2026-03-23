@@ -1,0 +1,100 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T01:27:46Z",
+  "run": {
+    "status": "error",
+    "started_at": "2026-03-17T01:27:46Z",
+    "finished_at": "2026-03-17T01:28:05Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "find . -type f -exec grep -q 'Hello' {} \\; -print0 | xargs -0 -n1 dirname | sort -u",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find . -type f -exec grep -q 'Hello' {} \\; -print0 | xargs -0 -n1 dirname | sort -u",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": false,
+    "raw_output_text": "find . -type f -exec grep -q 'Hello' {} \\; -print0 | xargs -0 -n1 dirname | sort -u",
+    "raw_output_payload": {
+      "content": "find . -type f -exec grep -q 'Hello' {} \\; -print0 | xargs -0 -n1 dirname | sort -u",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need bash command: find . -type f -exec grep -l 'Hello' {} + | xargs -I{} dirname {} | sort -u\n\nSimplify: find . -type f -exec grep -l 'Hello' {} + | xargs -n1 dirname | sort -u\n\nOr use -printf \"%h\\n\" with grep? Use find . -type f -exec grep -q 'Hello' {} \\; -print0 | xargs -0 -n1 dirname | sort -u\n\nLet's output one line.",
+      "reasoning_content": "Need bash command: find . -type f -exec grep -l 'Hello' {} + | xargs -I{} dirname {} | sort -u\n\nSimplify: find . -type f -exec grep -l 'Hello' {} + | xargs -n1 dirname | sort -u\n\nOr use -printf \"%h\\n\" with grep? Use find . -type f -exec grep -q 'Hello' {} \\; -print0 | xargs -0 -n1 dirname | sort -u\n\nLet's output one line."
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 55,
+    "query": "Recursively finds all files containing text 'Hello' and prints folder where they are placed.",
+    "gold": "grep -r Hello * | awk '{split($1, path, \":\"); print path[1]}' | xargs -I{} dirname {}",
+    "record": {
+      "query": "Recursively finds all files containing text 'Hello' and prints folder where they are placed.",
+      "gold": "grep -r Hello * | awk '{split($1, path, \":\"); print path[1]}' | xargs -I{} dirname {}"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Recursively finds all files containing text 'Hello' and prints folder where they are placed.",
+      "info": {}
+    },
+    "action": {
+      "command": "find . -type f -exec grep -q 'Hello' {} \\; -print0 | xargs -0 -n1 dirname | sort -u",
+      "observation": "Command timed out",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": null
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find . -type f -exec grep -q 'Hello' {} \\; -print0 | xargs -0 -n1 dirname | sort -u",
+        "observation": "Command timed out"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": null,
+    "done": null,
+    "action_executed": null,
+    "agent_observation": null,
+    "eval_observation": null,
+    "corrupt_gold": null
+  },
+  "error": {
+    "type": "NotFound",
+    "message": "404 Client Error for http+docker://localhost/v1.50/exec/129e283018c771fccd87596a6589cb96a3656d947c69da5f813e12cc67d73376/json: Not Found (\"No such exec instance: 129e283018c771fccd87596a6589cb96a3656d947c69da5f813e12cc67d73376\")",
+    "traceback": "Traceback (most recent call last):\n  File \"/home/tako/anaconda3/envs/intercode/lib/python3.9/site-packages/docker/api/client.py\", line 275, in _raise_for_status\n    response.raise_for_status()\n  File \"/home/tako/anaconda3/envs/intercode/lib/python3.9/site-packages/requests/models.py\", line 1026, in raise_for_status\n    raise HTTPError(http_error_msg, response=self)\nrequests.exceptions.HTTPError: 404 Client Error: Not Found for url: http+docker://localhost/v1.50/exec/129e283018c771fccd87596a6589cb96a3656d947c69da5f813e12cc67d73376/json\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/home/tako/jinseob/2026sisc_ss/agent/intercode_wrapper.py\", line 327, in run_task\n  File \"/home/tako/jinseob/2026sisc_ss/bench/intercode/intercode/envs/ic_env.py\", line 103, in step\n    reward, info = self.get_reward()\n  File \"/home/tako/jinseob/2026sisc_ss/bench/intercode/intercode/envs/bash/bash_env.py\", line 99, in get_reward\n    diff_agent = self.parse_status(self.container.exec_run(self.clean_cmd(GIT_STATUS_SCRIPT)).output.decode(\"utf-8\"))\n  File \"/home/tako/anaconda3/envs/intercode/lib/python3.9/site-packages/docker/models/containers.py\", line 221, in exec_run\n    self.client.api.exec_inspect(resp['Id'])['ExitCode'],\n  File \"/home/tako/anaconda3/envs/intercode/lib/python3.9/site-packages/docker/api/exec_api.py\", line 97, in exec_inspect\n    return self._result(res, True)\n  File \"/home/tako/anaconda3/envs/intercode/lib/python3.9/site-packages/docker/api/client.py\", line 281, in _result\n    self._raise_for_status(response)\n  File \"/home/tako/anaconda3/envs/intercode/lib/python3.9/site-packages/docker/api/client.py\", line 277, in _raise_for_status\n    raise create_api_error_from_http_exception(e) from e\n  File \"/home/tako/anaconda3/envs/intercode/lib/python3.9/site-packages/docker/errors.py\", line 39, in create_api_error_from_http_exception\n    raise cls(e, response=response, explanation=explanation) from e\ndocker.errors.NotFound: 404 Client Error for http+docker://localhost/v1.50/exec/129e283018c771fccd87596a6589cb96a3656d947c69da5f813e12cc67d73376/json: Not Found (\"No such exec instance: 129e283018c771fccd87596a6589cb96a3656d947c69da5f813e12cc67d73376\")\n"
+  },
+  "batch": {
+    "run_id": "172a61432793",
+    "selection": {
+      "split": 1,
+      "offset": 0,
+      "limit": null,
+      "task_indices": null
+    }
+  }
+}

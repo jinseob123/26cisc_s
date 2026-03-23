@@ -1,0 +1,163 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-22T11:39:39Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-22T11:39:39Z",
+    "finished_at": "2026-03-22T11:39:47Z",
+    "image_name": "intercode-nl2bash-fs2",
+    "command": {
+      "text": "find /system -type f -delete",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_2.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /system -type f -delete",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": false,
+    "raw_output_text": "find /system -type f -delete",
+    "raw_output_payload": {
+      "content": "find /system -type f -delete",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need command to delete regular files under /system. Use find. Probably: find /system -type f -delete.",
+      "reasoning_content": "Need command to delete regular files under /system. Use find. Probably: find /system -type f -delete."
+    }
+  },
+  "task": {
+    "split": 2,
+    "task_index": 34,
+    "query": "Remove regular files in the /system directory tree",
+    "gold": "find /system -type f -print0 | xargs -0 -n1 echo rm | sh -x",
+    "record": {
+      "query": "Remove regular files in the /system directory tree",
+      "gold": "find /system -type f -print0 | xargs -0 -n1 echo rm | sh -x"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Remove regular files in the /system directory tree",
+      "info": {}
+    },
+    "action": {
+      "command": "find /system -type f -delete",
+      "observation": "",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "",
+      "reward": 0.34,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.0,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [
+          [
+            "system/folder2/special_text2.txt",
+            "D"
+          ],
+          [
+            "system/folder2/special_text1.txt",
+            "D"
+          ],
+          [
+            "system/folder3/backup_dbg/sql1.sql",
+            "D"
+          ],
+          [
+            "system/folder2/text1.txt",
+            "D"
+          ],
+          [
+            "system/folder3/backup_dbg/text1_dbg.txt",
+            "D"
+          ]
+        ],
+        "diff_extra": [
+          [
+            "D",
+            "system/folder3/backup_dbg/sql1.sql"
+          ],
+          [
+            "text4.txt\"",
+            "\"system/folder3/special"
+          ],
+          [
+            "\"system/folder2/special",
+            "D"
+          ],
+          [
+            "D",
+            "system/folder2/special_text2.txt"
+          ],
+          [
+            "D",
+            "system/folder2/text1.txt"
+          ],
+          [
+            "D",
+            "text3.txt\""
+          ],
+          [
+            "D",
+            "system/folder3/backup_dbg/text1_dbg.txt"
+          ],
+          [
+            "D",
+            "system/folder2/special_text1.txt"
+          ]
+        ],
+        "agent_obs": "",
+        "eval_obs": "+ rm /system/folder1/text2.txt\n+ rm /system/folder1/text3.txt\n+ rm /system/folder1/text4.txt\n+ rm /system/folder1/keep.txt\n+ rm /system/folder1/a.out\n+ rm /system/folder1/doc1.doc\n+ rm /system/folder1/doc2.doc\n+ rm /system/folder1/log1.log\n+ rm /system/folder1/script1.sh\n+ rm /system/folder1/new.sh\n+ rm /system/folder1/data.csv\n+ rm /system/folder1/recent.txt\n+ rm /system/folder1/old2.txt\n+ rm /system/folder2/text1.txt\n+ rm /system/folder2/special_text1.txt\n+ rm /system/folder2/special_text2.txt\n+ rm /system/folder2/special text3.txt\nrm: cannot remove '/system/folder2/special': No such file or directory\nrm: cannot remove 'text3.txt': No such file or directory\n+ rm /system/folder3/temp/temp1/text1.txt\n+ rm /system/folder3/temp/empty.txt\n+ rm /system/folder3/backup_dbg/text1_dbg.txt\n+ rm /system/folder3/backup_dbg/sql1.sql\n+ rm /system/folder3/special text4.txt\nrm: cannot remove '/system/folder3/special': No such file or directory\nrm: cannot remove 'text4.txt': No such file or directory\n+ rm /system/temp/keep.txt\n+ rm /system/text1.txt\n+ rm /system/text3.txt\n+ rm /system/html1.html\n+ rm /system/a.out\n+ rm /system/.DS_Store\n+ rm /system/MANIFEST\n+ rm /system/folder2.tar.gz\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /system -type f -delete",
+        "observation": ""
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.34,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "",
+    "eval_observation": "+ rm /system/folder1/text2.txt\n+ rm /system/folder1/text3.txt\n+ rm /system/folder1/text4.txt\n+ rm /system/folder1/keep.txt\n+ rm /system/folder1/a.out\n+ rm /system/folder1/doc1.doc\n+ rm /system/folder1/doc2.doc\n+ rm /system/folder1/log1.log\n+ rm /system/folder1/script1.sh\n+ rm /system/folder1/new.sh\n+ rm /system/folder1/data.csv\n+ rm /system/folder1/recent.txt\n+ rm /system/folder1/old2.txt\n+ rm /system/folder2/text1.txt\n+ rm /system/folder2/special_text1.txt\n+ rm /system/folder2/special_text2.txt\n+ rm /system/folder2/special text3.txt\nrm: cannot remove '/system/folder2/special': No such file or directory\nrm: cannot remove 'text3.txt': No such file or directory\n+ rm /system/folder3/temp/temp1/text1.txt\n+ rm /system/folder3/temp/empty.txt\n+ rm /system/folder3/backup_dbg/text1_dbg.txt\n+ rm /system/folder3/backup_dbg/sql1.sql\n+ rm /system/folder3/special text4.txt\nrm: cannot remove '/system/folder3/special': No such file or directory\nrm: cannot remove 'text4.txt': No such file or directory\n+ rm /system/temp/keep.txt\n+ rm /system/text1.txt\n+ rm /system/text3.txt\n+ rm /system/html1.html\n+ rm /system/a.out\n+ rm /system/.DS_Store\n+ rm /system/MANIFEST\n+ rm /system/folder2.tar.gz\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "00da826ef10e",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260322_194005_00da826ef10e/commands.jsonl"
+  }
+}

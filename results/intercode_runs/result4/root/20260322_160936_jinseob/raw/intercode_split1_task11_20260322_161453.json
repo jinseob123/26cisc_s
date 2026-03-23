@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-22T07:14:53Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-22T07:14:53Z",
+    "finished_at": "2026-03-22T07:15:01Z",
+    "image_name": "intercode-nl2bash-fs1",
+    "command": {
+      "text": "find testbed -type f -mtime +7 -print0 | xargs -0 -P4 gzip",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find testbed -type f -mtime +7 -print0 | xargs -0 -P4 gzip",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nfind testbed -type f -mtime +7 -print0 | xargs -0 -P4 gzip\n```",
+    "raw_output_payload": {
+      "content": "```bash\nfind testbed -type f -mtime +7 -print0 | xargs -0 -P4 gzip\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need find files older than 7 days, compress in parallel. Use find with -mtime +7, -type f, then xargs -P with pigz or gzip. Command: find testbed -type f -mtime +7 -print0 | xargs -0 -P4 gzip. Use -k? but compress. Provide one command.",
+      "reasoning_content": "Need find files older than 7 days, compress in parallel. Use find with -mtime +7, -type f, then xargs -P with pigz or gzip. Command: find testbed -type f -mtime +7 -print0 | xargs -0 -P4 gzip. Use -k? but compress. Provide one command."
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 11,
+    "query": "Compress in parallel regular files in the testbed directory tree that were last modified more than 7 days ago",
+    "gold": "find /testbed -type f  -mtime +7 | tee compressedP.list | xargs -I{} -P10 compress {} &",
+    "record": {
+      "query": "Compress in parallel regular files in the testbed directory tree that were last modified more than 7 days ago",
+      "gold": "find /testbed -type f  -mtime +7 | tee compressedP.list | xargs -I{} -P10 compress {} &"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Compress in parallel regular files in the testbed directory tree that were last modified more than 7 days ago",
+      "info": {}
+    },
+    "action": {
+      "command": "find testbed -type f -mtime +7 -print0 | xargs -0 -P4 gzip",
+      "observation": "Malformed command",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "Malformed command",
+      "reward": 0.39,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.05,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [
+          [
+            "compressedP.list",
+            "??"
+          ]
+        ],
+        "diff_extra": [],
+        "agent_obs": "Malformed command",
+        "eval_obs": "xargs: compress: No such file or directory\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find testbed -type f -mtime +7 -print0 | xargs -0 -P4 gzip",
+        "observation": "Malformed command"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.39,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "Malformed command",
+    "eval_observation": "xargs: compress: No such file or directory\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "7c62332c30c1",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260322_152018_7c62332c30c1/commands.jsonl"
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-21T08:36:47Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-21T08:36:47Z",
+    "finished_at": "2026-03-21T08:36:55Z",
+    "image_name": "intercode-nl2bash-fs3",
+    "command": {
+      "text": "od -t f8 /workspace/dir1/long.txt",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "od -t f8 /workspace/dir1/long.txt",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nod -t f8 /workspace/dir1/long.txt\n```",
+    "raw_output_payload": {
+      "content": "```bash\nod -t f8 /workspace/dir1/long.txt\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need to use od -f? For double: od -t f8? Actually od -t f8 prints double. So command: od -t f8 /workspace/dir1/long.txt.",
+      "reasoning_content": "Need to use od -f? For double: od -t f8? Actually od -t f8 prints double. So command: od -t f8 /workspace/dir1/long.txt."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 45,
+    "query": "Display a dump of \"/workspace/dir1/long.txt\" as floating point values of double size",
+    "gold": "od -t fD /workspace/dir1/long.txt",
+    "record": {
+      "query": "Display a dump of \"/workspace/dir1/long.txt\" as floating point values of double size",
+      "gold": "od -t fD /workspace/dir1/long.txt"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Display a dump of \"/workspace/dir1/long.txt\" as floating point values of double size",
+      "info": {}
+    },
+    "action": {
+      "command": "od -t f8 /workspace/dir1/long.txt",
+      "observation": "0000000  1.2873323358344665e+248    7.047746896793779e+96\n0000020   9.076828512359824e+223    7.047746896793764e+96\n0000040    7.28605686484729e+175  3.6573637625587046e+194\n0000060   1.492619195366754e+195   7.0039058879147055e+96\n0000100  1.4891839580333812e+195      5.647546008305e-311\n0000116\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "0000000  1.2873323358344665e+248    7.047746896793779e+96\n0000020   9.076828512359824e+223    7.047746896793764e+96\n0000040    7.28605686484729e+175  3.6573637625587046e+194\n0000060   1.492619195366754e+195   7.0039058879147055e+96\n0000100  1.4891839580333812e+195      5.647546008305e-311\n0000116\n",
+      "reward": 1.0,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "0000000  1.2873323358344665e+248    7.047746896793779e+96\n0000020   9.076828512359824e+223    7.047746896793764e+96\n0000040    7.28605686484729e+175  3.6573637625587046e+194\n0000060   1.492619195366754e+195   7.0039058879147055e+96\n0000100  1.4891839580333812e+195      5.647546008305e-311\n0000116\n",
+        "eval_obs": "0000000  1.2873323358344665e+248    7.047746896793779e+96\n0000020   9.076828512359824e+223    7.047746896793764e+96\n0000040    7.28605686484729e+175  3.6573637625587046e+194\n0000060   1.492619195366754e+195   7.0039058879147055e+96\n0000100  1.4891839580333812e+195      5.647546008305e-311\n0000116\n",
+        "answer_similarity": 1.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "od -t f8 /workspace/dir1/long.txt",
+        "observation": "0000000  1.2873323358344665e+248    7.047746896793779e+96\n0000020   9.076828512359824e+223    7.047746896793764e+96\n0000040    7.28605686484729e+175  3.6573637625587046e+194\n0000060   1.492619195366754e+195   7.0039058879147055e+96\n0000100  1.4891839580333812e+195      5.647546008305e-311\n0000116\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 1.0,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "0000000  1.2873323358344665e+248    7.047746896793779e+96\n0000020   9.076828512359824e+223    7.047746896793764e+96\n0000040    7.28605686484729e+175  3.6573637625587046e+194\n0000060   1.492619195366754e+195   7.0039058879147055e+96\n0000100  1.4891839580333812e+195      5.647546008305e-311\n0000116\n",
+    "eval_observation": "0000000  1.2873323358344665e+248    7.047746896793779e+96\n0000020   9.076828512359824e+223    7.047746896793764e+96\n0000040    7.28605686484729e+175  3.6573637625587046e+194\n0000060   1.492619195366754e+195   7.0039058879147055e+96\n0000100  1.4891839580333812e+195      5.647546008305e-311\n0000116\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "7638e08942e6",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260321_153405_7638e08942e6/commands.jsonl"
+  }
+}

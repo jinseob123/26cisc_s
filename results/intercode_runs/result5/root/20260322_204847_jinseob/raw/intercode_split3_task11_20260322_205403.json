@@ -1,0 +1,143 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-22T11:54:03Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-22T11:54:03Z",
+    "finished_at": "2026-03-22T11:54:11Z",
+    "image_name": "intercode-nl2bash-fs3",
+    "command": {
+      "text": "find /workspace -maxdepth 1 -type f -exec mv {} / \\;",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /workspace -maxdepth 1 -type f -exec mv {} / \\;",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nfind /workspace -maxdepth 1 -type f -exec mv {} / \\;\n```",
+    "raw_output_payload": {
+      "content": "```bash\nfind /workspace -maxdepth 1 -type f -exec mv {} / \\;\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need to move files directly under /workspace to /, excluding subdirectories. Use mv /workspace/* / but that includes directories. Need only files. Use find. Command: find /workspace -maxdepth 1 -type f -exec mv {} / \\; .",
+      "reasoning_content": "Need to move files directly under /workspace to /, excluding subdirectories. Use mv /workspace/* / but that includes directories. Need only files. Use find. Command: find /workspace -maxdepth 1 -type f -exec mv {} / \\; ."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 11,
+    "query": "move all files in the /workspace folder to / and do not move the files in the sub folder",
+    "gold": "find /workspace -maxdepth 1 -type f -exec mv -t / {} +",
+    "record": {
+      "query": "move all files in the /workspace folder to / and do not move the files in the sub folder",
+      "gold": "find /workspace -maxdepth 1 -type f -exec mv -t / {} +"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "move all files in the /workspace folder to / and do not move the files in the sub folder",
+      "info": {}
+    },
+    "action": {
+      "command": "find /workspace -maxdepth 1 -type f -exec mv {} / \\;",
+      "observation": "",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "",
+      "reward": 1.0,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "diff_same": {
+          "files": [
+            [
+              "files.txt",
+              "??"
+            ],
+            [
+              "new.sh",
+              "??"
+            ],
+            [
+              "archive.tar.gz",
+              "??"
+            ],
+            [
+              "old2.txt",
+              "??"
+            ],
+            [
+              "recent1.txt",
+              "??"
+            ],
+            [
+              "results.txt",
+              "??"
+            ],
+            [
+              ".hidden.txt",
+              "??"
+            ]
+          ],
+          "correct": 7,
+          "total": 7
+        },
+        "agent_obs": "",
+        "eval_obs": "",
+        "answer_similarity": 1,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /workspace -maxdepth 1 -type f -exec mv {} / \\;",
+        "observation": ""
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 1.0,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "",
+    "eval_observation": "",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "7600a79d9526",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260322_194046_7600a79d9526/commands.jsonl"
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-22T09:42:59Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-22T09:42:59Z",
+    "finished_at": "2026-03-22T09:43:07Z",
+    "image_name": "intercode-nl2bash-fs3",
+    "command": {
+      "text": "find /workspace -maxdepth 1 -type f -size 0 -print",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /workspace -maxdepth 1 -type f -size 0 -print",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": false,
+    "raw_output_text": "find /workspace -maxdepth 1 -type f -size 0 -print",
+    "raw_output_payload": {
+      "content": "find /workspace -maxdepth 1 -type f -size 0 -print",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need find . -maxdepth 1? list all files in /workspace of size 0. Use find /workspace -maxdepth 1 -type f -size 0 -print.",
+      "reasoning_content": "Need find . -maxdepth 1? list all files in /workspace of size 0. Use find /workspace -maxdepth 1 -type f -size 0 -print."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 5,
+    "query": "list all the files in the /workspace directory which are of size 0 bytes.",
+    "gold": "find /workspace -empty",
+    "record": {
+      "query": "list all the files in the /workspace directory which are of size 0 bytes.",
+      "gold": "find /workspace -empty"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "list all the files in the /workspace directory which are of size 0 bytes.",
+      "info": {}
+    },
+    "action": {
+      "command": "find /workspace -maxdepth 1 -type f -size 0 -print",
+      "observation": "/workspace/recent1.txt\n/workspace/old2.txt\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "/workspace/recent1.txt\n/workspace/old2.txt\n",
+      "reward": 0.9500000000000001,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.28
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "/workspace/recent1.txt\n/workspace/old2.txt\n",
+        "eval_obs": "/workspace/dir1/readonly.txt\n/workspace/dir1/all.txt\n/workspace/recent1.txt\n/workspace/old2.txt\n",
+        "answer_similarity": 0.8406077628013082,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /workspace -maxdepth 1 -type f -size 0 -print",
+        "observation": "/workspace/recent1.txt\n/workspace/old2.txt\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.9500000000000001,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "/workspace/recent1.txt\n/workspace/old2.txt\n",
+    "eval_observation": "/workspace/dir1/readonly.txt\n/workspace/dir1/all.txt\n/workspace/recent1.txt\n/workspace/old2.txt\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "ba7ef8134b5e",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260322_152203_ba7ef8134b5e/commands.jsonl"
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T02:02:37Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T02:02:37Z",
+    "finished_at": "2026-03-17T02:02:45Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "find /workspace/dir1 -type f -exec grep -il 'hello' {} +",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /workspace/dir1 -type f -exec grep -il 'hello' {} +",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nfind /workspace/dir1 -type f -exec grep -il 'hello' {} +\n```",
+    "raw_output_payload": {
+      "content": "```bash\nfind /workspace/dir1 -type f -exec grep -il 'hello' {} +\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need find with grep -l -i. Command: find /workspace/dir1 -type f -exec grep -il 'hello' {} +.",
+      "reasoning_content": "Need find with grep -l -i. Command: find /workspace/dir1 -type f -exec grep -il 'hello' {} +."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 13,
+    "query": "print all filenames of files under /workspace/dir1 dir containing 'hello', case-insensitive",
+    "gold": "find /workspace/dir1 -type f -exec grep -il 'hello' {} \\;",
+    "record": {
+      "query": "print all filenames of files under /workspace/dir1 dir containing 'hello', case-insensitive",
+      "gold": "find /workspace/dir1 -type f -exec grep -il 'hello' {} \\;"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "print all filenames of files under /workspace/dir1 dir containing 'hello', case-insensitive",
+      "info": {}
+    },
+    "action": {
+      "command": "find /workspace/dir1 -type f -exec grep -il 'hello' {} +",
+      "observation": "find: '/workspace/dir1': No such file or directory\n",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "find: '/workspace/dir1': No such file or directory\n",
+      "reward": 1.0,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "find: '/workspace/dir1': No such file or directory\n",
+        "eval_obs": "find: '/workspace/dir1': No such file or directory\n",
+        "answer_similarity": 0.9999999999999999,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /workspace/dir1 -type f -exec grep -il 'hello' {} +",
+        "observation": "find: '/workspace/dir1': No such file or directory\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 1.0,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "find: '/workspace/dir1': No such file or directory\n",
+    "eval_observation": "find: '/workspace/dir1': No such file or directory\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "batch": {
+    "run_id": "dc74a59cf2ba",
+    "selection": {
+      "split": 3,
+      "offset": 0,
+      "limit": null,
+      "task_indices": null
+    }
+  }
+}

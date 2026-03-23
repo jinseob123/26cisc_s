@@ -1,0 +1,155 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-16T14:33:03Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-16T14:33:03Z",
+    "finished_at": "2026-03-16T14:33:12Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "find /var/log -type f -mtime +1 -print0 | tar -czvf logs.tar.gz --null -T - -C /var/log .",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    }
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /var/log -type f -mtime +1 -print0 | tar -czvf logs.tar.gz --null -T - -C /var/log .",
+    "raw_output_text": "```bash\nfind /var/log -type f -mtime +1 -print0 | tar -czvf logs.tar.gz --null -T - -C /var/log .\n```",
+    "raw_output_payload": {
+      "content": "```bash\nfind /var/log -type f -mtime +1 -print0 | tar -czvf logs.tar.gz --null -T - -C /var/log .\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need to tar.gz logs older than one day. Probably /var/log. Command: find /var/log -type f -mtime +1 -print0 | tar -czvf logs.tar.gz --null -T - . But need to include path? Use -C /var/log? Let's produce: find /var/log -type f -mtime +1 -print0 | tar -czvf logs.tar.gz --null -T - . But tar will include full path. Maybe use -C /var/log. So: find /var/log -type f -mtime +1 -print0 | tar -czvf logs.tar.gz --null -T - -C /var/log . But that would add relative paths. Let's output.",
+      "reasoning_content": "Need to tar.gz logs older than one day. Probably /var/log. Command: find /var/log -type f -mtime +1 -print0 | tar -czvf logs.tar.gz --null -T - . But need to include path? Use -C /var/log? Let's produce: find /var/log -type f -mtime +1 -print0 | tar -czvf logs.tar.gz --null -T - . But tar will include full path. Maybe use -C /var/log. So: find /var/log -type f -mtime +1 -print0 | tar -czvf logs.tar.gz --null -T - -C /var/log . But that would add relative paths. Let's output."
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 46,
+    "query": "Create logs.tar.gz of all older than one day logs of Ubuntu",
+    "gold": "find /var/log/ -mtime +1 | xargs  tar -czvPf  /testbed/logs.tar.gz",
+    "record": {
+      "query": "Create logs.tar.gz of all older than one day logs of Ubuntu",
+      "gold": "find /var/log/ -mtime +1 | xargs  tar -czvPf  /testbed/logs.tar.gz"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Create logs.tar.gz of all older than one day logs of Ubuntu",
+      "info": {
+        "action_executed": true,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.0,
+          "file_changes": 0.33,
+          "answer_similarity": 0.26
+        },
+        "diff_miss": [
+          [
+            "testbed/logs.tar.gz",
+            "??"
+          ]
+        ],
+        "diff_extra": [
+          [
+            "logs.tar.gz",
+            "??"
+          ]
+        ],
+        "agent_obs": "tar: Removing leading `/' from member names\n/var/log/bootstrap.log\ntar: Removing leading `/' from hard link targets\n/var/log/btmp\n/var/log/faillog\n/var/log/lastlog\n/var/log/wtmp\n./\n./alternatives.log\n./apt/\n./apt/eipp.log.xz\n./apt/history.log\n./apt/term.log\n./bootstrap.log\n./btmp\n./dpkg.log\n./faillog\n./lastlog\n./wtmp\n./journal/\n./README\n./private/\n./fontconfig.log\n",
+        "eval_obs": "/var/log/bootstrap.log\n/var/log/btmp\n/var/log/faillog\n/var/log/lastlog\n/var/log/wtmp\n",
+        "answer_similarity": 0.7940540324546411
+      }
+    },
+    "action": {
+      "command": "find /var/log -type f -mtime +1 -print0 | tar -czvf logs.tar.gz --null -T - -C /var/log .",
+      "observation": "tar: Removing leading `/' from member names\n/var/log/bootstrap.log\ntar: Removing leading `/' from hard link targets\n/var/log/btmp\n/var/log/faillog\n/var/log/lastlog\n/var/log/wtmp\n./\n./alternatives.log\n./apt/\n./apt/eipp.log.xz\n./apt/history.log\n./apt/term.log\n./bootstrap.log\n./btmp\n./dpkg.log\n./faillog\n./lastlog\n./wtmp\n./journal/\n./README\n./private/\n./fontconfig.log\n",
+      "info": {
+        "action_executed": true,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.0,
+          "file_changes": 0.33,
+          "answer_similarity": 0.26
+        },
+        "diff_miss": [
+          [
+            "testbed/logs.tar.gz",
+            "??"
+          ]
+        ],
+        "diff_extra": [
+          [
+            "logs.tar.gz",
+            "??"
+          ]
+        ],
+        "agent_obs": "tar: Removing leading `/' from member names\n/var/log/bootstrap.log\ntar: Removing leading `/' from hard link targets\n/var/log/btmp\n/var/log/faillog\n/var/log/lastlog\n/var/log/wtmp\n./\n./alternatives.log\n./apt/\n./apt/eipp.log.xz\n./apt/history.log\n./apt/term.log\n./bootstrap.log\n./btmp\n./dpkg.log\n./faillog\n./lastlog\n./wtmp\n./journal/\n./README\n./private/\n./fontconfig.log\n",
+        "eval_obs": "/var/log/bootstrap.log\n/var/log/btmp\n/var/log/faillog\n/var/log/lastlog\n/var/log/wtmp\n",
+        "answer_similarity": 0.7940540324546411
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "tar: Removing leading `/' from member names\n/var/log/bootstrap.log\ntar: Removing leading `/' from hard link targets\n/var/log/btmp\n/var/log/faillog\n/var/log/lastlog\n/var/log/wtmp\n./\n./alternatives.log\n./apt/\n./apt/eipp.log.xz\n./apt/history.log\n./apt/term.log\n./bootstrap.log\n./btmp\n./dpkg.log\n./faillog\n./lastlog\n./wtmp\n./journal/\n./README\n./private/\n./fontconfig.log\n",
+      "reward": 0.6000000000000001,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.0,
+          "file_changes": 0.33,
+          "answer_similarity": 0.26
+        },
+        "diff_miss": [
+          [
+            "testbed/logs.tar.gz",
+            "??"
+          ]
+        ],
+        "diff_extra": [
+          [
+            "logs.tar.gz",
+            "??"
+          ]
+        ],
+        "agent_obs": "tar: Removing leading `/' from member names\n/var/log/bootstrap.log\ntar: Removing leading `/' from hard link targets\n/var/log/btmp\n/var/log/faillog\n/var/log/lastlog\n/var/log/wtmp\n./\n./alternatives.log\n./apt/\n./apt/eipp.log.xz\n./apt/history.log\n./apt/term.log\n./bootstrap.log\n./btmp\n./dpkg.log\n./faillog\n./lastlog\n./wtmp\n./journal/\n./README\n./private/\n./fontconfig.log\n",
+        "eval_obs": "/var/log/bootstrap.log\n/var/log/btmp\n/var/log/faillog\n/var/log/lastlog\n/var/log/wtmp\n",
+        "answer_similarity": 0.7940540324546411,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /var/log -type f -mtime +1 -print0 | tar -czvf logs.tar.gz --null -T - -C /var/log .",
+        "observation": "tar: Removing leading `/' from member names\n/var/log/bootstrap.log\ntar: Removing leading `/' from hard link targets\n/var/log/btmp\n/var/log/faillog\n/var/log/lastlog\n/var/log/wtmp\n./\n./alternatives.log\n./apt/\n./apt/eipp.log.xz\n./apt/history.log\n./apt/term.log\n./bootstrap.log\n./btmp\n./dpkg.log\n./faillog\n./lastlog\n./wtmp\n./journal/\n./README\n./private/\n./fontconfig.log\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.6000000000000001,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "tar: Removing leading `/' from member names\n/var/log/bootstrap.log\ntar: Removing leading `/' from hard link targets\n/var/log/btmp\n/var/log/faillog\n/var/log/lastlog\n/var/log/wtmp\n./\n./alternatives.log\n./apt/\n./apt/eipp.log.xz\n./apt/history.log\n./apt/term.log\n./bootstrap.log\n./btmp\n./dpkg.log\n./faillog\n./lastlog\n./wtmp\n./journal/\n./README\n./private/\n./fontconfig.log\n",
+    "eval_observation": "/var/log/bootstrap.log\n/var/log/btmp\n/var/log/faillog\n/var/log/lastlog\n/var/log/wtmp\n",
+    "corrupt_gold": null
+  },
+  "error": null
+}

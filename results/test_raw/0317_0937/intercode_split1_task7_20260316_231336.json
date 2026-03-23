@@ -1,0 +1,125 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-16T14:13:36Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-16T14:13:36Z",
+    "finished_at": "2026-03-16T14:13:45Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "cd \"$(dirname \"$(readlink -f \"$(which python)\")\")\"",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    }
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "cd \"$(dirname \"$(readlink -f \"$(which python)\")\")\"",
+    "raw_output_text": "```bash\ncd \"$(dirname \"$(readlink -f \"$(which python)\")\")\"\n```",
+    "raw_output_payload": {
+      "content": "```bash\ncd \"$(dirname \"$(readlink -f \"$(which python)\")\")\"\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need to find path of python executable: which python or readlink -f $(which python). Then cd to its directory. So command: cd \"$(dirname \"$(readlink -f \"$(which python)\")\")\" . Provide single command.",
+      "reasoning_content": "Need to find path of python executable: which python or readlink -f $(which python). Then cd to its directory. So command: cd \"$(dirname \"$(readlink -f \"$(which python)\")\")\" . Provide single command."
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 7,
+    "query": "Change directory to the directory containing the executable file of command \"python\"",
+    "gold": "cd $(which python | xargs dirname)",
+    "record": {
+      "query": "Change directory to the directory containing the executable file of command \"python\"",
+      "gold": "cd $(which python | xargs dirname)"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Change directory to the directory containing the executable file of command \"python\"",
+      "info": {
+        "action_executed": false,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.02
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "$(readlink -f $(which: -c: line 2: unexpected EOF while looking for matching `)'\n",
+        "eval_obs": "dirname: missing operand\nTry 'dirname --help' for more information.\n",
+        "answer_similarity": 0.05355095314996731
+      }
+    },
+    "action": {
+      "command": "cd \"$(dirname \"$(readlink -f \"$(which python)\")\")\"",
+      "observation": "$(readlink -f $(which: -c: line 2: unexpected EOF while looking for matching `)'\n",
+      "info": {
+        "action_executed": false,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.02
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "$(readlink -f $(which: -c: line 2: unexpected EOF while looking for matching `)'\n",
+        "eval_obs": "dirname: missing operand\nTry 'dirname --help' for more information.\n",
+        "answer_similarity": 0.05355095314996731
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "$(readlink -f $(which: -c: line 2: unexpected EOF while looking for matching `)'\n",
+      "reward": 0.6900000000000001,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.02
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "$(readlink -f $(which: -c: line 2: unexpected EOF while looking for matching `)'\n",
+        "eval_obs": "dirname: missing operand\nTry 'dirname --help' for more information.\n",
+        "answer_similarity": 0.05355095314996731,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "cd \"$(dirname \"$(readlink -f \"$(which python)\")\")\"",
+        "observation": "$(readlink -f $(which: -c: line 2: unexpected EOF while looking for matching `)'\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.6900000000000001,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "$(readlink -f $(which: -c: line 2: unexpected EOF while looking for matching `)'\n",
+    "eval_observation": "dirname: missing operand\nTry 'dirname --help' for more information.\n",
+    "corrupt_gold": null
+  },
+  "error": null
+}

@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-21T09:44:52Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-21T09:44:52Z",
+    "finished_at": "2026-03-21T09:45:00Z",
+    "image_name": "intercode-nl2bash-fs2",
+    "command": {
+      "text": "tar -czf /mytarfile.tgz -C /system/folder1 $(find . -maxdepth 1 -type f -mtime -60 -printf \"%P\\n\")",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_2.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "tar -czf /mytarfile.tgz -C /system/folder1 $(find . -maxdepth 1 -type f -mtime -60 -printf \"%P\\n\")",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\ntar -czf /mytarfile.tgz -C /system/folder1 $(find . -maxdepth 1 -type f -mtime -60 -printf \"%P\\n\")\n```",
+    "raw_output_payload": {
+      "content": "```bash\ntar -czf /mytarfile.tgz -C /system/folder1 $(find . -maxdepth 1 -type f -mtime -60 -printf \"%P\\n\")\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need find modified in last 60 days: -mtime -60. tar -czf. Use find with -print0 and tar --null -T. Command: tar -czf /mytarfile.tgz -C /system/folder1 $(find . -maxdepth 1 -type f -mtime -60 -print). But better: tar -czf /mytarfile.tgz -C /system/folder1 $(find . -maxdepth 1 -type f -mtime -60 -printf \"%P\\n\") . Use -C. Simpler: tar -czf /mytarfile.tgz -C /system/folder1 $(find . -maxdepth 1 -type f -mtime -60 -printf \"%P\\n\") .",
+      "reasoning_content": "Need find modified in last 60 days: -mtime -60. tar -czf. Use find with -print0 and tar --null -T. Command: tar -czf /mytarfile.tgz -C /system/folder1 $(find . -maxdepth 1 -type f -mtime -60 -print). But better: tar -czf /mytarfile.tgz -C /system/folder1 $(find . -maxdepth 1 -type f -mtime -60 -printf \"%P\\n\") . Use -C. Simpler: tar -czf /mytarfile.tgz -C /system/folder1 $(find . -maxdepth 1 -type f -mtime -60 -printf \"%P\\n\") ."
+    }
+  },
+  "task": {
+    "split": 2,
+    "task_index": 39,
+    "query": "archive all files in /system/folder1 directory modified in the last 60 days to \"/mytarfile.tgz\"",
+    "gold": "tar czvf mytarfile.tgz `find /system/folder1 -mtime -60`",
+    "record": {
+      "query": "archive all files in /system/folder1 directory modified in the last 60 days to \"/mytarfile.tgz\"",
+      "gold": "tar czvf mytarfile.tgz `find /system/folder1 -mtime -60`"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "archive all files in /system/folder1 directory modified in the last 60 days to \"/mytarfile.tgz\"",
+      "info": {}
+    },
+    "action": {
+      "command": "tar -czf /mytarfile.tgz -C /system/folder1 $(find . -maxdepth 1 -type f -mtime -60 -printf \"%P\\n\")",
+      "observation": "tar: .dockerenvn.gitignoren.placeholdernsetup_nl2b_fs_2.shnsetup_fs.shnsetup_nl2b_fs_1.shnsetup_nl2b_fs_3.shnsetup_nl2b_fs_4.shn: Cannot stat: No such file or directory\ntar (child): /mytarfile.tgz: Cannot open: Permission denied\ntar (child): Error is not recoverable: exiting now\ntar: Child returned status 2\ntar: Error is not recoverable: exiting now\n",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "tar: .dockerenvn.gitignoren.placeholdernsetup_nl2b_fs_2.shnsetup_fs.shnsetup_nl2b_fs_1.shnsetup_nl2b_fs_3.shnsetup_nl2b_fs_4.shn: Cannot stat: No such file or directory\ntar (child): /mytarfile.tgz: Cannot open: Permission denied\ntar (child): Error is not recoverable: exiting now\ntar: Child returned status 2\ntar: Error is not recoverable: exiting now\n",
+      "reward": 0.39,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.05,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [
+          [
+            "mytarfile.tgz",
+            "??"
+          ]
+        ],
+        "diff_extra": [],
+        "agent_obs": "tar: .dockerenvn.gitignoren.placeholdernsetup_nl2b_fs_2.shnsetup_fs.shnsetup_nl2b_fs_1.shnsetup_nl2b_fs_3.shnsetup_nl2b_fs_4.shn: Cannot stat: No such file or directory\ntar (child): /mytarfile.tgz: Cannot open: Permission denied\ntar (child): Error is not recoverable: exiting now\ntar: Child returned status 2\ntar: Error is not recoverable: exiting now\n",
+        "eval_obs": "tar: Removing leading `/' from member names\n/system/folder1/\n/system/folder1/text2.txt\ntar: Removing leading `/' from hard link targets\n/system/folder1/text3.txt\n/system/folder1/text4.txt\n/system/folder1/keep.txt\n/system/folder1/a.out\n/system/folder1/doc1.doc\n/system/folder1/doc2.doc\n/system/folder1/log1.log\n/system/folder1/script1.sh\n/system/folder1/new.sh\n/system/folder1/data.csv\n/system/folder1/recent.txt\n/system/folder1/old2.txt\n/system/folder1/text2.txt\n/system/folder1/text3.txt\n/system/folder1/text4.txt\n/system/folder1/keep.txt\n/system/folder1/a.out\n/system/folder1/doc1.doc\n/system/folder1/doc2.doc\n/system/folder1/log1.log\n/system/folder1/script1.sh\n/system/folder1/new.sh\n/system/folder1/data.csv\n/system/folder1/recent.txt\n/system/folder1/old2.txt\n",
+        "answer_similarity": 0.014551346658654797,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "tar -czf /mytarfile.tgz -C /system/folder1 $(find . -maxdepth 1 -type f -mtime -60 -printf \"%P\\n\")",
+        "observation": "tar: .dockerenvn.gitignoren.placeholdernsetup_nl2b_fs_2.shnsetup_fs.shnsetup_nl2b_fs_1.shnsetup_nl2b_fs_3.shnsetup_nl2b_fs_4.shn: Cannot stat: No such file or directory\ntar (child): /mytarfile.tgz: Cannot open: Permission denied\ntar (child): Error is not recoverable: exiting now\ntar: Child returned status 2\ntar: Error is not recoverable: exiting now\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.39,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "tar: .dockerenvn.gitignoren.placeholdernsetup_nl2b_fs_2.shnsetup_fs.shnsetup_nl2b_fs_1.shnsetup_nl2b_fs_3.shnsetup_nl2b_fs_4.shn: Cannot stat: No such file or directory\ntar (child): /mytarfile.tgz: Cannot open: Permission denied\ntar (child): Error is not recoverable: exiting now\ntar: Child returned status 2\ntar: Error is not recoverable: exiting now\n",
+    "eval_observation": "tar: Removing leading `/' from member names\n/system/folder1/\n/system/folder1/text2.txt\ntar: Removing leading `/' from hard link targets\n/system/folder1/text3.txt\n/system/folder1/text4.txt\n/system/folder1/keep.txt\n/system/folder1/a.out\n/system/folder1/doc1.doc\n/system/folder1/doc2.doc\n/system/folder1/log1.log\n/system/folder1/script1.sh\n/system/folder1/new.sh\n/system/folder1/data.csv\n/system/folder1/recent.txt\n/system/folder1/old2.txt\n/system/folder1/text2.txt\n/system/folder1/text3.txt\n/system/folder1/text4.txt\n/system/folder1/keep.txt\n/system/folder1/a.out\n/system/folder1/doc1.doc\n/system/folder1/doc2.doc\n/system/folder1/log1.log\n/system/folder1/script1.sh\n/system/folder1/new.sh\n/system/folder1/data.csv\n/system/folder1/recent.txt\n/system/folder1/old2.txt\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "58ffa2cc8965",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260321_153319_58ffa2cc8965/commands.jsonl"
+  }
+}

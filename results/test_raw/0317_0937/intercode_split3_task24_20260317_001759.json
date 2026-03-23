@@ -1,0 +1,125 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-16T15:17:59Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-16T15:17:59Z",
+    "finished_at": "2026-03-16T15:18:08Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "find / -type d -name mysql 2>/dev/null",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    }
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find / -type d -name mysql 2>/dev/null",
+    "raw_output_text": "```bash\nfind / -type d -name mysql 2>/dev/null\n```",
+    "raw_output_payload": {
+      "content": "```bash\nfind / -type d -name mysql 2>/dev/null\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need command to search for directory named mysql. Use find / -type d -name mysql 2>/dev/null. Provide single command.",
+      "reasoning_content": "Need command to search for directory named mysql. Use find / -type d -name mysql 2>/dev/null. Provide single command."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 24,
+    "query": "search for the directory \"mysql\" in the entire file system",
+    "gold": "find  /workspace -name mysql -type d",
+    "record": {
+      "query": "search for the directory \"mysql\" in the entire file system",
+      "gold": "find  /workspace -name mysql -type d"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "search for the directory \"mysql\" in the entire file system",
+      "info": {
+        "action_executed": true,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "",
+        "eval_obs": "find: '/workspace': No such file or directory\n",
+        "answer_similarity": 0.0
+      }
+    },
+    "action": {
+      "command": "find / -type d -name mysql 2>/dev/null",
+      "observation": "",
+      "info": {
+        "action_executed": true,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "",
+        "eval_obs": "find: '/workspace': No such file or directory\n",
+        "answer_similarity": 0.0
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "",
+        "eval_obs": "find: '/workspace': No such file or directory\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find / -type d -name mysql 2>/dev/null",
+        "observation": ""
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "",
+    "eval_observation": "find: '/workspace': No such file or directory\n",
+    "corrupt_gold": null
+  },
+  "error": null
+}

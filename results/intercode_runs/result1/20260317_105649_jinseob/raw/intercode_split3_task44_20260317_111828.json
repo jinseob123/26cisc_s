@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T02:18:28Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T02:18:28Z",
+    "finished_at": "2026-03-17T02:18:36Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "[ -d /workspace/dir2/mysql/ ] && [ \"$(stat -c %d /workspace/dir2/mysql/)\" != \"$(stat -c %d /workspace/dir2)\" ] && echo \"mounted\" || echo \"not mounted\"",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "[ -d /workspace/dir2/mysql/ ] && [ \"$(stat -c %d /workspace/dir2/mysql/)\" != \"$(stat -c %d /workspace/dir2)\" ] && echo \"mounted\" || echo \"not mounted\"",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\n[ -d /workspace/dir2/mysql/ ] && [ \"$(stat -c %d /workspace/dir2/mysql/)\" != \"$(stat -c %d /workspace/dir2)\" ] && echo \"mounted\" || echo \"not mounted\"\n```",
+    "raw_output_payload": {
+      "content": "```bash\n[ -d /workspace/dir2/mysql/ ] && [ \"$(stat -c %d /workspace/dir2/mysql/)\" != \"$(stat -c %d /workspace/dir2)\" ] && echo \"mounted\" || echo \"not mounted\"\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need to check if directory exists and is on a mounted filesystem. Use find? Actually check if path exists and if its device differs from parent? Use stat -c %d? Or use find -L? Simpler: if [ -d /workspace/dir2/mysql/ ] && [ \"$(stat -c %d /workspace/dir2/mysql/)\" != \"$(stat -c %d /workspace/dir2)\" ]; then echo yes; fi. But need single command. Use test and stat. Maybe: [ -d /workspace/dir2/mysql/ ] && [ \"$(stat -c %d /workspace/dir2/mysql/)\" != \"$(stat -c %d /workspace/dir2)\" ] && echo \"mounted\" || echo \"not\". Provide command.",
+      "reasoning_content": "Need to check if directory exists and is on a mounted filesystem. Use find? Actually check if path exists and if its device differs from parent? Use stat -c %d? Or use find -L? Simpler: if [ -d /workspace/dir2/mysql/ ] && [ \"$(stat -c %d /workspace/dir2/mysql/)\" != \"$(stat -c %d /workspace/dir2)\" ]; then echo yes; fi. But need single command. Use test and stat. Maybe: [ -d /workspace/dir2/mysql/ ] && [ \"$(stat -c %d /workspace/dir2/mysql/)\" != \"$(stat -c %d /workspace/dir2)\" ] && echo \"mounted\" || echo \"not\". Provide command."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 44,
+    "query": "Determine if /workspace/dir2/mysql/ exists on a mounted file system.",
+    "gold": "df /workspace/dir2/mysql/",
+    "record": {
+      "query": "Determine if /workspace/dir2/mysql/ exists on a mounted file system.",
+      "gold": "df /workspace/dir2/mysql/"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Determine if /workspace/dir2/mysql/ exists on a mounted file system.",
+      "info": {}
+    },
+    "action": {
+      "command": "[ -d /workspace/dir2/mysql/ ] && [ \"$(stat -c %d /workspace/dir2/mysql/)\" != \"$(stat -c %d /workspace/dir2)\" ] && echo \"mounted\" || echo \"not mounted\"",
+      "observation": "-c: line 2: unexpected EOF while looking for matching `)'\n",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "-c: line 2: unexpected EOF while looking for matching `)'\n",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "-c: line 2: unexpected EOF while looking for matching `)'\n",
+        "eval_obs": "df: /workspace/dir2/mysql/: No such file or directory\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "[ -d /workspace/dir2/mysql/ ] && [ \"$(stat -c %d /workspace/dir2/mysql/)\" != \"$(stat -c %d /workspace/dir2)\" ] && echo \"mounted\" || echo \"not mounted\"",
+        "observation": "-c: line 2: unexpected EOF while looking for matching `)'\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "-c: line 2: unexpected EOF while looking for matching `)'\n",
+    "eval_observation": "df: /workspace/dir2/mysql/: No such file or directory\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "batch": {
+    "run_id": "e87c93ee9cb6",
+    "selection": {
+      "split": 3,
+      "offset": 0,
+      "limit": null,
+      "task_indices": null
+    }
+  }
+}

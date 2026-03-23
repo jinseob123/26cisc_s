@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-21T07:30:39Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-21T07:30:39Z",
+    "finished_at": "2026-03-21T07:30:46Z",
+    "image_name": "intercode-nl2bash-fs1",
+    "command": {
+      "text": "find /testbed -type f -name '*.c' -exec cat {} + | wc -l",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /testbed -type f -name '*.c' -exec cat {} + | wc -l",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": false,
+    "raw_output_text": "find /testbed -type f -name '*.c' -exec cat {} + | wc -l",
+    "raw_output_payload": {
+      "content": "find /testbed -type f -name '*.c' -exec cat {} + | wc -l",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need a bash command that counts lines of all *.c files recursively in /testbed. Use find and wc -l. For each file, wc -l gives lines. Sum them. Use xargs or find -exec. For example: find /testbed -name '*.c' -type f -print0 | xargs -0 cat | wc -l. That counts all lines. Or use find -exec cat {} + | wc -l. So final command: find /testbed -type f -name '*.c' -exec cat {} + | wc -l.",
+      "reasoning_content": "We need a bash command that counts lines of all *.c files recursively in /testbed. Use find and wc -l. For each file, wc -l gives lines. Sum them. Use xargs or find -exec. For example: find /testbed -name '*.c' -type f -print0 | xargs -0 cat | wc -l. That counts all lines. Or use find -exec cat {} + | wc -l. So final command: find /testbed -type f -name '*.c' -exec cat {} + | wc -l."
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 20,
+    "query": "Count all the lines of all '*.c' files in /testbed directory recursively",
+    "gold": "find /testbed -name \"*.c\" -print0 | xargs -0 cat | wc -l",
+    "record": {
+      "query": "Count all the lines of all '*.c' files in /testbed directory recursively",
+      "gold": "find /testbed -name \"*.c\" -print0 | xargs -0 cat | wc -l"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Count all the lines of all '*.c' files in /testbed directory recursively",
+      "info": {}
+    },
+    "action": {
+      "command": "find /testbed -type f -name '*.c' -exec cat {} + | wc -l",
+      "observation": "5\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "5\n",
+      "reward": 1.0,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "5\n",
+        "eval_obs": "5\n",
+        "answer_similarity": 1,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /testbed -type f -name '*.c' -exec cat {} + | wc -l",
+        "observation": "5\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 1.0,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "5\n",
+    "eval_observation": "5\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "fdb8887b32c1",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260321_153210_fdb8887b32c1/commands.jsonl"
+  }
+}

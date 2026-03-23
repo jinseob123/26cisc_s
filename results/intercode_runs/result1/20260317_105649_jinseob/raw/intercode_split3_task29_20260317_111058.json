@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T02:10:58Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T02:10:58Z",
+    "finished_at": "2026-03-17T02:11:06Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "find /workspace -type f -print0 | sort -z | xargs -0 cat | md5sum",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /workspace -type f -print0 | sort -z | xargs -0 cat | md5sum",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nfind /workspace -type f -print0 | sort -z | xargs -0 cat | md5sum\n```",
+    "raw_output_payload": {
+      "content": "```bash\nfind /workspace -type f -print0 | sort -z | xargs -0 cat | md5sum\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need command to compute md5 of concatenated sorted file contents. Use find, sort, cat, md5sum. Probably: find /workspace -type f -print0 | sort -z | xargs -0 cat | md5sum. But sorting file names. Use sort -z. So: find /workspace -type f -print0 | sort -z | xargs -0 cat | md5sum.",
+      "reasoning_content": "Need command to compute md5 of concatenated sorted file contents. Use find, sort, cat, md5sum. Probably: find /workspace -type f -print0 | sort -z | xargs -0 cat | md5sum. But sorting file names. Use sort -z. So: find /workspace -type f -print0 | sort -z | xargs -0 cat | md5sum."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 29,
+    "query": "Calculate the md5 sum of the contents of all files sorted in directory tree \"/workspace\"",
+    "gold": "find /workspace -type f | sort -u | xargs cat | md5sum",
+    "record": {
+      "query": "Calculate the md5 sum of the contents of all files sorted in directory tree \"/workspace\"",
+      "gold": "find /workspace -type f | sort -u | xargs cat | md5sum"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Calculate the md5 sum of the contents of all files sorted in directory tree \"/workspace\"",
+      "info": {}
+    },
+    "action": {
+      "command": "find /workspace -type f -print0 | sort -z | xargs -0 cat | md5sum",
+      "observation": "find: '/workspace': No such file or directory\nd41d8cd98f00b204e9800998ecf8427e  -\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "find: '/workspace': No such file or directory\nd41d8cd98f00b204e9800998ecf8427e  -\n",
+      "reward": 1.0,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "find: '/workspace': No such file or directory\nd41d8cd98f00b204e9800998ecf8427e  -\n",
+        "eval_obs": "find: '/workspace': No such file or directory\nd41d8cd98f00b204e9800998ecf8427e  -\n",
+        "answer_similarity": 0.9999999999999999,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /workspace -type f -print0 | sort -z | xargs -0 cat | md5sum",
+        "observation": "find: '/workspace': No such file or directory\nd41d8cd98f00b204e9800998ecf8427e  -\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 1.0,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "find: '/workspace': No such file or directory\nd41d8cd98f00b204e9800998ecf8427e  -\n",
+    "eval_observation": "find: '/workspace': No such file or directory\nd41d8cd98f00b204e9800998ecf8427e  -\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "batch": {
+    "run_id": "e87c93ee9cb6",
+    "selection": {
+      "split": 3,
+      "offset": 0,
+      "limit": null,
+      "task_indices": null
+    }
+  }
+}

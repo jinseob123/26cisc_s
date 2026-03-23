@@ -1,0 +1,118 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T05:15:31Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T05:15:31Z",
+    "finished_at": "2026-03-17T05:15:39Z",
+    "image_name": "intercode-nl2bash-fs3",
+    "command": {
+      "text": "find /workspace -mindepth 1 -name \".*\" -exec rm -rf {} +",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /workspace -mindepth 1 -name \".*\" -exec rm -rf {} +",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": true,
+    "raw_output_text": "find /workspace -mindepth 1 -name \".*\" -exec rm -rf {} +",
+    "raw_output_payload": {
+      "content": "find /workspace -mindepth 1 -name \".*\" -exec rm -rf {} +",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need bash command to delete all hidden files under /workspace. Hidden files start with dot. Recursively? Probably all hidden files and directories. Use find. Command: find /workspace -type f -name \".*\" -delete. Also delete hidden directories? maybe -type d -name \".*\" -exec rm -rf {} +. Combine. Use -mindepth 1 to avoid root? Provide one line. Let's output: find /workspace -mindepth 1 -name \".*\" -exec rm -rf {} +. That deletes files and dirs.",
+      "reasoning_content": "Need bash command to delete all hidden files under /workspace. Hidden files start with dot. Recursively? Probably all hidden files and directories. Use find. Command: find /workspace -type f -name \".*\" -delete. Also delete hidden directories? maybe -type d -name \".*\" -exec rm -rf {} +. Combine. Use -mindepth 1 to avoid root? Provide one line. Let's output: find /workspace -mindepth 1 -name \".*\" -exec rm -rf {} +. That deletes files and dirs."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 43,
+    "query": "Delete all hidden files under /workspace",
+    "gold": "find /workspace -type f -name '.*' -delete",
+    "record": {
+      "query": "Delete all hidden files under /workspace",
+      "gold": "find /workspace -type f -name '.*' -delete"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Delete all hidden files under /workspace",
+      "info": {}
+    },
+    "action": {
+      "command": "find /workspace -mindepth 1 -name \".*\" -exec rm -rf {} +",
+      "observation": "find: paths must precede expression: `.git'\nfind: possible unquoted pattern after predicate `-name'?\n",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "find: paths must precede expression: `.git'\nfind: possible unquoted pattern after predicate `-name'?\n",
+      "reward": 0.34,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.0,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [
+          [
+            "workspace/dir1/.hidden1.txt",
+            "D"
+          ],
+          [
+            "workspace/.hidden.txt",
+            "D"
+          ]
+        ],
+        "diff_extra": [],
+        "agent_obs": "find: paths must precede expression: `.git'\nfind: possible unquoted pattern after predicate `-name'?\n",
+        "eval_obs": "",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /workspace -mindepth 1 -name \".*\" -exec rm -rf {} +",
+        "observation": "find: paths must precede expression: `.git'\nfind: possible unquoted pattern after predicate `-name'?\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.34,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "find: paths must precede expression: `.git'\nfind: possible unquoted pattern after predicate `-name'?\n",
+    "eval_observation": "",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "2acd6955a881",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260317_120804_2acd6955a881/commands.jsonl"
+  }
+}

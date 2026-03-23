@@ -1,0 +1,104 @@
+{
+  "summary_files": [
+    "/home/tako/jinseob/2026sisc_ss/results/intercode_runs/result2/root/20260317_132938_jinseob/intercode_command_set_summary.jsonl",
+    "/home/tako/jinseob/2026sisc_ss/results/intercode_runs/result2/root/20260317_135503_jinseob/intercode_command_set_summary.jsonl",
+    "/home/tako/jinseob/2026sisc_ss/results/intercode_runs/result2/root/20260317_142340_jinseob/intercode_command_set_summary.jsonl",
+    "/home/tako/jinseob/2026sisc_ss/results/intercode_runs/result2/root/20260317_143639_jinseob/intercode_command_set_summary.jsonl",
+    "/home/tako/jinseob/2026sisc_ss/results/intercode_runs/result2/strict/20260317_150723_jinseob/intercode_command_set_summary.jsonl",
+    "/home/tako/jinseob/2026sisc_ss/results/intercode_runs/result2/strict/20260317_153307_jinseob/intercode_command_set_summary.jsonl",
+    "/home/tako/jinseob/2026sisc_ss/results/intercode_runs/result2/strict/20260317_160148_jinseob/intercode_command_set_summary.jsonl",
+    "/home/tako/jinseob/2026sisc_ss/results/intercode_runs/result2/strict/20260317_161450_jinseob/intercode_command_set_summary.jsonl"
+  ],
+  "profile_stats": {
+    "root": {
+      "attempted": 200,
+      "exact_successes": 83,
+      "exact_success_rate": 0.415,
+      "average_reward": 0.80925
+    },
+    "strict": {
+      "attempted": 200,
+      "exact_successes": 61,
+      "exact_success_rate": 0.305,
+      "average_reward": 0.73845
+    }
+  },
+  "split_stats": [
+    {
+      "profile": "root",
+      "split": 1,
+      "attempted": 60,
+      "exact_success_rate": 0.31666666666666665,
+      "average_reward": 0.767
+    },
+    {
+      "profile": "root",
+      "split": 2,
+      "attempted": 53,
+      "exact_success_rate": 0.4528301886792453,
+      "average_reward": 0.7947169811320755
+    },
+    {
+      "profile": "root",
+      "split": 3,
+      "attempted": 60,
+      "exact_success_rate": 0.5166666666666667,
+      "average_reward": 0.8635
+    },
+    {
+      "profile": "root",
+      "split": 4,
+      "attempted": 27,
+      "exact_success_rate": 0.3333333333333333,
+      "average_reward": 0.8111111111111111
+    },
+    {
+      "profile": "strict",
+      "split": 1,
+      "attempted": 60,
+      "exact_success_rate": 0.26666666666666666,
+      "average_reward": 0.7266666666666667
+    },
+    {
+      "profile": "strict",
+      "split": 2,
+      "attempted": 53,
+      "exact_success_rate": 0.2641509433962264,
+      "average_reward": 0.6730188679245284
+    },
+    {
+      "profile": "strict",
+      "split": 3,
+      "attempted": 60,
+      "exact_success_rate": 0.36666666666666664,
+      "average_reward": 0.7775
+    },
+    {
+      "profile": "strict",
+      "split": 4,
+      "attempted": 27,
+      "exact_success_rate": 0.3333333333333333,
+      "average_reward": 0.8062962962962963
+    }
+  ],
+  "paired_task_count": 200,
+  "average_reward_delta_root_minus_strict": 0.07079999999999999,
+  "bucket_counts": {
+    "root": {
+      "exact_success": 83,
+      "near_miss": 81,
+      "permission_denied": 1,
+      "missing_path": 13,
+      "syntax_or_parse": 16,
+      "semantic_miss": 6
+    },
+    "strict": {
+      "exact_success": 61,
+      "near_miss": 71,
+      "permission_denied": 38,
+      "missing_path": 12,
+      "syntax_or_parse": 14,
+      "semantic_miss": 4
+    }
+  }
+}

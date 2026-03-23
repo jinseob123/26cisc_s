@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T02:03:06Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T02:03:06Z",
+    "finished_at": "2026-03-17T02:03:15Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "grep -ril 'hello' /workspace/dir1",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "grep -ril 'hello' /workspace/dir1",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": true,
+    "raw_output_text": "grep -ril 'hello' /workspace/dir1",
+    "raw_output_payload": {
+      "content": "grep -ril 'hello' /workspace/dir1",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need find files under /workspace/dir1 dir containing 'hello' case-insensitive. Print filenames. Use grep -ril 'hello' /workspace/dir1. That prints paths. If only filenames, maybe basename. But likely want filenames. Use find with grep. Simpler: grep -ril 'hello' /workspace/dir1 | xargs -n1 basename? But that loses path. Maybe just grep -ril. I'll output that.",
+      "reasoning_content": "Need find files under /workspace/dir1 dir containing 'hello' case-insensitive. Print filenames. Use grep -ril 'hello' /workspace/dir1. That prints paths. If only filenames, maybe basename. But likely want filenames. Use find with grep. Simpler: grep -ril 'hello' /workspace/dir1 | xargs -n1 basename? But that loses path. Maybe just grep -ril. I'll output that."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 13,
+    "query": "print all filenames of files under /workspace/dir1 dir containing 'hello', case-insensitive",
+    "gold": "find /workspace/dir1 -type f -exec grep -il 'hello' {} \\;",
+    "record": {
+      "query": "print all filenames of files under /workspace/dir1 dir containing 'hello', case-insensitive",
+      "gold": "find /workspace/dir1 -type f -exec grep -il 'hello' {} \\;"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "print all filenames of files under /workspace/dir1 dir containing 'hello', case-insensitive",
+      "info": {}
+    },
+    "action": {
+      "command": "grep -ril 'hello' /workspace/dir1",
+      "observation": "grep: /workspace/dir1: No such file or directory\n",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "grep: /workspace/dir1: No such file or directory\n",
+      "reward": 0.93,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.26
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "grep: /workspace/dir1: No such file or directory\n",
+        "eval_obs": "find: '/workspace/dir1': No such file or directory\n",
+        "answer_similarity": 0.7799154245579976,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "grep -ril 'hello' /workspace/dir1",
+        "observation": "grep: /workspace/dir1: No such file or directory\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.93,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "grep: /workspace/dir1: No such file or directory\n",
+    "eval_observation": "find: '/workspace/dir1': No such file or directory\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "batch": {
+    "run_id": "e87c93ee9cb6",
+    "selection": {
+      "split": 3,
+      "offset": 0,
+      "limit": null,
+      "task_indices": null
+    }
+  }
+}

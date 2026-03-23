@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-21T08:25:49Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-21T08:25:49Z",
+    "finished_at": "2026-03-21T08:25:57Z",
+    "image_name": "intercode-nl2bash-fs3",
+    "command": {
+      "text": "find /workspace -type f -size +1k -printf \"%s %p\\n\" | sort -nr | head -n1",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /workspace -type f -size +1k -printf \"%s %p\\n\" | sort -nr | head -n1",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": false,
+    "raw_output_text": "find /workspace -type f -size +1k -printf \"%s %p\\n\" | sort -nr | head -n1",
+    "raw_output_payload": {
+      "content": "find /workspace -type f -size +1k -printf \"%s %p\\n\" | sort -nr | head -n1",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need find /workspace -type f -size +1k -printf \"%s %p\\n\" | sort -nr | head -n1.",
+      "reasoning_content": "Need find /workspace -type f -size +1k -printf \"%s %p\\n\" | sort -nr | head -n1."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 22,
+    "query": "search for all the files in the /workspace folder which are bigger than 1KB and display them biggest file",
+    "gold": "find /workspace -size +1k -exec ls -ls {} \\+ | sort -n | tail -1",
+    "record": {
+      "query": "search for all the files in the /workspace folder which are bigger than 1KB and display them biggest file",
+      "gold": "find /workspace -size +1k -exec ls -ls {} \\+ | sort -n | tail -1"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "search for all the files in the /workspace folder which are bigger than 1KB and display them biggest file",
+      "info": {}
+    },
+    "action": {
+      "command": "find /workspace -type f -size +1k -printf \"%s %p\\n\" | sort -nr | head -n1",
+      "observation": "20484096",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "20484096",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "20484096",
+        "eval_obs": "4 drwxr-xr-x 1 root root 4096 Mar 21 08:21 dir1\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /workspace -type f -size +1k -printf \"%s %p\\n\" | sort -nr | head -n1",
+        "observation": "20484096"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "20484096",
+    "eval_observation": "4 drwxr-xr-x 1 root root 4096 Mar 21 08:21 dir1\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "7638e08942e6",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260321_153405_7638e08942e6/commands.jsonl"
+  }
+}

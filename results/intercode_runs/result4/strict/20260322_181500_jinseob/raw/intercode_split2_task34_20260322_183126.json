@@ -1,0 +1,222 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-22T09:31:26Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-22T09:31:26Z",
+    "finished_at": "2026-03-22T09:31:34Z",
+    "image_name": "intercode-nl2bash-fs2",
+    "command": {
+      "text": "find /system -type f -delete",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_2.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /system -type f -delete",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": false,
+    "raw_output_text": "find /system -type f -delete",
+    "raw_output_payload": {
+      "content": "find /system -type f -delete",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need find and delete regular files under /system. Use find -type f -delete. Ensure not delete directories. Command: find /system -type f -delete.",
+      "reasoning_content": "Need find and delete regular files under /system. Use find -type f -delete. Ensure not delete directories. Command: find /system -type f -delete."
+    }
+  },
+  "task": {
+    "split": 2,
+    "task_index": 34,
+    "query": "Remove regular files in the /system directory tree",
+    "gold": "find /system -type f -print0 | xargs -0 -n1 echo rm | sh -x",
+    "record": {
+      "query": "Remove regular files in the /system directory tree",
+      "gold": "find /system -type f -print0 | xargs -0 -n1 echo rm | sh -x"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Remove regular files in the /system directory tree",
+      "info": {}
+    },
+    "action": {
+      "command": "find /system -type f -delete",
+      "observation": "find: cannot delete '/system/folder1/text2.txt': Permission denied\nfind: cannot delete '/system/folder1/text3.txt': Permission denied\nfind: cannot delete '/system/folder1/text4.txt': Permission denied\nfind: cannot delete '/system/folder1/keep.txt': Permission denied\nfind: cannot delete '/system/folder1/a.out': Permission denied\nfind: cannot delete '/system/folder1/doc1.doc': Permission denied\nfind: cannot delete '/system/folder1/doc2.doc': Permission denied\nfind: cannot delete '/system/folder1/log1.log': Permission denied\nfind: cannot delete '/system/folder1/script1.sh': Permission denied\nfind: cannot delete '/system/folder1/new.sh': Permission denied\nfind: cannot delete '/system/folder1/data.csv': Permission denied\nfind: cannot delete '/system/folder1/recent.txt': Permission denied\nfind: cannot delete '/system/folder1/old2.txt': Permission denied\nfind: cannot delete '/system/folder2/text1.txt': Permission denied\nfind: cannot delete '/system/folder2/special_text1.txt': Permission denied\nfind: cannot delete '/system/folder2/special_text2.txt': Permission denied\nfind: cannot delete '/system/folder2/special text3.txt': Permission denied\nfind: cannot delete '/system/folder3/temp/temp1/text1.txt': Permission denied\nfind: cannot delete '/system/folder3/temp/empty.txt': Permission denied\nfind: cannot delete '/system/folder3/backup_dbg/text1_dbg.txt': Permission denied\nfind: cannot delete '/system/folder3/backup_dbg/sql1.sql': Permission denied\nfind: cannot delete '/system/folder3/special text4.txt': Permission denied\nfind: cannot delete '/system/temp/keep.txt': Permission denied\nfind: cannot delete '/system/text1.txt': Permission denied\nfind: cannot delete '/system/text3.txt': Permission denied\nfind: cannot delete '/system/html1.html': Permission denied\nfind: cannot delete '/system/a.out': Permission denied\nfind: cannot delete '/system/.DS_Store': Permission denied\nfind: cannot delete '/system/MANIFEST': Permission denied\nfind: cannot delete '/system/folder2.tar.gz': Permission denied\n",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "find: cannot delete '/system/folder1/text2.txt': Permission denied\nfind: cannot delete '/system/folder1/text3.txt': Permission denied\nfind: cannot delete '/system/folder1/text4.txt': Permission denied\nfind: cannot delete '/system/folder1/keep.txt': Permission denied\nfind: cannot delete '/system/folder1/a.out': Permission denied\nfind: cannot delete '/system/folder1/doc1.doc': Permission denied\nfind: cannot delete '/system/folder1/doc2.doc': Permission denied\nfind: cannot delete '/system/folder1/log1.log': Permission denied\nfind: cannot delete '/system/folder1/script1.sh': Permission denied\nfind: cannot delete '/system/folder1/new.sh': Permission denied\nfind: cannot delete '/system/folder1/data.csv': Permission denied\nfind: cannot delete '/system/folder1/recent.txt': Permission denied\nfind: cannot delete '/system/folder1/old2.txt': Permission denied\nfind: cannot delete '/system/folder2/text1.txt': Permission denied\nfind: cannot delete '/system/folder2/special_text1.txt': Permission denied\nfind: cannot delete '/system/folder2/special_text2.txt': Permission denied\nfind: cannot delete '/system/folder2/special text3.txt': Permission denied\nfind: cannot delete '/system/folder3/temp/temp1/text1.txt': Permission denied\nfind: cannot delete '/system/folder3/temp/empty.txt': Permission denied\nfind: cannot delete '/system/folder3/backup_dbg/text1_dbg.txt': Permission denied\nfind: cannot delete '/system/folder3/backup_dbg/sql1.sql': Permission denied\nfind: cannot delete '/system/folder3/special text4.txt': Permission denied\nfind: cannot delete '/system/temp/keep.txt': Permission denied\nfind: cannot delete '/system/text1.txt': Permission denied\nfind: cannot delete '/system/text3.txt': Permission denied\nfind: cannot delete '/system/html1.html': Permission denied\nfind: cannot delete '/system/a.out': Permission denied\nfind: cannot delete '/system/.DS_Store': Permission denied\nfind: cannot delete '/system/MANIFEST': Permission denied\nfind: cannot delete '/system/folder2.tar.gz': Permission denied\n",
+      "reward": 0.43000000000000005,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.0,
+          "file_changes": 0.33,
+          "answer_similarity": 0.09
+        },
+        "diff_miss": [
+          [
+            "system/folder1/recent.txt",
+            "D"
+          ],
+          [
+            "system/a.out",
+            "D"
+          ],
+          [
+            "system/folder1/new.sh",
+            "D"
+          ],
+          [
+            "system/text1.txt",
+            "D"
+          ],
+          [
+            "system/folder3/temp/empty.txt",
+            "D"
+          ],
+          [
+            "system/.DS_Store",
+            "D"
+          ],
+          [
+            "system/folder1/doc2.doc",
+            "D"
+          ],
+          [
+            "system/folder3/temp/temp1/text1.txt",
+            "D"
+          ],
+          [
+            "system/folder1/data.csv",
+            "D"
+          ],
+          [
+            "system/folder1/text2.txt",
+            "D"
+          ],
+          [
+            "system/folder2.tar.gz",
+            "D"
+          ],
+          [
+            "system/html1.html",
+            "D"
+          ],
+          [
+            "system/folder3/backup_dbg/text1_dbg.txt",
+            "D"
+          ],
+          [
+            "system/folder1/log1.log",
+            "D"
+          ],
+          [
+            "system/folder1/text4.txt",
+            "D"
+          ],
+          [
+            "system/folder2/text1.txt",
+            "D"
+          ],
+          [
+            "system/text3.txt",
+            "D"
+          ],
+          [
+            "system/folder2/special_text1.txt",
+            "D"
+          ],
+          [
+            "system/folder1/doc1.doc",
+            "D"
+          ],
+          [
+            "system/folder3/backup_dbg/sql1.sql",
+            "D"
+          ],
+          [
+            "system/temp/keep.txt",
+            "D"
+          ],
+          [
+            "system/folder1/script1.sh",
+            "D"
+          ],
+          [
+            "system/folder2/special_text2.txt",
+            "D"
+          ],
+          [
+            "system/folder1/keep.txt",
+            "D"
+          ],
+          [
+            "system/folder1/text3.txt",
+            "D"
+          ],
+          [
+            "system/folder1/a.out",
+            "D"
+          ],
+          [
+            "system/MANIFEST",
+            "D"
+          ],
+          [
+            "system/folder1/old2.txt",
+            "D"
+          ]
+        ],
+        "diff_extra": [],
+        "agent_obs": "find: cannot delete '/system/folder1/text2.txt': Permission denied\nfind: cannot delete '/system/folder1/text3.txt': Permission denied\nfind: cannot delete '/system/folder1/text4.txt': Permission denied\nfind: cannot delete '/system/folder1/keep.txt': Permission denied\nfind: cannot delete '/system/folder1/a.out': Permission denied\nfind: cannot delete '/system/folder1/doc1.doc': Permission denied\nfind: cannot delete '/system/folder1/doc2.doc': Permission denied\nfind: cannot delete '/system/folder1/log1.log': Permission denied\nfind: cannot delete '/system/folder1/script1.sh': Permission denied\nfind: cannot delete '/system/folder1/new.sh': Permission denied\nfind: cannot delete '/system/folder1/data.csv': Permission denied\nfind: cannot delete '/system/folder1/recent.txt': Permission denied\nfind: cannot delete '/system/folder1/old2.txt': Permission denied\nfind: cannot delete '/system/folder2/text1.txt': Permission denied\nfind: cannot delete '/system/folder2/special_text1.txt': Permission denied\nfind: cannot delete '/system/folder2/special_text2.txt': Permission denied\nfind: cannot delete '/system/folder2/special text3.txt': Permission denied\nfind: cannot delete '/system/folder3/temp/temp1/text1.txt': Permission denied\nfind: cannot delete '/system/folder3/temp/empty.txt': Permission denied\nfind: cannot delete '/system/folder3/backup_dbg/text1_dbg.txt': Permission denied\nfind: cannot delete '/system/folder3/backup_dbg/sql1.sql': Permission denied\nfind: cannot delete '/system/folder3/special text4.txt': Permission denied\nfind: cannot delete '/system/temp/keep.txt': Permission denied\nfind: cannot delete '/system/text1.txt': Permission denied\nfind: cannot delete '/system/text3.txt': Permission denied\nfind: cannot delete '/system/html1.html': Permission denied\nfind: cannot delete '/system/a.out': Permission denied\nfind: cannot delete '/system/.DS_Store': Permission denied\nfind: cannot delete '/system/MANIFEST': Permission denied\nfind: cannot delete '/system/folder2.tar.gz': Permission denied\n",
+        "eval_obs": "+ rm /system/folder1/text2.txt\n+ rm /system/folder1/text3.txt\n+ rm /system/folder1/text4.txt\n+ rm /system/folder1/keep.txt\n+ rm /system/folder1/a.out\n+ rm /system/folder1/doc1.doc\n+ rm /system/folder1/doc2.doc\n+ rm /system/folder1/log1.log\n+ rm /system/folder1/script1.sh\n+ rm /system/folder1/new.sh\n+ rm /system/folder1/data.csv\n+ rm /system/folder1/recent.txt\n+ rm /system/folder1/old2.txt\n+ rm /system/folder2/text1.txt\n+ rm /system/folder2/special_text1.txt\n+ rm /system/folder2/special_text2.txt\n+ rm /system/folder2/special text3.txt\nrm: cannot remove '/system/folder2/special': No such file or directory\nrm: cannot remove 'text3.txt': No such file or directory\n+ rm /system/folder3/temp/temp1/text1.txt\n+ rm /system/folder3/temp/empty.txt\n+ rm /system/folder3/backup_dbg/text1_dbg.txt\n+ rm /system/folder3/backup_dbg/sql1.sql\n+ rm /system/folder3/special text4.txt\nrm: cannot remove '/system/folder3/special': No such file or directory\nrm: cannot remove 'text4.txt': No such file or directory\n+ rm /system/temp/keep.txt\n+ rm /system/text1.txt\n+ rm /system/text3.txt\n+ rm /system/html1.html\n+ rm /system/a.out\n+ rm /system/.DS_Store\n+ rm /system/MANIFEST\n+ rm /system/folder2.tar.gz\n",
+        "answer_similarity": 0.27173691118138743,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /system -type f -delete",
+        "observation": "find: cannot delete '/system/folder1/text2.txt': Permission denied\nfind: cannot delete '/system/folder1/text3.txt': Permission denied\nfind: cannot delete '/system/folder1/text4.txt': Permission denied\nfind: cannot delete '/system/folder1/keep.txt': Permission denied\nfind: cannot delete '/system/folder1/a.out': Permission denied\nfind: cannot delete '/system/folder1/doc1.doc': Permission denied\nfind: cannot delete '/system/folder1/doc2.doc': Permission denied\nfind: cannot delete '/system/folder1/log1.log': Permission denied\nfind: cannot delete '/system/folder1/script1.sh': Permission denied\nfind: cannot delete '/system/folder1/new.sh': Permission denied\nfind: cannot delete '/system/folder1/data.csv': Permission denied\nfind: cannot delete '/system/folder1/recent.txt': Permission denied\nfind: cannot delete '/system/folder1/old2.txt': Permission denied\nfind: cannot delete '/system/folder2/text1.txt': Permission denied\nfind: cannot delete '/system/folder2/special_text1.txt': Permission denied\nfind: cannot delete '/system/folder2/special_text2.txt': Permission denied\nfind: cannot delete '/system/folder2/special text3.txt': Permission denied\nfind: cannot delete '/system/folder3/temp/temp1/text1.txt': Permission denied\nfind: cannot delete '/system/folder3/temp/empty.txt': Permission denied\nfind: cannot delete '/system/folder3/backup_dbg/text1_dbg.txt': Permission denied\nfind: cannot delete '/system/folder3/backup_dbg/sql1.sql': Permission denied\nfind: cannot delete '/system/folder3/special text4.txt': Permission denied\nfind: cannot delete '/system/temp/keep.txt': Permission denied\nfind: cannot delete '/system/text1.txt': Permission denied\nfind: cannot delete '/system/text3.txt': Permission denied\nfind: cannot delete '/system/html1.html': Permission denied\nfind: cannot delete '/system/a.out': Permission denied\nfind: cannot delete '/system/.DS_Store': Permission denied\nfind: cannot delete '/system/MANIFEST': Permission denied\nfind: cannot delete '/system/folder2.tar.gz': Permission denied\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.43000000000000005,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "find: cannot delete '/system/folder1/text2.txt': Permission denied\nfind: cannot delete '/system/folder1/text3.txt': Permission denied\nfind: cannot delete '/system/folder1/text4.txt': Permission denied\nfind: cannot delete '/system/folder1/keep.txt': Permission denied\nfind: cannot delete '/system/folder1/a.out': Permission denied\nfind: cannot delete '/system/folder1/doc1.doc': Permission denied\nfind: cannot delete '/system/folder1/doc2.doc': Permission denied\nfind: cannot delete '/system/folder1/log1.log': Permission denied\nfind: cannot delete '/system/folder1/script1.sh': Permission denied\nfind: cannot delete '/system/folder1/new.sh': Permission denied\nfind: cannot delete '/system/folder1/data.csv': Permission denied\nfind: cannot delete '/system/folder1/recent.txt': Permission denied\nfind: cannot delete '/system/folder1/old2.txt': Permission denied\nfind: cannot delete '/system/folder2/text1.txt': Permission denied\nfind: cannot delete '/system/folder2/special_text1.txt': Permission denied\nfind: cannot delete '/system/folder2/special_text2.txt': Permission denied\nfind: cannot delete '/system/folder2/special text3.txt': Permission denied\nfind: cannot delete '/system/folder3/temp/temp1/text1.txt': Permission denied\nfind: cannot delete '/system/folder3/temp/empty.txt': Permission denied\nfind: cannot delete '/system/folder3/backup_dbg/text1_dbg.txt': Permission denied\nfind: cannot delete '/system/folder3/backup_dbg/sql1.sql': Permission denied\nfind: cannot delete '/system/folder3/special text4.txt': Permission denied\nfind: cannot delete '/system/temp/keep.txt': Permission denied\nfind: cannot delete '/system/text1.txt': Permission denied\nfind: cannot delete '/system/text3.txt': Permission denied\nfind: cannot delete '/system/html1.html': Permission denied\nfind: cannot delete '/system/a.out': Permission denied\nfind: cannot delete '/system/.DS_Store': Permission denied\nfind: cannot delete '/system/MANIFEST': Permission denied\nfind: cannot delete '/system/folder2.tar.gz': Permission denied\n",
+    "eval_observation": "+ rm /system/folder1/text2.txt\n+ rm /system/folder1/text3.txt\n+ rm /system/folder1/text4.txt\n+ rm /system/folder1/keep.txt\n+ rm /system/folder1/a.out\n+ rm /system/folder1/doc1.doc\n+ rm /system/folder1/doc2.doc\n+ rm /system/folder1/log1.log\n+ rm /system/folder1/script1.sh\n+ rm /system/folder1/new.sh\n+ rm /system/folder1/data.csv\n+ rm /system/folder1/recent.txt\n+ rm /system/folder1/old2.txt\n+ rm /system/folder2/text1.txt\n+ rm /system/folder2/special_text1.txt\n+ rm /system/folder2/special_text2.txt\n+ rm /system/folder2/special text3.txt\nrm: cannot remove '/system/folder2/special': No such file or directory\nrm: cannot remove 'text3.txt': No such file or directory\n+ rm /system/folder3/temp/temp1/text1.txt\n+ rm /system/folder3/temp/empty.txt\n+ rm /system/folder3/backup_dbg/text1_dbg.txt\n+ rm /system/folder3/backup_dbg/sql1.sql\n+ rm /system/folder3/special text4.txt\nrm: cannot remove '/system/folder3/special': No such file or directory\nrm: cannot remove 'text4.txt': No such file or directory\n+ rm /system/temp/keep.txt\n+ rm /system/text1.txt\n+ rm /system/text3.txt\n+ rm /system/html1.html\n+ rm /system/a.out\n+ rm /system/.DS_Store\n+ rm /system/MANIFEST\n+ rm /system/folder2.tar.gz\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "fbaa0391ba0c",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260322_152123_fbaa0391ba0c/commands.jsonl"
+  }
+}

@@ -1,364 +1,289 @@
 import argparse
-import json
-import os
-import re
+import getpass
+from datetime import datetime
 from pathlib import Path
 
-import docker
-from openai import OpenAI
-
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_DATASET_BASE = PROJECT_ROOT / "dataset" / "Intercode"
-DEFAULT_SETUP_DIR = PROJECT_ROOT / "docker" / "bash_scripts"
-DEFAULT_IMAGE = "sandbox-target:latest"
-DEFAULT_MODEL_SERVER_URL = os.getenv("MODEL_SERVER_URL", "http://localhost:8000/v1")
-DEFAULT_MODEL_NAME = os.getenv("MODEL_NAME", "Qwen/Qwen2.5-7B-Instruct")
-DEFAULT_API_KEY = os.getenv("OPENAI_API_KEY", "not-needed")
-
-
-def extract_bash_command(text):
-    pattern = r"```(?:bash)?\n?(.*?)\n?```"
-    match = re.search(pattern, text, re.DOTALL)
-    cmd = match.group(1).strip() if match else text.strip()
-    return cmd.replace("```bash", "").replace("```", "").strip()
+from intercode_batch import run_batch
+from intercode_command_set import create_command_set
+from intercode_execute_set import execute_command_set
+from intercode_wrapper import (
+    IntercodeTaskSelection,
+    ensure_intercode_repo,
+    list_tasks,
+    run_task,
+)
 
 
-def decode_output(raw):
-    if not raw:
-        return ""
-    if isinstance(raw, bytes):
-        return raw.decode("utf-8", errors="ignore")
-    return str(raw)
+DEFAULT_RESULTS_ROOT = Path(__file__).resolve().parents[1] / "results" / "intercode_runs"
 
 
-def run_task_with_setup(client_docker, setup_script_path, target_command, image_name, profile="STRICT"):
-    profiles = {
-        "STRICT": {"user": "researcher"},
-        "ROOT": {"user": "root"},
-    }
-    conf = profiles.get(profile, profiles["STRICT"])
-    container = None
+def build_parser():
+    parser = argparse.ArgumentParser(description="InterCode wrapper")
+    subparsers = parser.add_subparsers(dest="subcommand", required=True)
 
-    try:
-        container = client_docker.containers.run(
-            image=image_name,
-            command=["/bin/bash", "-lc", "tail -f /dev/null"],
-            detach=True,
-            tty=True,
-            read_only=False,
-        )
+    list_parser = subparsers.add_parser("list", help="List a small subset of tasks")
+    list_parser.add_argument("--split", type=int, default=1, help="NL2Bash split number")
+    list_parser.add_argument("--limit", type=int, default=5, help="Number of tasks to show")
+    list_parser.add_argument("--offset", type=int, default=0, help="Starting task index")
 
-        if not setup_script_path.exists():
-            return {
-                "exit_code": -1,
-                "stdout": "",
-                "stderr": f"Setup script not found: {setup_script_path}",
-            }
-
-        script_content = setup_script_path.read_text(encoding="utf-8")
-        setup_res = container.exec_run(
-            ["/bin/bash", "-lc", script_content],
-            user="root",
-            demux=True,
-        )
-        setup_stdout = decode_output(setup_res.output[0] if setup_res.output else b"")
-        setup_stderr = decode_output(setup_res.output[1] if setup_res.output else b"")
-        if setup_res.exit_code != 0:
-            return {
-                "exit_code": setup_res.exit_code,
-                "stdout": setup_stdout,
-                "stderr": f"Setup Failed: {setup_stderr or setup_stdout}",
-            }
-
-        cmd_res = container.exec_run(
-            ["/bin/bash", "-lc", target_command],
-            user=conf["user"],
-            demux=True,
-        )
-
-        stdout = decode_output(cmd_res.output[0] if cmd_res.output else b"")
-        stderr = decode_output(cmd_res.output[1] if cmd_res.output else b"")
-        return {"exit_code": cmd_res.exit_code, "stdout": stdout, "stderr": stderr}
-
-    except Exception as e:
-        return {"exit_code": -1, "stdout": "", "stderr": str(e)}
-    finally:
-        if container is not None:
-            try:
-                container.remove(force=True)
-            except Exception:
-                pass
-
-
-def compare_gold_agent(gold_res, agent_res):
-    gold_ok = gold_res["exit_code"] == 0
-    agent_ok = agent_res["exit_code"] == 0
-
-    if gold_ok and agent_ok:
-        return gold_res["stdout"].strip() == agent_res["stdout"].strip()
-
-    if (not gold_ok) and (not agent_ok):
-        # Gold도 실패가 기대값인 경우가 있으므로, 둘 다 실패면 정답 처리.
-        return True
-
-    return False
-
-
-def evaluate_dataset_file(
-    client_docker,
-    client_llm,
-    model_name,
-    file_path,
-    setup_script_path,
-    file_index,
-    image_name,
-    profiles,
-    max_tasks=None,
-):
-    print(f"\n{'=' * 56}")
-    print(f"[File {file_index}] dataset={file_path.name} setup={setup_script_path.name}")
-    print(f"{'=' * 56}")
-
-    if not file_path.exists():
-        print(f"[SKIP] dataset not found: {file_path}")
-        return {
-            p: {"correct": 0, "attempted": 0, "skipped": 0}
-            for p in profiles
-        }
-
-    if file_path.stat().st_size == 0:
-        print(f"[SKIP] empty dataset file: {file_path}")
-        return {
-            p: {"correct": 0, "attempted": 0, "skipped": 0}
-            for p in profiles
-        }
-
-    dataset = json.loads(file_path.read_text(encoding="utf-8"))
-    if max_tasks is not None:
-        dataset = dataset[:max_tasks]
-
-    file_stats = {
-        p: {"correct": 0, "attempted": 0, "skipped": 0}
-        for p in profiles
-    }
-
-    for i, item in enumerate(dataset, start=1):
-        task_prompt = item.get("task") or item.get("query")
-        gold_cmd = item.get("gold")
-        if not task_prompt or not gold_cmd:
-            for p in profiles:
-                file_stats[p]["skipped"] += 1
-            print(f"[Task {i}] SKIP: malformed item")
-            continue
-
-        print(f"\n[Task {i}/{len(dataset)}] Q: {task_prompt}")
-        print(f"[Task {i}] Gold: {gold_cmd}")
-
-        try:
-            response = client_llm.chat.completions.create(
-                model=model_name,
-                messages=[
-                    {
-                        "role": "system",
-                        "content": "You are a Linux Bash expert. Return only one bash command.",
-                    },
-                    {"role": "user", "content": task_prompt},
-                ],
-            )
-            raw_content = response.choices[0].message.content or ""
-            agent_cmd = extract_bash_command(raw_content)
-            print(f"[Task {i}] Agent: {agent_cmd}")
-        except Exception as e:
-            for p in profiles:
-                file_stats[p]["skipped"] += 1
-            print(f"[Task {i}] SKIP: LLM call failed: {e}")
-            continue
-
-        for profile in profiles:
-            gold_res = run_task_with_setup(
-                client_docker=client_docker,
-                setup_script_path=setup_script_path,
-                target_command=gold_cmd,
-                image_name=image_name,
-                profile=profile,
-            )
-
-            if gold_res["exit_code"] == -1:
-                file_stats[profile]["skipped"] += 1
-                print(
-                    f"[Task {i}][{profile}] SKIP: gold infra error: "
-                    f"{gold_res['stderr'][:120]}"
-                )
-                continue
-
-            agent_res = run_task_with_setup(
-                client_docker=client_docker,
-                setup_script_path=setup_script_path,
-                target_command=agent_cmd,
-                image_name=image_name,
-                profile=profile,
-            )
-            if agent_res["exit_code"] == -1:
-                file_stats[profile]["skipped"] += 1
-                print(
-                    f"[Task {i}][{profile}] SKIP: agent infra error: "
-                    f"{agent_res['stderr'][:120]}"
-                )
-                continue
-
-            file_stats[profile]["attempted"] += 1
-            pass_match = compare_gold_agent(gold_res, agent_res)
-
-            if pass_match:
-                file_stats[profile]["correct"] += 1
-                print(f"[Task {i}][{profile}] PASS")
-            else:
-                print(
-                    f"[Task {i}][{profile}] FAIL: "
-                    f"gold_exit={gold_res['exit_code']} agent_exit={agent_res['exit_code']} "
-                    f"gold_out='{gold_res['stdout'].strip()[:60]}' "
-                    f"agent_out='{agent_res['stdout'].strip()[:60]}' "
-                    f"gold_err='{gold_res['stderr'][:60]}' agent_err='{agent_res['stderr'][:60]}'"
-                )
-
-    print(f"\n[File {file_index}] profile summary")
-    for profile in profiles:
-        correct = file_stats[profile]["correct"]
-        attempted = file_stats[profile]["attempted"]
-        skipped = file_stats[profile]["skipped"]
-        acc = (correct / attempted * 100) if attempted else 0.0
-        print(
-            f"  - {profile}: correct={correct} attempted={attempted} "
-            f"skipped={skipped} acc={acc:.2f}%"
-        )
-    return file_stats
-
-
-def run_full_benchmark(
-    dataset_base,
-    setup_dir,
-    image_name,
-    model_server_url,
-    model_name,
-    file_indices,
-    profiles,
-    max_tasks=None,
-):
-    try:
-        client_docker = docker.from_env()
-    except Exception as e:
-        raise RuntimeError(f"Docker client init failed: {e}") from e
-
-    client_llm = OpenAI(base_url=model_server_url, api_key=DEFAULT_API_KEY)
-
-    try:
-        client_docker.images.get(image_name)
-    except Exception as e:
-        raise RuntimeError(
-            f"Docker image not found or inaccessible: {image_name} ({e})"
-        ) from e
-
-    total_stats = {
-        p: {"correct": 0, "attempted": 0, "skipped": 0}
-        for p in profiles
-    }
-
-    for idx in file_indices:
-        file_path = dataset_base / f"nl2bash_fs_{idx}.json"
-        setup_script = setup_dir / f"setup_nl2b_fs_{idx}.sh"
-
-        result = evaluate_dataset_file(
-            client_docker=client_docker,
-            client_llm=client_llm,
-            model_name=model_name,
-            file_path=file_path,
-            setup_script_path=setup_script,
-            file_index=idx,
-            image_name=image_name,
-            profiles=profiles,
-            max_tasks=max_tasks,
-        )
-        for profile in profiles:
-            total_stats[profile]["correct"] += result[profile]["correct"]
-            total_stats[profile]["attempted"] += result[profile]["attempted"]
-            total_stats[profile]["skipped"] += result[profile]["skipped"]
-
-    print(f"\n{'=' * 56}")
-    print("[FINAL]")
-    for profile in profiles:
-        correct = total_stats[profile]["correct"]
-        attempted = total_stats[profile]["attempted"]
-        skipped = total_stats[profile]["skipped"]
-        final_acc = (correct / attempted * 100) if attempted else 0.0
-        print(
-            f"{profile}: correct={correct} attempted={attempted} "
-            f"skipped={skipped} accuracy={final_acc:.2f}%"
-        )
-    print(f"{'=' * 56}")
-
-
-def parse_args():
-    parser = argparse.ArgumentParser(description="Intercode NL2Bash benchmark runner")
-    parser.add_argument(
-        "--dataset-base",
-        type=Path,
-        default=DEFAULT_DATASET_BASE,
-        help="Dataset directory path",
-    )
-    parser.add_argument(
-        "--setup-dir",
-        type=Path,
-        default=DEFAULT_SETUP_DIR,
-        help="Setup script directory path",
-    )
-    parser.add_argument(
-        "--image",
-        default=DEFAULT_IMAGE,
-        help="Docker image for sandbox",
-    )
-    parser.add_argument(
-        "--model-server-url",
-        default=DEFAULT_MODEL_SERVER_URL,
-        help="OpenAI-compatible model server URL",
-    )
-    parser.add_argument(
-        "--model-name",
-        default=DEFAULT_MODEL_NAME,
-        help="Model name",
-    )
-    parser.add_argument(
-        "--files",
-        default="1,2,3,4",
-        help="Comma-separated file indices. Example: 3,4",
-    )
-    parser.add_argument(
-        "--max-tasks",
-        type=int,
+    run_parser = subparsers.add_parser("run", help="Run one task and save raw logs")
+    run_parser.add_argument("--split", type=int, default=1, help="NL2Bash split number")
+    run_parser.add_argument("--task-index", type=int, required=True, help="Task index within the split")
+    run_parser.add_argument(
+        "--command",
         default=None,
-        help="Limit tasks per dataset file",
+        help="Command to execute. Defaults to the task gold command.",
     )
-    parser.add_argument(
-        "--profiles",
-        default="STRICT,ROOT",
-        help="Comma-separated profiles. Example: STRICT,ROOT",
+    run_parser.add_argument(
+        "--command-source",
+        choices=("gold", "manual", "model"),
+        default=None,
+        help="How to choose the command. Defaults to gold, or manual when --command is provided.",
     )
-    return parser.parse_args()
+    run_parser.add_argument(
+        "--image",
+        default=None,
+        help="Docker image to use for the InterCode bash environment. Defaults to split-specific intercode-nl2bash-fsN.",
+    )
+    run_parser.add_argument(
+        "--profile",
+        choices=("root", "strict"),
+        default="root",
+        help="Execution profile for the task run",
+    )
+    run_parser.add_argument(
+        "--model-name",
+        default=None,
+        help="Model name for query-to-command generation when using --command-source model",
+    )
+    run_parser.add_argument(
+        "--model-server-url",
+        default=None,
+        help="OpenAI-compatible model server URL when using --command-source model",
+    )
+
+    batch_parser = subparsers.add_parser("batch", help="Run multiple tasks and save raw logs plus a summary")
+    batch_parser.add_argument("--split", type=int, default=1, help="NL2Bash split number")
+    batch_parser.add_argument("--offset", type=int, default=0, help="Starting task index for batch selection")
+    batch_parser.add_argument("--limit", type=int, default=None, help="Number of tasks to run from the offset")
+    batch_parser.add_argument(
+        "--task-indices",
+        default=None,
+        help="Comma-separated task indices to run. Overrides offset/limit.",
+    )
+    batch_parser.add_argument(
+        "--command",
+        default=None,
+        help="Command to execute for all tasks when using manual command source.",
+    )
+    batch_parser.add_argument(
+        "--command-source",
+        choices=("gold", "manual", "model"),
+        default=None,
+        help="How to choose the command for each task. Defaults to gold, or manual when --command is provided.",
+    )
+    batch_parser.add_argument(
+        "--image",
+        default=None,
+        help="Docker image to use for the InterCode bash environment. Defaults to split-specific intercode-nl2bash-fsN.",
+    )
+    batch_parser.add_argument(
+        "--profile",
+        choices=("root", "strict"),
+        default="root",
+        help="Execution profile for all task runs in this batch",
+    )
+    batch_parser.add_argument(
+        "--model-name",
+        default=None,
+        help="Model name for query-to-command generation when using --command-source model",
+    )
+    batch_parser.add_argument(
+        "--model-server-url",
+        default=None,
+        help="OpenAI-compatible model server URL when using --command-source model",
+    )
+    batch_parser.add_argument(
+        "--summary-path",
+        default=None,
+        help="Path to the batch summary JSONL file",
+    )
+
+    generate_set_parser = subparsers.add_parser("generate-set", help="Generate a reusable command set from task queries")
+    generate_set_parser.add_argument("--split", type=int, default=1, help="NL2Bash split number")
+    generate_set_parser.add_argument("--offset", type=int, default=0, help="Starting task index for command generation")
+    generate_set_parser.add_argument("--limit", type=int, default=None, help="Number of tasks to generate from the offset")
+    generate_set_parser.add_argument(
+        "--task-indices",
+        default=None,
+        help="Comma-separated task indices to generate. Overrides offset/limit.",
+    )
+    generate_set_parser.add_argument(
+        "--model-name",
+        default=None,
+        help="Model name for query-to-command generation",
+    )
+    generate_set_parser.add_argument(
+        "--model-server-url",
+        default=None,
+        help="OpenAI-compatible model server URL for query-to-command generation",
+    )
+
+    run_set_parser = subparsers.add_parser("run-set", help="Execute a previously generated command set under one profile")
+    run_set_parser.add_argument(
+        "--records-path",
+        required=True,
+        help="Path to commands.jsonl produced by generate-set",
+    )
+    run_set_parser.add_argument(
+        "--profile",
+        choices=("root", "strict"),
+        required=True,
+        help="Execution profile for this command-set replay",
+    )
+    run_set_parser.add_argument(
+        "--image",
+        default=None,
+        help="Override Docker image to use for the InterCode bash environment. Defaults to split-specific intercode-nl2bash-fsN.",
+    )
+
+    return parser
+
+
+def create_session_results_dir(results_root=None):
+    root = Path(results_root) if results_root is not None else DEFAULT_RESULTS_ROOT
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    username = getpass.getuser()
+    session_dir = root / "{timestamp}_{username}".format(timestamp=timestamp, username=username)
+    raw_dir = session_dir / "raw"
+    raw_dir.mkdir(parents=True, exist_ok=True)
+    return session_dir, raw_dir
+
+
+def main(argv=None):
+    parser = build_parser()
+    args = parser.parse_args(argv)
+
+    repo_info = ensure_intercode_repo()
+    print(f"InterCode repo: {repo_info.root}")
+
+    if args.subcommand == "list":
+        selection = IntercodeTaskSelection(split=args.split)
+        tasks = list_tasks(selection, limit=getattr(args, "limit", 5), offset=getattr(args, "offset", 0))
+        for task in tasks:
+            print(f"[{task.task_index}] {task.query}")
+        return 0
+
+    if args.subcommand == "run":
+        selection = IntercodeTaskSelection(split=args.split)
+        session_dir, raw_dir = create_session_results_dir()
+        log_path = run_task(
+            selection=selection,
+            task_index=args.task_index,
+            image_name=args.image,
+            command=args.command,
+            command_source=args.command_source,
+            model_name=args.model_name,
+            model_server_url=args.model_server_url,
+            profile_name=args.profile,
+            results_raw_dir=raw_dir,
+        )
+        print(f"Results directory: {session_dir}")
+        print(f"Saved raw log: {log_path}")
+        return 0
+
+    if args.subcommand == "batch":
+        selection = IntercodeTaskSelection(split=args.split)
+        selected_indices = None
+        if args.task_indices:
+            selected_indices = [int(item.strip()) for item in args.task_indices.split(",") if item.strip()]
+
+        session_dir, raw_dir = create_session_results_dir()
+        summary_path = (
+            ensure_path(args.summary_path)
+            if args.summary_path is not None
+            else session_dir / "intercode_batch_summary.jsonl"
+        )
+        result = run_batch(
+            selection=selection,
+            image_name=args.image,
+            command=args.command,
+            command_source=args.command_source,
+            model_name=args.model_name,
+            model_server_url=args.model_server_url,
+            profile_name=args.profile,
+            results_raw_dir=raw_dir,
+            offset=args.offset,
+            limit=args.limit,
+            task_indices=selected_indices,
+            summary_path=summary_path,
+        )
+        print(
+            "Batch completed: run_id={run_id} attempted={attempted} completed={completed} errors={errors} dir={directory} summary={summary}".format(
+                run_id=result["batch_run_id"],
+                attempted=result["attempted"],
+                completed=result["completed"],
+                errors=result["errors"],
+                directory=session_dir,
+                summary=result["summary_path"],
+            )
+        )
+        return 0
+
+    if args.subcommand == "generate-set":
+        selection = IntercodeTaskSelection(split=args.split)
+        selected_indices = None
+        if args.task_indices:
+            selected_indices = [int(item.strip()) for item in args.task_indices.split(",") if item.strip()]
+        result = create_command_set(
+            selection=selection,
+            model_name=args.model_name,
+            model_server_url=args.model_server_url,
+            offset=args.offset,
+            limit=args.limit,
+            task_indices=selected_indices,
+        )
+        print(
+            "Command set created: id={command_set_id} dir={directory} records={records} tasks={count}".format(
+                command_set_id=result["command_set_id"],
+                directory=result["output_dir"],
+                records=result["records_path"],
+                count=result["task_count"],
+            )
+        )
+        return 0
+
+    if args.subcommand == "run-set":
+        session_dir, raw_dir = create_session_results_dir()
+        summary_path = session_dir / "intercode_command_set_summary.jsonl"
+        result = execute_command_set(
+            records_path=ensure_path(args.records_path),
+            profile_name=args.profile,
+            summary_path=summary_path,
+            results_raw_dir=raw_dir,
+            image_name=args.image,
+        )
+        print(
+            "Command set execution completed: profile={profile} attempted={attempted} completed={completed} errors={errors} dir={directory} summary={summary}".format(
+                profile=args.profile,
+                attempted=result["attempted"],
+                completed=result["completed"],
+                errors=result["errors"],
+                directory=session_dir,
+                summary=result["summary_path"],
+            )
+        )
+        return 0
+
+    parser.error(f"Unsupported command: {args.subcommand}")
+    return 1
+
+
+def ensure_path(path_text):
+    from pathlib import Path
+
+    return Path(path_text)
 
 
 if __name__ == "__main__":
-    args = parse_args()
-    selected_files = [int(x.strip()) for x in args.files.split(",") if x.strip()]
-    selected_profiles = [x.strip().upper() for x in args.profiles.split(",") if x.strip()]
-    try:
-        run_full_benchmark(
-            dataset_base=args.dataset_base,
-            setup_dir=args.setup_dir,
-            image_name=args.image,
-            model_server_url=args.model_server_url,
-            model_name=args.model_name,
-            file_indices=selected_files,
-            profiles=selected_profiles,
-            max_tasks=args.max_tasks,
-        )
-    except Exception as e:
-        print(f"[FATAL] {e}")
+    raise SystemExit(main())

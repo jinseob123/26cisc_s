@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T06:48:52Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T06:48:52Z",
+    "finished_at": "2026-03-17T06:49:00Z",
+    "image_name": "intercode-nl2bash-fs3",
+    "command": {
+      "text": "find /workspace -type f -printf '%T@ %p\\n' | sort -n | head -1 | cut -d' ' -f2- | xargs ls -l",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /workspace -type f -printf '%T@ %p\\n' | sort -n | head -1 | cut -d' ' -f2- | xargs ls -l",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": false,
+    "raw_output_text": "find /workspace -type f -printf '%T@ %p\\n' | sort -n | head -1 | cut -d' ' -f2- | xargs ls -l",
+    "raw_output_payload": {
+      "content": "find /workspace -type f -printf '%T@ %p\\n' | sort -n | head -1 | cut -d' ' -f2- | xargs ls -l",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need find oldest file and ls -l. Use find with -printf to get mtime, sort, head. Then ls -l. Command: find /workspace -type f -printf '%T@ %p\\n' | sort -n | head -1 | cut -d' ' -f2- | xargs ls -l. Combine.",
+      "reasoning_content": "Need find oldest file and ls -l. Use find with -printf to get mtime, sort, head. Then ls -l. Command: find /workspace -type f -printf '%T@ %p\\n' | sort -n | head -1 | cut -d' ' -f2- | xargs ls -l. Combine."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 33,
+    "query": "Display a long listing of the oldest file under '/workspace' directory tree",
+    "gold": "find /workspace -printf \"%T@ %p\\n\" | sort -n | head -1 | cut -d\" \" -f2- | xargs ls -al",
+    "record": {
+      "query": "Display a long listing of the oldest file under '/workspace' directory tree",
+      "gold": "find /workspace -printf \"%T@ %p\\n\" | sort -n | head -1 | cut -d\" \" -f2- | xargs ls -al"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Display a long listing of the oldest file under '/workspace' directory tree",
+      "info": {}
+    },
+    "action": {
+      "command": "find /workspace -type f -printf '%T@ %p\\n' | sort -n | head -1 | cut -d' ' -f2- | xargs ls -l",
+      "observation": "-rw-r--r-- 1 root root 28 Mar 17 05:00 /workspace/.hidden.txt\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "-rw-r--r-- 1 root root 28 Mar 17 05:00 /workspace/.hidden.txt\n",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "-rw-r--r-- 1 root root 28 Mar 17 05:00 /workspace/.hidden.txt\n",
+        "eval_obs": "1773729539.38035285101773729425.19001071101773722073.65226841901773722073.65326846401773722073.65326846401773722073.65326846401773722073.65726864401773722073.65726864401773722073.65726864401773722073.66026877901773729425.19001071101773722073.66226886901773722073.66526900501773729425.18901063301773724568.02927977901773724909.38816104601773722073.68326981601773722073.68326981601773722073.00000000001773722073.65726864401773722073.68927008601773729539.38035285101773729539.38035285101773729539.38035285101773729539.38035285101773729539.38035285101773729539.37935278301773729539.3803528510",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /workspace -type f -printf '%T@ %p\\n' | sort -n | head -1 | cut -d' ' -f2- | xargs ls -l",
+        "observation": "-rw-r--r-- 1 root root 28 Mar 17 05:00 /workspace/.hidden.txt\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "-rw-r--r-- 1 root root 28 Mar 17 05:00 /workspace/.hidden.txt\n",
+    "eval_observation": "1773729539.38035285101773729425.19001071101773722073.65226841901773722073.65326846401773722073.65326846401773722073.65326846401773722073.65726864401773722073.65726864401773722073.65726864401773722073.66026877901773729425.19001071101773722073.66226886901773722073.66526900501773729425.18901063301773724568.02927977901773724909.38816104601773722073.68326981601773722073.68326981601773722073.00000000001773722073.65726864401773722073.68927008601773729539.38035285101773729539.38035285101773729539.38035285101773729539.38035285101773729539.38035285101773729539.37935278301773729539.3803528510",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "2acd6955a881",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260317_120804_2acd6955a881/commands.jsonl"
+  }
+}

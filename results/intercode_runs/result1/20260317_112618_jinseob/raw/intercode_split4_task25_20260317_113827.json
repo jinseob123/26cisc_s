@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T02:38:27Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T02:38:27Z",
+    "finished_at": "2026-03-17T02:38:36Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "proc_load_average=$(awk '{print $1}' /proc/loadavg); echo \"$proc_load_average\"",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_4.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "proc_load_average=$(awk '{print $1}' /proc/loadavg); echo \"$proc_load_average\"",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nproc_load_average=$(awk '{print $1}' /proc/loadavg); echo \"$proc_load_average\"\n```",
+    "raw_output_payload": {
+      "content": "```bash\nproc_load_average=$(awk '{print $1}' /proc/loadavg); echo \"$proc_load_average\"\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need to read /proc/loadavg first field. Command: proc_load_average=$(cut -d' ' -f1 /proc/loadavg); echo \"$proc_load_average\". Provide single command? Could be a one-liner: proc_load_average=$(awk '{print $1}' /proc/loadavg); echo \"$proc_load_average\". Provide as bash command.",
+      "reasoning_content": "Need to read /proc/loadavg first field. Command: proc_load_average=$(cut -d' ' -f1 /proc/loadavg); echo \"$proc_load_average\". Provide single command? Could be a one-liner: proc_load_average=$(awk '{print $1}' /proc/loadavg); echo \"$proc_load_average\". Provide as bash command."
+    }
+  },
+  "task": {
+    "split": 4,
+    "task_index": 25,
+    "query": "Store system load average number in the 'proc_load_average' variable and print it.",
+    "gold": "proc_load_average=$(w | head -n 1 | awk '{print $NF}' | tr ',' '.') && echo $proc_load_average",
+    "record": {
+      "query": "Store system load average number in the 'proc_load_average' variable and print it.",
+      "gold": "proc_load_average=$(w | head -n 1 | awk '{print $NF}' | tr ',' '.') && echo $proc_load_average"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Store system load average number in the 'proc_load_average' variable and print it.",
+      "info": {}
+    },
+    "action": {
+      "command": "proc_load_average=$(awk '{print $1}' /proc/loadavg); echo \"$proc_load_average\"",
+      "observation": "16.20\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "16.20\n",
+      "reward": 0.78,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.11
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "16.20\n",
+        "eval_obs": "16.51\n",
+        "answer_similarity": 0.3360969272762574,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "proc_load_average=$(awk '{print $1}' /proc/loadavg); echo \"$proc_load_average\"",
+        "observation": "16.20\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.78,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "16.20\n",
+    "eval_observation": "16.51\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "batch": {
+    "run_id": "6cd0f7af3b38",
+    "selection": {
+      "split": 4,
+      "offset": 0,
+      "limit": null,
+      "task_indices": null
+    }
+  }
+}

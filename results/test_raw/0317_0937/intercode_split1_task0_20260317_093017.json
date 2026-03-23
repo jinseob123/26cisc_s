@@ -1,0 +1,93 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T00:30:17Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T00:30:17Z",
+    "finished_at": "2026-03-17T00:30:26Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "md5sum /testbed/*.java | awk '{print $1}' | sort | uniq -d",
+      "source": "gold"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    }
+  },
+  "generation": null,
+  "task": {
+    "split": 1,
+    "task_index": 0,
+    "query": "Calculate a list of duplicate md5 sum hashes for all the \".java\" files in the /testbed directory",
+    "gold": "md5sum /testbed/*.java | awk '{print $1}' | sort | uniq -d",
+    "record": {
+      "query": "Calculate a list of duplicate md5 sum hashes for all the \".java\" files in the /testbed directory",
+      "gold": "md5sum /testbed/*.java | awk '{print $1}' | sort | uniq -d"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Calculate a list of duplicate md5 sum hashes for all the \".java\" files in the /testbed directory",
+      "info": {}
+    },
+    "action": {
+      "command": "md5sum /testbed/*.java | awk '{print $1}' | sort | uniq -d",
+      "observation": "f32a3a97638afeb2ee2a15cfe335ab72\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "f32a3a97638afeb2ee2a15cfe335ab72\n",
+      "reward": 1.0,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "f32a3a97638afeb2ee2a15cfe335ab72\n",
+        "eval_obs": "f32a3a97638afeb2ee2a15cfe335ab72\n",
+        "answer_similarity": 1.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "md5sum /testbed/*.java | awk '{print $1}' | sort | uniq -d",
+        "observation": "f32a3a97638afeb2ee2a15cfe335ab72\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 1.0,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "f32a3a97638afeb2ee2a15cfe335ab72\n",
+    "eval_observation": "f32a3a97638afeb2ee2a15cfe335ab72\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "batch": {
+    "run_id": "f2473eb0234e",
+    "selection": {
+      "split": 1,
+      "offset": 0,
+      "limit": 1,
+      "task_indices": null
+    }
+  }
+}

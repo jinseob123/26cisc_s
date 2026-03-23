@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T01:20:47Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T01:20:47Z",
+    "finished_at": "2026-03-17T01:20:57Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "find /testbed -type f -name '*.php' -print0 | xargs -0 grep -E -c '[[:alnum:]]' | awk '{s+=$1} END{print s}'",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /testbed -type f -name '*.php' -print0 | xargs -0 grep -E -c '[[:alnum:]]' | awk '{s+=$1} END{print s}'",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": true,
+    "raw_output_text": "find /testbed -type f -name '*.php' -print0 | xargs -0 grep -E -c '[[:alnum:]]' | awk '{s+=$1} END{print s}'",
+    "raw_output_payload": {
+      "content": "find /testbed -type f -name '*.php' -print0 | xargs -0 grep -E -c '[[:alnum:]]' | awk '{s+=$1} END{print s}'",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need bash command to count lines with alphanumeric symbols in all .php files under /testbed. Use grep -E -c? Actually count lines that contain at least one alphanumeric character. Use grep -E -o? We can use grep -E -c '[[:alnum:]]' but that counts per file. Need total. Use grep -E -c? Actually grep -E -c counts per file. Instead use grep -E -o? Wait: we can use grep -E -c '[[:alnum:]]' file | awk sum. Or simpler: grep -E -c '[[:alnum:]]' $(find /testbed -name '*.php') | awk '{s+=$1} END{print s}'. But grep -c counts lines per file. That works. So command: grep -E -c '[[:alnum:]]' $(find /testbed -type f -name '*.php') | awk '{s+=$1} END{print s}'. But need to handle many files; use xargs. Use find ... -print0 | xargs -0 grep -E -c '[[:alnum:]]' | awk... But grep -c with multiple files prints each file count. So final: find /testbed -type f -name '*.php' -print0 | xargs -0 grep -E -c '[[:alnum:]]' | awk '{s+=$1} END{print s}'.",
+      "reasoning_content": "We need bash command to count lines with alphanumeric symbols in all .php files under /testbed. Use grep -E -c? Actually count lines that contain at least one alphanumeric character. Use grep -E -o? We can use grep -E -c '[[:alnum:]]' but that counts per file. Need total. Use grep -E -c? Actually grep -E -c counts per file. Instead use grep -E -o? Wait: we can use grep -E -c '[[:alnum:]]' file | awk sum. Or simpler: grep -E -c '[[:alnum:]]' $(find /testbed -name '*.php') | awk '{s+=$1} END{print s}'. But grep -c counts lines per file. That works. So command: grep -E -c '[[:alnum:]]' $(find /testbed -type f -name '*.php') | awk '{s+=$1} END{print s}'. But need to handle many files; use xargs. Use find ... -print0 | xargs -0 grep -E -c '[[:alnum:]]' | awk... But grep -c with multiple files prints each file count. So final: find /testbed -type f -name '*.php' -print0 | xargs -0 grep -E -c '[[:alnum:]]' | awk '{s+=$1} END{print s}'."
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 41,
+    "query": "Counts total number of only lines with alphanumeric symbols in all *.php files in the /testbed folder and subfolders.",
+    "gold": "find /testbed -name '*.php' | xargs cat | awk '/[a-zA-Z0-9]/ {i++} END{print i}'",
+    "record": {
+      "query": "Counts total number of only lines with alphanumeric symbols in all *.php files in the /testbed folder and subfolders.",
+      "gold": "find /testbed -name '*.php' | xargs cat | awk '/[a-zA-Z0-9]/ {i++} END{print i}'"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Counts total number of only lines with alphanumeric symbols in all *.php files in the /testbed folder and subfolders.",
+      "info": {}
+    },
+    "action": {
+      "command": "find /testbed -type f -name '*.php' -print0 | xargs -0 grep -E -c '[[:alnum:]]' | awk '{s+=$1} END{print s}'",
+      "observation": "0\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "0\n",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "0\n",
+        "eval_obs": "2\n",
+        "answer_similarity": 0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /testbed -type f -name '*.php' -print0 | xargs -0 grep -E -c '[[:alnum:]]' | awk '{s+=$1} END{print s}'",
+        "observation": "0\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "0\n",
+    "eval_observation": "2\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "batch": {
+    "run_id": "172a61432793",
+    "selection": {
+      "split": 1,
+      "offset": 0,
+      "limit": null,
+      "task_indices": null
+    }
+  }
+}

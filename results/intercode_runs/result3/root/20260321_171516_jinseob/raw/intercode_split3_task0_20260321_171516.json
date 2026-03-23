@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-21T08:15:16Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-21T08:15:16Z",
+    "finished_at": "2026-03-21T08:15:25Z",
+    "image_name": "intercode-nl2bash-fs3",
+    "command": {
+      "text": "find /workspace -type f -mtime 30",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /workspace -type f -mtime 30",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nfind /workspace -type f -mtime 30\n```",
+    "raw_output_payload": {
+      "content": "```bash\nfind /workspace -type f -mtime 30\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need find with -mtime 30? Modified exactly 30 days ago means -mtime 30? That matches files modified between 30 and 31 days. Use -mtime 30.",
+      "reasoning_content": "Need find with -mtime 30? Modified exactly 30 days ago means -mtime 30? That matches files modified between 30 and 31 days. Use -mtime 30."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 0,
+    "query": "find files in /workspace directory which are modified 30 days ago",
+    "gold": "find /workspace -daystart -type f -mtime -30",
+    "record": {
+      "query": "find files in /workspace directory which are modified 30 days ago",
+      "gold": "find /workspace -daystart -type f -mtime -30"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "find files in /workspace directory which are modified 30 days ago",
+      "info": {}
+    },
+    "action": {
+      "command": "find /workspace -type f -mtime 30",
+      "observation": "",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "",
+        "eval_obs": "/workspace/dir1/hello.c\n/workspace/dir1/sum.c\n/workspace/dir1/script1.sh\n/workspace/dir1/new1.sh\n/workspace/dir1/hello.txt\n/workspace/dir1/long.txt\n/workspace/dir1/terminate.txt\n/workspace/dir1/a.txt\n/workspace/dir1/file.txt\n/workspace/dir1/readonly.txt\n/workspace/dir1/all.txt\n/workspace/dir1/file.c\n/workspace/dir1/.hidden1.txt\n/workspace/dir2/mysql/sql1.sql\n/workspace/dir2/foo.txt\n/workspace/dir2/hello.txt\n/workspace/dir2/csvfile1.csv\n/workspace/new.sh\n/workspace/results.txt\n/workspace/files.txt\n/workspace/.hidden.txt\n/workspace/archive.tar.gz\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /workspace -type f -mtime 30",
+        "observation": ""
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "",
+    "eval_observation": "/workspace/dir1/hello.c\n/workspace/dir1/sum.c\n/workspace/dir1/script1.sh\n/workspace/dir1/new1.sh\n/workspace/dir1/hello.txt\n/workspace/dir1/long.txt\n/workspace/dir1/terminate.txt\n/workspace/dir1/a.txt\n/workspace/dir1/file.txt\n/workspace/dir1/readonly.txt\n/workspace/dir1/all.txt\n/workspace/dir1/file.c\n/workspace/dir1/.hidden1.txt\n/workspace/dir2/mysql/sql1.sql\n/workspace/dir2/foo.txt\n/workspace/dir2/hello.txt\n/workspace/dir2/csvfile1.csv\n/workspace/new.sh\n/workspace/results.txt\n/workspace/files.txt\n/workspace/.hidden.txt\n/workspace/archive.tar.gz\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "7638e08942e6",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260321_153405_7638e08942e6/commands.jsonl"
+  }
+}

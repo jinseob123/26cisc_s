@@ -1,0 +1,119 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T02:22:51Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T02:22:51Z",
+    "finished_at": "2026-03-17T02:22:59Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "grep -rni 'hello' /workspace",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "grep -rni 'hello' /workspace",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\ngrep -rni 'hello' /workspace\n```",
+    "raw_output_payload": {
+      "content": "```bash\ngrep -rni 'hello' /workspace\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need grep -r -i 'hello' /workspace. Show filenames. Use -H default. So command: grep -rni 'hello' /workspace. But requirement: show matched lines with filenames. So grep -r -i 'hello' /workspace. Add -n for line numbers maybe. I'll output: grep -rni 'hello' /workspace.",
+      "reasoning_content": "Need grep -r -i 'hello' /workspace. Show filenames. Use -H default. So command: grep -rni 'hello' /workspace. But requirement: show matched lines with filenames. So grep -r -i 'hello' /workspace. Add -n for line numbers maybe. I'll output: grep -rni 'hello' /workspace."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 55,
+    "query": "Search for 'hello' case insensitively in all files under /workspace directory tree and show the matched lines with their filenames",
+    "gold": "find /workspace -type f -print0  | xargs -0 grep -iH \"hello\"",
+    "record": {
+      "query": "Search for 'hello' case insensitively in all files under /workspace directory tree and show the matched lines with their filenames",
+      "gold": "find /workspace -type f -print0  | xargs -0 grep -iH \"hello\""
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Search for 'hello' case insensitively in all files under /workspace directory tree and show the matched lines with their filenames",
+      "info": {}
+    },
+    "action": {
+      "command": "grep -rni 'hello' /workspace",
+      "observation": "grep: /workspace: No such file or directory\n",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "grep: /workspace: No such file or directory\n",
+      "reward": 0.64,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.05,
+          "file_changes": 0.33,
+          "answer_similarity": 0.25
+        },
+        "diff_miss": [
+          [
+            "dir1",
+            "??"
+          ]
+        ],
+        "diff_extra": [],
+        "agent_obs": "grep: /workspace: No such file or directory\n",
+        "eval_obs": "find: '/workspace': No such file or directory\n",
+        "answer_similarity": 0.7523197619890014,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "grep -rni 'hello' /workspace",
+        "observation": "grep: /workspace: No such file or directory\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.64,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "grep: /workspace: No such file or directory\n",
+    "eval_observation": "find: '/workspace': No such file or directory\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "batch": {
+    "run_id": "dc74a59cf2ba",
+    "selection": {
+      "split": 3,
+      "offset": 0,
+      "limit": null,
+      "task_indices": null
+    }
+  }
+}

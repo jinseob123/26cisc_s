@@ -1,0 +1,140 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-16T14:59:22Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-16T14:59:22Z",
+    "finished_at": "2026-03-16T14:59:30Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "tar -czf /mytarfile.tgz -C /system/folder1 $(find . -maxdepth 1 -type f -mtime -60)",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_2.json"
+    }
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "tar -czf /mytarfile.tgz -C /system/folder1 $(find . -maxdepth 1 -type f -mtime -60)",
+    "raw_output_text": "```bash\ntar -czf /mytarfile.tgz -C /system/folder1 $(find . -maxdepth 1 -type f -mtime -60)\n```",
+    "raw_output_payload": {
+      "content": "```bash\ntar -czf /mytarfile.tgz -C /system/folder1 $(find . -maxdepth 1 -type f -mtime -60)\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need find modified in last 60 days and tar to gzip. Use find -mtime -60. tar -czf. Use -C to change dir. Command: tar -czf /mytarfile.tgz -C /system/folder1 $(find . -maxdepth 1 -type f -mtime -60). But better: tar -czf /mytarfile.tgz -C /system/folder1 $(find . -maxdepth 1 -type f -mtime -60). Provide single command.",
+      "reasoning_content": "Need find modified in last 60 days and tar to gzip. Use find -mtime -60. tar -czf. Use -C to change dir. Command: tar -czf /mytarfile.tgz -C /system/folder1 $(find . -maxdepth 1 -type f -mtime -60). But better: tar -czf /mytarfile.tgz -C /system/folder1 $(find . -maxdepth 1 -type f -mtime -60). Provide single command."
+    }
+  },
+  "task": {
+    "split": 2,
+    "task_index": 39,
+    "query": "archive all files in /system/folder1 directory modified in the last 60 days to \"/mytarfile.tgz\"",
+    "gold": "tar czvf mytarfile.tgz `find /system/folder1 -mtime -60`",
+    "record": {
+      "query": "archive all files in /system/folder1 directory modified in the last 60 days to \"/mytarfile.tgz\"",
+      "gold": "tar czvf mytarfile.tgz `find /system/folder1 -mtime -60`"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "archive all files in /system/folder1 directory modified in the last 60 days to \"/mytarfile.tgz\"",
+      "info": {
+        "action_executed": false,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.05,
+          "file_changes": 0.33,
+          "answer_similarity": 0.13
+        },
+        "diff_miss": [],
+        "diff_extra": [
+          [
+            "mytarfile.tgz",
+            "??"
+          ]
+        ],
+        "agent_obs": "tar: /system/folder1: Cannot open: No such file or directory\ntar: Error is not recoverable: exiting now\n",
+        "eval_obs": "find: '/system/folder1': No such file or directory\ntar: Cowardly refusing to create an empty archive\nTry 'tar --help' or 'tar --usage' for more information.\n",
+        "answer_similarity": 0.39590559453263835
+      }
+    },
+    "action": {
+      "command": "tar -czf /mytarfile.tgz -C /system/folder1 $(find . -maxdepth 1 -type f -mtime -60)",
+      "observation": "tar: /system/folder1: Cannot open: No such file or directory\ntar: Error is not recoverable: exiting now\n",
+      "info": {
+        "action_executed": false,
+        "corrupt_gold": false,
+        "reward": {
+          "file_diff": 0.05,
+          "file_changes": 0.33,
+          "answer_similarity": 0.13
+        },
+        "diff_miss": [],
+        "diff_extra": [
+          [
+            "mytarfile.tgz",
+            "??"
+          ]
+        ],
+        "agent_obs": "tar: /system/folder1: Cannot open: No such file or directory\ntar: Error is not recoverable: exiting now\n",
+        "eval_obs": "find: '/system/folder1': No such file or directory\ntar: Cowardly refusing to create an empty archive\nTry 'tar --help' or 'tar --usage' for more information.\n",
+        "answer_similarity": 0.39590559453263835
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "tar: /system/folder1: Cannot open: No such file or directory\ntar: Error is not recoverable: exiting now\n",
+      "reward": 0.52,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.05,
+          "file_changes": 0.33,
+          "answer_similarity": 0.13
+        },
+        "diff_miss": [],
+        "diff_extra": [
+          [
+            "mytarfile.tgz",
+            "??"
+          ]
+        ],
+        "agent_obs": "tar: /system/folder1: Cannot open: No such file or directory\ntar: Error is not recoverable: exiting now\n",
+        "eval_obs": "find: '/system/folder1': No such file or directory\ntar: Cowardly refusing to create an empty archive\nTry 'tar --help' or 'tar --usage' for more information.\n",
+        "answer_similarity": 0.39590559453263835,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "tar -czf /mytarfile.tgz -C /system/folder1 $(find . -maxdepth 1 -type f -mtime -60)",
+        "observation": "tar: /system/folder1: Cannot open: No such file or directory\ntar: Error is not recoverable: exiting now\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.52,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "tar: /system/folder1: Cannot open: No such file or directory\ntar: Error is not recoverable: exiting now\n",
+    "eval_observation": "find: '/system/folder1': No such file or directory\ntar: Cowardly refusing to create an empty archive\nTry 'tar --help' or 'tar --usage' for more information.\n",
+    "corrupt_gold": null
+  },
+  "error": null
+}

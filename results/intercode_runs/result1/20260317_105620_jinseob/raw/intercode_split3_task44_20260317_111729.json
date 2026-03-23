@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-17T02:17:29Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-17T02:17:29Z",
+    "finished_at": "2026-03-17T02:17:38Z",
+    "image_name": "intercode-nl2bash",
+    "command": {
+      "text": "[ -d /workspace/dir2/mysql/ ] && findmnt -n -o TARGET --target /workspace/dir2/mysql/ >/dev/null 2>&1 && echo \"exists on a mounted filesystem\" || echo \"does not exist or not on a mounted filesystem\"",
+      "source": "model"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-safeguard-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "[ -d /workspace/dir2/mysql/ ] && findmnt -n -o TARGET --target /workspace/dir2/mysql/ >/dev/null 2>&1 && echo \"exists on a mounted filesystem\" || echo \"does not exist or not on a mounted filesystem\"",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": true,
+    "raw_output_text": "[ -d /workspace/dir2/mysql/ ] && findmnt -n -o TARGET --target /workspace/dir2/mysql/ >/dev/null 2>&1 && echo \"exists on a mounted filesystem\" || echo \"does not exist or not on a mounted filesystem\"",
+    "raw_output_payload": {
+      "content": "[ -d /workspace/dir2/mysql/ ] && findmnt -n -o TARGET --target /workspace/dir2/mysql/ >/dev/null 2>&1 && echo \"exists on a mounted filesystem\" || echo \"does not exist or not on a mounted filesystem\"",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need to check if directory exists and is on a mounted filesystem. Use findmnt or stat -f. Command: test -d /workspace/dir2/mysql/ && findmnt -n -o TARGET --target /workspace/dir2/mysql/ | grep -q .? Actually to check if it's a mount point? They want if it exists on a mounted file system. So check if directory exists and its device differs from root? Use stat -f -c %T? Maybe: if [ -d /workspace/dir2/mysql/ ] && [ \"$(stat -f -c %T /workspace/dir2/mysql/)\" != \"ext4\" ]? Not. Simpler: findmnt -n -o TARGET --target /workspace/dir2/mysql/ > /dev/null 2>&1 && echo exists. So output command that returns success if exists. Provide one line.",
+      "reasoning_content": "Need to check if directory exists and is on a mounted filesystem. Use findmnt or stat -f. Command: test -d /workspace/dir2/mysql/ && findmnt -n -o TARGET --target /workspace/dir2/mysql/ | grep -q .? Actually to check if it's a mount point? They want if it exists on a mounted file system. So check if directory exists and its device differs from root? Use stat -f -c %T? Maybe: if [ -d /workspace/dir2/mysql/ ] && [ \"$(stat -f -c %T /workspace/dir2/mysql/)\" != \"ext4\" ]? Not. Simpler: findmnt -n -o TARGET --target /workspace/dir2/mysql/ > /dev/null 2>&1 && echo exists. So output command that returns success if exists. Provide one line."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 44,
+    "query": "Determine if /workspace/dir2/mysql/ exists on a mounted file system.",
+    "gold": "df /workspace/dir2/mysql/",
+    "record": {
+      "query": "Determine if /workspace/dir2/mysql/ exists on a mounted file system.",
+      "gold": "df /workspace/dir2/mysql/"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Determine if /workspace/dir2/mysql/ exists on a mounted file system.",
+      "info": {}
+    },
+    "action": {
+      "command": "[ -d /workspace/dir2/mysql/ ] && findmnt -n -o TARGET --target /workspace/dir2/mysql/ >/dev/null 2>&1 && echo \"exists on a mounted filesystem\" || echo \"does not exist or not on a mounted filesystem\"",
+      "observation": "",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "",
+        "eval_obs": "df: /workspace/dir2/mysql/: No such file or directory\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "[ -d /workspace/dir2/mysql/ ] && findmnt -n -o TARGET --target /workspace/dir2/mysql/ >/dev/null 2>&1 && echo \"exists on a mounted filesystem\" || echo \"does not exist or not on a mounted filesystem\"",
+        "observation": ""
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "",
+    "eval_observation": "df: /workspace/dir2/mysql/: No such file or directory\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "batch": {
+    "run_id": "dc74a59cf2ba",
+    "selection": {
+      "split": 3,
+      "offset": 0,
+      "limit": null,
+      "task_indices": null
+    }
+  }
+}
