@@ -1,0 +1,118 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-28T10:56:34Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-28T10:56:34Z",
+    "finished_at": "2026-03-28T10:56:40Z",
+    "image_name": "intercode-nl2bash-fs1",
+    "command": {
+      "text": "echo \"Number of .php files: $(find /testbed -type f -name '*.php' | wc -l)\" && find /testbed -type f -name '*.php' -exec chmod 755 {} +",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "echo \"Number of .php files: $(find /testbed -type f -name '*.php' | wc -l)\" && find /testbed -type f -name '*.php' -exec chmod 755 {} +",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": true,
+    "raw_output_text": "echo \"Number of .php files: $(find /testbed -type f -name '*.php' | wc -l)\" && find /testbed -type f -name '*.php' -exec chmod 755 {} +",
+    "raw_output_payload": {
+      "content": "echo \"Number of .php files: $(find /testbed -type f -name '*.php' | wc -l)\" && find /testbed -type f -name '*.php' -exec chmod 755 {} +",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need a bash command that counts .php files and changes permissions to 755. Probably use find. Count: find /testbed -type f -name '*.php' | wc -l. Change perms: find /testbed -type f -name '*.php' -exec chmod 755 {} +. Combine? Use find twice. One line: echo $(find /testbed -type f -name '*.php' | wc -l) && find /testbed -type f -name '*.php' -exec chmod 755 {} +. But need one command. Use semicolon. Provide one line.",
+      "reasoning_content": "We need a bash command that counts .php files and changes permissions to 755. Probably use find. Count: find /testbed -type f -name '*.php' | wc -l. Change perms: find /testbed -type f -name '*.php' -exec chmod 755 {} +. Combine? Use find twice. One line: echo $(find /testbed -type f -name '*.php' | wc -l) && find /testbed -type f -name '*.php' -exec chmod 755 {} +. But need one command. Use semicolon. Provide one line."
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 27,
+    "query": "Count the number of files/directories with '.php' extension under /testbed directory tree and change the permissions to 755",
+    "gold": "find /testbed -name \"*.php\" -exec chmod 755 {} \\; -exec /bin/echo {} \\; | wc -l",
+    "record": {
+      "query": "Count the number of files/directories with '.php' extension under /testbed directory tree and change the permissions to 755",
+      "gold": "find /testbed -name \"*.php\" -exec chmod 755 {} \\; -exec /bin/echo {} \\; | wc -l"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Count the number of files/directories with '.php' extension under /testbed directory tree and change the permissions to 755",
+      "info": {}
+    },
+    "action": {
+      "command": "echo \"Number of .php files: $(find /testbed -type f -name '*.php' | wc -l)\" && find /testbed -type f -name '*.php' -exec chmod 755 {} +",
+      "observation": "Number\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "Number\n",
+      "reward": 0.34,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.0,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [
+          [
+            "testbed/dir1/info.php",
+            "M"
+          ],
+          [
+            "testbed/hello.php",
+            "M"
+          ]
+        ],
+        "diff_extra": [],
+        "agent_obs": "Number\n",
+        "eval_obs": "2\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "echo \"Number of .php files: $(find /testbed -type f -name '*.php' | wc -l)\" && find /testbed -type f -name '*.php' -exec chmod 755 {} +",
+        "observation": "Number\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.34,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "Number\n",
+    "eval_observation": "2\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "074aaebadb36",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260328_193049_074aaebadb36/commands.jsonl"
+  }
+}

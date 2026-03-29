@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-28T12:28:19Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-28T12:28:19Z",
+    "finished_at": "2026-03-28T12:28:26Z",
+    "image_name": "intercode-nl2bash-fs1",
+    "command": {
+      "text": "find /testbed -type f -name 'job.history' -exec grep -q 'FAIL' {} \\; -print | wc -l",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    },
+    "profile": "user"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /testbed -type f -name 'job.history' -exec grep -q 'FAIL' {} \\; -print | wc -l",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": false,
+    "raw_output_text": "find /testbed -type f -name 'job.history' -exec grep -q 'FAIL' {} \\; -print | wc -l",
+    "raw_output_payload": {
+      "content": "find /testbed -type f -name 'job.history' -exec grep -q 'FAIL' {} \\; -print | wc -l",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need find files named job.history under /testbed, grep for FAIL, count. Use find and grep -l and wc -l. Command: find /testbed -type f -name 'job.history' -exec grep -q 'FAIL' {} \\; -print | wc -l. But need count only those that match. Use -exec grep -q 'FAIL' {} \\; -print. Then pipe to wc -l. So final: find /testbed -type f -name 'job.history' -exec grep -q 'FAIL' {} \\; -print | wc -l.",
+      "reasoning_content": "We need find files named job.history under /testbed, grep for FAIL, count. Use find and grep -l and wc -l. Command: find /testbed -type f -name 'job.history' -exec grep -q 'FAIL' {} \\; -print | wc -l. But need count only those that match. Use -exec grep -q 'FAIL' {} \\; -print. Then pipe to wc -l. So final: find /testbed -type f -name 'job.history' -exec grep -q 'FAIL' {} \\; -print | wc -l."
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 26,
+    "query": "Count the number of files named 'job.history' under '/testbed' directory tree that match 'FAIL' in their contents",
+    "gold": "find /testbed -name job.history | xargs grep -l FAIL | wc -l",
+    "record": {
+      "query": "Count the number of files named 'job.history' under '/testbed' directory tree that match 'FAIL' in their contents",
+      "gold": "find /testbed -name job.history | xargs grep -l FAIL | wc -l"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Count the number of files named 'job.history' under '/testbed' directory tree that match 'FAIL' in their contents",
+      "info": {}
+    },
+    "action": {
+      "command": "find /testbed -type f -name 'job.history' -exec grep -q 'FAIL' {} \\; -print | wc -l",
+      "observation": "0\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "0\n",
+      "reward": 1.0,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "0\n",
+        "eval_obs": "0\n",
+        "answer_similarity": 1,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /testbed -type f -name 'job.history' -exec grep -q 'FAIL' {} \\; -print | wc -l",
+        "observation": "0\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 1.0,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "0\n",
+    "eval_observation": "0\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "074aaebadb36",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260328_193049_074aaebadb36/commands.jsonl"
+  }
+}

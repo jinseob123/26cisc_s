@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-28T14:43:05Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-28T14:43:05Z",
+    "finished_at": "2026-03-28T14:43:12Z",
+    "image_name": "intercode-nl2bash-fs3",
+    "command": {
+      "text": "find /workspace -type f -size 0",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /workspace -type f -size 0",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nfind /workspace -type f -size 0\n```",
+    "raw_output_payload": {
+      "content": "```bash\nfind /workspace -type f -size 0\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need find -size 0 -type f in /workspace. Return command.",
+      "reasoning_content": "Need find -size 0 -type f in /workspace. Return command."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 5,
+    "query": "list all the files in the /workspace directory which are of size 0 bytes.",
+    "gold": "find /workspace -empty",
+    "record": {
+      "query": "list all the files in the /workspace directory which are of size 0 bytes.",
+      "gold": "find /workspace -empty"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "list all the files in the /workspace directory which are of size 0 bytes.",
+      "info": {}
+    },
+    "action": {
+      "command": "find /workspace -type f -size 0",
+      "observation": "/workspace/dir1/all.txt\n/workspace/dir1/readonly.txt\n/workspace/recent1.txt\n/workspace/old2.txt\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "/workspace/dir1/all.txt\n/workspace/dir1/readonly.txt\n/workspace/recent1.txt\n/workspace/old2.txt\n",
+      "reward": 1.0,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "/workspace/dir1/all.txt\n/workspace/dir1/readonly.txt\n/workspace/recent1.txt\n/workspace/old2.txt\n",
+        "eval_obs": "/workspace/dir1/readonly.txt\n/workspace/dir1/all.txt\n/workspace/recent1.txt\n/workspace/old2.txt\n",
+        "answer_similarity": 1.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /workspace -type f -size 0",
+        "observation": "/workspace/dir1/all.txt\n/workspace/dir1/readonly.txt\n/workspace/recent1.txt\n/workspace/old2.txt\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 1.0,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "/workspace/dir1/all.txt\n/workspace/dir1/readonly.txt\n/workspace/recent1.txt\n/workspace/old2.txt\n",
+    "eval_observation": "/workspace/dir1/readonly.txt\n/workspace/dir1/all.txt\n/workspace/recent1.txt\n/workspace/old2.txt\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "bd19835dc286",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260328_193245_bd19835dc286/commands.jsonl"
+  }
+}

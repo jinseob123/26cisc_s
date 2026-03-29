@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-28T13:44:24Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-28T13:44:24Z",
+    "finished_at": "2026-03-28T13:44:31Z",
+    "image_name": "intercode-nl2bash-fs4",
+    "command": {
+      "text": "who | awk '{print $1}' | sort -u",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_4.json"
+    },
+    "profile": "user"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "who | awk '{print $1}' | sort -u",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": false,
+    "raw_output_text": "who | awk '{print $1}' | sort -u",
+    "raw_output_payload": {
+      "content": "who | awk '{print $1}' | sort -u",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need a bash command to list unique users logged in. Use who or w. who | awk '{print $1}' | sort -u. So final command: who | awk '{print $1}' | sort -u.",
+      "reasoning_content": "We need a bash command to list unique users logged in. Use who or w. who | awk '{print $1}' | sort -u. So final command: who | awk '{print $1}' | sort -u."
+    }
+  },
+  "task": {
+    "split": 4,
+    "task_index": 18,
+    "query": "Print a list of unique users who are logged in",
+    "gold": "who | cut -d' ' -f1 | sort | uniq",
+    "record": {
+      "query": "Print a list of unique users who are logged in",
+      "gold": "who | cut -d' ' -f1 | sort | uniq"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Print a list of unique users who are logged in",
+      "info": {}
+    },
+    "action": {
+      "command": "who | awk '{print $1}' | sort -u",
+      "observation": "",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "",
+      "reward": 1.0,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "",
+        "eval_obs": "",
+        "answer_similarity": 1,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "who | awk '{print $1}' | sort -u",
+        "observation": ""
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 1.0,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "",
+    "eval_observation": "",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "1b9fdbfe0ec5",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260328_193330_1b9fdbfe0ec5/commands.jsonl"
+  }
+}

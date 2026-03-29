@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-28T12:01:38Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-28T12:01:38Z",
+    "finished_at": "2026-03-28T12:01:44Z",
+    "image_name": "intercode-nl2bash-fs3",
+    "command": {
+      "text": "grep -r -i -H 'hello' /workspace",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "grep -r -i -H 'hello' /workspace",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\ngrep -r -i -H 'hello' /workspace\n```",
+    "raw_output_payload": {
+      "content": "```bash\ngrep -r -i -H 'hello' /workspace\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need grep -r -i 'hello' /workspace. Show filenames. Use -H. So: grep -r -i -H 'hello' /workspace.",
+      "reasoning_content": "Need grep -r -i 'hello' /workspace. Show filenames. Use -H. So: grep -r -i -H 'hello' /workspace."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 55,
+    "query": "Search for 'hello' case insensitively in all files under /workspace directory tree and show the matched lines with their filenames",
+    "gold": "find /workspace -type f -print0  | xargs -0 grep -iH \"hello\"",
+    "record": {
+      "query": "Search for 'hello' case insensitively in all files under /workspace directory tree and show the matched lines with their filenames",
+      "gold": "find /workspace -type f -print0  | xargs -0 grep -iH \"hello\""
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Search for 'hello' case insensitively in all files under /workspace directory tree and show the matched lines with their filenames",
+      "info": {}
+    },
+    "action": {
+      "command": "grep -r -i -H 'hello' /workspace",
+      "observation": "/workspace/dir1/hello.c:\tprintf(\"Hello, World!\");\n/workspace/dir1/hello.txt:hello!\n/workspace/dir2/foo.txt:Another hello world file\n/workspace/dir2/hello.txt:hello!\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "/workspace/dir1/hello.c:\tprintf(\"Hello, World!\");\n/workspace/dir1/hello.txt:hello!\n/workspace/dir2/foo.txt:Another hello world file\n/workspace/dir2/hello.txt:hello!\n",
+      "reward": 1.0,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "/workspace/dir1/hello.c:\tprintf(\"Hello, World!\");\n/workspace/dir1/hello.txt:hello!\n/workspace/dir2/foo.txt:Another hello world file\n/workspace/dir2/hello.txt:hello!\n",
+        "eval_obs": "/workspace/dir1/hello.c:\tprintf(\"Hello, World!\");\n/workspace/dir1/hello.txt:hello!\n/workspace/dir2/foo.txt:Another hello world file\n/workspace/dir2/hello.txt:hello!\n",
+        "answer_similarity": 0.9999999999999997,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "grep -r -i -H 'hello' /workspace",
+        "observation": "/workspace/dir1/hello.c:\tprintf(\"Hello, World!\");\n/workspace/dir1/hello.txt:hello!\n/workspace/dir2/foo.txt:Another hello world file\n/workspace/dir2/hello.txt:hello!\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 1.0,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "/workspace/dir1/hello.c:\tprintf(\"Hello, World!\");\n/workspace/dir1/hello.txt:hello!\n/workspace/dir2/foo.txt:Another hello world file\n/workspace/dir2/hello.txt:hello!\n",
+    "eval_observation": "/workspace/dir1/hello.c:\tprintf(\"Hello, World!\");\n/workspace/dir1/hello.txt:hello!\n/workspace/dir2/foo.txt:Another hello world file\n/workspace/dir2/hello.txt:hello!\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "bd19835dc286",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260328_193245_bd19835dc286/commands.jsonl"
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-28T15:12:49Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-28T15:12:49Z",
+    "finished_at": "2026-03-28T15:12:56Z",
+    "image_name": "intercode-nl2bash-fs4",
+    "command": {
+      "text": "bind -p | grep -oP '\\w+' | grep -i p",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_4.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "bind -p | grep -oP '\\w+' | grep -i p",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nbind -p | grep -oP '\\w+' | grep -i p\n```",
+    "raw_output_payload": {
+      "content": "```bash\nbind -p | grep -oP '\\w+' | grep -i p\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need a bash command that lists names of bind functions containing \"p\". In bash, bind -p lists key bindings. We need to filter names containing \"p\". Use grep. So: bind -p | grep -oP '\\w+?='? Actually bind -p outputs like: \"\\C-a\": beginning-of-line. We want function names? Maybe key names? Let's just output names containing p: grep -oP '\\w+'? Simpler: bind -p | grep -oP '\\w+' | grep p. But that may duplicate. Maybe: bind -p | grep -oP '\\w+' | grep -i p. Provide command.",
+      "reasoning_content": "We need a bash command that lists names of bind functions containing \"p\". In bash, bind -p lists key bindings. We need to filter names containing \"p\". Use grep. So: bind -p | grep -oP '\\w+?='? Actually bind -p outputs like: \"\\C-a\": beginning-of-line. We want function names? Maybe key names? Let's just output names containing p: grep -oP '\\w+'? Simpler: bind -p | grep -oP '\\w+' | grep p. But that may duplicate. Maybe: bind -p | grep -oP '\\w+' | grep -i p. Provide command."
+    }
+  },
+  "task": {
+    "split": 4,
+    "task_index": 10,
+    "query": "list names of bind functions containing \"p\"",
+    "gold": "bind -l | grep p",
+    "record": {
+      "query": "list names of bind functions containing \"p\"",
+      "gold": "bind -l | grep p"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "list names of bind functions containing \"p\"",
+      "info": {}
+    },
+    "action": {
+      "command": "bind -p | grep -oP '\\w+' | grep -i p",
+      "observation": "/bin/bash: line 1: bind: warning: line editing not enabled\naccept\naccept\nexpand\nprefix\npaste\ncapitalize\ndisplay\ncomplete\ncomplete\ncomplete\ncomplete\ncomplete\ncomplete\ncomplete\ncomplete\ncopy\ncopy\ncopy\nexpand\nspace\ndisplay\nxP\nP\ndump\ndump\ndump\ncomplete\npoint\ncomplete\nexpand\nexpansions\nexpand\nexpand\ncompletions\nspace\ncomplete\ncomplete\np\ncomplete\noperate\npossible\ncompletions\npossible\ncompletions\npossible\ncompletions\npossible\ncompletions\npossible\ncompletions\npossible\ncompletions\npossible\ncompletions\np\nprevious\nprevious\nprevious\nprevious\nprint\nP\np\nexpand\ntranspose\nskip\nspell\nexpand\ntranspose\ntranspose\nupcase\nappend\nappend\ncomplete\nprint\nprev\nput\nreplace\nexpand\npop\npop\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "/bin/bash: line 1: bind: warning: line editing not enabled\naccept\naccept\nexpand\nprefix\npaste\ncapitalize\ndisplay\ncomplete\ncomplete\ncomplete\ncomplete\ncomplete\ncomplete\ncomplete\ncomplete\ncopy\ncopy\ncopy\nexpand\nspace\ndisplay\nxP\nP\ndump\ndump\ndump\ncomplete\npoint\ncomplete\nexpand\nexpansions\nexpand\nexpand\ncompletions\nspace\ncomplete\ncomplete\np\ncomplete\noperate\npossible\ncompletions\npossible\ncompletions\npossible\ncompletions\npossible\ncompletions\npossible\ncompletions\npossible\ncompletions\npossible\ncompletions\np\nprevious\nprevious\nprevious\nprevious\nprint\nP\np\nexpand\ntranspose\nskip\nspell\nexpand\ntranspose\ntranspose\nupcase\nappend\nappend\ncomplete\nprint\nprev\nput\nreplace\nexpand\npop\npop\n",
+      "reward": 0.88,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.21
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "/bin/bash: line 1: bind: warning: line editing not enabled\naccept\naccept\nexpand\nprefix\npaste\ncapitalize\ndisplay\ncomplete\ncomplete\ncomplete\ncomplete\ncomplete\ncomplete\ncomplete\ncomplete\ncopy\ncopy\ncopy\nexpand\nspace\ndisplay\nxP\nP\ndump\ndump\ndump\ncomplete\npoint\ncomplete\nexpand\nexpansions\nexpand\nexpand\ncompletions\nspace\ncomplete\ncomplete\np\ncomplete\noperate\npossible\ncompletions\npossible\ncompletions\npossible\ncompletions\npossible\ncompletions\npossible\ncompletions\npossible\ncompletions\npossible\ncompletions\np\nprevious\nprevious\nprevious\nprevious\nprint\nP\np\nexpand\ntranspose\nskip\nspell\nexpand\ntranspose\ntranspose\nupcase\nappend\nappend\ncomplete\nprint\nprev\nput\nreplace\nexpand\npop\npop\n",
+        "eval_obs": "/bin/bash: line 1: bind: warning: line editing not enabled\naccept-line\nalias-expand-line\narrow-key-prefix\nbracketed-paste-begin\ncapitalize-word\nclear-display\ncomplete\ncomplete-command\ncomplete-filename\ncomplete-hostname\ncomplete-into-braces\ncomplete-username\ncomplete-variable\ncopy-backward-word\ncopy-forward-word\ncopy-region-as-kill\ndabbrev-expand\ndelete-horizontal-space\ndisplay-shell-version\ndump-functions\ndump-macros\ndump-variables\ndynamic-complete-history\nexchange-point-and-mark\nglob-complete-word\nglob-expand-word\nglob-list-expansions\nhistory-and-alias-expand-line\nhistory-expand-line\ninsert-completions\nmagic-space\nmenu-complete\nmenu-complete-backward\nold-menu-complete\noperate-and-get-next\npossible-command-completions\npossible-completions\npossible-filename-completions\npossible-hostname-completions\npossible-username-completions\npossible-variable-completions\nprevious-history\nprevious-screen-line\nprint-last-kbd-macro\nshell-expand-line\nshell-transpose-words\nskip-csi-sequence\nspell-correct-word\ntilde-expand\ntranspose-chars\ntranspose-words\nupcase-word\nvi-append-eol\nvi-append-mode\nvi-complete\nvi-first-print\nvi-prev-word\nvi-put\nvi-replace\nvi-tilde-expand\nvi-yank-pop\nyank-pop\n",
+        "answer_similarity": 0.6406114558206465,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "bind -p | grep -oP '\\w+' | grep -i p",
+        "observation": "/bin/bash: line 1: bind: warning: line editing not enabled\naccept\naccept\nexpand\nprefix\npaste\ncapitalize\ndisplay\ncomplete\ncomplete\ncomplete\ncomplete\ncomplete\ncomplete\ncomplete\ncomplete\ncopy\ncopy\ncopy\nexpand\nspace\ndisplay\nxP\nP\ndump\ndump\ndump\ncomplete\npoint\ncomplete\nexpand\nexpansions\nexpand\nexpand\ncompletions\nspace\ncomplete\ncomplete\np\ncomplete\noperate\npossible\ncompletions\npossible\ncompletions\npossible\ncompletions\npossible\ncompletions\npossible\ncompletions\npossible\ncompletions\npossible\ncompletions\np\nprevious\nprevious\nprevious\nprevious\nprint\nP\np\nexpand\ntranspose\nskip\nspell\nexpand\ntranspose\ntranspose\nupcase\nappend\nappend\ncomplete\nprint\nprev\nput\nreplace\nexpand\npop\npop\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.88,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "/bin/bash: line 1: bind: warning: line editing not enabled\naccept\naccept\nexpand\nprefix\npaste\ncapitalize\ndisplay\ncomplete\ncomplete\ncomplete\ncomplete\ncomplete\ncomplete\ncomplete\ncomplete\ncopy\ncopy\ncopy\nexpand\nspace\ndisplay\nxP\nP\ndump\ndump\ndump\ncomplete\npoint\ncomplete\nexpand\nexpansions\nexpand\nexpand\ncompletions\nspace\ncomplete\ncomplete\np\ncomplete\noperate\npossible\ncompletions\npossible\ncompletions\npossible\ncompletions\npossible\ncompletions\npossible\ncompletions\npossible\ncompletions\npossible\ncompletions\np\nprevious\nprevious\nprevious\nprevious\nprint\nP\np\nexpand\ntranspose\nskip\nspell\nexpand\ntranspose\ntranspose\nupcase\nappend\nappend\ncomplete\nprint\nprev\nput\nreplace\nexpand\npop\npop\n",
+    "eval_observation": "/bin/bash: line 1: bind: warning: line editing not enabled\naccept-line\nalias-expand-line\narrow-key-prefix\nbracketed-paste-begin\ncapitalize-word\nclear-display\ncomplete\ncomplete-command\ncomplete-filename\ncomplete-hostname\ncomplete-into-braces\ncomplete-username\ncomplete-variable\ncopy-backward-word\ncopy-forward-word\ncopy-region-as-kill\ndabbrev-expand\ndelete-horizontal-space\ndisplay-shell-version\ndump-functions\ndump-macros\ndump-variables\ndynamic-complete-history\nexchange-point-and-mark\nglob-complete-word\nglob-expand-word\nglob-list-expansions\nhistory-and-alias-expand-line\nhistory-expand-line\ninsert-completions\nmagic-space\nmenu-complete\nmenu-complete-backward\nold-menu-complete\noperate-and-get-next\npossible-command-completions\npossible-completions\npossible-filename-completions\npossible-hostname-completions\npossible-username-completions\npossible-variable-completions\nprevious-history\nprevious-screen-line\nprint-last-kbd-macro\nshell-expand-line\nshell-transpose-words\nskip-csi-sequence\nspell-correct-word\ntilde-expand\ntranspose-chars\ntranspose-words\nupcase-word\nvi-append-eol\nvi-append-mode\nvi-complete\nvi-first-print\nvi-prev-word\nvi-put\nvi-replace\nvi-tilde-expand\nvi-yank-pop\nyank-pop\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "1b9fdbfe0ec5",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260328_193330_1b9fdbfe0ec5/commands.jsonl"
+  }
+}

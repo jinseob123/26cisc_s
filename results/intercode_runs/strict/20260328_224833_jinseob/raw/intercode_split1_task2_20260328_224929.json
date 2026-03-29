@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-28T13:49:29Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-28T13:49:29Z",
+    "finished_at": "2026-03-28T13:49:36Z",
+    "image_name": "intercode-nl2bash-fs1",
+    "command": {
+      "text": "cat $(printf \"%s\\n\" $FILES | sort) | md5sum",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "cat $(printf \"%s\\n\" $FILES | sort) | md5sum",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\ncat $(printf \"%s\\n\" $FILES | sort) | md5sum\n```",
+    "raw_output_payload": {
+      "content": "```bash\ncat $(printf \"%s\\n\" $FILES | sort) | md5sum\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need command: md5sum of sorted list of files. Use sort and cat? Probably: md5sum <(sort \"$FILES\")? But $FILES is list of files. We need to read contents of each file sorted by name. So: cat $(printf \"%s\\n\" $FILES | sort) | md5sum. Use xargs? Simpler: cat $(printf \"%s\\n\" $FILES | sort) | md5sum. Provide command.",
+      "reasoning_content": "We need command: md5sum of sorted list of files. Use sort and cat? Probably: md5sum <(sort \"$FILES\")? But $FILES is list of files. We need to read contents of each file sorted by name. So: cat $(printf \"%s\\n\" $FILES | sort) | md5sum. Use xargs? Simpler: cat $(printf \"%s\\n\" $FILES | sort) | md5sum. Provide command."
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 2,
+    "query": "Calculate the md5 sum of the contents of the sorted list of files \"$FILES\"",
+    "gold": "cat $(echo $FILES | sort) | md5sum",
+    "record": {
+      "query": "Calculate the md5 sum of the contents of the sorted list of files \"$FILES\"",
+      "gold": "cat $(echo $FILES | sort) | md5sum"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Calculate the md5 sum of the contents of the sorted list of files \"$FILES\"",
+      "info": {}
+    },
+    "action": {
+      "command": "cat $(printf \"%s\\n\" $FILES | sort) | md5sum",
+      "observation": "cat: n: No such file or directory\nd41d8cd98f00b204e9800998ecf8427e  -\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "cat: n: No such file or directory\nd41d8cd98f00b204e9800998ecf8427e  -\n",
+      "reward": 0.76,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.09
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "cat: n: No such file or directory\nd41d8cd98f00b204e9800998ecf8427e  -\n",
+        "eval_obs": "d41d8cd98f00b204e9800998ecf8427e  -\n",
+        "answer_similarity": 0.2789425453258252,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "cat $(printf \"%s\\n\" $FILES | sort) | md5sum",
+        "observation": "cat: n: No such file or directory\nd41d8cd98f00b204e9800998ecf8427e  -\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.76,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "cat: n: No such file or directory\nd41d8cd98f00b204e9800998ecf8427e  -\n",
+    "eval_observation": "d41d8cd98f00b204e9800998ecf8427e  -\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "074aaebadb36",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260328_193049_074aaebadb36/commands.jsonl"
+  }
+}

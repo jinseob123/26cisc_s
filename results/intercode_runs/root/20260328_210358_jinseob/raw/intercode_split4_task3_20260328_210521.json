@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-28T12:05:21Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-28T12:05:21Z",
+    "finished_at": "2026-03-28T12:05:28Z",
+    "image_name": "intercode-nl2bash-fs4",
+    "command": {
+      "text": "echo \"http://www.google.com\" | cut -d/ -f3",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_4.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "echo \"http://www.google.com\" | cut -d/ -f3",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": false,
+    "raw_output_text": "echo \"http://www.google.com\" | cut -d/ -f3",
+    "raw_output_payload": {
+      "content": "echo \"http://www.google.com\" | cut -d/ -f3",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need bash command to extract hostname. Use cut -d/ -f3? For http://www.google.com -> cut -d/ -f3 gives www.google.com. So command: echo \"http://www.google.com\" | cut -d/ -f3.",
+      "reasoning_content": "Need bash command to extract hostname. Use cut -d/ -f3? For http://www.google.com -> cut -d/ -f3 gives www.google.com. So command: echo \"http://www.google.com\" | cut -d/ -f3."
+    }
+  },
+  "task": {
+    "split": 4,
+    "task_index": 3,
+    "query": "Extract host name part from \"http://www.google.com\"",
+    "gold": "echo \"http://www.google.com\" | cut -d'/' -f3",
+    "record": {
+      "query": "Extract host name part from \"http://www.google.com\"",
+      "gold": "echo \"http://www.google.com\" | cut -d'/' -f3"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Extract host name part from \"http://www.google.com\"",
+      "info": {}
+    },
+    "action": {
+      "command": "echo \"http://www.google.com\" | cut -d/ -f3",
+      "observation": "www.google.com\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "www.google.com\n",
+      "reward": 1.0,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "www.google.com\n",
+        "eval_obs": "www.google.com\n",
+        "answer_similarity": 1.0000000000000002,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "echo \"http://www.google.com\" | cut -d/ -f3",
+        "observation": "www.google.com\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 1.0,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "www.google.com\n",
+    "eval_observation": "www.google.com\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "1b9fdbfe0ec5",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260328_193330_1b9fdbfe0ec5/commands.jsonl"
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-28T13:22:50Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-28T13:22:50Z",
+    "finished_at": "2026-03-28T13:22:57Z",
+    "image_name": "intercode-nl2bash-fs3",
+    "command": {
+      "text": "find /workspace -type f -printf \"%f\\n\" | rev | cut -d. -f1 | rev | awk 'length>=3 && length<=6' | sort -u | wc -l",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "user"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /workspace -type f -printf \"%f\\n\" | rev | cut -d. -f1 | rev | awk 'length>=3 && length<=6' | sort -u | wc -l",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": false,
+    "raw_output_text": "find /workspace -type f -printf \"%f\\n\" | rev | cut -d. -f1 | rev | awk 'length>=3 && length<=6' | sort -u | wc -l",
+    "raw_output_payload": {
+      "content": "find /workspace -type f -printf \"%f\\n\" | rev | cut -d. -f1 | rev | awk 'length>=3 && length<=6' | sort -u | wc -l",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need bash command to count unique extensions length 3-6. Use find, basename, cut, awk. Command: find /workspace -type f -printf \"%f\\n\" | rev | cut -d. -f1 | rev | awk 'length>=3 && length<=6' | sort -u | wc -l.",
+      "reasoning_content": "We need bash command to count unique extensions length 3-6. Use find, basename, cut, awk. Command: find /workspace -type f -printf \"%f\\n\" | rev | cut -d. -f1 | rev | awk 'length>=3 && length<=6' | sort -u | wc -l."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 31,
+    "query": "Count the number of unique 3 to 6 character file extensions are in the /workspace directory tree",
+    "gold": "find /workspace -type f -name \"*.*\" | grep -o -E \"\\.[^\\.]+$\" | grep -o -E \"[[:alpha:]]{3,6}\" | awk '{print tolower($0)}' | sort | uniq -c | sort -rn",
+    "record": {
+      "query": "Count the number of unique 3 to 6 character file extensions are in the /workspace directory tree",
+      "gold": "find /workspace -type f -name \"*.*\" | grep -o -E \"\\.[^\\.]+$\" | grep -o -E \"[[:alpha:]]{3,6}\" | awk '{print tolower($0)}' | sort | uniq -c | sort -rn"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Count the number of unique 3 to 6 character file extensions are in the /workspace directory tree",
+      "info": {}
+    },
+    "action": {
+      "command": "find /workspace -type f -printf \"%f\\n\" | rev | cut -d. -f1 | rev | awk 'length>=3 && length<=6' | sort -u | wc -l",
+      "observation": "1\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "1\n",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "1\n",
+        "eval_obs": "find: paths must precede expression: `setup_nl2b_fs_1.sh'\nfind: possible unquoted pattern after predicate `-name'?\ngrep: [[:alpha:]]6: No such file or directory\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /workspace -type f -printf \"%f\\n\" | rev | cut -d. -f1 | rev | awk 'length>=3 && length<=6' | sort -u | wc -l",
+        "observation": "1\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "1\n",
+    "eval_observation": "find: paths must precede expression: `setup_nl2b_fs_1.sh'\nfind: possible unquoted pattern after predicate `-name'?\ngrep: [[:alpha:]]6: No such file or directory\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "bd19835dc286",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260328_193245_bd19835dc286/commands.jsonl"
+  }
+}

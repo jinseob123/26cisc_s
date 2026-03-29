@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-28T14:48:06Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-28T14:48:06Z",
+    "finished_at": "2026-03-28T14:48:13Z",
+    "image_name": "intercode-nl2bash-fs3",
+    "command": {
+      "text": "find /workspace -type f -printf \"%s %p\\n\" | sort -nr | head -n3",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /workspace -type f -printf \"%s %p\\n\" | sort -nr | head -n3",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": false,
+    "raw_output_text": "find /workspace -type f -printf \"%s %p\\n\" | sort -nr | head -n3",
+    "raw_output_payload": {
+      "content": "find /workspace -type f -printf \"%s %p\\n\" | sort -nr | head -n3",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need bash command to find top 3 largest files in /workspace. Use find, du -h? Use sort -h. Command: find /workspace -type f -printf \"%s %p\\n\" | sort -nr | head -n3. Or use du -ah. Provide one line.",
+      "reasoning_content": "We need bash command to find top 3 largest files in /workspace. Use find, du -h? Use sort -h. Command: find /workspace -type f -printf \"%s %p\\n\" | sort -nr | head -n3. Or use du -ah. Provide one line."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 16,
+    "query": "print top 3 largest files and /workspace",
+    "gold": "du -a /workspace | sort -nr | head -3",
+    "record": {
+      "query": "print top 3 largest files and /workspace",
+      "gold": "du -a /workspace | sort -nr | head -3"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "print top 3 largest files and /workspace",
+      "info": {}
+    },
+    "action": {
+      "command": "find /workspace -type f -printf \"%s %p\\n\" | sort -nr | head -n3",
+      "observation": "22250204840967277831037185104892571273116240028153",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "22250204840967277831037185104892571273116240028153",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "22250204840967277831037185104892571273116240028153",
+        "eval_obs": "88\t/workspace\n48\t/workspace/dir1\n16\t/workspace/dir2\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /workspace -type f -printf \"%s %p\\n\" | sort -nr | head -n3",
+        "observation": "22250204840967277831037185104892571273116240028153"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "22250204840967277831037185104892571273116240028153",
+    "eval_observation": "88\t/workspace\n48\t/workspace/dir1\n16\t/workspace/dir2\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "bd19835dc286",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260328_193245_bd19835dc286/commands.jsonl"
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-28T11:57:31Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-28T11:57:31Z",
+    "finished_at": "2026-03-28T11:57:38Z",
+    "image_name": "intercode-nl2bash-fs3",
+    "command": {
+      "text": "diff <(ls /workspace/dir1) <(ls /workspace/dir2)",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "diff <(ls /workspace/dir1) <(ls /workspace/dir2)",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\ndiff <(ls /workspace/dir1) <(ls /workspace/dir2)\n```",
+    "raw_output_payload": {
+      "content": "```bash\ndiff <(ls /workspace/dir1) <(ls /workspace/dir2)\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need diff of file lists. Use diff <(ls dir1) <(ls dir2). Provide command.",
+      "reasoning_content": "Need diff of file lists. Use diff <(ls dir1) <(ls dir2). Provide command."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 46,
+    "query": "Display differences between list of files in /workspace/dir1 and /workspace/dir2.",
+    "gold": "diff <(ls /workspace/dir1) <(ls /workspace/dir2)",
+    "record": {
+      "query": "Display differences between list of files in /workspace/dir1 and /workspace/dir2.",
+      "gold": "diff <(ls /workspace/dir1) <(ls /workspace/dir2)"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Display differences between list of files in /workspace/dir1 and /workspace/dir2.",
+      "info": {}
+    },
+    "action": {
+      "command": "diff <(ls /workspace/dir1) <(ls /workspace/dir2)",
+      "observation": "1,5c1,2\n< a.txt\n< all.txt\n< file.c\n< file.txt\n< hello.c\n---\n> csvfile1.csv\n> foo.txt\n7,12c4\n< long.txt\n< new1.sh\n< readonly.txt\n< script1.sh\n< sum.c\n< terminate.txt\n---\n> mysql\n",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "1,5c1,2\n< a.txt\n< all.txt\n< file.c\n< file.txt\n< hello.c\n---\n> csvfile1.csv\n> foo.txt\n7,12c4\n< long.txt\n< new1.sh\n< readonly.txt\n< script1.sh\n< sum.c\n< terminate.txt\n---\n> mysql\n",
+      "reward": 1.0,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "1,5c1,2\n< a.txt\n< all.txt\n< file.c\n< file.txt\n< hello.c\n---\n> csvfile1.csv\n> foo.txt\n7,12c4\n< long.txt\n< new1.sh\n< readonly.txt\n< script1.sh\n< sum.c\n< terminate.txt\n---\n> mysql\n",
+        "eval_obs": "1,5c1,2\n< a.txt\n< all.txt\n< file.c\n< file.txt\n< hello.c\n---\n> csvfile1.csv\n> foo.txt\n7,12c4\n< long.txt\n< new1.sh\n< readonly.txt\n< script1.sh\n< sum.c\n< terminate.txt\n---\n> mysql\n",
+        "answer_similarity": 0.9999999999999998,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "diff <(ls /workspace/dir1) <(ls /workspace/dir2)",
+        "observation": "1,5c1,2\n< a.txt\n< all.txt\n< file.c\n< file.txt\n< hello.c\n---\n> csvfile1.csv\n> foo.txt\n7,12c4\n< long.txt\n< new1.sh\n< readonly.txt\n< script1.sh\n< sum.c\n< terminate.txt\n---\n> mysql\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 1.0,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "1,5c1,2\n< a.txt\n< all.txt\n< file.c\n< file.txt\n< hello.c\n---\n> csvfile1.csv\n> foo.txt\n7,12c4\n< long.txt\n< new1.sh\n< readonly.txt\n< script1.sh\n< sum.c\n< terminate.txt\n---\n> mysql\n",
+    "eval_observation": "1,5c1,2\n< a.txt\n< all.txt\n< file.c\n< file.txt\n< hello.c\n---\n> csvfile1.csv\n> foo.txt\n7,12c4\n< long.txt\n< new1.sh\n< readonly.txt\n< script1.sh\n< sum.c\n< terminate.txt\n---\n> mysql\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "bd19835dc286",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260328_193245_bd19835dc286/commands.jsonl"
+  }
+}

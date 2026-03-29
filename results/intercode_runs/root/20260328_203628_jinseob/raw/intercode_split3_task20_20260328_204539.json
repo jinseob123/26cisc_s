@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-28T11:45:39Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-28T11:45:39Z",
+    "finished_at": "2026-03-28T11:45:46Z",
+    "image_name": "intercode-nl2bash-fs3",
+    "command": {
+      "text": "find /workspace -type f -size +1k -size -32k",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /workspace -type f -size +1k -size -32k",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": false,
+    "raw_output_text": "find /workspace -type f -size +1k -size -32k",
+    "raw_output_payload": {
+      "content": "find /workspace -type f -size +1k -size -32k",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need find with -size +1k -size -32k. Use find /workspace -type f -size +1k -size -32k.",
+      "reasoning_content": "Need find with -size +1k -size -32k. Use find /workspace -type f -size +1k -size -32k."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 20,
+    "query": "search for all the files in the  /workspace directory which have size greater than 1KB (approx) and less than 32KB(approx).",
+    "gold": "find /workspace -size +1000c -size -32000c -print",
+    "record": {
+      "query": "search for all the files in the  /workspace directory which have size greater than 1KB (approx) and less than 32KB(approx).",
+      "gold": "find /workspace -size +1000c -size -32000c -print"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "search for all the files in the  /workspace directory which have size greater than 1KB (approx) and less than 32KB(approx).",
+      "info": {}
+    },
+    "action": {
+      "command": "find /workspace -type f -size +1k -size -32k",
+      "observation": "/workspace/dir1/file.c\n/workspace/dir1/file.txt\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "/workspace/dir1/file.c\n/workspace/dir1/file.txt\n",
+      "reward": 0.99,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.32
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "/workspace/dir1/file.c\n/workspace/dir1/file.txt\n",
+        "eval_obs": "/workspace\n/workspace/dir1\n/workspace/dir1/file.txt\n/workspace/dir1/file.c\n",
+        "answer_similarity": 0.9621023987294832,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /workspace -type f -size +1k -size -32k",
+        "observation": "/workspace/dir1/file.c\n/workspace/dir1/file.txt\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.99,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "/workspace/dir1/file.c\n/workspace/dir1/file.txt\n",
+    "eval_observation": "/workspace\n/workspace/dir1\n/workspace/dir1/file.txt\n/workspace/dir1/file.c\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "bd19835dc286",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260328_193245_bd19835dc286/commands.jsonl"
+  }
+}

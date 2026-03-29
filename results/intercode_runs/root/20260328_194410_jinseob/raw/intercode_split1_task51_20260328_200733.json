@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-28T11:07:33Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-28T11:07:33Z",
+    "finished_at": "2026-03-28T11:07:40Z",
+    "image_name": "intercode-nl2bash-fs1",
+    "command": {
+      "text": "find /testbed -type f -printf '%s %p\\n' | sort -nr | head",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_1.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /testbed -type f -printf '%s %p\\n' | sort -nr | head",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nfind /testbed -type f -printf '%s %p\\n' | sort -nr | head\n```",
+    "raw_output_payload": {
+      "content": "```bash\nfind /testbed -type f -printf '%s %p\\n' | sort -nr | head\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need command to list biggest file sizes only. Maybe sort -h -r -k1? Use du -ah? Probably: find /testbed -type f -printf '%s %p\\n' | sort -nr | head.",
+      "reasoning_content": "Need command to list biggest file sizes only. Maybe sort -h -r -k1? Use du -ah? Probably: find /testbed -type f -printf '%s %p\\n' | sort -nr | head."
+    }
+  },
+  "task": {
+    "split": 1,
+    "task_index": 51,
+    "query": "Display the biggest file sizes only in the /testbed directory",
+    "gold": "find /testbed -type f -exec du -Sh {} + | sort -rh | head -n 5",
+    "record": {
+      "query": "Display the biggest file sizes only in the /testbed directory",
+      "gold": "find /testbed -type f -exec du -Sh {} + | sort -rh | head -n 5"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Display the biggest file sizes only in the /testbed directory",
+      "info": {}
+    },
+    "action": {
+      "command": "find /testbed -type f -printf '%s %p\\n' | sort -nr | head",
+      "observation": "118 /testbed/NewClass.java\n116 /testbed/dir2/subdir1/javafile1.java\n103 /testbed/dir1/AnotherHello.java\n103 /testbed/Hello1.java\n103 /testbed/Hello.java\n82 /testbed/FooBar.html\n75 /testbed/hello.c\n66 /testbed/dir3/subdir2/csvfile1.csv\n63 /testbed/dir1/subdir1/jsonfile1.json\n48 /testbed/dir3/subdir1/pythonscript3.py\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "118 /testbed/NewClass.java\n116 /testbed/dir2/subdir1/javafile1.java\n103 /testbed/dir1/AnotherHello.java\n103 /testbed/Hello1.java\n103 /testbed/Hello.java\n82 /testbed/FooBar.html\n75 /testbed/hello.c\n66 /testbed/dir3/subdir2/csvfile1.csv\n63 /testbed/dir1/subdir1/jsonfile1.json\n48 /testbed/dir3/subdir1/pythonscript3.py\n",
+      "reward": 0.8,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.13
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "118 /testbed/NewClass.java\n116 /testbed/dir2/subdir1/javafile1.java\n103 /testbed/dir1/AnotherHello.java\n103 /testbed/Hello1.java\n103 /testbed/Hello.java\n82 /testbed/FooBar.html\n75 /testbed/hello.c\n66 /testbed/dir3/subdir2/csvfile1.csv\n63 /testbed/dir1/subdir1/jsonfile1.json\n48 /testbed/dir3/subdir1/pythonscript3.py\n",
+        "eval_obs": "4.0K\t/testbed/textfile7.txt\n4.0K\t/testbed/hello.php\n4.0K\t/testbed/hello.c\n4.0K\t/testbed/dir3/textfile6.txt\n4.0K\t/testbed/dir3/subdir2/csvfile1.csv\n",
+        "answer_similarity": 0.395814547160187,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /testbed -type f -printf '%s %p\\n' | sort -nr | head",
+        "observation": "118 /testbed/NewClass.java\n116 /testbed/dir2/subdir1/javafile1.java\n103 /testbed/dir1/AnotherHello.java\n103 /testbed/Hello1.java\n103 /testbed/Hello.java\n82 /testbed/FooBar.html\n75 /testbed/hello.c\n66 /testbed/dir3/subdir2/csvfile1.csv\n63 /testbed/dir1/subdir1/jsonfile1.json\n48 /testbed/dir3/subdir1/pythonscript3.py\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.8,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "118 /testbed/NewClass.java\n116 /testbed/dir2/subdir1/javafile1.java\n103 /testbed/dir1/AnotherHello.java\n103 /testbed/Hello1.java\n103 /testbed/Hello.java\n82 /testbed/FooBar.html\n75 /testbed/hello.c\n66 /testbed/dir3/subdir2/csvfile1.csv\n63 /testbed/dir1/subdir1/jsonfile1.json\n48 /testbed/dir3/subdir1/pythonscript3.py\n",
+    "eval_observation": "4.0K\t/testbed/textfile7.txt\n4.0K\t/testbed/hello.php\n4.0K\t/testbed/hello.c\n4.0K\t/testbed/dir3/textfile6.txt\n4.0K\t/testbed/dir3/subdir2/csvfile1.csv\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "074aaebadb36",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260328_193049_074aaebadb36/commands.jsonl"
+  }
+}

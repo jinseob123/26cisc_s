@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-28T11:25:01Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-28T11:25:01Z",
+    "finished_at": "2026-03-28T11:25:07Z",
+    "image_name": "intercode-nl2bash-fs2",
+    "command": {
+      "text": "echo \"1/2 [3] (27/03/2012 19:32:54) word word word word 4/5\" | sed 's/([^)]*)//g' | tr -cs '0-9' ' ' | column -t",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_2.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "echo \"1/2 [3] (27/03/2012 19:32:54) word word word word 4/5\" | sed 's/([^)]*)//g' | tr -cs '0-9' ' ' | column -t",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": false,
+    "raw_output_text": "echo \"1/2 [3] (27/03/2012 19:32:54) word word word word 4/5\" | sed 's/([^)]*)//g' | tr -cs '0-9' ' ' | column -t",
+    "raw_output_payload": {
+      "content": "echo \"1/2 [3] (27/03/2012 19:32:54) word word word word 4/5\" | sed 's/([^)]*)//g' | tr -cs '0-9' ' ' | column -t",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need bash command that processes string. Remove everything within parentheses. Then substitute all non-digit characters with space. Then format as table. Probably use echo and awk. Table maybe columns separated by space. Let's produce: echo \"1/2 [3] (27/03/2012 19:32:54) word word word word 4/5\" | sed 's/([^)]*)//g' | tr -cd '0-9\\n' ??? Actually need replace non-digit with space: tr -cs '0-9' ' ' . Then format as table: maybe use column -t. So: echo ... | sed 's/([^)]*)//g' | tr -cs '0-9' ' ' | column -t.",
+      "reasoning_content": "We need bash command that processes string. Remove everything within parentheses. Then substitute all non-digit characters with space. Then format as table. Probably use echo and awk. Table maybe columns separated by space. Let's produce: echo \"1/2 [3] (27/03/2012 19:32:54) word word word word 4/5\" | sed 's/([^)]*)//g' | tr -cd '0-9\\n' ??? Actually need replace non-digit with space: tr -cs '0-9' ' ' . Then format as table: maybe use column -t. So: echo ... | sed 's/([^)]*)//g' | tr -cs '0-9' ' ' | column -t."
+    }
+  },
+  "task": {
+    "split": 2,
+    "task_index": 28,
+    "query": "Remove everything within parentheses and substitute all non digit characters with a space from \"1/2 [3] (27/03/2012 19:32:54) word word word word 4/5\" and format the output as a table",
+    "gold": "echo '1/2 [3] (27/03/2012 19:32:54) word word word word 4/5' | sed -e 's/(.*)//' -e 's/[^0-9]/ /g' | column -t",
+    "record": {
+      "query": "Remove everything within parentheses and substitute all non digit characters with a space from \"1/2 [3] (27/03/2012 19:32:54) word word word word 4/5\" and format the output as a table",
+      "gold": "echo '1/2 [3] (27/03/2012 19:32:54) word word word word 4/5' | sed -e 's/(.*)//' -e 's/[^0-9]/ /g' | column -t"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Remove everything within parentheses and substitute all non digit characters with a space from \"1/2 [3] (27/03/2012 19:32:54) word word word word 4/5\" and format the output as a table",
+      "info": {}
+    },
+    "action": {
+      "command": "echo \"1/2 [3] (27/03/2012 19:32:54) word word word word 4/5\" | sed 's/([^)]*)//g' | tr -cs '0-9' ' ' | column -t",
+      "observation": "1/2\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "1/2\n",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "1/2\n",
+        "eval_obs": "1  2  3  4  5\n",
+        "answer_similarity": 0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "echo \"1/2 [3] (27/03/2012 19:32:54) word word word word 4/5\" | sed 's/([^)]*)//g' | tr -cs '0-9' ' ' | column -t",
+        "observation": "1/2\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "1/2\n",
+    "eval_observation": "1  2  3  4  5\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "bf881eeac670",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260328_193200_bf881eeac670/commands.jsonl"
+  }
+}

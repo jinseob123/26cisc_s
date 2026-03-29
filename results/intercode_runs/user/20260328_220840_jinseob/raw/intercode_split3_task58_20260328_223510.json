@@ -1,0 +1,114 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-28T13:35:10Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-28T13:35:10Z",
+    "finished_at": "2026-03-28T13:35:17Z",
+    "image_name": "intercode-nl2bash-fs3",
+    "command": {
+      "text": "mkdir -p /backup && tar -xzf /workspace/archive.tar.gz -C /backup",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "user"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "mkdir -p /backup && tar -xzf /workspace/archive.tar.gz -C /backup",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nmkdir -p /backup && tar -xzf /workspace/archive.tar.gz -C /backup\n```",
+    "raw_output_payload": {
+      "content": "```bash\nmkdir -p /backup && tar -xzf /workspace/archive.tar.gz -C /backup\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need tar -xzf archive.tar.gz -C /backup. Ensure directory exists. Use mkdir -p. Single command? Could chain: mkdir -p /backup && tar -xzf /workspace/archive.tar.gz -C /backup.",
+      "reasoning_content": "Need tar -xzf archive.tar.gz -C /backup. Ensure directory exists. Use mkdir -p. Single command? Could chain: mkdir -p /backup && tar -xzf /workspace/archive.tar.gz -C /backup."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 58,
+    "query": "Uncompress \"/workspace/archive.tar.gz\" and extract the archive to \"/backup\"",
+    "gold": "gzip -dc /workspace/archive.tar.gz | tar -xf - -C /backup",
+    "record": {
+      "query": "Uncompress \"/workspace/archive.tar.gz\" and extract the archive to \"/backup\"",
+      "gold": "gzip -dc /workspace/archive.tar.gz | tar -xf - -C /backup"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Uncompress \"/workspace/archive.tar.gz\" and extract the archive to \"/backup\"",
+      "info": {}
+    },
+    "action": {
+      "command": "mkdir -p /backup && tar -xzf /workspace/archive.tar.gz -C /backup",
+      "observation": "tar: workspace/dir2: Cannot mkdir: No such file or directory\ntar: workspace/dir2/foo.txt: Cannot open: No such file or directory\ntar: Exiting with failure status due to previous errors\n",
+      "info": {
+        "action_executed": false
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "tar: workspace/dir2: Cannot mkdir: No such file or directory\ntar: workspace/dir2/foo.txt: Cannot open: No such file or directory\ntar: Exiting with failure status due to previous errors\n",
+      "reward": 0.39,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.05,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [
+          [
+            "backup/workspace/",
+            "??"
+          ]
+        ],
+        "diff_extra": [],
+        "agent_obs": "tar: workspace/dir2: Cannot mkdir: No such file or directory\ntar: workspace/dir2/foo.txt: Cannot open: No such file or directory\ntar: Exiting with failure status due to previous errors\n",
+        "eval_obs": "",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "mkdir -p /backup && tar -xzf /workspace/archive.tar.gz -C /backup",
+        "observation": "tar: workspace/dir2: Cannot mkdir: No such file or directory\ntar: workspace/dir2/foo.txt: Cannot open: No such file or directory\ntar: Exiting with failure status due to previous errors\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.39,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "tar: workspace/dir2: Cannot mkdir: No such file or directory\ntar: workspace/dir2/foo.txt: Cannot open: No such file or directory\ntar: Exiting with failure status due to previous errors\n",
+    "eval_observation": "",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "bd19835dc286",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260328_193245_bd19835dc286/commands.jsonl"
+  }
+}

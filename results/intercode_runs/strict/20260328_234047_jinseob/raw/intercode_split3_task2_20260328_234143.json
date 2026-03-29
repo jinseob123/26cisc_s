@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-28T14:41:43Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-28T14:41:43Z",
+    "finished_at": "2026-03-28T14:41:50Z",
+    "image_name": "intercode-nl2bash-fs3",
+    "command": {
+      "text": "find /workspace -type f -mmin -60",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /workspace -type f -mmin -60",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": false,
+    "raw_output_text": "find /workspace -type f -mmin -60",
+    "raw_output_payload": {
+      "content": "find /workspace -type f -mmin -60",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need a bash command. Use find with -mtime -1? But last hour: -mmin -60. So: find /workspace -type f -mmin -60.",
+      "reasoning_content": "We need a bash command. Use find with -mtime -1? But last hour: -mmin -60. So: find /workspace -type f -mmin -60."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 2,
+    "query": "find files in the /workspace directory and sub-directories, that changed within last hour",
+    "gold": "find /workspace -cmin -60",
+    "record": {
+      "query": "find files in the /workspace directory and sub-directories, that changed within last hour",
+      "gold": "find /workspace -cmin -60"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "find files in the /workspace directory and sub-directories, that changed within last hour",
+      "info": {}
+    },
+    "action": {
+      "command": "find /workspace -type f -mmin -60",
+      "observation": "",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "",
+        "eval_obs": "/workspace\n/workspace/dir1/terminate.txt\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /workspace -type f -mmin -60",
+        "observation": ""
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "",
+    "eval_observation": "/workspace\n/workspace/dir1/terminate.txt\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "bd19835dc286",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260328_193245_bd19835dc286/commands.jsonl"
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-28T14:44:27Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-28T14:44:27Z",
+    "finished_at": "2026-03-28T14:44:34Z",
+    "image_name": "intercode-nl2bash-fs3",
+    "command": {
+      "text": "find /workspace -type f -perm -g=r -a ! -perm -g=w -a ! -perm -g=x -exec ls -l {} +",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /workspace -type f -perm -g=r -a ! -perm -g=w -a ! -perm -g=x -exec ls -l {} +",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nfind /workspace -type f -perm -g=r -a ! -perm -g=w -a ! -perm -g=x -exec ls -l {} +\n```",
+    "raw_output_payload": {
+      "content": "```bash\nfind /workspace -type f -perm -g=r -a ! -perm -g=w -a ! -perm -g=x -exec ls -l {} +\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need find files where group has only read permission (r--). Use find with -perm -g=r and not -perm -g=w -perm -g=x. Actually group read only: group permissions = 4. So -perm -g=r and not -perm -g=w and not -perm -g=x. Use -perm -g=r -a ! -perm -g=w -a ! -perm -g=x. Then list. Use ls -l. Command: find /workspace -type f -perm -g=r -a ! -perm -g=w -a ! -perm -g=x -exec ls -l {} +.",
+      "reasoning_content": "Need find files where group has only read permission (r--). Use find with -perm -g=r and not -perm -g=w -perm -g=x. Actually group read only: group permissions = 4. So -perm -g=r and not -perm -g=w and not -perm -g=x. Use -perm -g=r -a ! -perm -g=w -a ! -perm -g=x. Then list. Use ls -l. Command: find /workspace -type f -perm -g=r -a ! -perm -g=w -a ! -perm -g=x -exec ls -l {} +."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 8,
+    "query": "long list al the files in the /workspace directory which have only read permission to the group",
+    "gold": "find /workspace -perm 400 -type f -exec ls -l {} \\;",
+    "record": {
+      "query": "long list al the files in the /workspace directory which have only read permission to the group",
+      "gold": "find /workspace -perm 400 -type f -exec ls -l {} \\;"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "long list al the files in the /workspace directory which have only read permission to the group",
+      "info": {}
+    },
+    "action": {
+      "command": "find /workspace -type f -perm -g=r -a ! -perm -g=w -a ! -perm -g=x -exec ls -l {} +",
+      "observation": "-rw-r--r-- 1 root root   28 Mar 28 11:42 /workspace/.hidden.txt\n-rw-r--r-- 1 root root  153 Mar 28 12:03 /workspace/archive.tar.gz\n-rw-r--r-- 1 root root   22 Mar 28 11:45 /workspace/dir1/.hidden1.txt\n-rw-r--r-- 1 root root   25 Mar 28 11:45 /workspace/dir1/a.txt\n-rw-r--r-- 1 root root 2048 Mar 28 11:45 /workspace/dir1/file.c\n-rw-r--r-- 1 root root 4096 Mar 28 11:45 /workspace/dir1/file.txt\n-rw-r--r-- 1 root root   72 Mar 28 11:45 /workspace/dir1/hello.c\n-rw-r--r-- 1 root root    7 Mar 28 11:45 /workspace/dir1/hello.txt\n-rw-r--r-- 1 root root   78 Mar 28 11:45 /workspace/dir1/long.txt\n-rw-r--r-- 1 root root    0 Mar 28 11:45 /workspace/dir1/readonly.txt\n-rw-r--r-- 1 root root  185 Mar 28 11:45 /workspace/dir1/sum.c\n-rw-r--r-- 1 root root  104 Mar 28 11:45 /workspace/dir1/terminate.txt\n-rw-r--r-- 1 root root   89 Mar 28 11:45 /workspace/dir2/csvfile1.csv\n-rw-r--r-- 1 root root   25 Mar 28 11:45 /workspace/dir2/foo.txt\n-rw-r--r-- 1 root root    7 Mar 28 11:45 /workspace/dir2/hello.txt\n-rw-r--r-- 1 root root  127 Mar 28 11:45 /workspace/dir2/mysql/sql1.sql\n-rw-r--r-- 1 root root   24 Mar 28 11:45 /workspace/files.txt\n-rw-r--r-- 1 root root    0 Mar 28 11:45 /workspace/old2.txt\n-rw-r--r-- 1 root root    0 Mar 28 11:45 /workspace/recent1.txt\n-rw-r--r-- 1 root root   16 Mar 28 11:45 /workspace/results.txt\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "-rw-r--r-- 1 root root   28 Mar 28 11:42 /workspace/.hidden.txt\n-rw-r--r-- 1 root root  153 Mar 28 12:03 /workspace/archive.tar.gz\n-rw-r--r-- 1 root root   22 Mar 28 11:45 /workspace/dir1/.hidden1.txt\n-rw-r--r-- 1 root root   25 Mar 28 11:45 /workspace/dir1/a.txt\n-rw-r--r-- 1 root root 2048 Mar 28 11:45 /workspace/dir1/file.c\n-rw-r--r-- 1 root root 4096 Mar 28 11:45 /workspace/dir1/file.txt\n-rw-r--r-- 1 root root   72 Mar 28 11:45 /workspace/dir1/hello.c\n-rw-r--r-- 1 root root    7 Mar 28 11:45 /workspace/dir1/hello.txt\n-rw-r--r-- 1 root root   78 Mar 28 11:45 /workspace/dir1/long.txt\n-rw-r--r-- 1 root root    0 Mar 28 11:45 /workspace/dir1/readonly.txt\n-rw-r--r-- 1 root root  185 Mar 28 11:45 /workspace/dir1/sum.c\n-rw-r--r-- 1 root root  104 Mar 28 11:45 /workspace/dir1/terminate.txt\n-rw-r--r-- 1 root root   89 Mar 28 11:45 /workspace/dir2/csvfile1.csv\n-rw-r--r-- 1 root root   25 Mar 28 11:45 /workspace/dir2/foo.txt\n-rw-r--r-- 1 root root    7 Mar 28 11:45 /workspace/dir2/hello.txt\n-rw-r--r-- 1 root root  127 Mar 28 11:45 /workspace/dir2/mysql/sql1.sql\n-rw-r--r-- 1 root root   24 Mar 28 11:45 /workspace/files.txt\n-rw-r--r-- 1 root root    0 Mar 28 11:45 /workspace/old2.txt\n-rw-r--r-- 1 root root    0 Mar 28 11:45 /workspace/recent1.txt\n-rw-r--r-- 1 root root   16 Mar 28 11:45 /workspace/results.txt\n",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "-rw-r--r-- 1 root root   28 Mar 28 11:42 /workspace/.hidden.txt\n-rw-r--r-- 1 root root  153 Mar 28 12:03 /workspace/archive.tar.gz\n-rw-r--r-- 1 root root   22 Mar 28 11:45 /workspace/dir1/.hidden1.txt\n-rw-r--r-- 1 root root   25 Mar 28 11:45 /workspace/dir1/a.txt\n-rw-r--r-- 1 root root 2048 Mar 28 11:45 /workspace/dir1/file.c\n-rw-r--r-- 1 root root 4096 Mar 28 11:45 /workspace/dir1/file.txt\n-rw-r--r-- 1 root root   72 Mar 28 11:45 /workspace/dir1/hello.c\n-rw-r--r-- 1 root root    7 Mar 28 11:45 /workspace/dir1/hello.txt\n-rw-r--r-- 1 root root   78 Mar 28 11:45 /workspace/dir1/long.txt\n-rw-r--r-- 1 root root    0 Mar 28 11:45 /workspace/dir1/readonly.txt\n-rw-r--r-- 1 root root  185 Mar 28 11:45 /workspace/dir1/sum.c\n-rw-r--r-- 1 root root  104 Mar 28 11:45 /workspace/dir1/terminate.txt\n-rw-r--r-- 1 root root   89 Mar 28 11:45 /workspace/dir2/csvfile1.csv\n-rw-r--r-- 1 root root   25 Mar 28 11:45 /workspace/dir2/foo.txt\n-rw-r--r-- 1 root root    7 Mar 28 11:45 /workspace/dir2/hello.txt\n-rw-r--r-- 1 root root  127 Mar 28 11:45 /workspace/dir2/mysql/sql1.sql\n-rw-r--r-- 1 root root   24 Mar 28 11:45 /workspace/files.txt\n-rw-r--r-- 1 root root    0 Mar 28 11:45 /workspace/old2.txt\n-rw-r--r-- 1 root root    0 Mar 28 11:45 /workspace/recent1.txt\n-rw-r--r-- 1 root root   16 Mar 28 11:45 /workspace/results.txt\n",
+        "eval_obs": "",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /workspace -type f -perm -g=r -a ! -perm -g=w -a ! -perm -g=x -exec ls -l {} +",
+        "observation": "-rw-r--r-- 1 root root   28 Mar 28 11:42 /workspace/.hidden.txt\n-rw-r--r-- 1 root root  153 Mar 28 12:03 /workspace/archive.tar.gz\n-rw-r--r-- 1 root root   22 Mar 28 11:45 /workspace/dir1/.hidden1.txt\n-rw-r--r-- 1 root root   25 Mar 28 11:45 /workspace/dir1/a.txt\n-rw-r--r-- 1 root root 2048 Mar 28 11:45 /workspace/dir1/file.c\n-rw-r--r-- 1 root root 4096 Mar 28 11:45 /workspace/dir1/file.txt\n-rw-r--r-- 1 root root   72 Mar 28 11:45 /workspace/dir1/hello.c\n-rw-r--r-- 1 root root    7 Mar 28 11:45 /workspace/dir1/hello.txt\n-rw-r--r-- 1 root root   78 Mar 28 11:45 /workspace/dir1/long.txt\n-rw-r--r-- 1 root root    0 Mar 28 11:45 /workspace/dir1/readonly.txt\n-rw-r--r-- 1 root root  185 Mar 28 11:45 /workspace/dir1/sum.c\n-rw-r--r-- 1 root root  104 Mar 28 11:45 /workspace/dir1/terminate.txt\n-rw-r--r-- 1 root root   89 Mar 28 11:45 /workspace/dir2/csvfile1.csv\n-rw-r--r-- 1 root root   25 Mar 28 11:45 /workspace/dir2/foo.txt\n-rw-r--r-- 1 root root    7 Mar 28 11:45 /workspace/dir2/hello.txt\n-rw-r--r-- 1 root root  127 Mar 28 11:45 /workspace/dir2/mysql/sql1.sql\n-rw-r--r-- 1 root root   24 Mar 28 11:45 /workspace/files.txt\n-rw-r--r-- 1 root root    0 Mar 28 11:45 /workspace/old2.txt\n-rw-r--r-- 1 root root    0 Mar 28 11:45 /workspace/recent1.txt\n-rw-r--r-- 1 root root   16 Mar 28 11:45 /workspace/results.txt\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "-rw-r--r-- 1 root root   28 Mar 28 11:42 /workspace/.hidden.txt\n-rw-r--r-- 1 root root  153 Mar 28 12:03 /workspace/archive.tar.gz\n-rw-r--r-- 1 root root   22 Mar 28 11:45 /workspace/dir1/.hidden1.txt\n-rw-r--r-- 1 root root   25 Mar 28 11:45 /workspace/dir1/a.txt\n-rw-r--r-- 1 root root 2048 Mar 28 11:45 /workspace/dir1/file.c\n-rw-r--r-- 1 root root 4096 Mar 28 11:45 /workspace/dir1/file.txt\n-rw-r--r-- 1 root root   72 Mar 28 11:45 /workspace/dir1/hello.c\n-rw-r--r-- 1 root root    7 Mar 28 11:45 /workspace/dir1/hello.txt\n-rw-r--r-- 1 root root   78 Mar 28 11:45 /workspace/dir1/long.txt\n-rw-r--r-- 1 root root    0 Mar 28 11:45 /workspace/dir1/readonly.txt\n-rw-r--r-- 1 root root  185 Mar 28 11:45 /workspace/dir1/sum.c\n-rw-r--r-- 1 root root  104 Mar 28 11:45 /workspace/dir1/terminate.txt\n-rw-r--r-- 1 root root   89 Mar 28 11:45 /workspace/dir2/csvfile1.csv\n-rw-r--r-- 1 root root   25 Mar 28 11:45 /workspace/dir2/foo.txt\n-rw-r--r-- 1 root root    7 Mar 28 11:45 /workspace/dir2/hello.txt\n-rw-r--r-- 1 root root  127 Mar 28 11:45 /workspace/dir2/mysql/sql1.sql\n-rw-r--r-- 1 root root   24 Mar 28 11:45 /workspace/files.txt\n-rw-r--r-- 1 root root    0 Mar 28 11:45 /workspace/old2.txt\n-rw-r--r-- 1 root root    0 Mar 28 11:45 /workspace/recent1.txt\n-rw-r--r-- 1 root root   16 Mar 28 11:45 /workspace/results.txt\n",
+    "eval_observation": "",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "bd19835dc286",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260328_193245_bd19835dc286/commands.jsonl"
+  }
+}

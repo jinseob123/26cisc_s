@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-28T11:53:25Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-28T11:53:25Z",
+    "finished_at": "2026-03-28T11:53:32Z",
+    "image_name": "intercode-nl2bash-fs3",
+    "command": {
+      "text": "awk '{sum+=$1} END{print sum}' <(xargs -d '\\n' -a /workspace/files.txt stat -c %s)",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "root"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "awk '{sum+=$1} END{print sum}' <(xargs -d '\\n' -a /workspace/files.txt stat -c %s)",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nawk '{sum+=$1} END{print sum}' <(xargs -d '\\n' -a /workspace/files.txt stat -c %s)\n```",
+    "raw_output_payload": {
+      "content": "```bash\nawk '{sum+=$1} END{print sum}' <(xargs -d '\\n' -a /workspace/files.txt stat -c %s)\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "We need to read file list, sum sizes. Use xargs -d '\\n' -I{} stat -c %s {} and sum. Use awk. Command: awk '{sum+=$1} END{print sum}' <(xargs -d '\\n' -a /workspace/files.txt stat -c %s). Use process substitution. Provide single command.",
+      "reasoning_content": "We need to read file list, sum sizes. Use xargs -d '\\n' -I{} stat -c %s {} and sum. Use awk. Command: awk '{sum+=$1} END{print sum}' <(xargs -d '\\n' -a /workspace/files.txt stat -c %s). Use process substitution. Provide single command."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 37,
+    "query": "Print the total disk usage in bytes of all files listed in \"/workspace/files.txt\"",
+    "gold": "cat /workspace/files.txt | xargs du -c | tail -1 | awk '{print $1}'",
+    "record": {
+      "query": "Print the total disk usage in bytes of all files listed in \"/workspace/files.txt\"",
+      "gold": "cat /workspace/files.txt | xargs du -c | tail -1 | awk '{print $1}'"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Print the total disk usage in bytes of all files listed in \"/workspace/files.txt\"",
+      "info": {}
+    },
+    "action": {
+      "command": "awk '{sum+=$1} END{print sum}' <(xargs -d '\\n' -a /workspace/files.txt stat -c %s)",
+      "observation": "25\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "25\n",
+      "reward": 0.67,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.0
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "25\n",
+        "eval_obs": "4\n",
+        "answer_similarity": 0.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "awk '{sum+=$1} END{print sum}' <(xargs -d '\\n' -a /workspace/files.txt stat -c %s)",
+        "observation": "25\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.67,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "25\n",
+    "eval_observation": "4\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "bd19835dc286",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260328_193245_bd19835dc286/commands.jsonl"
+  }
+}

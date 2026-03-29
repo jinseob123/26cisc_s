@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-28T14:47:39Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-28T14:47:39Z",
+    "finished_at": "2026-03-28T14:47:46Z",
+    "image_name": "intercode-nl2bash-fs3",
+    "command": {
+      "text": "awk '{print $NF}' /workspace/dir1/long.txt",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_3.json"
+    },
+    "profile": "strict"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "awk '{print $NF}' /workspace/dir1/long.txt",
+    "extraction_source": "content",
+    "retry_count": 0,
+    "command_is_complete": true,
+    "raw_output_text": "```bash\nawk '{print $NF}' /workspace/dir1/long.txt\n```",
+    "raw_output_payload": {
+      "content": "```bash\nawk '{print $NF}' /workspace/dir1/long.txt\n```",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need command to print last word. Use awk or rev. Let's use awk '{print $NF}'.",
+      "reasoning_content": "Need command to print last word. Use awk or rev. Let's use awk '{print $NF}'."
+    }
+  },
+  "task": {
+    "split": 3,
+    "task_index": 15,
+    "query": "print the last word in /workspace/dir1/long.txt",
+    "gold": "tac /workspace/dir1/long.txt | awk 'NF{print $NF; exit}'",
+    "record": {
+      "query": "print the last word in /workspace/dir1/long.txt",
+      "gold": "tac /workspace/dir1/long.txt | awk 'NF{print $NF; exit}'"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "print the last word in /workspace/dir1/long.txt",
+      "info": {}
+    },
+    "action": {
+      "command": "awk '{print $NF}' /workspace/dir1/long.txt",
+      "observation": "line\nline\nline\nline;\nline\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "line\nline\nline\nline;\nline\n",
+      "reward": 1.0,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.33
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "line\nline\nline\nline;\nline\n",
+        "eval_obs": "line\n",
+        "answer_similarity": 1.0,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "awk '{print $NF}' /workspace/dir1/long.txt",
+        "observation": "line\nline\nline\nline;\nline\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 1.0,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "line\nline\nline\nline;\nline\n",
+    "eval_observation": "line\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "bd19835dc286",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260328_193245_bd19835dc286/commands.jsonl"
+  }
+}

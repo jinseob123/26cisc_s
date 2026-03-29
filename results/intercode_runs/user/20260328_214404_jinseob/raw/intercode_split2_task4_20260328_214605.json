@@ -1,0 +1,109 @@
+{
+  "schema_version": "intercode.raw.v1",
+  "benchmark": "intercode",
+  "task_family": "nl2bash",
+  "created_at": "2026-03-28T12:46:05Z",
+  "run": {
+    "status": "completed",
+    "started_at": "2026-03-28T12:46:05Z",
+    "finished_at": "2026-03-28T12:46:12Z",
+    "image_name": "intercode-nl2bash-fs2",
+    "command": {
+      "text": "find /system -type f -name '*.out' -printf '%h\\n' | sort -u",
+      "source": "command_set"
+    },
+    "paths": {
+      "intercode_root": "/home/tako/jinseob/2026sisc_ss/bench/intercode",
+      "dataset_path": "/home/tako/jinseob/2026sisc_ss/bench/intercode/data/nl2bash/nl2bash_fs_2.json"
+    },
+    "profile": "user"
+  },
+  "generation": {
+    "model_name": "openai/gpt-oss-20b",
+    "model_server_url": "http://localhost:8000/v1",
+    "finish_reason": "stop",
+    "generated_command": "find /system -type f -name '*.out' -printf '%h\\n' | sort -u",
+    "extraction_source": "content",
+    "retry_count": 1,
+    "command_is_complete": false,
+    "raw_output_text": "find /system -type f -name '*.out' -printf '%h\\n' | sort -u",
+    "raw_output_payload": {
+      "content": "find /system -type f -name '*.out' -printf '%h\\n' | sort -u",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": [],
+      "reasoning": "Need find directories under /system containing *.out. Use find -type f -name '*.out' -printf '%h\\n' | sort -u. So command: find /system -type f -name '*.out' -printf '%h\\n' | sort -u.",
+      "reasoning_content": "Need find directories under /system containing *.out. Use find -type f -name '*.out' -printf '%h\\n' | sort -u. So command: find /system -type f -name '*.out' -printf '%h\\n' | sort -u."
+    }
+  },
+  "task": {
+    "split": 2,
+    "task_index": 4,
+    "query": "Recursively prints all folders in the '/system' folder that contain files like \"*.out\".",
+    "gold": "find /system -name \"*.out\" -print0 | xargs -0 -n1 /system | sort --unique",
+    "record": {
+      "query": "Recursively prints all folders in the '/system' folder that contain files like \"*.out\".",
+      "gold": "find /system -name \"*.out\" -print0 | xargs -0 -n1 /system | sort --unique"
+    }
+  },
+  "steps": {
+    "reset": {
+      "observation": "Recursively prints all folders in the '/system' folder that contain files like \"*.out\".",
+      "info": {}
+    },
+    "action": {
+      "command": "find /system -type f -name '*.out' -printf '%h\\n' | sort -u",
+      "observation": "/system\n/system/folder1\n",
+      "info": {
+        "action_executed": true
+      }
+    },
+    "submit": {
+      "command": "submit",
+      "observation": "/system\n/system/folder1\n",
+      "reward": 0.77,
+      "done": true,
+      "info": {
+        "reward": {
+          "file_diff": 0.33,
+          "file_changes": 0.33,
+          "answer_similarity": 0.1
+        },
+        "diff_miss": [],
+        "diff_extra": [],
+        "agent_obs": "/system\n/system/folder1\n",
+        "eval_obs": "xargs: /system: Permission denied\n",
+        "answer_similarity": 0.3108907746813972,
+        "action_executed": true
+      }
+    }
+  },
+  "artifacts": {
+    "trajectory": [
+      {
+        "action": "find /system -type f -name '*.out' -printf '%h\\n' | sort -u",
+        "observation": "/system\n/system/folder1\n"
+      },
+      {
+        "action": "submit",
+        "observation": null
+      }
+    ]
+  },
+  "summary": {
+    "reward": 0.77,
+    "done": true,
+    "action_executed": true,
+    "agent_observation": "/system\n/system/folder1\n",
+    "eval_observation": "xargs: /system: Permission denied\n",
+    "corrupt_gold": null
+  },
+  "error": null,
+  "command_set": {
+    "command_set_id": "bf881eeac670",
+    "records_path": "/home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/20260328_193200_bf881eeac670/commands.jsonl"
+  }
+}
