@@ -47,7 +47,7 @@ def build_parser():
     )
     run_parser.add_argument(
         "--profile",
-        choices=("root", "strict"),
+        choices=("root", "user", "strict"),
         default="root",
         help="Execution profile for the task run",
     )
@@ -89,7 +89,7 @@ def build_parser():
     )
     batch_parser.add_argument(
         "--profile",
-        choices=("root", "strict"),
+        choices=("root", "user", "strict"),
         default="root",
         help="Execution profile for all task runs in this batch",
     )
@@ -137,7 +137,7 @@ def build_parser():
     )
     run_set_parser.add_argument(
         "--profile",
-        choices=("root", "strict"),
+        choices=("root", "user", "strict"),
         required=True,
         help="Execution profile for this command-set replay",
     )

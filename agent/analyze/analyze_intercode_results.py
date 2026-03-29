@@ -8,8 +8,22 @@ from statistics import mean
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_RUNS_DIR = PROJECT_ROOT / "results" / "intercode_runs" / "result5"
-DEFAULT_OUT_DIR = PROJECT_ROOT / "results" / "intercode_runs" / "result5"/ "analysis"
+DEFAULT_RUNS_DIR = PROJECT_ROOT / "results" / "intercode_runs" / "result12"
+DEFAULT_OUT_DIR = PROJECT_ROOT / "results" / "intercode_runs" / "result12"/ "analysis"
+PROFILE_ALIASES = {
+    "r": "root",
+    "root": "root",
+    "u": "user",
+    "user": "user",
+    "s": "strict",
+    "strict": "strict",
+}
+PROFILE_ORDER = ["root", "user", "strict"]
+PROFILE_COLORS = {
+    "root": "#2a9d8f",
+    "user": "#577590",
+    "strict": "#e76f51",
+}
 
 
 def load_jsonl(path: Path):
@@ -43,6 +57,28 @@ def dedupe_latest_rows(rows):
         if key not in latest or row["session_id"] > latest[key]["session_id"]:
             latest[key] = row
     return list(latest.values())
+
+
+def parse_profiles_arg(raw_profiles):
+    if not raw_profiles:
+        return ["root", "strict"]
+
+    profiles = []
+    for item in raw_profiles.split(","):
+        token = item.strip().lower()
+        if not token:
+            continue
+        canonical = PROFILE_ALIASES.get(token)
+        if canonical is None:
+            raise ValueError(f"Unsupported profile alias: {item}")
+        if canonical not in profiles:
+            profiles.append(canonical)
+    return profiles or ["root", "strict"]
+
+
+def filter_rows_by_profiles(rows, selected_profiles):
+    selected = set(selected_profiles)
+    return [row for row in rows if row.get("profile") in selected]
 
 
 def normalize_row(row, summary_path: Path):
@@ -124,25 +160,31 @@ def build_paired_rows(rows):
     return paired
 
 
-def build_delta_rows(rows):
+def build_delta_rows(rows, base_profile="root", comparison_profiles=None):
     deltas = []
+    comparison_profiles = comparison_profiles or []
     for key, pair in build_paired_rows(rows).items():
-        if "root" not in pair or "strict" not in pair:
+        if base_profile not in pair:
             continue
-        root_row = pair["root"]
-        strict_row = pair["strict"]
-        deltas.append(
-            {
-                "command_set_id": key[0],
-                "split": key[1],
-                "task_index": key[2],
-                "root_reward": root_row.get("reward"),
-                "strict_reward": strict_row.get("reward"),
-                "reward_delta": (root_row.get("reward") or 0.0) - (strict_row.get("reward") or 0.0),
-                "root_bucket": classify_failure(root_row),
-                "strict_bucket": classify_failure(strict_row),
-            }
-        )
+        base_row = pair[base_profile]
+        for comparison_profile in comparison_profiles:
+            if comparison_profile not in pair:
+                continue
+            comparison_row = pair[comparison_profile]
+            deltas.append(
+                {
+                    "command_set_id": key[0],
+                    "split": key[1],
+                    "task_index": key[2],
+                    "base_profile": base_profile,
+                    "comparison_profile": comparison_profile,
+                    "base_reward": base_row.get("reward"),
+                    "comparison_reward": comparison_row.get("reward"),
+                    "reward_delta": (base_row.get("reward") or 0.0) - (comparison_row.get("reward") or 0.0),
+                    "base_bucket": classify_failure(base_row),
+                    "comparison_bucket": classify_failure(comparison_row),
+                }
+            )
     return deltas
 
 
@@ -214,11 +256,11 @@ def make_bar_chart_svg(labels, values, title, ylabel, out_path: Path, colors):
     write_svg(out_path, width, height, "".join(parts))
 
 
-def plot_profile_metrics(profile_stats, out_dir: Path):
-    profiles = ["root", "strict"]
+def plot_profile_metrics(profile_stats, out_dir: Path, profiles):
     labels = [profile.upper() for profile in profiles if profile in profile_stats]
     exact_values = [profile_stats[profile]["exact_success_rate"] for profile in profiles if profile in profile_stats]
     reward_values = [profile_stats[profile]["average_reward"] for profile in profiles if profile in profile_stats]
+    colors = [PROFILE_COLORS.get(profile, "#666666") for profile in profiles if profile in profile_stats]
 
     make_bar_chart_svg(
         labels,
@@ -226,7 +268,7 @@ def plot_profile_metrics(profile_stats, out_dir: Path):
         "Exact Success Rate By Profile",
         "Exact Success Rate",
         out_dir / "exact_success_by_profile.svg",
-        colors=["#2a9d8f", "#e76f51"],
+        colors=colors,
     )
     make_bar_chart_svg(
         labels,
@@ -234,20 +276,18 @@ def plot_profile_metrics(profile_stats, out_dir: Path):
         "Average Reward By Profile",
         "Average Reward",
         out_dir / "average_reward_by_profile.svg",
-        colors=["#264653", "#f4a261"],
+        colors=colors,
     )
 
 
-def plot_split_metrics(split_stats, out_dir: Path):
+def plot_split_metrics(split_stats, out_dir: Path, profiles):
     splits = sorted({row["split"] for row in split_stats})
-    profiles = ["root", "strict"]
     width, height = 980, 520
     left, right, top, bottom = 90, 40, 60, 80
     plot_width = width - left - right
     plot_height = height - top - bottom
     group_width = plot_width / max(len(splits), 1)
-    bar_width = group_width * 0.28
-    colors = {"root": "#2a9d8f", "strict": "#e76f51"}
+    bar_width = group_width * min(0.22, 0.7 / max(len(profiles), 1))
 
     parts = [
         f'<rect x="0" y="0" width="{width}" height="{height}" fill="white"/>',
@@ -264,27 +304,28 @@ def plot_split_metrics(split_stats, out_dir: Path):
         for profile_idx, profile in enumerate(profiles):
             match = next((row for row in split_stats if row["profile"] == profile and row["split"] == split), None)
             value = match["exact_success_rate"] if match else 0.0
-            x = group_x + group_width * 0.2 + profile_idx * bar_width * 1.3
+            total_bar_width = len(profiles) * bar_width + max(len(profiles) - 1, 0) * bar_width * 0.3
+            start_x = group_x + (group_width - total_bar_width) / 2
+            x = start_x + profile_idx * bar_width * 1.3
             bar_height = value * plot_height
             y = top + plot_height - bar_height
-            parts.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{bar_width:.1f}" height="{bar_height:.1f}" fill="{colors[profile]}"/>')
+            parts.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{bar_width:.1f}" height="{bar_height:.1f}" fill="{PROFILE_COLORS.get(profile, "#666666")}"/>')
             parts.append(svg_text(x + bar_width / 2, y - 8, f"{value:.2f}", size=10))
 
-    parts.append(f'<rect x="{width - 190}" y="{top}" width="14" height="14" fill="{colors["root"]}"/>')
-    parts.append(svg_text(width - 165, top + 12, "ROOT", size=12, anchor="start"))
-    parts.append(f'<rect x="{width - 190}" y="{top + 24}" width="14" height="14" fill="{colors["strict"]}"/>')
-    parts.append(svg_text(width - 165, top + 36, "STRICT", size=12, anchor="start"))
+    for idx, profile in enumerate(profiles):
+        y = top + idx * 24
+        parts.append(f'<rect x="{width - 190}" y="{y}" width="14" height="14" fill="{PROFILE_COLORS.get(profile, "#666666")}"/>')
+        parts.append(svg_text(width - 165, y + 12, profile.upper(), size=12, anchor="start"))
     write_svg(out_dir / "split_exact_success.svg", width, height, "".join(parts))
 
 
-def plot_reward_delta_histogram(delta_rows, out_dir: Path):
-    deltas = [row["reward_delta"] for row in delta_rows]
+def render_reward_delta_histogram(deltas, out_path: Path, title: str):
     if not deltas:
         write_svg(
-            out_dir / "reward_delta_histogram.svg",
+            out_path,
             800,
             300,
-            '<rect width="800" height="300" fill="white"/>' + svg_text(400, 150, "No paired ROOT/STRICT rows", size=20),
+            '<rect width="800" height="300" fill="white"/>' + svg_text(400, 150, "No paired rows", size=20),
         )
         return
 
@@ -305,7 +346,7 @@ def plot_reward_delta_histogram(delta_rows, out_dir: Path):
 
     parts = [
         f'<rect x="0" y="0" width="{width}" height="{height}" fill="white"/>',
-        svg_text(width / 2, 30, "Reward Delta Distribution (ROOT - STRICT)", size=20, weight="bold"),
+        svg_text(width / 2, 30, title, size=20, weight="bold"),
         f'<line x1="{left}" y1="{top}" x2="{left}" y2="{top + plot_height}" stroke="#444"/>',
         f'<line x1="{left}" y1="{top + plot_height}" x2="{left + plot_width}" y2="{top + plot_height}" stroke="#444"/>',
     ]
@@ -320,11 +361,27 @@ def plot_reward_delta_histogram(delta_rows, out_dir: Path):
     parts.append(svg_text(left + plot_width, top + plot_height + 24, f"{max_value:.2f}", size=12, anchor="end"))
     parts.append(svg_text(width / 2, height - 20, "Reward Delta", size=14))
     parts.append(svg_text(24, height / 2, "Task Count", size=14))
-    write_svg(out_dir / "reward_delta_histogram.svg", width, height, "".join(parts))
+    write_svg(out_path, width, height, "".join(parts))
 
 
-def plot_failure_buckets(bucket_counts, out_dir: Path):
-    profiles = ["root", "strict"]
+def plot_reward_delta_histograms(delta_rows, out_dir: Path, base_profile: str, comparison_profiles):
+    rendered = []
+    for comparison_profile in comparison_profiles:
+        deltas = [row["reward_delta"] for row in delta_rows if row["comparison_profile"] == comparison_profile]
+        if len(comparison_profiles) == 1:
+            out_path = out_dir / "reward_delta_histogram.svg"
+        else:
+            out_path = out_dir / f"reward_delta_histogram_{base_profile}_vs_{comparison_profile}.svg"
+        render_reward_delta_histogram(
+            deltas,
+            out_path,
+            f"Reward Delta Distribution ({base_profile.upper()} - {comparison_profile.upper()})",
+        )
+        rendered.append(str(out_path))
+    return rendered
+
+
+def plot_failure_buckets(bucket_counts, out_dir: Path, profiles):
     buckets = [
         "exact_success",
         "near_miss",
@@ -380,13 +437,18 @@ def plot_failure_buckets(bucket_counts, out_dir: Path):
     write_svg(out_dir / "failure_buckets_by_profile.svg", width, height, "".join(parts))
 
 
-def write_summary_json(out_dir: Path, profile_stats, split_stats, delta_rows, bucket_counts, summary_files):
+def write_summary_json(out_dir: Path, profile_stats, split_stats, delta_rows, bucket_counts, summary_files, selected_profiles, base_profile):
     summary = {
         "summary_files": [str(path) for path in summary_files],
+        "selected_profiles": selected_profiles,
+        "base_profile": base_profile,
         "profile_stats": profile_stats,
         "split_stats": split_stats,
         "paired_task_count": len(delta_rows),
-        "average_reward_delta_root_minus_strict": mean([row["reward_delta"] for row in delta_rows]) if delta_rows else 0.0,
+        "pairwise_reward_deltas": {
+            comparison_profile: mean([row["reward_delta"] for row in delta_rows if row["comparison_profile"] == comparison_profile])
+            for comparison_profile in sorted({row["comparison_profile"] for row in delta_rows})
+        },
         "bucket_counts": {profile: dict(counts) for profile, counts in bucket_counts.items()},
     }
     (out_dir / "summary.json").write_text(json.dumps(summary, indent=2, ensure_ascii=False), encoding="utf-8")
@@ -395,13 +457,15 @@ def write_summary_json(out_dir: Path, profile_stats, split_stats, delta_rows, bu
 
 def render_report(summary, out_dir: Path):
     profile_stats = summary["profile_stats"]
+    selected_profiles = summary.get("selected_profiles", PROFILE_ORDER)
+    base_profile = summary.get("base_profile", "root")
     lines = [
         "# InterCode Permission Analysis",
         "",
         "## Headline",
         "",
     ]
-    for profile in ["root", "strict"]:
+    for profile in selected_profiles:
         if profile not in profile_stats:
             continue
         stats = profile_stats[profile]
@@ -422,21 +486,23 @@ def render_report(summary, out_dir: Path):
             "- `exact_success_by_profile.svg`: strict한 exact match 기준에서 어느 권한이 더 많이 통과하는지 보여준다.",
             "- `average_reward_by_profile.svg`: 부분점수까지 포함한 전체 성능 차이를 보여준다.",
             "- `split_exact_success.svg`: split별로 어느 권한에서 성능 차이가 커지는지 보여준다.",
-            "- `reward_delta_histogram.svg`: task별 `ROOT - STRICT` reward 차이 분포를 보여준다.",
+            "- `reward_delta_histogram*.svg`: task별 `{base}` 대비 다른 프로파일의 reward 차이 분포를 보여준다.".format(
+                base=base_profile.upper()
+            ),
             "- `failure_buckets_by_profile.svg`: near-miss, permission denied, semantic miss 같은 실패 유형 구성을 보여준다.",
             "",
             "## Interpretation Notes",
             "",
             "- exact success는 보수적인 지표라 near-miss를 많이 놓칠 수 있다.",
             "- average reward는 InterCode 원래 채점 기준을 따르므로 출력 mismatch와 state mismatch가 함께 반영된다.",
-            "- permission denied 비중이 높으면 strict 제약이 실제로 utility를 줄였다고 해석할 수 있다.",
+            "- permission denied 비중이 높으면 비root 제약이 실제로 utility를 줄였다고 해석할 수 있다.",
         ]
     )
     (out_dir / "report.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Analyze InterCode root/strict results and render plots")
+    parser = argparse.ArgumentParser(description="Analyze InterCode results and render plots")
     parser.add_argument("--runs-dir", type=Path, default=DEFAULT_RUNS_DIR)
     parser.add_argument(
         "--summary-files",
@@ -446,33 +512,57 @@ def main():
         help="Optional explicit intercode_command_set_summary.jsonl files",
     )
     parser.add_argument("--out-dir", type=Path, default=DEFAULT_OUT_DIR)
+    parser.add_argument(
+        "--profiles",
+        default="root,strict",
+        help="Comma-separated profiles to include. Supports aliases r,u,s or root,user,strict.",
+    )
+    parser.add_argument(
+        "--base-profile",
+        default="root",
+        help="Base profile used for paired reward deltas. Supports aliases r,u,s or root,user,strict.",
+    )
     args = parser.parse_args()
 
     summary_files = args.summary_files or find_summary_files(args.runs_dir)
     if not summary_files:
         raise FileNotFoundError("No intercode_command_set_summary.jsonl files found")
 
+    selected_profiles = parse_profiles_arg(args.profiles)
+    base_profile = parse_profiles_arg(args.base_profile)[0]
+    comparison_profiles = [profile for profile in selected_profiles if profile != base_profile]
+
     rows = []
     for summary_path in summary_files:
         for row in load_jsonl(summary_path):
             rows.append(normalize_row(row, summary_path))
 
-    deduped_rows = dedupe_latest_rows(rows)
+    filtered_rows = filter_rows_by_profiles(rows, selected_profiles)
+    deduped_rows = dedupe_latest_rows(filtered_rows)
     profile_stats = build_profile_stats(deduped_rows)
     split_stats = build_split_stats(deduped_rows)
-    delta_rows = build_delta_rows(deduped_rows)
+    delta_rows = build_delta_rows(deduped_rows, base_profile=base_profile, comparison_profiles=comparison_profiles)
     bucket_counts = build_bucket_counts(deduped_rows)
 
     args.out_dir.mkdir(parents=True, exist_ok=True)
     write_csv(args.out_dir / "all_rows_deduped.csv", deduped_rows)
     write_csv(args.out_dir / "split_stats.csv", split_stats)
     write_csv(args.out_dir / "paired_reward_deltas.csv", delta_rows)
-    summary = write_summary_json(args.out_dir, profile_stats, split_stats, delta_rows, bucket_counts, summary_files)
+    summary = write_summary_json(
+        args.out_dir,
+        profile_stats,
+        split_stats,
+        delta_rows,
+        bucket_counts,
+        summary_files,
+        selected_profiles,
+        base_profile,
+    )
 
-    plot_profile_metrics(profile_stats, args.out_dir)
-    plot_split_metrics(split_stats, args.out_dir)
-    plot_reward_delta_histogram(delta_rows, args.out_dir)
-    plot_failure_buckets(bucket_counts, args.out_dir)
+    plot_profile_metrics(profile_stats, args.out_dir, selected_profiles)
+    plot_split_metrics(split_stats, args.out_dir, selected_profiles)
+    plot_reward_delta_histograms(delta_rows, args.out_dir, base_profile, comparison_profiles)
+    plot_failure_buckets(bucket_counts, args.out_dir, selected_profiles)
     render_report(summary, args.out_dir)
 
     print("[DONE] intercode analysis completed")

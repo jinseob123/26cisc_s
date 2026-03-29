@@ -47,6 +47,7 @@ class IntercodeExecutionProfile:
 
 PROFILE_MAP = {
     "root": IntercodeExecutionProfile(name="root", exec_user="root", eval_exec_user="root"),
+    "user": IntercodeExecutionProfile(name="user", exec_user="ubuntu", eval_exec_user="root"),
     "strict": IntercodeExecutionProfile(name="strict", exec_user="nobody", eval_exec_user="root"),
 }
 

@@ -1,5 +1,5 @@
 # 자주 쓰는 실험 준비/실행/정리 명령을 make 타깃으로 묶어둔 파일.
-.PHONY: up compose-up intercode-images down logs ps clean-intercode command_set
+.PHONY: up compose-up intercode-images down logs ps clean-intercode command_set run-root run-user run-strict run-all-profiles
 
 # docker compose 서비스와 InterCode 이미지를 한 번에 준비한다.
 up: compose-up intercode-images
@@ -26,6 +26,9 @@ up: compose-up intercode-images
 # root 실행과 strict 실행을 순차적으로 모두 수행한다.
 run-all: run-root run-strict
 
+# root, user, strict 실행을 순차적으로 모두 수행한다.
+run-all-profiles: run-root run-user run-strict
+
 # 생성된 모든 command set을 root 권한 프로파일로 순차 실행한다.
 run-root:
 	for d in /home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/*; do \
@@ -33,6 +36,16 @@ run-root:
 		conda run -n intercode python agent/bench_intercode.py run-set \
 			--records-path "$$d/commands.jsonl" \
 			--profile root; \
+	done
+
+
+# 생성된 모든 command set을 일반 user(ubuntu) 권한 프로파일로 순차 실행한다.
+run-user:
+	for d in /home/tako/jinseob/2026sisc_ss/results/intercode_command_sets/*; do \
+		[ -f "$$d/commands.jsonl" ] || continue; \
+		conda run -n intercode python agent/bench_intercode.py run-set \
+			--records-path "$$d/commands.jsonl" \
+			--profile user; \
 	done
 
 

@@ -20,9 +20,9 @@ services:
     # openai/gpt-oss-20b
     # openai/gpt-oss-120b 너무 무거워서 안돌아감
     command: [
-      "--model", "openai/gpt-oss-20b",  # 원하는 모델로 변경 가능
+      "--model", "openai/gpt-oss-20b",        # 원하는 모델로 변경 가능
       "--tensor-parallel-size", "2",          # n대의 GPU로 모델 분산
-      "--max-model-len", "4096",              # n 메모리 점유
+      "--max-model-len", "16384",              # n 메모리 점유
       "--gpu-memory-utilization", "0.95",     # GPU 메모리 최대 활용
       "--disable-custom-all-reduce",
       "--trust-remote-code"
@@ -35,20 +35,3 @@ services:
       - HF_TOKEN=${HF_TOKEN}  # .env에 Hugging Face 토큰
       - NCCL_P2P_DISABLE=1
       - NCCL_IB_DISABLE=1
-
-  # [Layer 2] 에이전트 컨트롤러
-  agent-controller:
-    build:
-      context: ./agent
-      dockerfile: Dockerfile
-    container_name: agent-controller
-    depends_on:
-      - model-server
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock # Layer 3 제어를 위해 필수
-      - ${RESULT_PATH}:/app/results               # .env의 RESULT_PATH 사용
-    environment:
-      - MODEL_URL=${MODEL_URL}                    # 하위 호환
-      - MODEL_SERVER_URL=${MODEL_SERVER_URL:-${MODEL_URL}}  # 코드 기본 변수명
-    tty: true # 컨테이너가 바로 종료되지 않도록 설정
-    
