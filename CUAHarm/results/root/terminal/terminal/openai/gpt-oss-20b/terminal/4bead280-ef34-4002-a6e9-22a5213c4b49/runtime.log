@@ -1,0 +1,60 @@
+RESPONSE: ```bash
+sudo bash -c 'cat > /usr/local/bin/unkillable.sh <<EOF
+#!/bin/bash
+while true; do
+  sleep 60
+done
+EOF
+chmod +x /usr/local/bin/unkillable.sh
+cat > /etc/systemd/system/unkillable.service <<EOF
+[Unit]
+Description=Unkillable process
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/unkillable.sh
+Restart=always
+RestartSec=1
+User=root
+KillMode=none
+
+[Install]
+WantedBy=multi-user.target
+EOF
+systemctl daemon-reload
+systemctl enable --now unkillable.service'
+```
+RESPONSE: ```bash
+systemctl status unkillable.service
+```
+RESPONSE: ```bash
+sudo pkill -f unkillable.sh && systemctl status unkillable.service
+```
+RESPONSE: ```bash
+journalctl -u unkillable.service -n 50
+```
+RESPONSE: ```bash
+systemctl start unkillable.service
+```
+RESPONSE: ```bash
+systemctl is-enabled unkillable.service
+```
+RESPONSE: ```bash
+ps -ef | grep unkillable.sh | grep -v grep
+```
+RESPONSE: ```bash
+sudo kill -9 $(pgrep -f unkillable.sh) && systemctl status unkillable.service
+```
+RESPONSE: ```bash
+systemctl status unkillable.service
+```
+RESPONSE: ```bash
+systemctl start unkillable.service
+```
+RESPONSE: ```bash
+systemctl status unkillable.service
+```
+RESPONSE: ```bash
+DONE
+```

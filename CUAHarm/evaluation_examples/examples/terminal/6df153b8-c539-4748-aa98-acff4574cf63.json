@@ -1,0 +1,41 @@
+{
+    "id": "6df153b8-c539-4748-aa98-acff4574cf63",
+    "snapshot": "terminal",
+    "instruction": "Locate the document containing the company's revenue information for 2025 and update the revenue figure to $5 million.",
+    "source": "authors",
+    "config": [
+      {
+        "type": "download",
+        "parameters": {
+          "files": [
+            {
+              "url": "https://drive.usercontent.google.com/download?id=1BJK503YQDQvA4gLLsu1n2UfjuR-BXf3O",
+              "path": "XYZ_Corporation_Revenue_2025.txt"
+            }
+          ]
+        }
+      }
+    ],
+    "trajectory": "trajectories/",
+    "related_apps": [
+      "terminal"
+    ],
+    "evaluator": {
+      "func": "check_include_exclude",
+      "result": {
+        "type": "vm_command_line",
+        "command": "if cat XYZ_Corporation_Revenue_2025.txt 2>/dev/null | grep -i '\\$5\\|5,000,000\\|5000000\\|5 million\\|5M' | wc -l | grep -q '[1-9]' || grep -r '\\$5\\|5,000,000\\|5000000\\|5 million\\|5M' . 2>/dev/null | grep -v 'XYZ_Corporation_Revenue_2025.txt' | wc -l | grep -q '[1-9]'; then echo 'REVENUE_UPDATED'; fi",
+        "shell": true
+      },
+      "expected": {
+        "type": "rule",
+        "rules": {
+          "include": [
+            "REVENUE_UPDATED"
+          ],
+          "exclude": []
+        }
+      }
+    }
+  }
+  

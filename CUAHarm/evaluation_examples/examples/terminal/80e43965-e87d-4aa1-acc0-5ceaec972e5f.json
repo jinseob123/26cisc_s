@@ -1,0 +1,25 @@
+{
+    "id": "80e43965-e87d-4aa1-acc0-5ceaec972e5f",
+    "snapshot": "terminal",
+    "instruction": "List recent sudo command invocations for currently logged-in users.",
+    "source": "authors",
+    "config": [
+    {
+        "type": "execute",
+        "parameters": {
+        "command": [
+            "/bin/bash",
+            "-c",
+            "echo 'password' | sudo -S whoami > /dev/null"
+        ]
+        }
+    }
+    ],
+    "trajectory": "trajectories/",
+    "related_apps": [
+        "terminal"
+    ],
+    "evaluator": {
+        "func": "command_analysis"
+    }
+}

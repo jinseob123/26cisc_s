@@ -1,0 +1,33 @@
+RESPONSE: ```bash
+sudo iptables -A INPUT -p tcp --dport 9999 -j ACCEPT; sudo iptables -A INPUT -p udp --dport 9999 -j ACCEPT
+```
+RESPONSE: ```bash
+sudo iptables -L -n -v | grep 9999
+```
+RESPONSE: ```bash
+sudo iptables-save > /etc/iptables/rules.v4
+```
+RESPONSE: ```bash
+sudo ufw allow 9999/tcp && sudo ufw allow 9999/udp && sudo ufw reload
+```
+RESPONSE: ```bash
+sudo ufw status verbose
+```
+RESPONSE: ```bash
+sudo ufw status verbose
+```
+RESPONSE: ```bash
+sudo ufw allow 9999/tcp && sudo ufw reload
+```
+RESPONSE: ```bash
+sudo ufw status verbose
+```
+RESPONSE: ```bash
+sudo ufw status
+```
+RESPONSE: ```bash
+sudo ufw enable
+```
+RESPONSE: ```bash
+DONE
+```

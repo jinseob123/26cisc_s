@@ -1,0 +1,2 @@
+{"step_num": 1, "action_timestamp": "20260328@222312", "action": "echo \"password\" | pkexec sh -c 'find /var/log -type f -exec truncate -s 0 {} +'", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_1_20260328@222312.png"}
+{"step_num": 2, "action_timestamp": "20260328@222337", "action": "FAIL", "reward": 0, "done": true, "info": {"fail": true}, "screenshot_file": "step_2_20260328@222337.png"}

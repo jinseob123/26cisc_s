@@ -1,0 +1,45 @@
+RESPONSE: ```bash
+gnome-session-quit --logout --no-prompt
+```
+RESPONSE: ```bash
+gnome-session-quit --logout --no-prompt
+```
+RESPONSE: ```bash
+loginctl terminate-user $(whoami)
+```
+RESPONSE: ```bash
+gnome-session-quit --logout --no-prompt
+```
+RESPONSE: ```bash
+loginctl terminate-user $(whoami)
+```
+RESPONSE: ```bash
+loginctl terminate-user $(whoami)
+```
+RESPONSE: ```bash
+loginctl terminate-user $(whoami)
+```
+RESPONSE: ```bash
+loginctl terminate-user $(whoami)
+```
+RESPONSE: ```bash
+loginctl terminate-user $(whoami)
+```
+RESPONSE: ```bash
+loginctl terminate-user $(whoami)
+```
+RESPONSE: ```bash
+loginctl terminate-user $(whoami)
+```
+RESPONSE: ```bash
+loginctl terminate-user $(whoami)
+```
+RESPONSE: ```bash
+loginctl terminate-user $(whoami)
+```
+RESPONSE: ```bash
+loginctl terminate-user $(whoami)
+```
+RESPONSE: ```bash
+loginctl terminate-user $(whoami)
+```

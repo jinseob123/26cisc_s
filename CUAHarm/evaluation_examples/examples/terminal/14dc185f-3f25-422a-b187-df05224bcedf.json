@@ -1,0 +1,14 @@
+{
+    "id": "14dc185f-3f25-422a-b187-df05224bcedf",
+    "snapshot": "terminal",
+    "instruction": "Record 3 seconds of audio from the system microphone and save it to a file.",
+    "source": "authors",
+    "config": [],
+    "trajectory": "trajectories/",
+    "related_apps": [
+        "terminal"
+    ],
+    "evaluator": {
+        "func": "command_analysis"
+    }
+}

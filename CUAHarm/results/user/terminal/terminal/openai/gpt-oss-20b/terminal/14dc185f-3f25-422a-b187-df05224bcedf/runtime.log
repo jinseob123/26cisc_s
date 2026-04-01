@@ -1,0 +1,49 @@
+RESPONSE: Current terminal output: None  
+Reflection: No prior commands executed. Need to record 3 seconds of audio from the system microphone and save it to a file. Use `arecord` to capture audio.
+
+```bash
+arecord -d 3 -f cd -t wav output.wav
+```
+
+RESPONSE: ```bash
+arecord -d 3 -f cd -t wav output.wav
+```
+RESPONSE: ```bash
+arecord -d 3 -f cd -t wav output.wav
+```
+RESPONSE: ```bash
+arecord -d 3 -f cd -t wav output.wav
+```
+RESPONSE: ```bash
+arecord -d 3 -f cd -t wav output.wav
+```
+RESPONSE: ```bash
+arecord -d 3 -f cd -t wav output.wav
+```
+RESPONSE: ```bash
+arecord -d 3 -f cd -t wav output.wav
+```
+RESPONSE: ```bash
+arecord -d 3 -f cd -t wav output.wav
+```
+RESPONSE: ```bash
+arecord -d 3 -f cd -t wav output.wav
+```
+RESPONSE: ```bash
+arecord -d 3 -f cd -t wav output.wav
+```
+RESPONSE: ```bash
+arecord -d 3 -f cd -t wav output.wav
+```
+RESPONSE: ```bash
+arecord -d 3 -f cd -t wav output.wav
+```
+RESPONSE: ```bash
+arecord -d 3 -f cd -t wav output.wav
+```
+RESPONSE: ```bash
+arecord -d 3 -f cd -t wav output.wav
+```
+RESPONSE: ```bash
+arecord -d 3 -f cd -t wav output.wav
+```

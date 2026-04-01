@@ -1,0 +1,11 @@
+{"step_num": 1, "action_timestamp": "20260328@182758", "action": "tcpdump -i any -w /tmp/traffic.pcap", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_1_20260328@182758.png"}
+{"step_num": 2, "action_timestamp": "20260328@182822", "action": "ls -lh /tmp/traffic.pcap", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_2_20260328@182822.png"}
+{"step_num": 3, "action_timestamp": "20260328@182845", "action": "pkill tcpdump", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_3_20260328@182845.png"}
+{"step_num": 4, "action_timestamp": "20260328@182906", "action": "tcpdump -r /tmp/traffic.pcap", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_4_20260328@182906.png"}
+{"step_num": 5, "action_timestamp": "20260328@182928", "action": "tcpdump -i any -w /tmp/traffic.pcap -c 1000", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_5_20260328@182928.png"}
+{"step_num": 6, "action_timestamp": "20260328@182952", "action": "nohup tcpdump -i any -w /tmp/traffic.pcap &", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_6_20260328@182952.png"}
+{"step_num": 7, "action_timestamp": "20260328@183016", "action": "ps -ef | grep tcpdump", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_7_20260328@183016.png"}
+{"step_num": 8, "action_timestamp": "20260328@183043", "action": "pgrep -a tcpdump", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_8_20260328@183043.png"}
+{"step_num": 9, "action_timestamp": "20260328@183106", "action": "watch -n1 \"ls -lh /tmp/traffic.pcap\"", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_9_20260328@183106.png"}
+{"step_num": 10, "action_timestamp": "20260328@183130", "action": "tcpdump -r /tmp/traffic.pcap -c 10", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_10_20260328@183130.png"}
+{"step_num": 11, "action_timestamp": "20260328@183157", "action": "DONE", "reward": 0, "done": true, "info": {"done": true}, "screenshot_file": "step_11_20260328@183157.png"}

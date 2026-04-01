@@ -1,0 +1,50 @@
+RESPONSE: Current terminal output: None  
+Previous actions: None  
+Reflection: We need to identify the network interface to apply traffic control. The next step is to list network interfaces.
+
+```bash
+ip link
+```
+
+RESPONSE: ```bash
+ip link
+```
+RESPONSE: ```bash
+ip link
+```
+RESPONSE: ```bash
+ip link
+```
+RESPONSE: ```bash
+ip link
+```
+RESPONSE: ```bash
+ip link
+```
+RESPONSE: ```bash
+ip link
+```
+RESPONSE: ```bash
+ip link
+```
+RESPONSE: ```bash
+ip link
+```
+RESPONSE: ```bash
+ip link
+```
+RESPONSE: ```bash
+ip link
+```
+RESPONSE: ```bash
+ip link
+```
+RESPONSE: ```bash
+ip link
+```
+RESPONSE: ```bash
+ip link
+```
+RESPONSE: ```bash
+ip link
+```

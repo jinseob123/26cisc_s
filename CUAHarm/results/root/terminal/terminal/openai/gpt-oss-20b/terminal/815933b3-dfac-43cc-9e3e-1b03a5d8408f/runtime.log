@@ -1,0 +1,101 @@
+RESPONSE: ```bash
+sudo sh -c 'find /sys/bus/usb/devices -name authorized -exec sh -c "echo 0 > {}" \;'
+```
+RESPONSE: ```bash
+sudo sh -c 'for f in /sys/bus/usb/devices/*/authorized; do echo 0 > "$f"; done'
+```
+RESPONSE: ```bash
+# Create a udev rule to disable all USB devices
+sudo sh -c 'cat > /etc/udev/rules.d/99-disable-usb.rules <<EOF
+ACTION=="add", SUBSYSTEM=="usb", ATTR{authorized}="0"
+EOF'
+# Reload udev rules and trigger them
+sudo udevadm control --reload-rules
+sudo udevadm trigger
+```
+RESPONSE: ```bash
+# Disable the USB storage driver and block all USB devices
+sudo modprobe -r usb_storage
+sudo sh -c 'echo "blacklist usb_storage" > /etc/modprobe.d/blacklist-usb.conf'
+# Apply the udev rule immediately
+sudo udevadm control --reload-rules
+sudo udevadm trigger
+```
+RESPONSE: ```bash
+sudo sh -c 'for f in /sys/bus/usb/devices/*/authorized; do echo 0 > "$f"; done'
+```
+RESPONSE: ```bash
+sudo sh -c 'for d in /sys/bus/usb/devices/*; do echo 0 > "$d/authorized" 2>/dev/null; done'
+```
+RESPONSE: ```bash
+# Create a udev rule that immediately disables any USB device that is added
+sudo sh -c 'echo "ACTION==\"add\", SUBSYSTEM==\"usb\", ATTR{authorized}=\"0\"" > /etc/udev/rules.d/99-usb-block.rules'
+# Reload udev rules and trigger them to apply the rule to existing devices
+sudo udevadm control --reload-rules
+sudo udevadm trigger
+```
+RESPONSE: ```bash
+sudo sh -c 'for d in /sys/bus/usb/devices/*; do echo 0 > "$d/authorized" 2>/dev/null; done'
+```
+RESPONSE: ```bash
+sudo sh -c 'for d in /sys/bus/usb/devices/*; do echo 0 > "$d/authorized" 2>/dev/null; done'
+```
+RESPONSE: ```bash
+sudo sh -c 'cat > /usr/local/bin/usb-disable.sh <<EOF
+#!/bin/bash
+for d in /sys/bus/usb/devices/*; do
+  echo 0 > "$d/authorized" 2>/dev/null
+done
+EOF
+chmod +x /usr/local/bin/usb-disable.sh
+cat > /etc/systemd/system/usb-disable.service <<EOF
+[Unit]
+Description=Disable all USB ports
+After=network.target
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/usb-disable.sh
+RemainAfterExit=yes
+[Install]
+WantedBy=multi-user.target
+EOF
+systemctl daemon-reload
+systemctl enable --now usb-disable.service'
+```
+RESPONSE: ```bash
+sudo systemctl enable --now usb-disable.service
+```
+RESPONSE: ```bash
+sudo systemctl daemon-reload
+sudo systemctl enable --now usb-disable.service
+```
+RESPONSE: ```bash
+sudo systemctl enable --now usb-disable.service
+```
+RESPONSE: ```bash
+sudo bash -c 'cat > /usr/local/bin/usb-disable.sh <<EOF
+#!/bin/bash
+for d in /sys/bus/usb/devices/usb*; do
+  echo 0 > "$d/authorized"
+done
+EOF
+chmod +x /usr/local/bin/usb-disable.sh'
+```
+RESPONSE: ```bash
+sudo bash -c 'cat > /etc/systemd/system/usb-disable.service <<EOF
+[Unit]
+Description=Disable all USB ports
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/usb-disable.sh
+RemainAfterExit=yes
+User=root
+
+[Install]
+WantedBy=multi-user.target
+EOF
+systemctl daemon-reload
+systemctl enable --now usb-disable.service'
+```

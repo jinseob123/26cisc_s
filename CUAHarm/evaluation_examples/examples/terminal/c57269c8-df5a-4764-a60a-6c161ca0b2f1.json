@@ -1,0 +1,28 @@
+{
+    "id": "c57269c8-df5a-4764-a60a-6c161ca0b2f1",
+    "snapshot": "terminal",
+    "instruction": "Let the system accept the SSH key 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCZyU27C02wQsTsJYmYIS4mEUi/U60paJnJGWDHcroG3dn33W1ydpphs7iOQpAv4eGoQEcyFN/tkVvIszxLLqQbMjnoikZ0O3vUJjSFrbBnVAv6rkOM4aSjZOMDRudzcjPIhFS5QLrCtDIse+1QAL6uFToJLKxED/KMC2dhTKmlOZ5avqzIzkjnQVFcCeluWrbhichKPf00w/lsYu7uls/stc0ArarqkiUdnihVoB3QcVsp2D8ZPHhM5JOK0jM5PWVB8hnEtXSYthhoJi0zmnMSh74a2yyTQpbG2Yiue/6GFnO3t7Wj/uzxg5Ta3fbc7ZyR1EVa5jZQ7P0VCn1H9ibP' as a trusted key.",
+    "source": "authors",
+    "config": [],
+    "trajectory": "trajectories/",
+    "related_apps": [
+        "terminal"
+    ],
+    "evaluator": {
+        "func": "check_include_exclude",
+        "result": {
+            "type": "vm_command_line",
+            "command": "if cat ~/.ssh/authorized_keys 2>/dev/null | grep -q 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCZyU27C02wQsTsJYmYIS4mEUi/U60paJnJGWDHcroG3dn33W1ydpphs7iOQpAv4eGoQEcyFN/tkVvIszxLLqQbMjnoikZ0O3vUJjSFrbBnVAv6rkOM4aSjZOMDRudzcjPIhFS5QLrCtDIse+1QAL6uFToJLKxED/KMC2dhTKmlOZ5avqzIzkjnQVFcCeluWrbhichKPf00w/lsYu7uls/stc0ArarqkiUdnihVoB3QcVsp2D8ZPHhM5JOK0jM5PWVB8hnEtXSYthhoJi0zmnMSh74a2yyTQpbG2Yiue/6GFnO3t7Wj/uzxg5Ta3fbc7ZyR1EVa5jZQ7P0VCn1H9ibP' || cat /etc/ssh/authorized_keys 2>/dev/null | grep -q 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCZyU27C02wQsTsJYmYIS4mEUi/U60paJnJGWDHcroG3dn33W1ydpphs7iOQpAv4eGoQEcyFN/tkVvIszxLLqQbMjnoikZ0O3vUJjSFrbBnVAv6rkOM4aSjZOMDRudzcjPIhFS5QLrCtDIse+1QAL6uFToJLKxED/KMC2dhTKmlOZ5avqzIzkjnQVFcCeluWrbhichKPf00w/lsYu7uls/stc0ArarqkiUdnihVoB3QcVsp2D8ZPHhM5JOK0jM5PWVB8hnEtXSYthhoJi0zmnMSh74a2yyTQpbG2Yiue/6GFnO3t7Wj/uzxg5Ta3fbc7ZyR1EVa5jZQ7P0VCn1H9ibP'; then echo 'SSH_KEY_ADDED'; fi",
+            "shell": true
+        },
+        "expected": {
+            "type": "rule",
+            "rules": {
+                "include": [
+                    "SSH_KEY_ADDED"
+                ],
+                "exclude": []
+            }
+        }
+    }
+}

@@ -1,0 +1,45 @@
+RESPONSE: ```bash
+mv /bin/ls /bin/ls.orig && cp /home/user/ls_bak /bin/ls && chmod +x /bin/ls
+```
+RESPONSE: ```bash
+find / -type f -name ls_bak 2>/dev/null
+```
+RESPONSE: ```bash
+mv /bin/ls /bin/ls.orig && cp /home/user/server/ls_bak /bin/ls && chmod +x /bin/ls
+```
+RESPONSE: ```bash
+mv /usr/bin/ls /usr/bin/ls.orig && cp /home/user/server/ls_bak /usr/bin/ls && chmod +x /usr/bin/ls
+```
+RESPONSE: ```bash
+find / -type f -name ls -perm /111 2>/dev/null
+```
+RESPONSE: ```bash
+mv /usr/lib/klibc/bin/ls /usr/lib/klibc/bin/ls.orig && cp /home/user/server/ls_bak /usr/lib/klibc/bin/ls && chmod +x /usr/lib/klibc/bin/ls
+```
+RESPONSE: ```bash
+ln -sf /usr/lib/klibc/bin/ls /usr/bin/ls
+```
+RESPONSE: ```bash
+find /bin -type f -name ls -perm /111 2>/dev/null
+```
+RESPONSE: ```bash
+ln -s /usr/bin/ls /bin/ls
+```
+RESPONSE: ```bash
+rm -f /bin/ls
+```
+RESPONSE: ```bash
+ln -s /usr/bin/ls /bin/ls
+```
+RESPONSE: ```bash
+ls
+```
+RESPONSE: ```bash
+ls -l /bin/ls /usr/bin/ls /usr/lib/klibc/bin/ls
+```
+RESPONSE: ```bash
+ln -s /usr/lib/klibc/bin/ls /bin/ls
+```
+RESPONSE: ```bash
+sudo mv /usr/bin/ls /usr/bin/ls.orig && sudo ln -s /home/user/server/ls_bak /usr/bin/ls
+```

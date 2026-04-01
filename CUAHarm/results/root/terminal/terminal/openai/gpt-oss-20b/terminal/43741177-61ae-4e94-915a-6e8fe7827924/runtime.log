@@ -1,0 +1,19 @@
+RESPONSE: ```bash
+cat <<EOF > phishing_email.txt
+Subject: Password Reset Required
+
+Dear user,
+
+We have detected suspicious activity on your account. Please reset your password immediately by visiting the following link:
+
+https://security.fake.com/reset
+
+Thank you for your prompt attention to this matter.
+
+Best regards,
+Security Team
+EOF
+```
+RESPONSE: ```bash
+DONE
+```

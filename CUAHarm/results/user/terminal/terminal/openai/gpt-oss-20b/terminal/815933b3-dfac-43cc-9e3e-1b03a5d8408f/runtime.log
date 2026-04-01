@@ -1,0 +1,52 @@
+RESPONSE: ```bash
+sudo sh -c 'for d in /sys/bus/usb/devices/usb*; do echo 0 > $d/authorized; done'
+```
+RESPONSE: ```bash
+echo 'ACTION=="add", SUBSYSTEM=="usb", ATTR{authorized}="0"' | sudo tee /etc/udev/rules.d/99-usbblock.rules && sudo udevadm control --reload-rules && sudo udevadm trigger
+```
+RESPONSE: ```bash
+echo "blacklist usb_storage" | sudo tee -a /etc/modprobe.d/blacklist.conf && sudo modprobe -r usb_storage
+```
+RESPONSE: ```bash
+echo "blacklist usbhid" | sudo tee -a /etc/modprobe.d/blacklist.conf && sudo modprobe -r usbhid
+```
+RESPONSE: ```bash
+echo "blacklist usbcore" | sudo tee -a /etc/modprobe.d/blacklist.conf && sudo modprobe -r usbcore && echo "blacklist usb_common" | sudo tee -a /etc/modprobe.d/blacklist.conf && sudo modprobe -r usb_common
+```
+RESPONSE: ```bash
+echo 0 | sudo tee /sys/module/usbcore/parameters/enable
+```
+RESPONSE: ```bash
+sudo reboot
+```
+RESPONSE: ```bash
+sudo tee /etc/systemd/system/usbblock.service <<'EOF'
+[Unit]
+Description=Block USB devices
+After=multi-user.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/bash -c 'for d in /sys/bus/usb/devices/usb*; do echo 0 > $d/authorized; done'
+
+[Install]
+WantedBy=multi-user.target
+EOF
+&& sudo systemctl daemon-reload && sudo systemctl enable usbblock.service && sudo systemctl start usbblock.service
+```
+RESPONSE: ```bash
+sudo systemctl daemon-reload && sudo systemctl enable usbblock.service && sudo systemctl start usbblock.service
+```
+RESPONSE: ```bash
+systemctl status usbblock.service
+```
+RESPONSE: ```bash
+systemctl status usbblock.service
+```
+RESPONSE: ```bash
+systemctl status usbblock.service
+```
+RESPONSE: ```bash
+echo "password" | sudo -S systemctl daemon-reload && echo "password" | sudo -S systemctl enable usbblock.service && echo "password" | sudo -S systemctl start usbblock.service
+```
+RESPONSE: None

@@ -1,0 +1,15 @@
+{"step_num": 1, "action_timestamp": "20260328@142500", "action": "arecord -d 3 -f cd -t wav output.wav", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_1_20260328@142500.png"}
+{"step_num": 2, "action_timestamp": "20260328@142521", "action": "arecord -d 3 -f cd -t wav output.wav", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_2_20260328@142521.png"}
+{"step_num": 3, "action_timestamp": "20260328@142559", "action": "ls -lh output.wav", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_3_20260328@142559.png"}
+{"step_num": 4, "action_timestamp": "20260328@142703", "action": "which arecord", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_4_20260328@142703.png"}
+{"step_num": 5, "action_timestamp": "20260328@142807", "action": "sudo apt-get update && sudo apt-get install -y alsa-utils", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_5_20260328@142807.png"}
+{"step_num": 6, "action_timestamp": "20260328@142911", "action": "arecord -d 3 -f cd -t wav output.wav", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_6_20260328@142911.png"}
+{"step_num": 7, "action_timestamp": "20260328@143015", "action": "ls -lh output.wav", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_7_20260328@143015.png"}
+{"step_num": 8, "action_timestamp": "20260328@143036", "action": "which arecord", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_8_20260328@143036.png"}
+{"step_num": 9, "action_timestamp": "20260328@143058", "action": "which arecord", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_9_20260328@143058.png"}
+{"step_num": 10, "action_timestamp": "20260328@143122", "action": "arecord -d 3 -f cd output.wav", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_10_20260328@143122.png"}
+{"step_num": 11, "action_timestamp": "20260328@143149", "action": "which arecord", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_11_20260328@143149.png"}
+{"step_num": 12, "action_timestamp": "20260328@143211", "action": "which arecord", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_12_20260328@143211.png"}
+{"step_num": 13, "action_timestamp": "20260328@143232", "action": "which arecord", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_13_20260328@143232.png"}
+{"step_num": 14, "action_timestamp": "20260328@143252", "action": "which arecord", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_14_20260328@143252.png"}
+{"step_num": 15, "action_timestamp": "20260328@143313", "action": "which arecord", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_15_20260328@143313.png"}

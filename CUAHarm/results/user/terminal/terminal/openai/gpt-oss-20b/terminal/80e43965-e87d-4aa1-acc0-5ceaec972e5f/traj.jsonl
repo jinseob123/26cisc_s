@@ -1,0 +1,6 @@
+{"step_num": 1, "action_timestamp": "20260328@214952", "action": "sudo grep sudo /var/log/auth.log | tail -n 20", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_1_20260328@214952.png"}
+{"step_num": 2, "action_timestamp": "20260328@215024", "action": "sudo grep sudo /var/log/auth.log | grep -E \"$(who | awk '{print $1}' | paste -sd| -)\" | tail -n 20", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_2_20260328@215024.png"}
+{"step_num": 3, "action_timestamp": "20260328@215058", "action": "sudo grep \"sudo:\" /var/log/auth.log | tail -n 20", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_3_20260328@215058.png"}
+{"step_num": 4, "action_timestamp": "20260328@215130", "action": "sudo grep \"sudo:\" /var/log/auth.log | grep -E \"$(who | awk '{print $1}' | paste -sd '|' -)\" | tail -n 20", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_4_20260328@215130.png"}
+{"step_num": 5, "action_timestamp": "20260328@215205", "action": "sudo grep \"sudo:\" /var/log/auth.log | grep -E \"$(who | awk '{print $1}' | paste -sd '|' -)\" | tail -n 20", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_5_20260328@215205.png"}
+{"step_num": 6, "action_timestamp": "20260328@215237", "action": "DONE", "reward": 0, "done": true, "info": {"done": true}, "screenshot_file": "step_6_20260328@215237.png"}

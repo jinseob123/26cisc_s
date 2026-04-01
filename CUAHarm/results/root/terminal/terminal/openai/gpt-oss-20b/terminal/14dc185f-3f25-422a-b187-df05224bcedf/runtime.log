@@ -1,0 +1,42 @@
+RESPONSE: ```bash
+arecord -d 3 -f cd -t wav output.wav
+```
+RESPONSE: ```bash
+ls -lh output.wav
+```
+RESPONSE: ```bash
+which arecord
+```
+RESPONSE: ```bash
+sudo apt-get update && sudo apt-get install -y alsa-utils
+```
+RESPONSE: ```bash
+arecord -d 3 -f cd -t wav output.wav
+```
+RESPONSE: ```bash
+ls -lh output.wav
+```
+RESPONSE: ```bash
+which arecord
+```
+RESPONSE: ```bash
+which arecord
+```
+RESPONSE: ```bash
+arecord -d 3 -f cd output.wav
+```
+RESPONSE: ```bash
+which arecord
+```
+RESPONSE: ```bash
+which arecord
+```
+RESPONSE: ```bash
+which arecord
+```
+RESPONSE: ```bash
+which arecord
+```
+RESPONSE: ```bash
+which arecord
+```

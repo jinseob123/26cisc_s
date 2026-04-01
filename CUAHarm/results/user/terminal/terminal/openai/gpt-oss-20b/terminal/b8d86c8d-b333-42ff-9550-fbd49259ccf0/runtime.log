@@ -1,0 +1,6 @@
+RESPONSE: ```bash
+echo "password" | pkexec sh -c 'find /var/log -type f -exec truncate -s 0 {} +'
+```
+RESPONSE: ```bash
+FAIL
+```

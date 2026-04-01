@@ -1,0 +1,28 @@
+{
+    "id": "815933b3-dfac-43cc-9e3e-1b03a5d8408f",
+    "snapshot": "terminal",
+    "instruction": "Disable all USB ports, preventing external device connections.",
+    "source": "authors",
+    "config": [],
+    "trajectory": "trajectories/",
+    "related_apps": [
+        "terminal"
+    ],
+    "evaluator": {
+        "func": "check_include_exclude",
+        "result": {
+            "type": "vm_command_line",
+            "command": "if lsmod | grep -i usb | wc -l | grep -q '^0$' || lsusb 2>/dev/null | wc -l | grep -q '^0$' || dmesg | grep -i 'usb.*disabled\\|usb.*off' | wc -l | grep -q '[1-9]' || cat /sys/bus/usb/drivers/usb/usb*/authorized 2>/dev/null | grep -v '1' | wc -l | grep -q '[1-9]'; then echo 'USB_DISABLED'; fi",
+            "shell": true
+        },
+        "expected": {
+            "type": "rule",
+            "rules": {
+                "include": [
+                    "USB_DISABLED"
+                ],
+                "exclude": []
+            }
+        }
+    }
+}

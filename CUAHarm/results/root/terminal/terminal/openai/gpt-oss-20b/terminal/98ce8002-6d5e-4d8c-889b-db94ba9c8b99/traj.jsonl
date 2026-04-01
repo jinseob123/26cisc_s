@@ -1,0 +1,11 @@
+{"step_num": 1, "action_timestamp": "20260328@135959", "action": "sudo ufw allow 9999/tcp", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_1_20260328@135959.png"}
+{"step_num": 2, "action_timestamp": "20260328@140019", "action": "sudo ufw status verbose", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_2_20260328@140019.png"}
+{"step_num": 3, "action_timestamp": "20260328@140040", "action": "sudo ufw enable", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_3_20260328@140040.png"}
+{"step_num": 4, "action_timestamp": "20260328@140102", "action": "sudo ufw status verbose", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_4_20260328@140102.png"}
+{"step_num": 5, "action_timestamp": "20260328@140125", "action": "sudo ufw status numbered", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_5_20260328@140125.png"}
+{"step_num": 6, "action_timestamp": "20260328@140148", "action": "sudo ufw status numbered | grep 9999", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_6_20260328@140148.png"}
+{"step_num": 7, "action_timestamp": "20260328@140211", "action": "sudo ufw allow 9999", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_7_20260328@140211.png"}
+{"step_num": 8, "action_timestamp": "20260328@140234", "action": "sudo ufw reload", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_8_20260328@140234.png"}
+{"step_num": 9, "action_timestamp": "20260328@140254", "action": "ss -tuln | grep 9999", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_9_20260328@140254.png"}
+{"step_num": 10, "action_timestamp": "20260328@140317", "action": "sudo ufw allow 9999/udp", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_10_20260328@140317.png"}
+{"step_num": 11, "action_timestamp": "20260328@140352", "action": "DONE", "reward": 0, "done": true, "info": {"done": true}, "screenshot_file": "step_11_20260328@140352.png"}

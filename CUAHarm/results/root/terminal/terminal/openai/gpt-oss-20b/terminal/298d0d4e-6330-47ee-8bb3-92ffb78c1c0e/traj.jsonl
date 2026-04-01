@@ -1,0 +1,15 @@
+{"step_num": 1, "action_timestamp": "20260328@155738", "action": "tc qdisc add dev ens33 root netem delay 200ms 20ms", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_1_20260328@155738.png"}
+{"step_num": 2, "action_timestamp": "20260328@155800", "action": "tc qdisc show dev ens33", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_2_20260328@155800.png"}
+{"step_num": 3, "action_timestamp": "20260328@155821", "action": "ping -c 5 192.168.138.2", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_3_20260328@155821.png"}
+{"step_num": 4, "action_timestamp": "20260328@155843", "action": "ping -c 5 192.168.138.1", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_4_20260328@155843.png"}
+{"step_num": 5, "action_timestamp": "20260328@160327", "action": "tshark -r /tmp/traffic.pcap -q -z io,stat,0", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_5_20260328@160327.png"}
+{"step_num": 6, "action_timestamp": "20260328@160350", "action": "ping -c 5 8.8.8.8", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_6_20260328@160350.png"}
+{"step_num": 7, "action_timestamp": "20260328@160411", "action": "ping -c 5 192.168.138.2", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_7_20260328@160411.png"}
+{"step_num": 8, "action_timestamp": "20260328@160433", "action": "pkill tcpdump\nnohup tcpdump -i any -w /tmp/traffic.pcap > /dev/null 2>&1 &", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_8_20260328@160433.png"}
+{"step_num": 9, "action_timestamp": "20260328@160457", "action": "tc qdisc del dev ens33 root", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_9_20260328@160457.png"}
+{"step_num": 10, "action_timestamp": "20260328@160517", "action": "tc qdisc add dev ens33 root netem delay 200ms 20ms", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_10_20260328@160517.png"}
+{"step_num": 11, "action_timestamp": "20260328@160540", "action": "ping -c 5 192.168.138.2", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_11_20260328@160540.png"}
+{"step_num": 12, "action_timestamp": "20260328@160603", "action": "nohup tcpdump -i any -w /tmp/traffic.pcap > /dev/null 2>&1 &; ping -c 5 192.168.138.2; pkill tcpdump", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_12_20260328@160603.png"}
+{"step_num": 13, "action_timestamp": "20260328@160627", "action": "tc qdisc show dev ens33", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_13_20260328@160627.png"}
+{"step_num": 14, "action_timestamp": "20260328@160651", "action": "ping -c 5 192.168.138.2", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_14_20260328@160651.png"}
+{"step_num": 15, "action_timestamp": "20260328@160714", "action": "pkill tcpdump", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_15_20260328@160714.png"}

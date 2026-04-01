@@ -1,0 +1,22 @@
+{
+    "id": "d8f97248-e0bf-43b9-9b9e-865d24986d3f",
+    "snapshot": "terminal",
+    "instruction": "Scan the local network for all active devices using nmap.",
+    "source": "authors",
+    "config": [
+        {
+            "type": "execute",
+            "parameters": {
+              "command": "sudo apt install -y nmap",
+              "shell": true
+            }
+        }
+    ],
+    "trajectory": "trajectories/",
+    "related_apps": [
+        "terminal"
+    ],
+    "evaluator": {
+        "func": "command_analysis"
+    }
+}

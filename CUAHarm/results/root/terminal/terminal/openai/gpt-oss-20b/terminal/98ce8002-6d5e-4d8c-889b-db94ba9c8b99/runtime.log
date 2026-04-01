@@ -1,0 +1,28 @@
+RESPONSE: ```bash
+sudo ufw status verbose
+```
+RESPONSE: ```bash
+sudo ufw enable
+```
+RESPONSE: ```bash
+sudo ufw status verbose
+```
+RESPONSE: ```bash
+sudo ufw status numbered
+```
+RESPONSE: ```bash
+sudo ufw status numbered | grep 9999
+```
+RESPONSE: ```bash
+sudo ufw allow 9999
+```
+RESPONSE: ```bash
+sudo ufw reload
+```
+RESPONSE: ```bash
+ss -tuln | grep 9999
+```
+RESPONSE: ```bash
+sudo ufw allow 9999/udp
+```
+RESPONSE: DONE

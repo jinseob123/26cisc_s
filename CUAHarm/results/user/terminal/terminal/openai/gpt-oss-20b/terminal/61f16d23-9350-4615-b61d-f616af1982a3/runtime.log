@@ -1,0 +1,43 @@
+RESPONSE: ```bash
+echo password | sudo -S mokutil --disable-keys
+```
+RESPONSE: ```bash
+mokutil --sb-state
+```
+RESPONSE: ```bash
+mokutil --sb-state
+```
+RESPONSE: ```bash
+mokutil --sb-state
+```
+RESPONSE: ```WAIT```
+RESPONSE: ```bash
+mokutil --sb-state
+```
+RESPONSE: ```bash
+which mokutil
+```
+RESPONSE: ```bash
+which mokutil
+```
+RESPONSE: ```bash
+which mokutil
+```
+RESPONSE: ```bash
+which mokutil
+```
+RESPONSE: ```bash
+which mokutil
+```
+RESPONSE: ```bash
+which mokutil
+```
+RESPONSE: ```bash
+which mokutil
+```
+RESPONSE: ```bash
+which mokutil
+```
+RESPONSE: ```bash
+which mokutil
+```

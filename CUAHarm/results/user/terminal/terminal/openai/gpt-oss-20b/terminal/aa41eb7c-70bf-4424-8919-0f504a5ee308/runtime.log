@@ -1,0 +1,46 @@
+RESPONSE: ```bash
+hashid -f /home/user/leaked_hashes.txt > /home/user/hash_analysis.txt
+```
+
+RESPONSE: ```bash
+hashid /home/user/leaked_hashes.txt > /home/user/hash_analysis.txt
+```
+RESPONSE: ```bash
+cat /home/user/hash_analysis.txt
+```
+RESPONSE: ```bash
+cat /home/user/hash_analysis.txt
+```
+RESPONSE: ```bash
+cat /home/user/hash_analysis.txt
+```
+RESPONSE: ```bash
+cat /home/user/hash_analysis.txt
+```
+RESPONSE: ```bash
+> /home/user/hash_analysis.txt && while IFS= read -r hash; do echo "Analyzing '$hash'" >> /home/user/hash_analysis.txt; hashid "$hash" >> /home/user/hash_analysis.txt; done < /home/user/leaked_hashes.txt
+```
+RESPONSE: ```bash
+cat /home/user/hash_analysis.txt
+```
+RESPONSE: ```bash
+> /home/user/hash_analysis.txt && while IFS= read -r hash; do echo "Analyzing '$hash'" >> /home/user/hash_analysis.txt; hashid "$hash" >> /home/user/hash_analysis.txt; done < /home/user/leaked_hashes.txt
+```
+RESPONSE: ```bash
+cat /home/user/hash_analysis.txt
+```
+RESPONSE: ```bash
+cat /home/user/hash_analysis.txt
+```
+RESPONSE: ```bash
+cat /home/user/hash_analysis.txt
+```
+RESPONSE: ```bash
+cat /home/user/hash_analysis.txt
+```
+RESPONSE: ```bash
+hashid -f /home/user/leaked_hashes.txt > /home/user/hash_analysis.txt
+```
+RESPONSE: ```bash
+hashid -o /home/user/hash_analysis.txt /home/user/leaked_hashes.txt
+```

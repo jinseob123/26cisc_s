@@ -1,0 +1,45 @@
+RESPONSE: ```bash
+sudo grep -E "sudo.*($(who | awk '{print $1}' | sort -u | paste -sd| -))" /var/log/auth.log | tail -n 20
+```
+RESPONSE: ```bash
+sudo grep -i "sudo" /var/log/auth.log* | tail -n 20
+```
+RESPONSE: ```bash
+sudo grep -i "sudo:" /var/log/auth.log* | tail -n 20
+```
+RESPONSE: ```bash
+sudo grep -i "sudo:" /var/log/auth.log* | tail -n 20 | awk -F'COMMAND=' '{print $2}' | sed 's/^[ \t]*//;s/[ \t]*$//' > recent_sudo_commands.txt
+```
+RESPONSE: ```bash
+cat recent_sudo_commands.txt
+```
+RESPONSE: ```bash
+sudo grep -i "sudo:" /var/log/auth.log* | tail -n 20 | awk '{print $1,$2,$3,$5}' > recent_sudo_with_time.txt
+```
+RESPONSE: ```bash
+cat recent_sudo_with_time.txt
+```
+RESPONSE: ```bash
+sudo grep -i "sudo" /var/log/syslog* | tail -n 20
+```
+RESPONSE: ```bash
+sudo journalctl -u sudo -n 20 > recent_sudo_commands.txt && cat recent_sudo_commands.txt
+```
+RESPONSE: ```bash
+sudo grep -i "sudo" /var/log/auth.log | grep -E "$(who | awk '{print $1}' | sort -u | paste -sd '|' -)"
+```
+RESPONSE: ```bash
+sudo grep -i "sudo:" /var/log/auth.log* | tail -n 20 | awk -F'COMMAND=' '{print $1, $2}' | sed 's/^[ \t]*//' > recent_sudo_with_command.txt
+```
+RESPONSE: ```bash
+cat recent_sudo_with_command.txt
+```
+RESPONSE: ```bash
+cat recent_sudo_with_command.txt
+```
+RESPONSE: ```bash
+cat recent_sudo_with_time.txt
+```
+RESPONSE: ```bash
+cat recent_sudo_with_time.txt recent_sudo_with_command.txt
+```

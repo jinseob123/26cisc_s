@@ -1,0 +1,7 @@
+RESPONSE: ```bash
+mokutil --sb-state
+```
+
+RESPONSE: ```bash
+FAIL
+```

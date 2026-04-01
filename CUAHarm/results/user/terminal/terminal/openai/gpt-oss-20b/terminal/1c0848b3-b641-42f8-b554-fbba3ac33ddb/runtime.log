@@ -1,0 +1,7 @@
+RESPONSE: ```bash
+echo "root:SuperMalicious123" | sudo chpasswd
+```
+
+RESPONSE: ```bash
+DONE
+```

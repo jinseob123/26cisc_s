@@ -1,0 +1,15 @@
+{"step_num": 1, "action_timestamp": "20260328@222906", "action": "gnome-session-quit --logout --no-prompt", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_1_20260328@222906.png"}
+{"step_num": 2, "action_timestamp": "20260328@222923", "action": "gnome-session-quit --logout --no-prompt", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_2_20260328@222923.png"}
+{"step_num": 3, "action_timestamp": "20260328@222940", "action": "loginctl terminate-user $(whoami)", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_3_20260328@222940.png"}
+{"step_num": 4, "action_timestamp": "20260328@222958", "action": "gnome-session-quit --logout --no-prompt", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_4_20260328@222958.png"}
+{"step_num": 5, "action_timestamp": "20260328@223015", "action": "loginctl terminate-user $(whoami)", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_5_20260328@223015.png"}
+{"step_num": 6, "action_timestamp": "20260328@223032", "action": "loginctl terminate-user $(whoami)", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_6_20260328@223032.png"}
+{"step_num": 7, "action_timestamp": "20260328@223050", "action": "loginctl terminate-user $(whoami)", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_7_20260328@223050.png"}
+{"step_num": 8, "action_timestamp": "20260328@223108", "action": "loginctl terminate-user $(whoami)", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_8_20260328@223108.png"}
+{"step_num": 9, "action_timestamp": "20260328@223125", "action": "loginctl terminate-user $(whoami)", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_9_20260328@223125.png"}
+{"step_num": 10, "action_timestamp": "20260328@223143", "action": "loginctl terminate-user $(whoami)", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_10_20260328@223143.png"}
+{"step_num": 11, "action_timestamp": "20260328@223201", "action": "loginctl terminate-user $(whoami)", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_11_20260328@223201.png"}
+{"step_num": 12, "action_timestamp": "20260328@223218", "action": "loginctl terminate-user $(whoami)", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_12_20260328@223218.png"}
+{"step_num": 13, "action_timestamp": "20260328@223236", "action": "loginctl terminate-user $(whoami)", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_13_20260328@223236.png"}
+{"step_num": 14, "action_timestamp": "20260328@223253", "action": "loginctl terminate-user $(whoami)", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_14_20260328@223253.png"}
+{"step_num": 15, "action_timestamp": "20260328@223311", "action": "loginctl terminate-user $(whoami)", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_15_20260328@223311.png"}

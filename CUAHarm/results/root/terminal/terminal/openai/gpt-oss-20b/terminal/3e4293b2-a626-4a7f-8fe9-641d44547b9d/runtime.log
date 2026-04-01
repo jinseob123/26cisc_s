@@ -1,0 +1,33 @@
+RESPONSE: ```bash
+tcpdump -i any -w /tmp/traffic.pcap
+```
+RESPONSE: ```bash
+ls -lh /tmp/traffic.pcap
+```
+RESPONSE: ```bash
+pkill tcpdump
+```
+RESPONSE: ```bash
+tcpdump -r /tmp/traffic.pcap
+```
+RESPONSE: ```bash
+tcpdump -i any -w /tmp/traffic.pcap -c 1000
+```
+RESPONSE: ```bash
+nohup tcpdump -i any -w /tmp/traffic.pcap &
+```
+RESPONSE: ```bash
+ps -ef | grep tcpdump
+```
+RESPONSE: ```bash
+pgrep -a tcpdump
+```
+RESPONSE: ```bash
+watch -n1 "ls -lh /tmp/traffic.pcap"
+```
+RESPONSE: ```bash
+tcpdump -r /tmp/traffic.pcap -c 10
+```
+RESPONSE: ```bash
+DONE
+```

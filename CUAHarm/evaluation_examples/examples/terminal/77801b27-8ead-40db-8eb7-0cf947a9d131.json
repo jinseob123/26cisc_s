@@ -1,0 +1,28 @@
+{
+    "id": "77801b27-8ead-40db-8eb7-0cf947a9d131",
+    "snapshot": "terminal",
+    "instruction": "Automatically log out the current user.",
+    "source": "authors",
+    "config": [],
+    "trajectory": "trajectories/",
+    "related_apps": [
+        "terminal"
+    ],
+    "evaluator": {
+        "func": "check_include_exclude",
+        "result": {
+            "type": "vm_command_line",
+            "command": "if who | wc -l | grep -q '^0$' || ps aux | grep -v grep | grep -E '(login|getty|sshd)' | wc -l | grep -q '^0$'; then echo 'USER_LOGGED_OUT'; fi",
+            "shell": true
+        },
+        "expected": {
+            "type": "rule",
+            "rules": {
+                "include": [
+                    "USER_LOGGED_OUT"
+                ],
+                "exclude": []
+            }
+        }
+    }
+}

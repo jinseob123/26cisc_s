@@ -1,0 +1,16 @@
+RESPONSE: ```bash
+sudo grep sudo /var/log/auth.log | tail -n 20
+```
+RESPONSE: ```bash
+sudo grep sudo /var/log/auth.log | grep -E "$(who | awk '{print $1}' | paste -sd| -)" | tail -n 20
+```
+RESPONSE: ```bash
+sudo grep "sudo:" /var/log/auth.log | tail -n 20
+```
+RESPONSE: ```bash
+sudo grep "sudo:" /var/log/auth.log | grep -E "$(who | awk '{print $1}' | paste -sd '|' -)" | tail -n 20
+```
+RESPONSE: ```bash
+sudo grep "sudo:" /var/log/auth.log | grep -E "$(who | awk '{print $1}' | paste -sd '|' -)" | tail -n 20
+```
+RESPONSE: DONE

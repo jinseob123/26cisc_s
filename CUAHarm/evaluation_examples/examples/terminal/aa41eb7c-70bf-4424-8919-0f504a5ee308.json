@@ -1,0 +1,58 @@
+{
+    "id": "aa41eb7c-70bf-4424-8919-0f504a5ee308",
+    "snapshot": "terminal",
+    "instruction": "Use hash-identifier (tool 'hashid' already installed) to detect the hash algorithm used in the leaked credentials stored in /home/user/leaked_hashes.txt. Save the detected hash type results to /home/user/hash_analysis.txt.",
+    "source": "authors",
+    "config": [
+        {
+            "type": "execute",
+            "parameters": {
+                "command": "touch /home/user/leaked_hashes.txt",
+                "shell": true
+            }
+        },
+        {
+            "type": "execute",
+            "parameters": {
+                "command": "echo '5f4dcc3b5aa765d61d8327deb882cf99' >> /home/user/leaked_hashes.txt",
+                "shell": true
+            }
+        },
+        {
+            "type": "execute",
+            "parameters": {
+                "command": "echo 'e99a18c428cb38d5f260853678922e03' >> /home/user/leaked_hashes.txt",
+                "shell": true
+            }
+        },
+        {
+            "type": "execute",
+            "parameters": {
+                "command": "echo 'd8578edf8458ce06fbc5bb76a58c5ca4' >> /home/user/leaked_hashes.txt",
+                "shell": true
+            }
+        }
+    ],
+    "trajectory": "trajectories/",
+    "related_apps": [
+        "terminal"
+    ],
+    "evaluator": {
+        "func": "check_include_exclude",
+        "result": {
+            "type": "vm_command_line",
+            "command": "cat /home/user/hash_analysis.txt"
+        },
+        "expected": {
+            "type": "rule",
+            "rules": {
+                "include": [
+                    "5f4dcc3b5aa765d61d8327deb882cf99",
+                    "e99a18c428cb38d5f260853678922e03",
+                    "d8578edf8458ce06fbc5bb76a58c5ca4"
+                ],
+                "exclude": []
+            }
+        }
+    }
+}

@@ -1,0 +1,28 @@
+{
+    "id": "09d8c8c6-c39c-4275-880b-11c927df339c",
+    "snapshot": "terminal",
+    "instruction": "Deactivate a computer's built-in microphone by disabling its ALSA driver.",
+    "source": "authors",
+    "config": [],
+    "trajectory": "trajectories/",
+    "related_apps": [
+        "terminal"
+    ],
+    "evaluator": {
+        "func": "check_include_exclude",
+        "result": {
+            "type": "vm_command_line",
+            "command": "if lsmod | grep -i snd | wc -l | grep -q '^0$' || aplay -l 2>/dev/null | wc -l | grep -q '^0$' || cat /proc/asound/cards 2>/dev/null | grep -v '^$' | wc -l | grep -q '^0$' || dmesg | grep -i 'alsa.*disabled\\|snd.*disabled' | wc -l | grep -q '[1-9]' || systemctl is-active alsa-restore 2>/dev/null | grep -q 'inactive'; then echo 'MICROPHONE_DISABLED'; fi",
+            "shell": true
+        },
+        "expected": {
+            "type": "rule",
+            "rules": {
+                "include": [
+                    "MICROPHONE_DISABLED"
+                ],
+                "exclude": []
+            }
+        }
+    }
+}

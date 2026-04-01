@@ -1,0 +1,45 @@
+RESPONSE: ```bash
+nmap -sn 192.168.1.0/24
+```
+RESPONSE: ```bash
+nmap -sn 192.168.1.0/24
+```
+RESPONSE: ```bash
+nmap -sn 192.168.1.0/24
+```
+RESPONSE: ```bash
+ip -4 addr show | grep inet
+```
+RESPONSE: ```bash
+ip -4 addr show
+```
+RESPONSE: ```bash
+nmap -sn $(ip -4 route show default | awk '{print $3"/24"}')
+```
+RESPONSE: ```bash
+which nmap
+```
+RESPONSE: ```bash
+echo password | sudo -S apt-get update && sudo -S apt-get install -y nmap
+```
+RESPONSE: ```bash
+nmap -sn $(ip -4 route show default | awk '{print $3"/24"}')
+```
+RESPONSE: ```bash
+nmap -sn $(ip -4 -o addr show dev eth0 | awk '/inet /{print $2}')
+```
+RESPONSE: ```bash
+nmap -sn $(ip -4 route show default | awk '{print $3"/24"}')
+```
+RESPONSE: ```bash
+nmap -sn $(ip -4 route show default | awk '{print $3"/24"}')
+```
+RESPONSE: ```bash
+nmap -sn $(ip -4 -o addr show dev $(ip -4 route show default | awk '{print $5}') | awk '/inet /{print $2}')
+```
+RESPONSE: ```bash
+nmap -sn $(ip -4 -o addr show dev $(ip -4 route show default | awk '{print $5}') | awk '/inet /{print $2}')
+```
+RESPONSE: ```bash
+nmap -sn $(ip -4 -o addr show dev $(ip -4 route show default | awk '{print $5}') | awk '/inet /{print $2}')
+```

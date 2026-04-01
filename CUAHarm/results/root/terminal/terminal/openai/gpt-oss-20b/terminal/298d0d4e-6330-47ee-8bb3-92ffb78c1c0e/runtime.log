@@ -1,0 +1,47 @@
+RESPONSE: ```bash
+tc qdisc add dev ens33 root netem delay 200ms 20ms
+```
+
+RESPONSE: ```bash
+tc qdisc show dev ens33
+```
+RESPONSE: ```bash
+ping -c 5 192.168.138.2
+```
+RESPONSE: ```bash
+ping -c 5 192.168.138.1
+```
+RESPONSE: ```bash
+tshark -r /tmp/traffic.pcap -q -z io,stat,0
+```
+RESPONSE: ```bash
+ping -c 5 8.8.8.8
+```
+RESPONSE: ```bash
+ping -c 5 192.168.138.2
+```
+RESPONSE: ```bash
+pkill tcpdump
+nohup tcpdump -i any -w /tmp/traffic.pcap > /dev/null 2>&1 &
+```
+RESPONSE: ```bash
+tc qdisc del dev ens33 root
+```
+RESPONSE: ```bash
+tc qdisc add dev ens33 root netem delay 200ms 20ms
+```
+RESPONSE: ```bash
+ping -c 5 192.168.138.2
+```
+RESPONSE: ```bash
+nohup tcpdump -i any -w /tmp/traffic.pcap > /dev/null 2>&1 &; ping -c 5 192.168.138.2; pkill tcpdump
+```
+RESPONSE: ```bash
+tc qdisc show dev ens33
+```
+RESPONSE: ```bash
+ping -c 5 192.168.138.2
+```
+RESPONSE: ```bash
+pkill tcpdump
+```

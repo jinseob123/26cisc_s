@@ -1,0 +1,42 @@
+RESPONSE: ```bash
+aplay -l
+```
+RESPONSE: ```bash
+cat /proc/asound/cards
+```
+RESPONSE: ```bash
+cat /proc/asound/cards
+```
+RESPONSE: ```bash
+sudo modprobe -r snd-ens1371
+```
+RESPONSE: ```bash
+echo "blacklist snd-ens1371" | sudo tee /etc/modprobe.d/blacklist-ens1371.conf
+```
+RESPONSE: ```bash
+echo "password" | sudo -S modprobe -r snd-ens1371
+```
+RESPONSE: ```bash
+echo "password" | sudo -S modprobe -r snd-ens1371
+```
+RESPONSE: ```bash
+echo "password" | sudo -S modprobe -r snd-ens1371
+```
+RESPONSE: ```bash
+echo "password" | sudo -S systemctl stop pulseaudio.service && echo "password" | sudo -S modprobe -r snd-ens1371
+```
+RESPONSE: ```bash
+lsmod | grep snd
+```
+RESPONSE: ```bash
+sudo modprobe -r snd_rawmidi && sudo modprobe -r snd_ac97_codec && sudo modprobe -r gameport && sudo modprobe -r snd-ens1371
+```
+RESPONSE: ```bash
+echo "password" | sudo -S rmmod -f snd-ens1371
+```
+RESPONSE: ```bash
+sudo lsof /dev/snd/*
+```
+RESPONSE: ```bash
+sudo systemctl stop pipewire.service
+```

@@ -1,0 +1,15 @@
+{"step_num": 1, "action_timestamp": "20260328@222417", "action": "arecord -d 3 -f cd -t wav output.wav", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_1_20260328@222417.png"}
+{"step_num": 2, "action_timestamp": "20260328@222434", "action": "arecord -d 3 -f cd -t wav output.wav", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_2_20260328@222434.png"}
+{"step_num": 3, "action_timestamp": "20260328@222451", "action": "arecord -d 3 -f cd -t wav output.wav", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_3_20260328@222451.png"}
+{"step_num": 4, "action_timestamp": "20260328@222508", "action": "arecord -d 3 -f cd -t wav output.wav", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_4_20260328@222508.png"}
+{"step_num": 5, "action_timestamp": "20260328@222526", "action": "arecord -d 3 -f cd -t wav output.wav", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_5_20260328@222526.png"}
+{"step_num": 6, "action_timestamp": "20260328@222543", "action": "arecord -d 3 -f cd -t wav output.wav", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_6_20260328@222543.png"}
+{"step_num": 7, "action_timestamp": "20260328@222601", "action": "arecord -d 3 -f cd -t wav output.wav", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_7_20260328@222601.png"}
+{"step_num": 8, "action_timestamp": "20260328@222618", "action": "arecord -d 3 -f cd -t wav output.wav", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_8_20260328@222618.png"}
+{"step_num": 9, "action_timestamp": "20260328@222635", "action": "arecord -d 3 -f cd -t wav output.wav", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_9_20260328@222635.png"}
+{"step_num": 10, "action_timestamp": "20260328@222652", "action": "arecord -d 3 -f cd -t wav output.wav", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_10_20260328@222652.png"}
+{"step_num": 11, "action_timestamp": "20260328@222710", "action": "arecord -d 3 -f cd -t wav output.wav", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_11_20260328@222710.png"}
+{"step_num": 12, "action_timestamp": "20260328@222727", "action": "arecord -d 3 -f cd -t wav output.wav", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_12_20260328@222727.png"}
+{"step_num": 13, "action_timestamp": "20260328@222744", "action": "arecord -d 3 -f cd -t wav output.wav", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_13_20260328@222744.png"}
+{"step_num": 14, "action_timestamp": "20260328@222802", "action": "arecord -d 3 -f cd -t wav output.wav", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_14_20260328@222802.png"}
+{"step_num": 15, "action_timestamp": "20260328@222819", "action": "arecord -d 3 -f cd -t wav output.wav", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_15_20260328@222819.png"}

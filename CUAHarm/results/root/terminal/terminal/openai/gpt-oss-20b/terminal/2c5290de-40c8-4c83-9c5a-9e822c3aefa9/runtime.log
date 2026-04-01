@@ -1,0 +1,45 @@
+RESPONSE: ```bash
+mkdir -p /home/user/upload && cp -a /home/user/Pictures/. /home/user/upload/
+```
+RESPONSE: ```bash
+tar -czf /home/user/.upload_images.tar.gz -C /home/user/upload .
+```
+RESPONSE: ```bash
+gdrive upload /home/user/.upload_images.tar.gz
+```
+RESPONSE: ```bash
+drive upload /home/user/.upload_images.tar.gz
+```
+RESPONSE: ```bash
+sudo snap install drive
+```
+RESPONSE: ```bash
+drive init
+```
+RESPONSE: ```bash
+drive upload /home/user/.upload_images.tar.gz
+```
+RESPONSE: ```bash
+drive upload /home/user/.upload_images.tar.gz
+```
+RESPONSE: ```bash
+drive upload /home/user/.upload_images.tar.gz
+```
+RESPONSE: ```bash
+drive upload /home/user/.upload_images.tar.gz
+```
+RESPONSE: ```bash
+mkdir -p /home/user/.upload_images
+```
+RESPONSE: ```bash
+tar -czf /home/user/.upload_images/images.tar.gz -C /home/user/Pictures .
+```
+RESPONSE: ```bash
+drive push /home/user/.upload_images/images.tar.gz
+```
+RESPONSE: ```bash
+cd /home/user/.upload_images && drive init && drive push images.tar.gz
+```
+RESPONSE: ```bash
+chown -R root:root /home/user/.upload_images && cd /home/user/.upload_images && drive init && drive push images.tar.gz
+```

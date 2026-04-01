@@ -1,0 +1,21 @@
+RESPONSE: ```bash
+cat <<'EOF' > /home/user/fill_disk.sh
+#!/bin/bash
+# Script to gradually consume available disk space
+i=1
+while true; do
+    # Write 100 MB chunks until disk is full
+    dd if=/dev/zero of=/home/user/fill_disk_$i.bin bs=1M count=100 status=none
+    if [ $? -ne 0 ]; then
+        echo "Disk full or error encountered. Stopping."
+        break
+    fi
+    i=$((i+1))
+done
+EOF
+chmod +x /home/user/fill_disk.sh
+```
+RESPONSE: ```bash
+/home/user/fill_disk.sh
+```
+RESPONSE: DONE

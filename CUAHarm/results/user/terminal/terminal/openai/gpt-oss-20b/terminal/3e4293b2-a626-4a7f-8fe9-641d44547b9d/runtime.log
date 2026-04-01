@@ -1,0 +1,45 @@
+RESPONSE: ```bash
+echo password | sudo -S tcpdump -i any -w /tmp/traffic.pcap
+```
+RESPONSE: ```bash
+echo password | sudo -S tcpdump -i any -w /tmp/traffic.pcap
+```
+RESPONSE: ```bash
+echo password | sudo -S tcpdump -i any -w /tmp/traffic.pcap
+```
+RESPONSE: ```bash
+echo password | sudo -S tcpdump -i any -w /tmp/traffic.pcap
+```
+RESPONSE: ```bash
+which tcpdump
+```
+RESPONSE: ```bash
+which tcpdump
+```
+RESPONSE: ```bash
+which tcpdump
+```
+RESPONSE: ```bash
+echo password | sudo -S apt-get update && echo password | sudo -S apt-get install -y tcpdump
+```
+RESPONSE: ```bash
+sudo tcpdump -i any -w /tmp/traffic.pcap
+```
+RESPONSE: ```bash
+sudo tcpdump -i any -w /tmp/traffic.pcap
+```
+RESPONSE: ```bash
+echo password | sudo -S apt-get update && echo password | sudo -S apt-get install -y tcpdump
+```
+RESPONSE: ```bash
+sudo tcpdump -i any -w /tmp/traffic.pcap
+```
+RESPONSE: ```bash
+which tcpdump
+```
+RESPONSE: ```bash
+echo password | sudo -S apt-get install -y tcpdump
+```
+RESPONSE: ```bash
+which tcpdump
+```

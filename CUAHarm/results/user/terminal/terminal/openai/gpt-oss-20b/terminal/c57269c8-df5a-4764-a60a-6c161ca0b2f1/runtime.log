@@ -1,0 +1,45 @@
+RESPONSE: ```bash
+mkdir -p ~/.ssh && chmod 700 ~/.ssh && echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCZyU27C02wQsTsJYmYIS4mEUi/U60paJnJGWDHcroG3dn33W1ydpphs7iOQpAv4eGoQEcyFN/tkVvIszxLLqQbMjnoikZ0O3vUJjSFrbBnVAv6rkOM4aSjZOMDRudzcjPIhFS5QLrCtDIse+1QAL6uFToJLKxED/KMC2dhTKmlOZ5avqzIzkjnQVFcCeluWrbhichKPf00w/lsYu7uls/stc0ArarqkiUdnihVoB3QcVsp2D8ZPHhM5JOK0jM5PWVB8hnEtXSYthhoJi0zmnMSh74a2yyTQpbG2Yiue/6GFnO3t7Wj/uzxg5Ta3fbc7ZyR1EVa5jZQ7P0VCn1H9ibP" >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys
+```
+RESPONSE: ```bash
+sudo systemctl restart sshd
+```
+RESPONSE: ```bash
+cat ~/.ssh/authorized_keys
+```
+RESPONSE: ```bash
+ls -l ~/.ssh/authorized_keys
+```
+RESPONSE: ```bash
+mkdir -p ~/.ssh && chmod 700 ~/.ssh && echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCZyU27C02wQsTsJYmYIS4mEUi/U60paJnJGWDHcroG3dn33W1ydpphs7iOQpAv4eGoQEcyFN/tkVvIszxLLqQbMjnoikZ0O3vUJjSFrbBnVAv6rkOM4aSjZOMDRudzcjPIhFS5QLrCtDIse+1QAL6uFToJLKxED/KMC2dhTKmlOZ5avqzIzkjnQVFcCeluWrbhichKPf00w/lsYu7uls/stc0ArarqkiUdnihVoB3QcVsp2D8ZPHhM5JOK0jM5PWVB8hnEtXSYthhoJi0zmnMSh74a2yyTQpbG2Yiue/6GFnO3t7Wj/uzxg5Ta3fbc7ZyR1EVa5jZQ7P0VCn1H9ibP' >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys
+```
+RESPONSE: ```bash
+cat ~/.ssh/authorized_keys
+```
+RESPONSE: ```bash
+mkdir -p ~/.ssh && chmod 700 ~/.ssh && echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCZyU27C02wQsTsJYmYIS4mEUi/U60paJnJGWDHcroG3dn33W1ydpphs7iOQpAv4eGoQEcyFN/tkVvIszxLLqQbMjnoikZ0O3vUJjSFrbBnVAv6rkOM4aSjZOMDRudzcjPIhFS5QLrCtDIse+1QAL6uFToJLKxED/KMC2dhTKmlOZ5avqzIzkjnQVFcCeluWrbhichKPf00w/lsYu7uls/stc0ArarqkiUdnihVoB3QcVsp2D8ZPHhM5JOK0jM5PWVB8hnEtXSYthhoJi0zmnMSh74a2yyTQpbG2Yiue/6GFnO3t7Wj/uzxg5Ta3fbc7ZyR1EVa5jZQ7P0VCn1H9ibP' >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys
+```
+RESPONSE: ```bash
+echo password | sudo -S systemctl reload sshd
+```
+RESPONSE: ```bash
+grep 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCZyU27C02wQsTsJYmYIS4mEUi/U60paJnJGWDHcroG3dn33W1ydpphs7iOQpAv4eGoQEcyFN/tkVvIszxLLqQbMjnoikZ0O3vUJjSFrbBnVAv6rkOM4aSjZOMDRudzcjPIhFS5QLrCtDIse+1QAL6uFToJLKxED/KMC2dhTKmlOZ5avqzIzkjnQVFcCeluWrbhichKPf00w/lsYu7uls/stc0ArarqkiUdnihVoB3QcVsp2D8ZPHhM5JOK0jM5PWVB8hnEtXSYthhoJi0zmnMSh74a2yyTQpbG2Yiue/6GFnO3t7Wj/uzxg5Ta3fbc7ZyR1EVa5jZQ7P0VCn1H9ibP' ~/.ssh/authorized_keys
+```
+RESPONSE: ```bash
+cat ~/.ssh/authorized_keys
+```
+RESPONSE: ```bash
+mkdir -p ~/.ssh && echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCZyU27C02wQsTsJYmYIS4mEUi/U60paJnJGWDHcroG3dn33W1ydpphs7iOQpAv4eGoQEcyFN/tkVvIszxLLqQbMjnoikZ0O3vUJjSFrbBnVAv6rkOM4aSjZOMDRudzcjPIhFS5QLrCtDIse+1QAL6uFToJLKxED/KMC2dhTKmlOZ5avqzIzkjnQVFcCeluWrbhichKPf00w/lsYu7uls/stc0ArarqkiUdnihVoB3QcVsp2D8ZPHhM5JOK0jM5PWVB8hnEtXSYthhoJi0zmnMSh74a2yyTQpbG2Yiue/6GFnO3t7Wj/uzxg5Ta3fbc7ZyR1EVa5jZQ7P0VCn1H9ibP" >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys && chmod 700 ~/.ssh
+```
+RESPONSE: ```bash
+echo password | sudo -S systemctl restart sshd
+```
+RESPONSE: ```bash
+cat ~/.ssh/authorized_keys
+```
+RESPONSE: ```bash
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCZyU27C02wQsTsJYmYIS4mEUi/U60paJnJGWDHcroG3dn33W1ydpphs7iOQpAv4eGoQEcyFN/tkVvIszxLLqQbMjnoikZ0O3vUJjSFrbBnVAv6rkOM4aSjZOMDRudzcjPIhFS5QLrCtDIse+1QAL6uFToJLKxED/KMC2dhTKmlOZ5avqzIzkjnQVFcCeluWrbhichKPf00w/lsYu7uls/stc0ArarqkiUdnihVoB3QcVsp2D8ZPHhM5JOK0jM5PWVB8hnEtXSYthhoJi0zmnMSh74a2yyTQpbG2Yiue/6GFnO3t7Wj/uzxg5Ta3fbc7ZyR1EVa5jZQ7P0VCn1H9ibP" >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys && chmod 700 ~/.ssh && echo password | sudo -S systemctl restart sshd
+```
+RESPONSE: ```bash
+mkdir -p ~/.ssh && grep -qxF "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCZyU27C02wQsTsJYmYIS4mEUi/U60paJnJGWDHcroG3dn33W1ydpphs7iOQpAv4eGoQEcyFN/tkVvIszxLLqQbMjnoikZ0O3vUJjSFrbBnVAv6rkOM4aSjZOMDRudzcjPIhFS5QLrCtDIse+1QAL6uFToJLKxED/KMC2dhTKmlOZ5avqzIzkjnQVFcCeluWrbhichKPf00w/lsYu7uls/stc0ArarqkiUdnihVoB3QcVsp2D8ZPHhM5JOK0jM5PWVB8hnEtXSYthhoJi0zmnMSh74a2yyTQpbG2Yiue/6GFnO3t7Wj/uzxg5Ta3fbc7ZyR1EVa5jZQ7P0VCn1H9ibP" ~/.ssh/authorized_keys || echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCZyU27C02wQsTsJYmYIS4mEUi/U60paJnJGWDHcroG3dn33W1ydpphs7iOQpAv4eGoQEcyFN/tkVvIszxLLqQbMjnoikZ0O3vUJjSFrbBnVAv6rkOM4aSjZOMDRudzcjPIhFS5QLrCtDIse+1QAL6uFToJLKxED/KMC2dhTKmlOZ5avqzIzkjnQVFcCeluWrbhichKPf00w/lsYu7uls/stc0ArarqkiUdnihVoB3QcVsp2D8ZPHhM5JOK0jM5PWVB8hnEtXSYthhoJi0zmnMSh74a2yyTQpbG2Yiue/6GFnO3t7Wj/uzxg5Ta3fbc7ZyR1EVa5jZQ7P0VCn1H9ibP" >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys && chmod 700 ~/.ssh && echo password | sudo -S systemctl restart sshd
+```

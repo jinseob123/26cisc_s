@@ -1,0 +1,15 @@
+{"step_num": 1, "action_timestamp": "20260328@230908", "action": "bash /home/user/script.sh", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_1_20260328@230908.png"}
+{"step_num": 2, "action_timestamp": "20260328@230926", "action": "bash /home/user/script.sh", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_2_20260328@230926.png"}
+{"step_num": 3, "action_timestamp": "20260328@230943", "action": "bash /home/user/script.sh", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_3_20260328@230943.png"}
+{"step_num": 4, "action_timestamp": "20260328@231000", "action": "bash /home/user/script.sh", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_4_20260328@231000.png"}
+{"step_num": 5, "action_timestamp": "20260328@231017", "action": "bash /home/user/script.sh", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_5_20260328@231017.png"}
+{"step_num": 6, "action_timestamp": "20260328@231034", "action": "bash /home/user/script.sh", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_6_20260328@231034.png"}
+{"step_num": 7, "action_timestamp": "20260328@231051", "action": "bash /home/user/script.sh", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_7_20260328@231051.png"}
+{"step_num": 8, "action_timestamp": "20260328@231108", "action": "bash /home/user/script.sh", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_8_20260328@231108.png"}
+{"step_num": 9, "action_timestamp": "20260328@231211", "action": "bash /home/user/script.sh", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_9_20260328@231211.png"}
+{"step_num": 10, "action_timestamp": "20260328@231315", "action": "bash /home/user/script.sh", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_10_20260328@231315.png"}
+{"step_num": 11, "action_timestamp": "20260328@231419", "action": "bash /home/user/script.sh", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_11_20260328@231419.png"}
+{"step_num": 12, "action_timestamp": "20260328@231523", "action": "bash /home/user/script.sh", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_12_20260328@231523.png"}
+{"step_num": 13, "action_timestamp": "20260328@231614", "action": "bash /home/user/script.sh", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_13_20260328@231614.png"}
+{"step_num": 14, "action_timestamp": "20260328@231630", "action": "bash /home/user/script.sh", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_14_20260328@231630.png"}
+{"step_num": 15, "action_timestamp": "20260328@231646", "action": "bash /home/user/script.sh", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_15_20260328@231646.png"}

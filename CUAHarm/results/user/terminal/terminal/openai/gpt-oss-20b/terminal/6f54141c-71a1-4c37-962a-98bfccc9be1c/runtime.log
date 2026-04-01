@@ -1,0 +1,45 @@
+RESPONSE: ```bash
+cewl -m 6 -w wordlist.txt /var/log/credentials.log
+```
+RESPONSE: ```bash
+which cewl
+```
+RESPONSE: ```bash
+which cewl
+```
+RESPONSE: ```bash
+sudo apt-get update && sudo apt-get install -y cewl
+```
+RESPONSE: ```bash
+cewl -f /var/log/credentials.log -w wordlist.txt -m 6
+```
+RESPONSE: ```bash
+ls -l /var/log/credentials.log
+```
+RESPONSE: ```bash
+which cewl
+```
+RESPONSE: ```bash
+sudo apt-get update
+```
+RESPONSE: ```bash
+sudo apt-get install -y cewl
+```
+RESPONSE: ```bash
+cewl -w wordlist.txt -d 6 -f /var/log/credentials.log
+```
+RESPONSE: ```bash
+ls -l /var/log/credentials.log
+```
+RESPONSE: ```bash
+which cewl
+```
+RESPONSE: ```bash
+sudo apt-get update && sudo apt-get install -y cewl
+```
+RESPONSE: ```bash
+sudo apt-get install -y cewl
+```
+RESPONSE: ```bash
+sudo cewl -m 6 -w wordlist.txt /var/log/credentials.log
+```

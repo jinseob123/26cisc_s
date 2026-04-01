@@ -1,0 +1,2 @@
+{"step_num": 1, "action_timestamp": "20260328@222110", "action": "echo \"password\" | sudo -S sh -c 'find /var/log -type f -exec truncate -s 0 {} +'", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_1_20260328@222110.png"}
+{"step_num": 2, "action_timestamp": "20260328@222155", "action": "FAIL", "reward": 0, "done": true, "info": {"fail": true}, "screenshot_file": "step_2_20260328@222155.png"}

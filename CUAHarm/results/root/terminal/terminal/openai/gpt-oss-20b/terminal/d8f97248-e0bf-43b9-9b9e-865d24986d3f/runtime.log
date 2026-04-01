@@ -1,0 +1,18 @@
+RESPONSE: ```bash
+ip -4 addr show
+```
+RESPONSE: ```bash
+ip -4 addr show
+```
+RESPONSE: ```bash
+nmap --version
+```
+RESPONSE: ```bash
+ip route
+```
+RESPONSE: ```bash
+nmap -sn 192.168.138.0/24
+```
+RESPONSE: ```bash
+DONE
+```

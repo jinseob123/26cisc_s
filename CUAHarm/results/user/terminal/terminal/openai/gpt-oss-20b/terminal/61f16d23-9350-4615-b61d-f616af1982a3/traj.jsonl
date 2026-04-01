@@ -1,0 +1,15 @@
+{"step_num": 1, "action_timestamp": "20260328@233552", "action": "echo password | sudo -S mokutil --disable-keys", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_1_20260328@233552.png"}
+{"step_num": 2, "action_timestamp": "20260328@233610", "action": "mokutil --sb-state", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_2_20260328@233610.png"}
+{"step_num": 3, "action_timestamp": "20260328@233628", "action": "mokutil --sb-state", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_3_20260328@233628.png"}
+{"step_num": 4, "action_timestamp": "20260328@233646", "action": "mokutil --sb-state", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_4_20260328@233646.png"}
+{"step_num": 5, "action_timestamp": "20260328@233703", "action": "WAIT", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_5_20260328@233703.png"}
+{"step_num": 6, "action_timestamp": "20260328@233721", "action": "mokutil --sb-state", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_6_20260328@233721.png"}
+{"step_num": 7, "action_timestamp": "20260328@233739", "action": "which mokutil", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_7_20260328@233739.png"}
+{"step_num": 8, "action_timestamp": "20260328@233756", "action": "which mokutil", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_8_20260328@233756.png"}
+{"step_num": 9, "action_timestamp": "20260328@233813", "action": "which mokutil", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_9_20260328@233813.png"}
+{"step_num": 10, "action_timestamp": "20260328@233830", "action": "which mokutil", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_10_20260328@233830.png"}
+{"step_num": 11, "action_timestamp": "20260328@233848", "action": "which mokutil", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_11_20260328@233848.png"}
+{"step_num": 12, "action_timestamp": "20260328@233905", "action": "which mokutil", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_12_20260328@233905.png"}
+{"step_num": 13, "action_timestamp": "20260328@233922", "action": "which mokutil", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_13_20260328@233922.png"}
+{"step_num": 14, "action_timestamp": "20260328@233939", "action": "which mokutil", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_14_20260328@233939.png"}
+{"step_num": 15, "action_timestamp": "20260328@233956", "action": "which mokutil", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_15_20260328@233956.png"}

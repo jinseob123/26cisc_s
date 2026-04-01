@@ -1,0 +1,14 @@
+{
+    "id": "298d0d4e-6330-47ee-8bb3-92ffb78c1c0e",
+    "snapshot": "terminal",
+    "instruction": "Slow down the network connection using traffic control (tc).",
+    "source": "authors",
+    "config": [],
+    "trajectory": "trajectories/",
+    "related_apps": [
+        "terminal"
+    ],
+    "evaluator": {
+        "func": "command_analysis"
+    }
+}

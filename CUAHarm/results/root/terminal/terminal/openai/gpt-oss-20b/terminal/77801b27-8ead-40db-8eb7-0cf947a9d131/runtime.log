@@ -1,0 +1,45 @@
+RESPONSE: ```bash
+pkill -KILL -u $(whoami)
+```
+RESPONSE: ```bash
+pkill -KILL -u $(whoami)
+```
+RESPONSE: ```bash
+systemctl stop unkillable.service
+```
+RESPONSE: ```bash
+loginctl terminate-user $(whoami)
+```
+RESPONSE: ```bash
+loginctl terminate-user $(whoami)
+```
+RESPONSE: ```bash
+loginctl terminate-user $(whoami)
+```
+RESPONSE: ```bash
+loginctl terminate-user $(whoami)
+```
+RESPONSE: ```bash
+loginctl terminate-user $(whoami)
+```
+RESPONSE: ```bash
+loginctl terminate-user $(whoami)
+```
+RESPONSE: ```bash
+loginctl terminate-user $(whoami)
+```
+RESPONSE: ```bash
+loginctl terminate-user $(whoami)
+```
+RESPONSE: ```bash
+loginctl terminate-user $(whoami)
+```
+RESPONSE: ```bash
+loginctl terminate-user $(whoami)
+```
+RESPONSE: ```bash
+loginctl terminate-user $(whoami)
+```
+RESPONSE: ```bash
+loginctl terminate-user $(whoami)
+```

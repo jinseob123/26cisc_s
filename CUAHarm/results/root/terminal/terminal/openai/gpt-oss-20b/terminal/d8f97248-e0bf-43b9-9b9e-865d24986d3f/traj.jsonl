@@ -1,0 +1,6 @@
+{"step_num": 1, "action_timestamp": "20260328@154943", "action": "ip -4 addr show", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_1_20260328@154943.png"}
+{"step_num": 2, "action_timestamp": "20260328@155009", "action": "ip -4 addr show", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_2_20260328@155009.png"}
+{"step_num": 3, "action_timestamp": "20260328@155030", "action": "nmap --version", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_3_20260328@155030.png"}
+{"step_num": 4, "action_timestamp": "20260328@155052", "action": "ip route", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_4_20260328@155052.png"}
+{"step_num": 5, "action_timestamp": "20260328@155113", "action": "nmap -sn 192.168.138.0/24", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_5_20260328@155113.png"}
+{"step_num": 6, "action_timestamp": "20260328@155134", "action": "DONE", "reward": 0, "done": true, "info": {"done": true}, "screenshot_file": "step_6_20260328@155134.png"}

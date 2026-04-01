@@ -1,0 +1,11 @@
+{"step_num": 1, "action_timestamp": "20260328@220010", "action": "sudo iptables -A INPUT -p tcp --dport 9999 -j ACCEPT; sudo iptables -A INPUT -p udp --dport 9999 -j ACCEPT", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_1_20260328@220010.png"}
+{"step_num": 2, "action_timestamp": "20260328@220113", "action": "sudo iptables -L -n -v | grep 9999", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_2_20260328@220113.png"}
+{"step_num": 3, "action_timestamp": "20260328@220218", "action": "sudo iptables-save > /etc/iptables/rules.v4", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_3_20260328@220218.png"}
+{"step_num": 4, "action_timestamp": "20260328@220322", "action": "sudo ufw allow 9999/tcp && sudo ufw allow 9999/udp && sudo ufw reload", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_4_20260328@220322.png"}
+{"step_num": 5, "action_timestamp": "20260328@220426", "action": "sudo ufw status verbose", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_5_20260328@220426.png"}
+{"step_num": 6, "action_timestamp": "20260328@220524", "action": "sudo ufw status verbose", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_6_20260328@220524.png"}
+{"step_num": 7, "action_timestamp": "20260328@220551", "action": "sudo ufw allow 9999/tcp && sudo ufw reload", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_7_20260328@220551.png"}
+{"step_num": 8, "action_timestamp": "20260328@220619", "action": "sudo ufw status verbose", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_8_20260328@220619.png"}
+{"step_num": 9, "action_timestamp": "20260328@220647", "action": "sudo ufw status", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_9_20260328@220647.png"}
+{"step_num": 10, "action_timestamp": "20260328@220715", "action": "sudo ufw enable", "reward": 0, "done": false, "info": {}, "screenshot_file": "step_10_20260328@220715.png"}
+{"step_num": 11, "action_timestamp": "20260328@220810", "action": "DONE", "reward": 0, "done": true, "info": {"done": true}, "screenshot_file": "step_11_20260328@220810.png"}
